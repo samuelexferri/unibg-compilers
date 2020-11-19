@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g 2020-11-17 17:58:35
+// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g 2020-11-19 16:07:07
 
 	//package myCompiler;
 
@@ -9,19 +9,19 @@ import java.util.List;
 import java.util.ArrayList;
 
 @SuppressWarnings("all")
-public class AssignmentCompilerLexer extends Lexer {
+public class OpenWeatherMapAPILexer extends Lexer {
 	public static final int EOF=-1;
 	public static final int COMMENT=4;
-	public static final int EQ=5;
+	public static final int DUEP=5;
 	public static final int ERROR_TOKEN=6;
 	public static final int EXPONENT=7;
 	public static final int FLOAT=8;
-	public static final int ID=9;
-	public static final int INT=10;
-	public static final int LP=11;
-	public static final int OP=12;
-	public static final int RP=13;
-	public static final int SC=14;
+	public static final int GC=9;
+	public static final int GO=10;
+	public static final int INT=11;
+	public static final int NAME=12;
+	public static final int VIRG=13;
+	public static final int VIRGUP=14;
 	public static final int WS=15;
 
 		int prova1;
@@ -33,25 +33,24 @@ public class AssignmentCompilerLexer extends Lexer {
 		return new Lexer[] {};
 	}
 
-	public AssignmentCompilerLexer() {} 
-	public AssignmentCompilerLexer(CharStream input) {
+	public OpenWeatherMapAPILexer() {} 
+	public OpenWeatherMapAPILexer(CharStream input) {
 		this(input, new RecognizerSharedState());
 	}
-	public AssignmentCompilerLexer(CharStream input, RecognizerSharedState state) {
+	public OpenWeatherMapAPILexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g"; }
+	@Override public String getGrammarFileName() { return "C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g"; }
 
-	// $ANTLR start "EQ"
-	public final void mEQ() throws RecognitionException {
+	// $ANTLR start "GO"
+	public final void mGO() throws RecognitionException {
 		try {
-			int _type = EQ;
+			int _type = GO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:44:5: ( ':=' )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:44:7: ':='
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:55:4: ( '{' )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:55:6: '{'
 			{
-			match(":="); 
-
+			match('{'); 
 			}
 
 			state.type = _type;
@@ -61,17 +60,97 @@ public class AssignmentCompilerLexer extends Lexer {
 			// do for sure before leaving
 		}
 	}
-	// $ANTLR end "EQ"
+	// $ANTLR end "GO"
 
-	// $ANTLR start "OP"
-	public final void mOP() throws RecognitionException {
+	// $ANTLR start "GC"
+	public final void mGC() throws RecognitionException {
 		try {
-			int _type = OP;
+			int _type = GC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:47:2: ( '+' | '-' | '*' | '/' )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:57:4: ( '}' )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:57:6: '}'
 			{
-			if ( (input.LA(1) >= '*' && input.LA(1) <= '+')||input.LA(1)=='-'||input.LA(1)=='/' ) {
+			match('}'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "GC"
+
+	// $ANTLR start "VIRG"
+	public final void mVIRG() throws RecognitionException {
+		try {
+			int _type = VIRG;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:59:6: ( ',' )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:59:8: ','
+			{
+			match(','); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "VIRG"
+
+	// $ANTLR start "VIRGUP"
+	public final void mVIRGUP() throws RecognitionException {
+		try {
+			int _type = VIRGUP;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:61:8: ( '\"' )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:61:10: '\"'
+			{
+			match('\"'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "VIRGUP"
+
+	// $ANTLR start "DUEP"
+	public final void mDUEP() throws RecognitionException {
+		try {
+			int _type = DUEP;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:63:6: ( ':' )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:63:8: ':'
+			{
+			match(':'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "DUEP"
+
+	// $ANTLR start "NAME"
+	public final void mNAME() throws RecognitionException {
+		try {
+			int _type = NAME;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:65:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | ' ' )* )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:65:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | ' ' )*
+			{
+			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
 			}
 			else {
@@ -79,107 +158,20 @@ public class AssignmentCompilerLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "OP"
-
-	// $ANTLR start "LP"
-	public final void mLP() throws RecognitionException {
-		try {
-			int _type = LP;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:50:2: ( '(' )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:50:4: '('
-			{
-			match('('); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "LP"
-
-	// $ANTLR start "RP"
-	public final void mRP() throws RecognitionException {
-		try {
-			int _type = RP;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:53:2: ( ')' )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:53:4: ')'
-			{
-			match(')'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "RP"
-
-	// $ANTLR start "SC"
-	public final void mSC() throws RecognitionException {
-		try {
-			int _type = SC;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:56:2: ( ';' )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:56:4: ';'
-			{
-			match(';'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "SC"
-
-	// $ANTLR start "ID"
-	public final void mID() throws RecognitionException {
-		try {
-			int _type = ID;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:58:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:58:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
-			{
-			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
-				input.consume();
-			}
-			else {
-				MismatchedSetException mse = new MismatchedSetException(null,input);
-				recover(mse);
-				throw mse;
-			}
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:58:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:65:29: ( 'a' .. 'z' | 'A' .. 'Z' | ' ' )*
 			loop1:
 			while (true) {
 				int alt1=2;
 				int LA1_0 = input.LA(1);
-				if ( ((LA1_0 >= '0' && LA1_0 <= '9')||(LA1_0 >= 'A' && LA1_0 <= 'Z')||LA1_0=='_'||(LA1_0 >= 'a' && LA1_0 <= 'z')) ) {
+				if ( (LA1_0==' '||(LA1_0 >= 'A' && LA1_0 <= 'Z')||(LA1_0 >= 'a' && LA1_0 <= 'z')) ) {
 					alt1=1;
 				}
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 					{
-					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+					if ( input.LA(1)==' '||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
 					}
 					else {
@@ -204,17 +196,17 @@ public class AssignmentCompilerLexer extends Lexer {
 			// do for sure before leaving
 		}
 	}
-	// $ANTLR end "ID"
+	// $ANTLR end "NAME"
 
 	// $ANTLR start "INT"
 	public final void mINT() throws RecognitionException {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:61:5: ( ( '0' .. '9' )+ )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:61:7: ( '0' .. '9' )+
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:67:5: ( ( '0' .. '9' )+ )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:67:7: ( '0' .. '9' )+
 			{
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:61:7: ( '0' .. '9' )+
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:67:7: ( '0' .. '9' )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -226,7 +218,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -263,14 +255,14 @@ public class AssignmentCompilerLexer extends Lexer {
 		try {
 			int _type = FLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:65:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:71:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
 			int alt9=3;
 			alt9 = dfa9.predict(input);
 			switch (alt9) {
 				case 1 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:65:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:71:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
 					{
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:65:9: ( '0' .. '9' )+
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:71:9: ( '0' .. '9' )+
 					int cnt3=0;
 					loop3:
 					while (true) {
@@ -282,7 +274,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 						switch (alt3) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -304,7 +296,7 @@ public class AssignmentCompilerLexer extends Lexer {
 					}
 
 					match('.'); 
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:65:25: ( '0' .. '9' )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:71:25: ( '0' .. '9' )*
 					loop4:
 					while (true) {
 						int alt4=2;
@@ -315,7 +307,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 						switch (alt4) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -333,7 +325,7 @@ public class AssignmentCompilerLexer extends Lexer {
 						}
 					}
 
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:65:37: ( EXPONENT )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:71:37: ( EXPONENT )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
 					if ( (LA5_0=='E'||LA5_0=='e') ) {
@@ -341,7 +333,7 @@ public class AssignmentCompilerLexer extends Lexer {
 					}
 					switch (alt5) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:65:37: EXPONENT
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:71:37: EXPONENT
 							{
 							mEXPONENT(); 
 
@@ -353,10 +345,10 @@ public class AssignmentCompilerLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:66:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:72:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
 					{
 					match('.'); 
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:66:13: ( '0' .. '9' )+
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:72:13: ( '0' .. '9' )+
 					int cnt6=0;
 					loop6:
 					while (true) {
@@ -368,7 +360,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 						switch (alt6) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -389,7 +381,7 @@ public class AssignmentCompilerLexer extends Lexer {
 						cnt6++;
 					}
 
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:66:25: ( EXPONENT )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:72:25: ( EXPONENT )?
 					int alt7=2;
 					int LA7_0 = input.LA(1);
 					if ( (LA7_0=='E'||LA7_0=='e') ) {
@@ -397,7 +389,7 @@ public class AssignmentCompilerLexer extends Lexer {
 					}
 					switch (alt7) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:66:25: EXPONENT
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:72:25: EXPONENT
 							{
 							mEXPONENT(); 
 
@@ -409,9 +401,9 @@ public class AssignmentCompilerLexer extends Lexer {
 					}
 					break;
 				case 3 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:67:9: ( '0' .. '9' )+ EXPONENT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:73:9: ( '0' .. '9' )+ EXPONENT
 					{
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:67:9: ( '0' .. '9' )+
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:73:9: ( '0' .. '9' )+
 					int cnt8=0;
 					loop8:
 					while (true) {
@@ -423,7 +415,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 						switch (alt8) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -464,7 +456,7 @@ public class AssignmentCompilerLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:71:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:77:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
 			int alt13=2;
 			int LA13_0 = input.LA(1);
 			if ( (LA13_0=='/') ) {
@@ -498,11 +490,11 @@ public class AssignmentCompilerLexer extends Lexer {
 
 			switch (alt13) {
 				case 1 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:71:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:77:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
 
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:71:14: (~ ( '\\n' | '\\r' ) )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:77:14: (~ ( '\\n' | '\\r' ) )*
 					loop10:
 					while (true) {
 						int alt10=2;
@@ -513,7 +505,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 						switch (alt10) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 							{
 							if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
 								input.consume();
@@ -531,7 +523,7 @@ public class AssignmentCompilerLexer extends Lexer {
 						}
 					}
 
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:71:28: ( '\\r' )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:77:28: ( '\\r' )?
 					int alt11=2;
 					int LA11_0 = input.LA(1);
 					if ( (LA11_0=='\r') ) {
@@ -539,7 +531,7 @@ public class AssignmentCompilerLexer extends Lexer {
 					}
 					switch (alt11) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:71:28: '\\r'
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:77:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -552,11 +544,11 @@ public class AssignmentCompilerLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:72:9: '/*' ( options {greedy=false; } : . )* '*/'
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:78:9: '/*' ( options {greedy=false; } : . )* '*/'
 					{
 					match("/*"); 
 
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:72:14: ( options {greedy=false; } : . )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:78:14: ( options {greedy=false; } : . )*
 					loop12:
 					while (true) {
 						int alt12=2;
@@ -577,7 +569,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 						switch (alt12) {
 						case 1 :
-							// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:72:42: .
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:78:42: .
 							{
 							matchAny(); 
 							}
@@ -607,8 +599,8 @@ public class AssignmentCompilerLexer extends Lexer {
 	// $ANTLR start "EXPONENT"
 	public final void mEXPONENT() throws RecognitionException {
 		try {
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:77:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:77:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:83:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:83:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
 			{
 			if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
 				input.consume();
@@ -618,7 +610,7 @@ public class AssignmentCompilerLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:77:22: ( '+' | '-' )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:83:22: ( '+' | '-' )?
 			int alt14=2;
 			int LA14_0 = input.LA(1);
 			if ( (LA14_0=='+'||LA14_0=='-') ) {
@@ -626,7 +618,7 @@ public class AssignmentCompilerLexer extends Lexer {
 			}
 			switch (alt14) {
 				case 1 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 					{
 					if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
 						input.consume();
@@ -641,7 +633,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 			}
 
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:77:33: ( '0' .. '9' )+
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:83:33: ( '0' .. '9' )+
 			int cnt15=0;
 			loop15:
 			while (true) {
@@ -653,7 +645,7 @@ public class AssignmentCompilerLexer extends Lexer {
 
 				switch (alt15) {
 				case 1 :
-					// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -688,8 +680,8 @@ public class AssignmentCompilerLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:78:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:78:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:84:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:84:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -716,8 +708,8 @@ public class AssignmentCompilerLexer extends Lexer {
 		try {
 			int _type = ERROR_TOKEN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:86:2: ( . )
-			// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:86:4: .
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:92:2: ( . )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:92:4: .
 			{
 			matchAny(); 
 			_channel=HIDDEN;
@@ -734,82 +726,82 @@ public class AssignmentCompilerLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:8: ( EQ | OP | LP | RP | SC | ID | INT | FLOAT | COMMENT | WS | ERROR_TOKEN )
+		// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:8: ( GO | GC | VIRG | VIRGUP | DUEP | NAME | INT | FLOAT | COMMENT | WS | ERROR_TOKEN )
 		int alt16=11;
 		alt16 = dfa16.predict(input);
 		switch (alt16) {
 			case 1 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:10: EQ
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:10: GO
 				{
-				mEQ(); 
+				mGO(); 
 
 				}
 				break;
 			case 2 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:13: OP
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:13: GC
 				{
-				mOP(); 
+				mGC(); 
 
 				}
 				break;
 			case 3 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:16: LP
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:16: VIRG
 				{
-				mLP(); 
+				mVIRG(); 
 
 				}
 				break;
 			case 4 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:19: RP
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:21: VIRGUP
 				{
-				mRP(); 
+				mVIRGUP(); 
 
 				}
 				break;
 			case 5 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:22: SC
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:28: DUEP
 				{
-				mSC(); 
+				mDUEP(); 
 
 				}
 				break;
 			case 6 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:25: ID
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:33: NAME
 				{
-				mID(); 
+				mNAME(); 
 
 				}
 				break;
 			case 7 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:28: INT
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:38: INT
 				{
 				mINT(); 
 
 				}
 				break;
 			case 8 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:32: FLOAT
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:42: FLOAT
 				{
 				mFLOAT(); 
 
 				}
 				break;
 			case 9 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:38: COMMENT
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:48: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
 			case 10 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:46: WS
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:56: WS
 				{
 				mWS(); 
 
 				}
 				break;
 			case 11 :
-				// C:\\Google Drive\\Università\\Anno V\\Linguaggi formali e compilatori\\Tutorato\\IdeaProjects\\ANTLR Scanner\\src\\AssignmentCompiler.g:1:49: ERROR_TOKEN
+				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:59: ERROR_TOKEN
 				{
 				mERROR_TOKEN(); 
 
@@ -873,46 +865,46 @@ public class AssignmentCompilerLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "64:1: FLOAT : ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT );";
+			return "70:1: FLOAT : ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT );";
 		}
 	}
 
 	static final String DFA16_eotS =
-		"\1\uffff\1\13\1\16\4\uffff\1\23\1\13\13\uffff\1\23\2\uffff";
+		"\7\uffff\1\22\2\13\11\uffff\1\22\3\uffff";
 	static final String DFA16_eofS =
 		"\27\uffff";
 	static final String DFA16_minS =
-		"\1\0\1\75\1\52\4\uffff\1\56\1\60\13\uffff\1\56\2\uffff";
+		"\1\0\6\uffff\1\56\1\60\1\52\11\uffff\1\56\3\uffff";
 	static final String DFA16_maxS =
-		"\1\uffff\1\75\1\57\4\uffff\1\145\1\71\13\uffff\1\145\2\uffff";
+		"\1\uffff\6\uffff\1\145\1\71\1\57\11\uffff\1\145\3\uffff";
 	static final String DFA16_acceptS =
-		"\3\uffff\1\3\1\4\1\5\1\6\2\uffff\1\2\1\12\1\13\1\1\1\11\1\2\1\3\1\4\1"+
-		"\5\1\6\1\7\1\uffff\1\10\1\12";
+		"\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\3\uffff\1\12\1\13\1\1\1\2\1\3\1\4\1\5"+
+		"\1\6\1\7\1\uffff\1\10\1\11\1\12";
 	static final String DFA16_specialS =
 		"\1\0\26\uffff}>";
 	static final String[] DFA16_transitionS = {
-			"\11\13\2\12\2\13\1\12\22\13\1\12\7\13\1\3\1\4\2\11\1\13\1\11\1\10\1\2"+
-			"\12\7\1\1\1\5\5\13\32\6\4\13\1\6\1\13\32\6\uff85\13",
-			"\1\14",
-			"\1\15\4\uffff\1\15",
-			"",
-			"",
-			"",
-			"",
-			"\1\25\1\uffff\12\24\13\uffff\1\25\37\uffff\1\25",
-			"\12\25",
+			"\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\4\11\13\1\3\1\13\1\10\1\11\12"+
+			"\7\1\5\6\13\32\6\6\13\32\6\1\1\1\13\1\2\uff82\13",
 			"",
 			"",
 			"",
 			"",
 			"",
 			"",
+			"\1\24\1\uffff\12\23\13\uffff\1\24\37\uffff\1\24",
+			"\12\24",
+			"\1\25\4\uffff\1\25",
 			"",
 			"",
 			"",
 			"",
 			"",
-			"\1\25\1\uffff\12\24\13\uffff\1\25\37\uffff\1\25",
+			"",
+			"",
+			"",
+			"",
+			"\1\24\1\uffff\12\23\13\uffff\1\24\37\uffff\1\24",
+			"",
 			"",
 			""
 	};
@@ -948,7 +940,7 @@ public class AssignmentCompilerLexer extends Lexer {
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( EQ | OP | LP | RP | SC | ID | INT | FLOAT | COMMENT | WS | ERROR_TOKEN );";
+			return "1:1: Tokens : ( GO | GC | VIRG | VIRGUP | DUEP | NAME | INT | FLOAT | COMMENT | WS | ERROR_TOKEN );";
 		}
 		@Override
 		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
@@ -958,17 +950,17 @@ public class AssignmentCompilerLexer extends Lexer {
 					case 0 : 
 						int LA16_0 = input.LA(1);
 						s = -1;
-						if ( (LA16_0==':') ) {s = 1;}
-						else if ( (LA16_0=='/') ) {s = 2;}
-						else if ( (LA16_0=='(') ) {s = 3;}
-						else if ( (LA16_0==')') ) {s = 4;}
-						else if ( (LA16_0==';') ) {s = 5;}
-						else if ( ((LA16_0 >= 'A' && LA16_0 <= 'Z')||LA16_0=='_'||(LA16_0 >= 'a' && LA16_0 <= 'z')) ) {s = 6;}
+						if ( (LA16_0=='{') ) {s = 1;}
+						else if ( (LA16_0=='}') ) {s = 2;}
+						else if ( (LA16_0==',') ) {s = 3;}
+						else if ( (LA16_0=='\"') ) {s = 4;}
+						else if ( (LA16_0==':') ) {s = 5;}
+						else if ( ((LA16_0 >= 'A' && LA16_0 <= 'Z')||(LA16_0 >= 'a' && LA16_0 <= 'z')) ) {s = 6;}
 						else if ( ((LA16_0 >= '0' && LA16_0 <= '9')) ) {s = 7;}
 						else if ( (LA16_0=='.') ) {s = 8;}
-						else if ( ((LA16_0 >= '*' && LA16_0 <= '+')||LA16_0=='-') ) {s = 9;}
+						else if ( (LA16_0=='/') ) {s = 9;}
 						else if ( ((LA16_0 >= '\t' && LA16_0 <= '\n')||LA16_0=='\r'||LA16_0==' ') ) {s = 10;}
-						else if ( ((LA16_0 >= '\u0000' && LA16_0 <= '\b')||(LA16_0 >= '\u000B' && LA16_0 <= '\f')||(LA16_0 >= '\u000E' && LA16_0 <= '\u001F')||(LA16_0 >= '!' && LA16_0 <= '\'')||LA16_0==','||(LA16_0 >= '<' && LA16_0 <= '@')||(LA16_0 >= '[' && LA16_0 <= '^')||LA16_0=='`'||(LA16_0 >= '{' && LA16_0 <= '\uFFFF')) ) {s = 11;}
+						else if ( ((LA16_0 >= '\u0000' && LA16_0 <= '\b')||(LA16_0 >= '\u000B' && LA16_0 <= '\f')||(LA16_0 >= '\u000E' && LA16_0 <= '\u001F')||LA16_0=='!'||(LA16_0 >= '#' && LA16_0 <= '+')||LA16_0=='-'||(LA16_0 >= ';' && LA16_0 <= '@')||(LA16_0 >= '[' && LA16_0 <= '`')||LA16_0=='|'||(LA16_0 >= '~' && LA16_0 <= '\uFFFF')) ) {s = 11;}
 						if ( s>=0 ) return s;
 						break;
 			}

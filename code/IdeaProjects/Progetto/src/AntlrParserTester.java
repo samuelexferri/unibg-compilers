@@ -4,37 +4,32 @@ import org.antlr.runtime.CommonTokenStream;
 import java.io.FileReader;
 
 public class AntlrParserTester {
-	public static void main(String[] args) {
-		AssignmentCompilerParser parser;
-		String fileIn = ".\\resources\\input2.file";
-  	
-  	try {
-  		// Inizializzazione del parser (antlr docet):
-  		//		1. Si inizializza il lexer
-  		//		2. Si crea uno stream di token
-  		//		3. si istanzia il parser passandogli lo stream di token
+    public static void main(String[] args) {
+        OpenWeatherMapAPIParser parser;
+        String fileIn = ".\\resources\\current_example.json";
 
-  		// 1. usare la classe del lexer generato
-  		AssignmentCompilerLexer  lexer = new AssignmentCompilerLexer (new ANTLRReaderStream(new FileReader(fileIn))); 
+        try {
+            // Inizializzazione del parser (antlr docet):
+            // 1. Si inizializza il lexer
+            // 2. Si crea uno stream di token
+            // 3. si istanzia il parser passandogli lo stream di token
 
-  		// 2. 
-  		CommonTokenStream tokens = new CommonTokenStream (lexer);	
+            // 1. Usare la classe del lexer generato
+            OpenWeatherMapAPILexer lexer = new OpenWeatherMapAPILexer(new ANTLRReaderStream(new FileReader(fileIn)));
 
-  		// 3. usare la classe del parser generato
-		parser = new AssignmentCompilerParser (tokens);
+            // 2. Token
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-			
-	    // si lancia il parser dallo start simbol (prima produzione specificata)
-	    parser.myStartExample();
-	    
-		System.out.println ("Parsing con ANTLR terminato con successo\n\n");
-	    
-  	
-  	} catch (Exception e) {
-			System.out.println ("Parsing con ANTLR abortito\n\n");
-			e.printStackTrace();
-		}
-  }
+            // 3. Usare la classe del parser generato
+            parser = new OpenWeatherMapAPIParser(tokens);
+            // Si lancia il parser dallo start symbol (prima produzione specificata)
+            parser.myStartExample();
 
+            System.out.println("Parsing con ANTLR terminato con successo\n\n");
 
+        } catch (Exception e) {
+            System.out.println("Parsing con ANTLR abortito\n\n");
+            e.printStackTrace();
+        }
+    }
 }

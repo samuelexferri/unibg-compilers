@@ -1,4 +1,4 @@
-grammar AssignmentCompiler;
+grammar OpenWeatherMapAPI;
 
 options {
 	language = Java;
@@ -22,16 +22,26 @@ options {
 
 // Qui inizia la specifica del parser
 myStartExample
-	: assignement+
+	: mainblock
 	;
 
-assignement
-	: ID EQ expression SC
-	;
+mainblock
+	: GO (block)* GC ;
 	
+block
+	: stringa DUEP sublock VIRG*; // TODO: L'ultimo blocco non ha la virgola (sia quelli grossi che innestati)
+	
+stringa
+	: VIRGUP NAME VIRGUP;
+
+sublock
+	: INT | FLOAT | stringa | (GO (block)+ GC) ;
+	
+/*
 expression
 	: atom (x=OP {System.out.println("Ho trovato questa operazione: \t" + $x.getText());} atom)* ;
-	
+
+
 atom
 	: 	( INT
 		| FLOAT
@@ -39,24 +49,20 @@ atom
 		| LP expression RP
 		)
 	;
+*/
 
 // Qui inizia la specifica del lexer
-EQ 	:	':=' ;
+GO	: '{' ;
 
-OP
-	: '+' | '-' | '*' | '/' ;
-	
-LP
-	: '(' ;
+GC	: '}' ;
 
-RP
-	: ')' ;
-	
-SC
-	: ';' ;
+VIRG	: ',' ;
 
-ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
-    ;
+VIRGUP	: '"' ;
+
+DUEP	:	':' ;
+
+NAME  :	('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z' | ' ')* ; // TODO: Possono essere solo da una lista
 
 INT :	'0'..'9'+
     ;

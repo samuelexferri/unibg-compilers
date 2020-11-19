@@ -1,0 +1,8 @@
+OpenWeatherMap:
+https://openweathermap.org/api
+https://openweathermap.org/guide
+https://openweathermap.org/current
+
+Current Weather API:
+https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=4406c6fea7e6c54877c57029ea57d5d5
+api.openweathermap.org/data/2.5/weather?q=London,uk&appid=dd926ba1f5c84c4e35af2742db3cab24&mode=xml
