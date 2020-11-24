@@ -22,6 +22,7 @@ public class AntlrParserTester {
 
             // 3. Usare la classe del parser generato
             parser = new OpenWeatherMapAPIParser(tokens);
+
             // Si lancia il parser dallo start symbol (prima produzione specificata)
             parser.myStartExample();
 

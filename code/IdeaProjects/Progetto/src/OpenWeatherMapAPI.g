@@ -2,6 +2,7 @@ grammar OpenWeatherMapAPI;
 
 options {
 	language = Java;
+	k = 1; // Compilatore con prospettiva 1
 }
 
 @lexer::header {
@@ -62,7 +63,7 @@ VIRGUP	: '"' ;
 
 DUEP	:	':' ;
 
-NAME  :	('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z' | ' ')* ; // TODO: Possono essere solo da una lista
+NAME  :	(('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|INT|' '|'_')*) | (INT ('a'..'z'|'A'..'Z'|' '|'_') ('a'..'z'|'A'..'Z'|INT|' '|'_')*) ; // TODO: Non possono essre finali underscore o spazio, Possono essere solo da una lista
 
 INT :	'0'..'9'+
     ;
