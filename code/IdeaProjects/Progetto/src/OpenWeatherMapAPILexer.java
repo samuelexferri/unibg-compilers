@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g 2020-11-28 16:42:59
+// $ANTLR 3.5.1 C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g 2020-11-28 17:08:25
 
 	//package myCompiler;
 
@@ -20,11 +20,12 @@ public class OpenWeatherMapAPILexer extends Lexer {
 	public static final int GO=10;
 	public static final int INT=11;
 	public static final int NAME=12;
-	public static final int QC=13;
-	public static final int QO=14;
-	public static final int VIRG=15;
-	public static final int VIRGUP=16;
-	public static final int WS=17;
+	public static final int NEG=13;
+	public static final int QC=14;
+	public static final int QO=15;
+	public static final int VIRG=16;
+	public static final int VIRGUP=17;
+	public static final int WS=18;
 
 		
 		int nErrori = 0;
@@ -55,8 +56,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = GO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:80:4: ( '{' )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:80:6: '{'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:82:4: ( '{' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:82:6: '{'
 			{
 			match('{'); 
 			}
@@ -75,8 +76,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = GC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:82:4: ( '}' )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:82:6: '}'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:84:4: ( '}' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:84:6: '}'
 			{
 			match('}'); 
 			}
@@ -95,8 +96,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = QO;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:84:4: ( '[' )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:84:6: '['
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:86:4: ( '[' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:86:6: '['
 			{
 			match('['); 
 			}
@@ -115,8 +116,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = QC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:86:4: ( ']' )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:86:6: ']'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:88:4: ( ']' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:88:6: ']'
 			{
 			match(']'); 
 			}
@@ -135,8 +136,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = VIRG;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:88:6: ( ',' )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:88:8: ','
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:90:6: ( ',' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:90:8: ','
 			{
 			match(','); 
 			}
@@ -155,8 +156,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = VIRGUP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:90:8: ( '\"' )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:90:10: '\"'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:92:8: ( '\"' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:92:10: '\"'
 			{
 			match('\"'); 
 			}
@@ -175,8 +176,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = DUEP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:92:6: ( ':' )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:92:8: ':'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:6: ( ':' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:8: ':'
 			{
 			match(':'); 
 			}
@@ -195,13 +196,13 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = NAME;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:7: ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* ) | ( INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* ) )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:7: ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* ) | ( INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* ) )
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( ((LA3_0 >= 'A' && LA3_0 <= 'Z')||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
 				alt3=1;
 			}
-			else if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
+			else if ( (LA3_0=='-'||(LA3_0 >= '0' && LA3_0 <= '9')) ) {
 				alt3=2;
 			}
 
@@ -213,10 +214,10 @@ public class OpenWeatherMapAPILexer extends Lexer {
 
 			switch (alt3) {
 				case 1 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:9: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:9: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
 					{
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:9: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:10: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:9: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:10: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
 					{
 					if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -226,7 +227,7 @@ public class OpenWeatherMapAPILexer extends Lexer {
 						recover(mse);
 						throw mse;
 					}
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:30: ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:30: ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
 					loop1:
 					while (true) {
 						int alt1=6;
@@ -291,6 +292,7 @@ public class OpenWeatherMapAPILexer extends Lexer {
 							alt1=2;
 							}
 							break;
+						case '-':
 						case '0':
 						case '1':
 						case '2':
@@ -318,32 +320,32 @@ public class OpenWeatherMapAPILexer extends Lexer {
 						}
 						switch (alt1) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:31: 'a' .. 'z'
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:31: 'a' .. 'z'
 							{
 							matchRange('a','z'); 
 							}
 							break;
 						case 2 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:40: 'A' .. 'Z'
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:40: 'A' .. 'Z'
 							{
 							matchRange('A','Z'); 
 							}
 							break;
 						case 3 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:49: INT
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:49: INT
 							{
 							mINT(); 
 
 							}
 							break;
 						case 4 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:53: ' '
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:53: ' '
 							{
 							match(' '); 
 							}
 							break;
 						case 5 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:57: '_'
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:57: '_'
 							{
 							match('_'); 
 							}
@@ -359,10 +361,10 @@ public class OpenWeatherMapAPILexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:66: ( INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:66: ( INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
 					{
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:66: ( INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:67: INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:66: ( INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )* )
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:67: INT ( 'a' .. 'z' | 'A' .. 'Z' | ' ' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
 					{
 					mINT(); 
 
@@ -374,7 +376,7 @@ public class OpenWeatherMapAPILexer extends Lexer {
 						recover(mse);
 						throw mse;
 					}
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:99: ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:99: ( 'a' .. 'z' | 'A' .. 'Z' | INT | ' ' | '_' )*
 					loop2:
 					while (true) {
 						int alt2=6;
@@ -439,6 +441,7 @@ public class OpenWeatherMapAPILexer extends Lexer {
 							alt2=2;
 							}
 							break;
+						case '-':
 						case '0':
 						case '1':
 						case '2':
@@ -466,32 +469,32 @@ public class OpenWeatherMapAPILexer extends Lexer {
 						}
 						switch (alt2) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:100: 'a' .. 'z'
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:100: 'a' .. 'z'
 							{
 							matchRange('a','z'); 
 							}
 							break;
 						case 2 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:109: 'A' .. 'Z'
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:109: 'A' .. 'Z'
 							{
 							matchRange('A','Z'); 
 							}
 							break;
 						case 3 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:118: INT
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:118: INT
 							{
 							mINT(); 
 
 							}
 							break;
 						case 4 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:122: ' '
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:122: ' '
 							{
 							match(' '); 
 							}
 							break;
 						case 5 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:94:126: '_'
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:126: '_'
 							{
 							match('_'); 
 							}
@@ -522,20 +525,43 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:5: ( ( '0' .. '9' )+ )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:7: ( '0' .. '9' )+
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:98:5: ( ( NEG )? ( '0' .. '9' )+ )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:98:7: ( NEG )? ( '0' .. '9' )+
 			{
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:96:7: ( '0' .. '9' )+
-			int cnt4=0;
-			loop4:
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:98:7: ( NEG )?
+			int alt4=2;
+			int LA4_0 = input.LA(1);
+			if ( (LA4_0=='-') ) {
+				alt4=1;
+			}
+			switch (alt4) {
+				case 1 :
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
+					{
+					if ( input.LA(1)=='-' ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+			}
+
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:98:11: ( '0' .. '9' )+
+			int cnt5=0;
+			loop5:
 			while (true) {
-				int alt4=2;
-				int LA4_0 = input.LA(1);
-				if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
-					alt4=1;
+				int alt5=2;
+				int LA5_0 = input.LA(1);
+				if ( ((LA5_0 >= '0' && LA5_0 <= '9')) ) {
+					alt5=1;
 				}
 
-				switch (alt4) {
+				switch (alt5) {
 				case 1 :
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 					{
@@ -551,11 +577,11 @@ public class OpenWeatherMapAPILexer extends Lexer {
 					break;
 
 				default :
-					if ( cnt4 >= 1 ) break loop4;
-					EarlyExitException eee = new EarlyExitException(4, input);
+					if ( cnt5 >= 1 ) break loop5;
+					EarlyExitException eee = new EarlyExitException(5, input);
 					throw eee;
 				}
-				cnt4++;
+				cnt5++;
 			}
 
 			}
@@ -569,29 +595,72 @@ public class OpenWeatherMapAPILexer extends Lexer {
 	}
 	// $ANTLR end "INT"
 
+	// $ANTLR start "NEG"
+	public final void mNEG() throws RecognitionException {
+		try {
+			int _type = NEG;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:100:9: ( '-' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:100:10: '-'
+			{
+			match('-'); 
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "NEG"
+
 	// $ANTLR start "FLOAT"
 	public final void mFLOAT() throws RecognitionException {
 		try {
 			int _type = FLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:104:5: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
-			int alt11=3;
-			alt11 = dfa11.predict(input);
-			switch (alt11) {
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:107:5: ( ( NEG )? ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT )
+			int alt13=3;
+			alt13 = dfa13.predict(input);
+			switch (alt13) {
 				case 1 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:104:9: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:107:9: ( NEG )? ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )?
 					{
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:104:9: ( '0' .. '9' )+
-					int cnt5=0;
-					loop5:
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:107:9: ( NEG )?
+					int alt6=2;
+					int LA6_0 = input.LA(1);
+					if ( (LA6_0=='-') ) {
+						alt6=1;
+					}
+					switch (alt6) {
+						case 1 :
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
+							{
+							if ( input.LA(1)=='-' ) {
+								input.consume();
+							}
+							else {
+								MismatchedSetException mse = new MismatchedSetException(null,input);
+								recover(mse);
+								throw mse;
+							}
+							}
+							break;
+
+					}
+
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:107:13: ( '0' .. '9' )+
+					int cnt7=0;
+					loop7:
 					while (true) {
-						int alt5=2;
-						int LA5_0 = input.LA(1);
-						if ( ((LA5_0 >= '0' && LA5_0 <= '9')) ) {
-							alt5=1;
+						int alt7=2;
+						int LA7_0 = input.LA(1);
+						if ( ((LA7_0 >= '0' && LA7_0 <= '9')) ) {
+							alt7=1;
 						}
 
-						switch (alt5) {
+						switch (alt7) {
 						case 1 :
 							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 							{
@@ -607,68 +676,15 @@ public class OpenWeatherMapAPILexer extends Lexer {
 							break;
 
 						default :
-							if ( cnt5 >= 1 ) break loop5;
-							EarlyExitException eee = new EarlyExitException(5, input);
+							if ( cnt7 >= 1 ) break loop7;
+							EarlyExitException eee = new EarlyExitException(7, input);
 							throw eee;
 						}
-						cnt5++;
+						cnt7++;
 					}
 
 					match('.'); 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:104:25: ( '0' .. '9' )*
-					loop6:
-					while (true) {
-						int alt6=2;
-						int LA6_0 = input.LA(1);
-						if ( ((LA6_0 >= '0' && LA6_0 <= '9')) ) {
-							alt6=1;
-						}
-
-						switch (alt6) {
-						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
-							{
-							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-								input.consume();
-							}
-							else {
-								MismatchedSetException mse = new MismatchedSetException(null,input);
-								recover(mse);
-								throw mse;
-							}
-							}
-							break;
-
-						default :
-							break loop6;
-						}
-					}
-
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:104:37: ( EXPONENT )?
-					int alt7=2;
-					int LA7_0 = input.LA(1);
-					if ( (LA7_0=='E'||LA7_0=='e') ) {
-						alt7=1;
-					}
-					switch (alt7) {
-						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:104:37: EXPONENT
-							{
-							mEXPONENT(); 
-
-							}
-							break;
-
-					}
-
-					}
-					break;
-				case 2 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:105:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
-					{
-					match('.'); 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:105:13: ( '0' .. '9' )+
-					int cnt8=0;
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:107:29: ( '0' .. '9' )*
 					loop8:
 					while (true) {
 						int alt8=2;
@@ -693,14 +709,11 @@ public class OpenWeatherMapAPILexer extends Lexer {
 							break;
 
 						default :
-							if ( cnt8 >= 1 ) break loop8;
-							EarlyExitException eee = new EarlyExitException(8, input);
-							throw eee;
+							break loop8;
 						}
-						cnt8++;
 					}
 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:105:25: ( EXPONENT )?
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:107:41: ( EXPONENT )?
 					int alt9=2;
 					int LA9_0 = input.LA(1);
 					if ( (LA9_0=='E'||LA9_0=='e') ) {
@@ -708,7 +721,7 @@ public class OpenWeatherMapAPILexer extends Lexer {
 					}
 					switch (alt9) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:105:25: EXPONENT
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:107:41: EXPONENT
 							{
 							mEXPONENT(); 
 
@@ -719,10 +732,11 @@ public class OpenWeatherMapAPILexer extends Lexer {
 
 					}
 					break;
-				case 3 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:106:9: ( '0' .. '9' )+ EXPONENT
+				case 2 :
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:108:9: '.' ( '0' .. '9' )+ ( EXPONENT )?
 					{
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:106:9: ( '0' .. '9' )+
+					match('.'); 
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:108:13: ( '0' .. '9' )+
 					int cnt10=0;
 					loop10:
 					while (true) {
@@ -755,6 +769,61 @@ public class OpenWeatherMapAPILexer extends Lexer {
 						cnt10++;
 					}
 
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:108:25: ( EXPONENT )?
+					int alt11=2;
+					int LA11_0 = input.LA(1);
+					if ( (LA11_0=='E'||LA11_0=='e') ) {
+						alt11=1;
+					}
+					switch (alt11) {
+						case 1 :
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:108:25: EXPONENT
+							{
+							mEXPONENT(); 
+
+							}
+							break;
+
+					}
+
+					}
+					break;
+				case 3 :
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:109:9: ( '0' .. '9' )+ EXPONENT
+					{
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:109:9: ( '0' .. '9' )+
+					int cnt12=0;
+					loop12:
+					while (true) {
+						int alt12=2;
+						int LA12_0 = input.LA(1);
+						if ( ((LA12_0 >= '0' && LA12_0 <= '9')) ) {
+							alt12=1;
+						}
+
+						switch (alt12) {
+						case 1 :
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
+							{
+							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+								input.consume();
+							}
+							else {
+								MismatchedSetException mse = new MismatchedSetException(null,input);
+								recover(mse);
+								throw mse;
+							}
+							}
+							break;
+
+						default :
+							if ( cnt12 >= 1 ) break loop12;
+							EarlyExitException eee = new EarlyExitException(12, input);
+							throw eee;
+						}
+						cnt12++;
+					}
+
 					mEXPONENT(); 
 
 					}
@@ -775,16 +844,16 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:110:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
-			int alt15=2;
-			int LA15_0 = input.LA(1);
-			if ( (LA15_0=='/') ) {
-				int LA15_1 = input.LA(2);
-				if ( (LA15_1=='/') ) {
-					alt15=1;
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:113:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+			int alt17=2;
+			int LA17_0 = input.LA(1);
+			if ( (LA17_0=='/') ) {
+				int LA17_1 = input.LA(2);
+				if ( (LA17_1=='/') ) {
+					alt17=1;
 				}
-				else if ( (LA15_1=='*') ) {
-					alt15=2;
+				else if ( (LA17_1=='*') ) {
+					alt17=2;
 				}
 
 				else {
@@ -792,7 +861,7 @@ public class OpenWeatherMapAPILexer extends Lexer {
 					try {
 						input.consume();
 						NoViableAltException nvae =
-							new NoViableAltException("", 15, 1, input);
+							new NoViableAltException("", 17, 1, input);
 						throw nvae;
 					} finally {
 						input.rewind(nvaeMark);
@@ -803,26 +872,26 @@ public class OpenWeatherMapAPILexer extends Lexer {
 
 			else {
 				NoViableAltException nvae =
-					new NoViableAltException("", 15, 0, input);
+					new NoViableAltException("", 17, 0, input);
 				throw nvae;
 			}
 
-			switch (alt15) {
+			switch (alt17) {
 				case 1 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:110:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:113:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:110:14: (~ ( '\\n' | '\\r' ) )*
-					loop12:
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:113:14: (~ ( '\\n' | '\\r' ) )*
+					loop14:
 					while (true) {
-						int alt12=2;
-						int LA12_0 = input.LA(1);
-						if ( ((LA12_0 >= '\u0000' && LA12_0 <= '\t')||(LA12_0 >= '\u000B' && LA12_0 <= '\f')||(LA12_0 >= '\u000E' && LA12_0 <= '\uFFFF')) ) {
-							alt12=1;
+						int alt14=2;
+						int LA14_0 = input.LA(1);
+						if ( ((LA14_0 >= '\u0000' && LA14_0 <= '\t')||(LA14_0 >= '\u000B' && LA14_0 <= '\f')||(LA14_0 >= '\u000E' && LA14_0 <= '\uFFFF')) ) {
+							alt14=1;
 						}
 
-						switch (alt12) {
+						switch (alt14) {
 						case 1 :
 							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 							{
@@ -838,19 +907,19 @@ public class OpenWeatherMapAPILexer extends Lexer {
 							break;
 
 						default :
-							break loop12;
+							break loop14;
 						}
 					}
 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:110:28: ( '\\r' )?
-					int alt13=2;
-					int LA13_0 = input.LA(1);
-					if ( (LA13_0=='\r') ) {
-						alt13=1;
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:113:28: ( '\\r' )?
+					int alt15=2;
+					int LA15_0 = input.LA(1);
+					if ( (LA15_0=='\r') ) {
+						alt15=1;
 					}
-					switch (alt13) {
+					switch (alt15) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:110:28: '\\r'
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:113:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -863,39 +932,39 @@ public class OpenWeatherMapAPILexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:111:9: '/*' ( options {greedy=false; } : . )* '*/'
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:114:9: '/*' ( options {greedy=false; } : . )* '*/'
 					{
 					match("/*"); 
 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:111:14: ( options {greedy=false; } : . )*
-					loop14:
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:114:14: ( options {greedy=false; } : . )*
+					loop16:
 					while (true) {
-						int alt14=2;
-						int LA14_0 = input.LA(1);
-						if ( (LA14_0=='*') ) {
-							int LA14_1 = input.LA(2);
-							if ( (LA14_1=='/') ) {
-								alt14=2;
+						int alt16=2;
+						int LA16_0 = input.LA(1);
+						if ( (LA16_0=='*') ) {
+							int LA16_1 = input.LA(2);
+							if ( (LA16_1=='/') ) {
+								alt16=2;
 							}
-							else if ( ((LA14_1 >= '\u0000' && LA14_1 <= '.')||(LA14_1 >= '0' && LA14_1 <= '\uFFFF')) ) {
-								alt14=1;
+							else if ( ((LA16_1 >= '\u0000' && LA16_1 <= '.')||(LA16_1 >= '0' && LA16_1 <= '\uFFFF')) ) {
+								alt16=1;
 							}
 
 						}
-						else if ( ((LA14_0 >= '\u0000' && LA14_0 <= ')')||(LA14_0 >= '+' && LA14_0 <= '\uFFFF')) ) {
-							alt14=1;
+						else if ( ((LA16_0 >= '\u0000' && LA16_0 <= ')')||(LA16_0 >= '+' && LA16_0 <= '\uFFFF')) ) {
+							alt16=1;
 						}
 
-						switch (alt14) {
+						switch (alt16) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:111:42: .
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:114:42: .
 							{
 							matchAny(); 
 							}
 							break;
 
 						default :
-							break loop14;
+							break loop16;
 						}
 					}
 
@@ -918,8 +987,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 	// $ANTLR start "EXPONENT"
 	public final void mEXPONENT() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:116:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:116:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:119:10: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:119:12: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
 			{
 			if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
 				input.consume();
@@ -929,13 +998,13 @@ public class OpenWeatherMapAPILexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:116:22: ( '+' | '-' )?
-			int alt16=2;
-			int LA16_0 = input.LA(1);
-			if ( (LA16_0=='+'||LA16_0=='-') ) {
-				alt16=1;
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:119:22: ( '+' | '-' )?
+			int alt18=2;
+			int LA18_0 = input.LA(1);
+			if ( (LA18_0=='+'||LA18_0=='-') ) {
+				alt18=1;
 			}
-			switch (alt16) {
+			switch (alt18) {
 				case 1 :
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 					{
@@ -952,17 +1021,17 @@ public class OpenWeatherMapAPILexer extends Lexer {
 
 			}
 
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:116:33: ( '0' .. '9' )+
-			int cnt17=0;
-			loop17:
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:119:33: ( '0' .. '9' )+
+			int cnt19=0;
+			loop19:
 			while (true) {
-				int alt17=2;
-				int LA17_0 = input.LA(1);
-				if ( ((LA17_0 >= '0' && LA17_0 <= '9')) ) {
-					alt17=1;
+				int alt19=2;
+				int LA19_0 = input.LA(1);
+				if ( ((LA19_0 >= '0' && LA19_0 <= '9')) ) {
+					alt19=1;
 				}
 
-				switch (alt17) {
+				switch (alt19) {
 				case 1 :
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:
 					{
@@ -978,11 +1047,11 @@ public class OpenWeatherMapAPILexer extends Lexer {
 					break;
 
 				default :
-					if ( cnt17 >= 1 ) break loop17;
-					EarlyExitException eee = new EarlyExitException(17, input);
+					if ( cnt19 >= 1 ) break loop19;
+					EarlyExitException eee = new EarlyExitException(19, input);
 					throw eee;
 				}
-				cnt17++;
+				cnt19++;
 			}
 
 			}
@@ -999,8 +1068,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:117:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:117:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:120:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:120:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -1027,8 +1096,8 @@ public class OpenWeatherMapAPILexer extends Lexer {
 		try {
 			int _type = ERROR_TOKEN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:125:2: ( . )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:125:4: .
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:128:2: ( . )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:128:4: .
 			{
 			matchAny(); 
 			printMsg();
@@ -1045,10 +1114,10 @@ public class OpenWeatherMapAPILexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:8: ( GO | GC | QO | QC | VIRG | VIRGUP | DUEP | NAME | INT | FLOAT | COMMENT | WS | ERROR_TOKEN )
-		int alt18=13;
-		alt18 = dfa18.predict(input);
-		switch (alt18) {
+		// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:8: ( GO | GC | QO | QC | VIRG | VIRGUP | DUEP | NAME | INT | NEG | FLOAT | COMMENT | WS | ERROR_TOKEN )
+		int alt20=14;
+		alt20 = dfa20.predict(input);
+		switch (alt20) {
 			case 1 :
 				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:10: GO
 				{
@@ -1113,28 +1182,35 @@ public class OpenWeatherMapAPILexer extends Lexer {
 				}
 				break;
 			case 10 :
-				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:48: FLOAT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:48: NEG
+				{
+				mNEG(); 
+
+				}
+				break;
+			case 11 :
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:52: FLOAT
 				{
 				mFLOAT(); 
 
 				}
 				break;
-			case 11 :
-				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:54: COMMENT
+			case 12 :
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:58: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
-			case 12 :
-				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:62: WS
+			case 13 :
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:66: WS
 				{
 				mWS(); 
 
 				}
 				break;
-			case 13 :
-				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:65: ERROR_TOKEN
+			case 14 :
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:1:69: ERROR_TOKEN
 				{
 				mERROR_TOKEN(); 
 
@@ -1145,79 +1221,81 @@ public class OpenWeatherMapAPILexer extends Lexer {
 	}
 
 
-	protected DFA11 dfa11 = new DFA11(this);
-	protected DFA18 dfa18 = new DFA18(this);
-	static final String DFA11_eotS =
+	protected DFA13 dfa13 = new DFA13(this);
+	protected DFA20 dfa20 = new DFA20(this);
+	static final String DFA13_eotS =
 		"\5\uffff";
-	static final String DFA11_eofS =
+	static final String DFA13_eofS =
 		"\5\uffff";
-	static final String DFA11_minS =
-		"\2\56\3\uffff";
-	static final String DFA11_maxS =
-		"\1\71\1\145\3\uffff";
-	static final String DFA11_acceptS =
-		"\2\uffff\1\2\1\1\1\3";
-	static final String DFA11_specialS =
+	static final String DFA13_minS =
+		"\1\55\1\uffff\1\56\2\uffff";
+	static final String DFA13_maxS =
+		"\1\71\1\uffff\1\145\2\uffff";
+	static final String DFA13_acceptS =
+		"\1\uffff\1\1\1\uffff\1\2\1\3";
+	static final String DFA13_specialS =
 		"\5\uffff}>";
-	static final String[] DFA11_transitionS = {
-			"\1\2\1\uffff\12\1",
-			"\1\3\1\uffff\12\1\13\uffff\1\4\37\uffff\1\4",
+	static final String[] DFA13_transitionS = {
+			"\1\1\1\3\1\uffff\12\2",
 			"",
+			"\1\1\1\uffff\12\2\13\uffff\1\4\37\uffff\1\4",
 			"",
 			""
 	};
 
-	static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
-	static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
-	static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
-	static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
-	static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
-	static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
-	static final short[][] DFA11_transition;
+	static final short[] DFA13_eot = DFA.unpackEncodedString(DFA13_eotS);
+	static final short[] DFA13_eof = DFA.unpackEncodedString(DFA13_eofS);
+	static final char[] DFA13_min = DFA.unpackEncodedStringToUnsignedChars(DFA13_minS);
+	static final char[] DFA13_max = DFA.unpackEncodedStringToUnsignedChars(DFA13_maxS);
+	static final short[] DFA13_accept = DFA.unpackEncodedString(DFA13_acceptS);
+	static final short[] DFA13_special = DFA.unpackEncodedString(DFA13_specialS);
+	static final short[][] DFA13_transition;
 
 	static {
-		int numStates = DFA11_transitionS.length;
-		DFA11_transition = new short[numStates][];
+		int numStates = DFA13_transitionS.length;
+		DFA13_transition = new short[numStates][];
 		for (int i=0; i<numStates; i++) {
-			DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
+			DFA13_transition[i] = DFA.unpackEncodedString(DFA13_transitionS[i]);
 		}
 	}
 
-	protected class DFA11 extends DFA {
+	protected class DFA13 extends DFA {
 
-		public DFA11(BaseRecognizer recognizer) {
+		public DFA13(BaseRecognizer recognizer) {
 			this.recognizer = recognizer;
-			this.decisionNumber = 11;
-			this.eot = DFA11_eot;
-			this.eof = DFA11_eof;
-			this.min = DFA11_min;
-			this.max = DFA11_max;
-			this.accept = DFA11_accept;
-			this.special = DFA11_special;
-			this.transition = DFA11_transition;
+			this.decisionNumber = 13;
+			this.eot = DFA13_eot;
+			this.eof = DFA13_eof;
+			this.min = DFA13_min;
+			this.max = DFA13_max;
+			this.accept = DFA13_accept;
+			this.special = DFA13_special;
+			this.transition = DFA13_transition;
 		}
 		@Override
 		public String getDescription() {
-			return "103:1: FLOAT : ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT );";
+			return "106:1: FLOAT : ( ( NEG )? ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( EXPONENT )? | '.' ( '0' .. '9' )+ ( EXPONENT )? | ( '0' .. '9' )+ EXPONENT );";
 		}
 	}
 
-	static final String DFA18_eotS =
-		"\11\uffff\1\26\2\15\13\uffff\1\25\1\26\3\uffff\1\25";
-	static final String DFA18_eofS =
-		"\35\uffff";
-	static final String DFA18_minS =
-		"\1\0\10\uffff\1\40\1\60\1\52\13\uffff\1\53\1\40\3\uffff\1\60";
-	static final String DFA18_maxS =
-		"\1\uffff\10\uffff\1\172\1\71\1\57\13\uffff\1\71\1\172\3\uffff\1\71";
-	static final String DFA18_acceptS =
-		"\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\3\uffff\1\14\1\15\1\1\1\2\1"+
-		"\3\1\4\1\5\1\6\1\7\1\10\1\11\2\uffff\1\12\1\13\1\14\1\uffff";
-	static final String DFA18_specialS =
-		"\1\0\34\uffff}>";
-	static final String[] DFA18_transitionS = {
-			"\11\15\2\14\2\15\1\14\22\15\1\14\1\15\1\6\11\15\1\5\1\15\1\12\1\13\12"+
-			"\11\1\7\6\15\32\10\1\3\1\15\1\4\3\15\32\10\1\1\1\15\1\2\uff82\15",
+	static final String DFA20_eotS =
+		"\11\uffff\1\30\1\31\2\16\12\uffff\1\31\2\uffff\1\26\1\31\4\uffff\1\26";
+	static final String DFA20_eofS =
+		"\41\uffff";
+	static final String DFA20_minS =
+		"\1\0\10\uffff\1\60\1\40\1\60\1\52\12\uffff\1\40\2\uffff\1\53\1\40\3\uffff"+
+		"\2\60";
+	static final String DFA20_maxS =
+		"\1\uffff\10\uffff\1\71\1\172\1\71\1\57\12\uffff\1\172\2\uffff\1\71\1\172"+
+		"\3\uffff\2\71";
+	static final String DFA20_acceptS =
+		"\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\4\uffff\1\15\1\16\1\1\1\2\1"+
+		"\3\1\4\1\5\1\6\1\7\1\10\1\uffff\1\12\1\11\2\uffff\1\13\1\14\1\15\2\uffff";
+	static final String DFA20_specialS =
+		"\1\0\40\uffff}>";
+	static final String[] DFA20_transitionS = {
+			"\11\16\2\15\2\16\1\15\22\16\1\15\1\16\1\6\11\16\1\5\1\11\1\13\1\14\12"+
+			"\12\1\7\6\16\32\10\1\3\1\16\1\4\3\16\32\10\1\1\1\16\1\2\uff82\16",
 			"",
 			"",
 			"",
@@ -1226,10 +1304,11 @@ public class OpenWeatherMapAPILexer extends Lexer {
 			"",
 			"",
 			"",
-			"\1\25\15\uffff\1\31\1\uffff\12\30\7\uffff\4\25\1\27\25\25\4\uffff\1"+
-			"\25\1\uffff\4\25\1\27\25\25",
-			"\12\31",
-			"\1\32\4\uffff\1\32",
+			"\12\27",
+			"\1\26\15\uffff\1\34\1\uffff\12\33\7\uffff\4\26\1\32\25\26\4\uffff\1"+
+			"\26\1\uffff\4\26\1\32\25\26",
+			"\12\34",
+			"\1\35\4\uffff\1\35",
 			"",
 			"",
 			"",
@@ -1240,48 +1319,52 @@ public class OpenWeatherMapAPILexer extends Lexer {
 			"",
 			"",
 			"",
-			"",
-			"\1\31\1\uffff\1\31\2\uffff\12\34",
-			"\1\25\15\uffff\1\31\1\uffff\12\30\7\uffff\4\25\1\27\25\25\4\uffff\1"+
-			"\25\1\uffff\4\25\1\27\25\25",
+			"\1\26\15\uffff\1\34\1\uffff\12\27\7\uffff\32\26\4\uffff\1\26\1\uffff"+
+			"\32\26",
 			"",
 			"",
+			"\1\34\1\uffff\1\37\2\uffff\12\40",
+			"\1\26\15\uffff\1\34\1\uffff\12\33\7\uffff\4\26\1\32\25\26\4\uffff\1"+
+			"\26\1\uffff\4\26\1\32\25\26",
 			"",
-			"\12\34"
+			"",
+			"",
+			"\12\40",
+			"\12\40"
 	};
 
-	static final short[] DFA18_eot = DFA.unpackEncodedString(DFA18_eotS);
-	static final short[] DFA18_eof = DFA.unpackEncodedString(DFA18_eofS);
-	static final char[] DFA18_min = DFA.unpackEncodedStringToUnsignedChars(DFA18_minS);
-	static final char[] DFA18_max = DFA.unpackEncodedStringToUnsignedChars(DFA18_maxS);
-	static final short[] DFA18_accept = DFA.unpackEncodedString(DFA18_acceptS);
-	static final short[] DFA18_special = DFA.unpackEncodedString(DFA18_specialS);
-	static final short[][] DFA18_transition;
+	static final short[] DFA20_eot = DFA.unpackEncodedString(DFA20_eotS);
+	static final short[] DFA20_eof = DFA.unpackEncodedString(DFA20_eofS);
+	static final char[] DFA20_min = DFA.unpackEncodedStringToUnsignedChars(DFA20_minS);
+	static final char[] DFA20_max = DFA.unpackEncodedStringToUnsignedChars(DFA20_maxS);
+	static final short[] DFA20_accept = DFA.unpackEncodedString(DFA20_acceptS);
+	static final short[] DFA20_special = DFA.unpackEncodedString(DFA20_specialS);
+	static final short[][] DFA20_transition;
 
 	static {
-		int numStates = DFA18_transitionS.length;
-		DFA18_transition = new short[numStates][];
+		int numStates = DFA20_transitionS.length;
+		DFA20_transition = new short[numStates][];
 		for (int i=0; i<numStates; i++) {
-			DFA18_transition[i] = DFA.unpackEncodedString(DFA18_transitionS[i]);
+			DFA20_transition[i] = DFA.unpackEncodedString(DFA20_transitionS[i]);
 		}
 	}
 
-	protected class DFA18 extends DFA {
+	protected class DFA20 extends DFA {
 
-		public DFA18(BaseRecognizer recognizer) {
+		public DFA20(BaseRecognizer recognizer) {
 			this.recognizer = recognizer;
-			this.decisionNumber = 18;
-			this.eot = DFA18_eot;
-			this.eof = DFA18_eof;
-			this.min = DFA18_min;
-			this.max = DFA18_max;
-			this.accept = DFA18_accept;
-			this.special = DFA18_special;
-			this.transition = DFA18_transition;
+			this.decisionNumber = 20;
+			this.eot = DFA20_eot;
+			this.eof = DFA20_eof;
+			this.min = DFA20_min;
+			this.max = DFA20_max;
+			this.accept = DFA20_accept;
+			this.special = DFA20_special;
+			this.transition = DFA20_transition;
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( GO | GC | QO | QC | VIRG | VIRGUP | DUEP | NAME | INT | FLOAT | COMMENT | WS | ERROR_TOKEN );";
+			return "1:1: Tokens : ( GO | GC | QO | QC | VIRG | VIRGUP | DUEP | NAME | INT | NEG | FLOAT | COMMENT | WS | ERROR_TOKEN );";
 		}
 		@Override
 		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
@@ -1289,26 +1372,27 @@ public class OpenWeatherMapAPILexer extends Lexer {
 			int _s = s;
 			switch ( s ) {
 					case 0 : 
-						int LA18_0 = input.LA(1);
+						int LA20_0 = input.LA(1);
 						s = -1;
-						if ( (LA18_0=='{') ) {s = 1;}
-						else if ( (LA18_0=='}') ) {s = 2;}
-						else if ( (LA18_0=='[') ) {s = 3;}
-						else if ( (LA18_0==']') ) {s = 4;}
-						else if ( (LA18_0==',') ) {s = 5;}
-						else if ( (LA18_0=='\"') ) {s = 6;}
-						else if ( (LA18_0==':') ) {s = 7;}
-						else if ( ((LA18_0 >= 'A' && LA18_0 <= 'Z')||(LA18_0 >= 'a' && LA18_0 <= 'z')) ) {s = 8;}
-						else if ( ((LA18_0 >= '0' && LA18_0 <= '9')) ) {s = 9;}
-						else if ( (LA18_0=='.') ) {s = 10;}
-						else if ( (LA18_0=='/') ) {s = 11;}
-						else if ( ((LA18_0 >= '\t' && LA18_0 <= '\n')||LA18_0=='\r'||LA18_0==' ') ) {s = 12;}
-						else if ( ((LA18_0 >= '\u0000' && LA18_0 <= '\b')||(LA18_0 >= '\u000B' && LA18_0 <= '\f')||(LA18_0 >= '\u000E' && LA18_0 <= '\u001F')||LA18_0=='!'||(LA18_0 >= '#' && LA18_0 <= '+')||LA18_0=='-'||(LA18_0 >= ';' && LA18_0 <= '@')||LA18_0=='\\'||(LA18_0 >= '^' && LA18_0 <= '`')||LA18_0=='|'||(LA18_0 >= '~' && LA18_0 <= '\uFFFF')) ) {s = 13;}
+						if ( (LA20_0=='{') ) {s = 1;}
+						else if ( (LA20_0=='}') ) {s = 2;}
+						else if ( (LA20_0=='[') ) {s = 3;}
+						else if ( (LA20_0==']') ) {s = 4;}
+						else if ( (LA20_0==',') ) {s = 5;}
+						else if ( (LA20_0=='\"') ) {s = 6;}
+						else if ( (LA20_0==':') ) {s = 7;}
+						else if ( ((LA20_0 >= 'A' && LA20_0 <= 'Z')||(LA20_0 >= 'a' && LA20_0 <= 'z')) ) {s = 8;}
+						else if ( (LA20_0=='-') ) {s = 9;}
+						else if ( ((LA20_0 >= '0' && LA20_0 <= '9')) ) {s = 10;}
+						else if ( (LA20_0=='.') ) {s = 11;}
+						else if ( (LA20_0=='/') ) {s = 12;}
+						else if ( ((LA20_0 >= '\t' && LA20_0 <= '\n')||LA20_0=='\r'||LA20_0==' ') ) {s = 13;}
+						else if ( ((LA20_0 >= '\u0000' && LA20_0 <= '\b')||(LA20_0 >= '\u000B' && LA20_0 <= '\f')||(LA20_0 >= '\u000E' && LA20_0 <= '\u001F')||LA20_0=='!'||(LA20_0 >= '#' && LA20_0 <= '+')||(LA20_0 >= ';' && LA20_0 <= '@')||LA20_0=='\\'||(LA20_0 >= '^' && LA20_0 <= '`')||LA20_0=='|'||(LA20_0 >= '~' && LA20_0 <= '\uFFFF')) ) {s = 14;}
 						if ( s>=0 ) return s;
 						break;
 			}
 			NoViableAltException nvae =
-				new NoViableAltException(getDescription(), 18, _s, input);
+				new NoViableAltException(getDescription(), 20, _s, input);
 			error(nvae);
 			throw nvae;
 		}

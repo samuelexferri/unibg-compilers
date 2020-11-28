@@ -27,13 +27,15 @@ options {
 	int prova2;
 }
 
+
+
 // Qui inizia la specifica del parser
 myStartExample
 	: mainblock EOF
 	;
 
 mainblock
-	: GO (block)* GC ;
+	: GO (block) GC ;
 	
 block
 	: (stringa DUEP sublock) (VIRG stringa DUEP sublock)* ; 
@@ -42,7 +44,7 @@ stringa
 	: VIRGUP NAME VIRGUP;
 
 sublock
-	: INT | FLOAT | stringa | (QO? GO (block)+ GC QC?) ;
+	: INT | FLOAT | stringa | (QO? GO (block) GC QC?) ;
 
 	
 /*
@@ -93,15 +95,16 @@ DUEP	: ':' ;
 
 NAME  :	(('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|INT|' '|'_')*) | (INT ('a'..'z'|'A'..'Z'|' '|'_') ('a'..'z'|'A'..'Z'|INT|' '|'_')*) ; // TODO: Non possono essre finali underscore o spazio, Possono essere solo da una lista
 
-INT :	'0'..'9'+
+INT :	NEG?('0'..'9')+
     ;
+NEG     :'-';  //Per i valori negativi
     
     
 
 	
 
 FLOAT
-    :   ('0'..'9')+ '.' ('0'..'9')* EXPONENT?
+    :   NEG?('0'..'9')+ '.' ('0'..'9')* EXPONENT?
     |   '.' ('0'..'9')+ EXPONENT?
     |   ('0'..'9')+ EXPONENT
     ;
