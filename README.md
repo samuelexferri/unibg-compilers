@@ -13,7 +13,7 @@ Formal Languages and Compilers project
 ### Team
 
 -   **Samuele Ferri**: [Site](https://samuelexferri.com), [GitHub](https://github.com/samuelexferri)
--   **Simone Sudati**
+-   **Simone Sudati**: [Site](https://simonesudati.com), [GitHub](https://github.com/SudatiSimone)
 
 ## Version
 
