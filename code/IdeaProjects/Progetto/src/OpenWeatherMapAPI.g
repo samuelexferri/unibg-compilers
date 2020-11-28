@@ -30,13 +30,14 @@ mainblock
 	: GO (block)* GC ;
 	
 block
-	: stringa DUEP sublock VIRG*; // TODO: L'ultimo blocco non ha la virgola (sia quelli grossi che innestati)
+	: stringa DUEP sublock VIRG?; // TODO: L'ultimo blocco non ha la virgola (sia quelli grossi che innestati)
 	
 stringa
 	: VIRGUP NAME VIRGUP;
 
 sublock
-	: INT | FLOAT | stringa | (GO (block)+ GC) ;
+	: INT | FLOAT | stringa | (QO? GO (block)+ GC QC?) ;
+
 	
 /*
 expression
@@ -52,21 +53,48 @@ atom
 	;
 */
 
+
+// SYNTAX RULES
+/*
+COORD 
+	:	'coord';
+WEATHER 
+	:	'weather';
+MAIN
+	:	'main';
+WIND 
+	:	'wind';
+CLOUDS 
+	:	'clouds';
+SYS
+	:	'sys';
+*/
+
 // Qui inizia la specifica del lexer
 GO	: '{' ;
 
 GC	: '}' ;
 
+QO	: '[' ;
+
+QC	: ']' ;
+    
 VIRG	: ',' ;
 
 VIRGUP	: '"' ;
 
-DUEP	:	':' ;
+DUEP	: ':' ;
 
 NAME  :	(('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|INT|' '|'_')*) | (INT ('a'..'z'|'A'..'Z'|' '|'_') ('a'..'z'|'A'..'Z'|INT|' '|'_')*) ; // TODO: Non possono essre finali underscore o spazio, Possono essere solo da una lista
 
 INT :	'0'..'9'+
     ;
+    
+    
+
+
+	
+	
 
 FLOAT
     :   ('0'..'9')+ '.' ('0'..'9')* EXPONENT?
