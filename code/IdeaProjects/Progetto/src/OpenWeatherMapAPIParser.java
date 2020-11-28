@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g 2020-11-28 11:57:26
+// $ANTLR 3.5.1 C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g 2020-11-28 16:22:39
 
 	//package myCompiler;
 
@@ -55,16 +55,17 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 	// $ANTLR start "myStartExample"
-	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:25:1: myStartExample : mainblock ;
+	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:25:1: myStartExample : mainblock EOF ;
 	public final void myStartExample() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:26:2: ( mainblock )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:26:4: mainblock
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:26:2: ( mainblock EOF )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:26:4: mainblock EOF
 			{
 			pushFollow(FOLLOW_mainblock_in_myStartExample64);
 			mainblock();
 			state._fsp--;
 
+			match(input,EOF,FOLLOW_EOF_in_myStartExample66); 
 			}
 
 		}
@@ -87,7 +88,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:2: ( GO ( block )* GC )
 			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:4: GO ( block )* GC
 			{
-			match(input,GO,FOLLOW_GO_in_mainblock75); 
+			match(input,GO,FOLLOW_GO_in_mainblock77); 
 			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:7: ( block )*
 			loop1:
 			while (true) {
@@ -101,7 +102,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 				case 1 :
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:8: block
 					{
-					pushFollow(FOLLOW_block_in_mainblock78);
+					pushFollow(FOLLOW_block_in_mainblock80);
 					block();
 					state._fsp--;
 
@@ -113,7 +114,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 				}
 			}
 
-			match(input,GC,FOLLOW_GC_in_mainblock82); 
+			match(input,GC,FOLLOW_GC_in_mainblock84); 
 			}
 
 		}
@@ -130,35 +131,55 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 	// $ANTLR start "block"
-	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:32:1: block : stringa DUEP sublock ( VIRG )? ;
+	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:32:1: block : ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )* ;
 	public final void block() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:2: ( stringa DUEP sublock ( VIRG )? )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:4: stringa DUEP sublock ( VIRG )?
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:2: ( ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )* )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:4: ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )*
 			{
-			pushFollow(FOLLOW_stringa_in_block93);
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:4: ( stringa DUEP sublock )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:5: stringa DUEP sublock
+			{
+			pushFollow(FOLLOW_stringa_in_block96);
 			stringa();
 			state._fsp--;
 
-			match(input,DUEP,FOLLOW_DUEP_in_block95); 
-			pushFollow(FOLLOW_sublock_in_block97);
+			match(input,DUEP,FOLLOW_DUEP_in_block98); 
+			pushFollow(FOLLOW_sublock_in_block100);
 			sublock();
 			state._fsp--;
 
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:25: ( VIRG )?
-			int alt2=2;
-			int LA2_0 = input.LA(1);
-			if ( (LA2_0==VIRG) ) {
-				alt2=1;
 			}
-			switch (alt2) {
+
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:27: ( VIRG stringa DUEP sublock )*
+			loop2:
+			while (true) {
+				int alt2=2;
+				int LA2_0 = input.LA(1);
+				if ( (LA2_0==VIRG) ) {
+					alt2=1;
+				}
+
+				switch (alt2) {
 				case 1 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:25: VIRG
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:28: VIRG stringa DUEP sublock
 					{
-					match(input,VIRG,FOLLOW_VIRG_in_block99); 
+					match(input,VIRG,FOLLOW_VIRG_in_block104); 
+					pushFollow(FOLLOW_stringa_in_block106);
+					stringa();
+					state._fsp--;
+
+					match(input,DUEP,FOLLOW_DUEP_in_block108); 
+					pushFollow(FOLLOW_sublock_in_block110);
+					sublock();
+					state._fsp--;
+
 					}
 					break;
 
+				default :
+					break loop2;
+				}
 			}
 
 			}
@@ -183,9 +204,9 @@ public class OpenWeatherMapAPIParser extends Parser {
 			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:2: ( VIRGUP NAME VIRGUP )
 			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:4: VIRGUP NAME VIRGUP
 			{
-			match(input,VIRGUP,FOLLOW_VIRGUP_in_stringa111); 
-			match(input,NAME,FOLLOW_NAME_in_stringa113); 
-			match(input,VIRGUP,FOLLOW_VIRGUP_in_stringa115); 
+			match(input,VIRGUP,FOLLOW_VIRGUP_in_stringa124); 
+			match(input,NAME,FOLLOW_NAME_in_stringa126); 
+			match(input,VIRGUP,FOLLOW_VIRGUP_in_stringa128); 
 			}
 
 		}
@@ -238,19 +259,19 @@ public class OpenWeatherMapAPIParser extends Parser {
 				case 1 :
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:4: INT
 					{
-					match(input,INT,FOLLOW_INT_in_sublock124); 
+					match(input,INT,FOLLOW_INT_in_sublock137); 
 					}
 					break;
 				case 2 :
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:10: FLOAT
 					{
-					match(input,FLOAT,FOLLOW_FLOAT_in_sublock128); 
+					match(input,FLOAT,FOLLOW_FLOAT_in_sublock141); 
 					}
 					break;
 				case 3 :
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:18: stringa
 					{
-					pushFollow(FOLLOW_stringa_in_sublock132);
+					pushFollow(FOLLOW_stringa_in_sublock145);
 					stringa();
 					state._fsp--;
 
@@ -272,13 +293,13 @@ public class OpenWeatherMapAPIParser extends Parser {
 						case 1 :
 							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:29: QO
 							{
-							match(input,QO,FOLLOW_QO_in_sublock137); 
+							match(input,QO,FOLLOW_QO_in_sublock150); 
 							}
 							break;
 
 					}
 
-					match(input,GO,FOLLOW_GO_in_sublock140); 
+					match(input,GO,FOLLOW_GO_in_sublock153); 
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:36: ( block )+
 					int cnt4=0;
 					loop4:
@@ -293,7 +314,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 						case 1 :
 							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:37: block
 							{
-							pushFollow(FOLLOW_block_in_sublock143);
+							pushFollow(FOLLOW_block_in_sublock156);
 							block();
 							state._fsp--;
 
@@ -308,7 +329,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 						cnt4++;
 					}
 
-					match(input,GC,FOLLOW_GC_in_sublock147); 
+					match(input,GC,FOLLOW_GC_in_sublock160); 
 					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:48: ( QC )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
@@ -319,7 +340,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 						case 1 :
 							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:48: QC
 							{
-							match(input,QC,FOLLOW_QC_in_sublock149); 
+							match(input,QC,FOLLOW_QC_in_sublock162); 
 							}
 							break;
 
@@ -346,23 +367,27 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 
-	public static final BitSet FOLLOW_mainblock_in_myStartExample64 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_GO_in_mainblock75 = new BitSet(new long[]{0x0000000000010200L});
-	public static final BitSet FOLLOW_block_in_mainblock78 = new BitSet(new long[]{0x0000000000010200L});
-	public static final BitSet FOLLOW_GC_in_mainblock82 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_stringa_in_block93 = new BitSet(new long[]{0x0000000000000020L});
-	public static final BitSet FOLLOW_DUEP_in_block95 = new BitSet(new long[]{0x0000000000014D00L});
-	public static final BitSet FOLLOW_sublock_in_block97 = new BitSet(new long[]{0x0000000000008002L});
-	public static final BitSet FOLLOW_VIRG_in_block99 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VIRGUP_in_stringa111 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_NAME_in_stringa113 = new BitSet(new long[]{0x0000000000010000L});
-	public static final BitSet FOLLOW_VIRGUP_in_stringa115 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_sublock124 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FLOAT_in_sublock128 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_stringa_in_sublock132 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_QO_in_sublock137 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_GO_in_sublock140 = new BitSet(new long[]{0x0000000000010000L});
-	public static final BitSet FOLLOW_block_in_sublock143 = new BitSet(new long[]{0x0000000000010200L});
-	public static final BitSet FOLLOW_GC_in_sublock147 = new BitSet(new long[]{0x0000000000002002L});
-	public static final BitSet FOLLOW_QC_in_sublock149 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_mainblock_in_myStartExample64 = new BitSet(new long[]{0x0000000000000000L});
+	public static final BitSet FOLLOW_EOF_in_myStartExample66 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_GO_in_mainblock77 = new BitSet(new long[]{0x0000000000010200L});
+	public static final BitSet FOLLOW_block_in_mainblock80 = new BitSet(new long[]{0x0000000000010200L});
+	public static final BitSet FOLLOW_GC_in_mainblock84 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_stringa_in_block96 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_DUEP_in_block98 = new BitSet(new long[]{0x0000000000014D00L});
+	public static final BitSet FOLLOW_sublock_in_block100 = new BitSet(new long[]{0x0000000000008002L});
+	public static final BitSet FOLLOW_VIRG_in_block104 = new BitSet(new long[]{0x0000000000010000L});
+	public static final BitSet FOLLOW_stringa_in_block106 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_DUEP_in_block108 = new BitSet(new long[]{0x0000000000014D00L});
+	public static final BitSet FOLLOW_sublock_in_block110 = new BitSet(new long[]{0x0000000000008002L});
+	public static final BitSet FOLLOW_VIRGUP_in_stringa124 = new BitSet(new long[]{0x0000000000001000L});
+	public static final BitSet FOLLOW_NAME_in_stringa126 = new BitSet(new long[]{0x0000000000010000L});
+	public static final BitSet FOLLOW_VIRGUP_in_stringa128 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_sublock137 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FLOAT_in_sublock141 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_stringa_in_sublock145 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_QO_in_sublock150 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_GO_in_sublock153 = new BitSet(new long[]{0x0000000000010000L});
+	public static final BitSet FOLLOW_block_in_sublock156 = new BitSet(new long[]{0x0000000000010200L});
+	public static final BitSet FOLLOW_GC_in_sublock160 = new BitSet(new long[]{0x0000000000002002L});
+	public static final BitSet FOLLOW_QC_in_sublock162 = new BitSet(new long[]{0x0000000000000002L});
 }

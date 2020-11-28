@@ -23,14 +23,14 @@ options {
 
 // Qui inizia la specifica del parser
 myStartExample
-	: mainblock
+	: mainblock EOF
 	;
 
 mainblock
 	: GO (block)* GC ;
 	
 block
-	: stringa DUEP sublock VIRG?; // TODO: L'ultimo blocco non ha la virgola (sia quelli grossi che innestati)
+	: (stringa DUEP sublock) (VIRG stringa DUEP sublock)* ; 
 	
 stringa
 	: VIRGUP NAME VIRGUP;
