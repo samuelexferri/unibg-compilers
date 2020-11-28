@@ -10,7 +10,13 @@ options {
 }
 
 @lexer::members {
-	int prova1;
+	
+	int nErrori = 0;
+	
+	void printMsg () {
+		nErrori++;
+		System.out.println("n. Errori Trovati: \t" + nErrori);
+	}
 }
 
 @header {
@@ -92,8 +98,6 @@ INT :	'0'..'9'+
     
     
 
-
-	
 	
 
 FLOAT
@@ -118,5 +122,5 @@ WS  :   ( ' '
     ;
 
 ERROR_TOKEN
-	: . {$channel=HIDDEN;}
+	: . {printMsg();}
 	;

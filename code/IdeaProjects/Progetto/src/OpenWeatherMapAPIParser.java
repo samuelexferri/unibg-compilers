@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g 2020-11-28 16:22:39
+// $ANTLR 3.5.1 C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g 2020-11-28 16:42:58
 
 	//package myCompiler;
 
@@ -55,11 +55,11 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 	// $ANTLR start "myStartExample"
-	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:25:1: myStartExample : mainblock EOF ;
+	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:31:1: myStartExample : mainblock EOF ;
 	public final void myStartExample() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:26:2: ( mainblock EOF )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:26:4: mainblock EOF
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:32:2: ( mainblock EOF )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:32:4: mainblock EOF
 			{
 			pushFollow(FOLLOW_mainblock_in_myStartExample64);
 			mainblock();
@@ -82,14 +82,14 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 	// $ANTLR start "mainblock"
-	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:29:1: mainblock : GO ( block )* GC ;
+	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:35:1: mainblock : GO ( block )* GC ;
 	public final void mainblock() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:2: ( GO ( block )* GC )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:4: GO ( block )* GC
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:2: ( GO ( block )* GC )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:4: GO ( block )* GC
 			{
 			match(input,GO,FOLLOW_GO_in_mainblock77); 
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:7: ( block )*
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:7: ( block )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -100,7 +100,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:30:8: block
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:8: block
 					{
 					pushFollow(FOLLOW_block_in_mainblock80);
 					block();
@@ -131,14 +131,14 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 	// $ANTLR start "block"
-	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:32:1: block : ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )* ;
+	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:38:1: block : ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )* ;
 	public final void block() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:2: ( ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )* )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:4: ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )*
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:2: ( ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )* )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:4: ( stringa DUEP sublock ) ( VIRG stringa DUEP sublock )*
 			{
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:4: ( stringa DUEP sublock )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:5: stringa DUEP sublock
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:4: ( stringa DUEP sublock )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:5: stringa DUEP sublock
 			{
 			pushFollow(FOLLOW_stringa_in_block96);
 			stringa();
@@ -151,7 +151,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 			}
 
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:27: ( VIRG stringa DUEP sublock )*
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:27: ( VIRG stringa DUEP sublock )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -162,7 +162,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:33:28: VIRG stringa DUEP sublock
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:28: VIRG stringa DUEP sublock
 					{
 					match(input,VIRG,FOLLOW_VIRG_in_block104); 
 					pushFollow(FOLLOW_stringa_in_block106);
@@ -198,11 +198,11 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 	// $ANTLR start "stringa"
-	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:35:1: stringa : VIRGUP NAME VIRGUP ;
+	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:41:1: stringa : VIRGUP NAME VIRGUP ;
 	public final void stringa() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:2: ( VIRGUP NAME VIRGUP )
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:36:4: VIRGUP NAME VIRGUP
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:42:2: ( VIRGUP NAME VIRGUP )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:42:4: VIRGUP NAME VIRGUP
 			{
 			match(input,VIRGUP,FOLLOW_VIRGUP_in_stringa124); 
 			match(input,NAME,FOLLOW_NAME_in_stringa126); 
@@ -223,10 +223,10 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 
 	// $ANTLR start "sublock"
-	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:38:1: sublock : ( INT | FLOAT | stringa | ( ( QO )? GO ( block )+ GC ( QC )? ) );
+	// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:44:1: sublock : ( INT | FLOAT | stringa | ( ( QO )? GO ( block )+ GC ( QC )? ) );
 	public final void sublock() throws RecognitionException {
 		try {
-			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:2: ( INT | FLOAT | stringa | ( ( QO )? GO ( block )+ GC ( QC )? ) )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:2: ( INT | FLOAT | stringa | ( ( QO )? GO ( block )+ GC ( QC )? ) )
 			int alt6=4;
 			switch ( input.LA(1) ) {
 			case INT:
@@ -257,19 +257,19 @@ public class OpenWeatherMapAPIParser extends Parser {
 			}
 			switch (alt6) {
 				case 1 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:4: INT
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:4: INT
 					{
 					match(input,INT,FOLLOW_INT_in_sublock137); 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:10: FLOAT
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:10: FLOAT
 					{
 					match(input,FLOAT,FOLLOW_FLOAT_in_sublock141); 
 					}
 					break;
 				case 3 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:18: stringa
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:18: stringa
 					{
 					pushFollow(FOLLOW_stringa_in_sublock145);
 					stringa();
@@ -278,12 +278,12 @@ public class OpenWeatherMapAPIParser extends Parser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:28: ( ( QO )? GO ( block )+ GC ( QC )? )
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:28: ( ( QO )? GO ( block )+ GC ( QC )? )
 					{
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:28: ( ( QO )? GO ( block )+ GC ( QC )? )
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:29: ( QO )? GO ( block )+ GC ( QC )?
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:28: ( ( QO )? GO ( block )+ GC ( QC )? )
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:29: ( QO )? GO ( block )+ GC ( QC )?
 					{
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:29: ( QO )?
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:29: ( QO )?
 					int alt3=2;
 					int LA3_0 = input.LA(1);
 					if ( (LA3_0==QO) ) {
@@ -291,7 +291,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 					}
 					switch (alt3) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:29: QO
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:29: QO
 							{
 							match(input,QO,FOLLOW_QO_in_sublock150); 
 							}
@@ -300,7 +300,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 					}
 
 					match(input,GO,FOLLOW_GO_in_sublock153); 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:36: ( block )+
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:36: ( block )+
 					int cnt4=0;
 					loop4:
 					while (true) {
@@ -312,7 +312,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 
 						switch (alt4) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:37: block
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:37: block
 							{
 							pushFollow(FOLLOW_block_in_sublock156);
 							block();
@@ -330,7 +330,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 					}
 
 					match(input,GC,FOLLOW_GC_in_sublock160); 
-					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:48: ( QC )?
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:48: ( QC )?
 					int alt5=2;
 					int LA5_0 = input.LA(1);
 					if ( (LA5_0==QC) ) {
@@ -338,7 +338,7 @@ public class OpenWeatherMapAPIParser extends Parser {
 					}
 					switch (alt5) {
 						case 1 :
-							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:39:48: QC
+							// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\OpenWeatherMapAPI.g:45:48: QC
 							{
 							match(input,QC,FOLLOW_QC_in_sublock162); 
 							}
