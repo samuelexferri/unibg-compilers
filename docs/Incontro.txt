@@ -1,0 +1,38 @@
+PROGRAMMA C (NON C++):
+Include (Leggere e basta, non tradurlo)
+Costanti
+Preambolo
+Definizione delle variabili (int, float, char, array (puntatori?) di stringhe)
+Blocco con variabili interni
+Assegnamenti
+Chiamate a funzione (func(args))
+If
+For
+Ciclo (While, Do-While)
+Commenti
+Operazioni (*/+-)
+
+Prospezione LL(1) k=1
+
+ATTENZIONE:
+Scope variabili (globali, locali a funzioni)
+Symbol table deve essere strutturata in modo da oscurare e tenere traccia i { blocchi }: prima cercare nel blocco in cui si è, poi quelli sopra
+
+b = sqrt(a)+2 (non si confonde con la variabile "sqrt(", si legge la prima parentesi)
+
+Blocco soltanto
+{
+a
+}
+
+Chiamare una variabile include
+
+Symbol table necessaria nella semantica e capire i pattern di traduzione
+
+Testare su vari files e anche sbagliati (.html) per verificare lo scanner e il parser, in seguito passare alla semantica
+
+Differenza tra assegnamento (=) e confronto (==)
+
+Main prefedinito obbligatorio in qualsiasi ordine, demandiamo a livello semantico, ha una struttura come tutte le altre funzioni: int main(...) {return 0}
+Variabile ridefinita è errore semantico
+Cercare parole chiave di C, forse const, if, for, while, return, main (no), include (forse), sqrt, printf sono funzioni predefinite (la semantica deve dire che è di una funzione predefinita)
