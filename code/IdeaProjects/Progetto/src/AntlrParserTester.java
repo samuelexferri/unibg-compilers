@@ -5,8 +5,8 @@ import java.io.FileReader;
 
 public class AntlrParserTester {
     public static void main(String[] args) {
-        OpenWeatherMapAPIParser parser;
-        String fileIn = ".\\resources\\current_example.json";
+        C_MIPSParser parser;
+        String fileIn = ".\\resources\\test_C";
 
         try {
             // Inizializzazione del parser (antlr docet):
@@ -15,16 +15,16 @@ public class AntlrParserTester {
             // 3. si istanzia il parser passandogli lo stream di token
 
             // 1. Usare la classe del lexer generato
-            OpenWeatherMapAPILexer lexer = new OpenWeatherMapAPILexer(new ANTLRReaderStream(new FileReader(fileIn)));
+            C_MIPSLexer lexer = new C_MIPSLexer(new ANTLRReaderStream(new FileReader(fileIn)));
 
             // 2. Token
             CommonTokenStream tokens = new CommonTokenStream(lexer);
 
             // 3. Usare la classe del parser generato
-            parser = new OpenWeatherMapAPIParser(tokens);
+            parser = new C_MIPSParser(tokens);
 
             // Si lancia il parser dallo start symbol (prima produzione specificata)
-            parser.myStartExample();
+            parser.start();
 
             System.out.println("Parsing con ANTLR terminato con successo\n\n");
 

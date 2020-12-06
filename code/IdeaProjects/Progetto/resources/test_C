@@ -1,0 +1,9 @@
+#include <stdio.h>
+int a;
+
+int func();
+
+int func() {
+    int a = 1;
+    a = 3;
+}
