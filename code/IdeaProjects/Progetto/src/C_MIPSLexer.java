@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g 2020-12-06 16:47:17
+// $ANTLR 3.5.1 C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g 2020-12-06 22:45:15
 
 	//package myCompiler;
 
@@ -50,11 +50,12 @@ public class C_MIPSLexer extends Lexer {
 	public static final int SPACE=40;
 	public static final int S_QUOTE=41;
 	public static final int TAB=42;
-	public static final int UNDRSCR=43;
-	public static final int VOID=44;
-	public static final int WHILE=45;
-	public static final int WORD=46;
-	public static final int WS=47;
+	public static final int TOKEN_ERROR=43;
+	public static final int UNDRSCR=44;
+	public static final int VOID=45;
+	public static final int WHILE=46;
+	public static final int WORD=47;
+	public static final int WS=48;
 
 		int nErrori = 0;
 		
@@ -77,14 +78,14 @@ public class C_MIPSLexer extends Lexer {
 	public C_MIPSLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g"; }
 
 	// $ANTLR start "INCLUDE"
 	public final void mINCLUDE() throws RecognitionException {
 		try {
 			int _type = INCLUDE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:11: ( '#include <stdio.h>' | '#include <stdlib.h>' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:66:9: ( '#include <stdio.h>' | '#include <stdlib.h>' )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0=='#') ) {
@@ -334,14 +335,14 @@ public class C_MIPSLexer extends Lexer {
 
 			switch (alt1) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:13: '#include <stdio.h>'
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:66:11: '#include <stdio.h>'
 					{
 					match("#include <stdio.h>"); 
 
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:36: '#include <stdlib.h>'
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:66:34: '#include <stdlib.h>'
 					{
 					match("#include <stdlib.h>"); 
 
@@ -361,8 +362,8 @@ public class C_MIPSLexer extends Lexer {
 	// $ANTLR start "DIGIT"
 	public final void mDIGIT() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:76:16: ( '0' .. '9' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:68:16: ( '0' .. '9' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
 			{
 			if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 				input.consume();
@@ -384,8 +385,8 @@ public class C_MIPSLexer extends Lexer {
 	// $ANTLR start "DIGIT_NO_ZERO"
 	public final void mDIGIT_NO_ZERO() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:77:24: ( '1' .. '9' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:69:24: ( '1' .. '9' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
 			{
 			if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
 				input.consume();
@@ -407,8 +408,8 @@ public class C_MIPSLexer extends Lexer {
 	// $ANTLR start "UNDRSCR"
 	public final void mUNDRSCR() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:78:17: ( '_' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:78:19: '_'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:17: ( '_' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:19: '_'
 			{
 			match('_'); 
 			}
@@ -423,8 +424,8 @@ public class C_MIPSLexer extends Lexer {
 	// $ANTLR start "SPACE"
 	public final void mSPACE() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:79:16: ( ' ' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:79:18: ' '
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:71:16: ( ' ' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:71:18: ' '
 			{
 			match(' '); 
 			}
@@ -439,8 +440,8 @@ public class C_MIPSLexer extends Lexer {
 	// $ANTLR start "TAB"
 	public final void mTAB() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:80:14: ( '\\t' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:80:16: '\\t'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:72:14: ( '\\t' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:72:16: '\\t'
 			{
 			match('\t'); 
 			}
@@ -455,8 +456,8 @@ public class C_MIPSLexer extends Lexer {
 	// $ANTLR start "NEWL"
 	public final void mNEWL() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:81:17: ( '\\n' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:81:19: '\\n'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:73:17: ( '\\n' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:73:19: '\\n'
 			{
 			match('\n'); 
 			}
@@ -471,8 +472,8 @@ public class C_MIPSLexer extends Lexer {
 	// $ANTLR start "SLASHR"
 	public final void mSLASHR() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:82:17: ( '\\r' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:82:19: '\\r'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:17: ( '\\r' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:19: '\\r'
 			{
 			match('\r'); 
 			}
@@ -489,38 +490,17 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:8: ( ( SPACE | TAB | NEWL | SLASHR )* )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:10: ( SPACE | TAB | NEWL | SLASHR )*
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:76:4: ( ( SPACE | TAB | NEWL | SLASHR ) )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:76:6: ( SPACE | TAB | NEWL | SLASHR )
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:10: ( SPACE | TAB | NEWL | SLASHR )*
-			loop2:
-			while (true) {
-				int alt2=2;
-				int LA2_0 = input.LA(1);
-				if ( ((LA2_0 >= '\t' && LA2_0 <= '\n')||LA2_0=='\r'||LA2_0==' ') ) {
-					alt2=1;
-				}
-
-				switch (alt2) {
-				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
-					{
-					if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					}
-					break;
-
-				default :
-					break loop2;
-				}
+			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
+				input.consume();
 			}
-
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				recover(mse);
+				throw mse;
+			}
 			_channel=HIDDEN;
 			}
 
@@ -538,8 +518,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = K_INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:86:9: ( 'int' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:86:11: 'int'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:82:9: ( 'int' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:82:11: 'int'
 			{
 			match("int"); 
 
@@ -559,8 +539,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = K_FLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:87:11: ( 'float' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:87:13: 'float'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:83:11: ( 'float' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:83:13: 'float'
 			{
 			match("float"); 
 
@@ -580,8 +560,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = K_CHAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:88:10: ( 'char' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:88:12: 'char'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:10: ( 'char' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:12: 'char'
 			{
 			match("char"); 
 
@@ -601,8 +581,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = VOID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:90:9: ( 'void' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:90:11: 'void'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:86:9: ( 'void' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:86:11: 'void'
 			{
 			match("void"); 
 
@@ -622,8 +602,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = WHILE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:91:11: ( 'while' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:91:13: 'while'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:87:11: ( 'while' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:87:13: 'while'
 			{
 			match("while"); 
 
@@ -643,8 +623,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = FOR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:92:8: ( 'for' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:92:10: 'for'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:88:8: ( 'for' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:88:10: 'for'
 			{
 			match("for"); 
 
@@ -664,8 +644,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = IF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:93:8: ( 'if' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:93:10: 'if'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:89:7: ( 'if' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:89:9: 'if'
 			{
 			match("if"); 
 
@@ -685,8 +665,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = ELSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:94:9: ( 'else' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:94:11: 'else'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:90:9: ( 'else' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:90:11: 'else'
 			{
 			match("else"); 
 
@@ -706,8 +686,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = RETURN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:95:11: ( 'return' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:95:13: 'return'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:91:11: ( 'return' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:91:13: 'return'
 			{
 			match("return"); 
 
@@ -727,8 +707,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:96:8: ( '==' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:96:10: '=='
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:92:7: ( '==' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:92:9: '=='
 			{
 			match("=="); 
 
@@ -748,8 +728,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:97:8: ( '!=' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:97:10: '!='
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:93:7: ( '!=' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:93:9: '!='
 			{
 			match("!="); 
 
@@ -769,8 +749,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = GT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:98:8: ( '>' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:98:10: '>'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:94:7: ( '>' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:94:9: '>'
 			{
 			match('>'); 
 			}
@@ -789,8 +769,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = LT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:99:8: ( '<' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:99:10: '<'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:95:7: ( '<' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:95:9: '<'
 			{
 			match('<'); 
 			}
@@ -809,8 +789,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = GE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:100:7: ( '>=' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:100:9: '>='
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:96:6: ( '>=' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:96:8: '>='
 			{
 			match(">="); 
 
@@ -830,8 +810,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = LE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:101:8: ( '<=' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:101:10: '<='
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:97:7: ( '<=' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:97:9: '<='
 			{
 			match("<="); 
 
@@ -851,8 +831,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:102:9: ( '+' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:102:11: '+'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:98:9: ( '+' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:98:11: '+'
 			{
 			match('+'); 
 			}
@@ -871,8 +851,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = MIN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:103:8: ( '-' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:103:10: '-'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:99:8: ( '-' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:99:10: '-'
 			{
 			match('-'); 
 			}
@@ -891,8 +871,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = MULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:104:9: ( '*' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:104:11: '*'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:100:9: ( '*' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:100:11: '*'
 			{
 			match('*'); 
 			}
@@ -911,8 +891,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:105:8: ( '/' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:105:10: '/'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:101:8: ( '/' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:101:10: '/'
 			{
 			match('/'); 
 			}
@@ -931,8 +911,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = ASS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:106:8: ( '=' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:106:10: '='
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:102:8: ( '=' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:102:10: '='
 			{
 			match('='); 
 			}
@@ -951,8 +931,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:107:13: ( '(' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:107:15: '('
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:103:13: ( '(' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:103:15: '('
 			{
 			match('('); 
 			}
@@ -971,8 +951,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:108:11: ( ')' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:108:13: ')'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:104:11: ( ')' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:104:13: ')'
 			{
 			match(')'); 
 			}
@@ -991,8 +971,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = LBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:109:11: ( '[' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:109:13: '['
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:105:11: ( '[' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:105:13: '['
 			{
 			match('['); 
 			}
@@ -1011,8 +991,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = RBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:110:12: ( ']' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:110:14: ']'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:106:12: ( ']' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:106:14: ']'
 			{
 			match(']'); 
 			}
@@ -1031,8 +1011,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = LCURL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:111:10: ( '{' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:111:12: '{'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:107:10: ( '{' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:107:12: '{'
 			{
 			match('{'); 
 			}
@@ -1051,8 +1031,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = RCURL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:112:10: ( '}' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:112:12: '}'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:108:10: ( '}' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:108:12: '}'
 			{
 			match('}'); 
 			}
@@ -1071,8 +1051,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = SEMICOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:113:11: ( ';' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:113:13: ';'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:109:11: ( ';' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:109:13: ';'
 			{
 			match(';'); 
 			}
@@ -1091,8 +1071,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = ARROW;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:114:10: ( '->' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:114:12: '->'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:110:10: ( '->' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:110:12: '->'
 			{
 			match("->"); 
 
@@ -1112,8 +1092,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = S_QUOTE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:115:11: ( '\\'' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:115:13: '\\''
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:111:11: ( '\\'' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:111:13: '\\''
 			{
 			match('\''); 
 			}
@@ -1132,8 +1112,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = D_QUOTE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:116:11: ( '\"' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:116:13: '\"'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:112:11: ( '\"' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:112:13: '\"'
 			{
 			match('\"'); 
 			}
@@ -1152,8 +1132,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:117:9: ( ',' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:117:11: ','
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:113:9: ( ',' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:113:11: ','
 			{
 			match(','); 
 			}
@@ -1172,8 +1152,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = AMP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:118:12: ( '&' )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:118:14: '&'
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:114:12: ( '&' )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:114:14: '&'
 			{
 			match('&'); 
 			}
@@ -1192,23 +1172,23 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:120:8: ( DIGIT_NO_ZERO ( DIGIT )* )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:120:10: DIGIT_NO_ZERO ( DIGIT )*
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:116:7: ( DIGIT_NO_ZERO ( DIGIT )* )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:116:9: DIGIT_NO_ZERO ( DIGIT )*
 			{
 			mDIGIT_NO_ZERO(); 
 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:120:24: ( DIGIT )*
-			loop3:
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:116:23: ( DIGIT )*
+			loop2:
 			while (true) {
-				int alt3=2;
-				int LA3_0 = input.LA(1);
-				if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
-					alt3=1;
+				int alt2=2;
+				int LA2_0 = input.LA(1);
+				if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
+					alt2=1;
 				}
 
-				switch (alt3) {
+				switch (alt2) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -1222,7 +1202,7 @@ public class C_MIPSLexer extends Lexer {
 					break;
 
 				default :
-					break loop3;
+					break loop2;
 				}
 			}
 
@@ -1242,10 +1222,45 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = FLOAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:121:9: ( ( DIGIT )+ COMMA ( DIGIT )+ )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:121:11: ( DIGIT )+ COMMA ( DIGIT )+
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:117:9: ( ( DIGIT )+ COMMA ( DIGIT )+ )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:117:11: ( DIGIT )+ COMMA ( DIGIT )+
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:121:11: ( DIGIT )+
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:117:11: ( DIGIT )+
+			int cnt3=0;
+			loop3:
+			while (true) {
+				int alt3=2;
+				int LA3_0 = input.LA(1);
+				if ( ((LA3_0 >= '0' && LA3_0 <= '9')) ) {
+					alt3=1;
+				}
+
+				switch (alt3) {
+				case 1 :
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
+					{
+					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					if ( cnt3 >= 1 ) break loop3;
+					EarlyExitException eee = new EarlyExitException(3, input);
+					throw eee;
+				}
+				cnt3++;
+			}
+
+			mCOMMA(); 
+
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:117:24: ( DIGIT )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -1257,7 +1272,7 @@ public class C_MIPSLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -1278,41 +1293,6 @@ public class C_MIPSLexer extends Lexer {
 				cnt4++;
 			}
 
-			mCOMMA(); 
-
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:121:24: ( DIGIT )+
-			int cnt5=0;
-			loop5:
-			while (true) {
-				int alt5=2;
-				int LA5_0 = input.LA(1);
-				if ( ((LA5_0 >= '0' && LA5_0 <= '9')) ) {
-					alt5=1;
-				}
-
-				switch (alt5) {
-				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
-					{
-					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-						input.consume();
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						recover(mse);
-						throw mse;
-					}
-					}
-					break;
-
-				default :
-					if ( cnt5 >= 1 ) break loop5;
-					EarlyExitException eee = new EarlyExitException(5, input);
-					throw eee;
-				}
-				cnt5++;
-			}
-
 			}
 
 			state.type = _type;
@@ -1329,8 +1309,8 @@ public class C_MIPSLexer extends Lexer {
 		try {
 			int _type = WORD;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:124:9: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | UNDRSCR | DIGIT )* )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:124:11: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | UNDRSCR | DIGIT )*
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:119:9: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | UNDRSCR | DIGIT )* )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:119:11: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | UNDRSCR | DIGIT )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1340,18 +1320,18 @@ public class C_MIPSLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:124:33: ( 'a' .. 'z' | 'A' .. 'Z' | UNDRSCR | DIGIT )*
-			loop6:
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:119:33: ( 'a' .. 'z' | 'A' .. 'Z' | UNDRSCR | DIGIT )*
+			loop5:
 			while (true) {
-				int alt6=2;
-				int LA6_0 = input.LA(1);
-				if ( ((LA6_0 >= '0' && LA6_0 <= '9')||(LA6_0 >= 'A' && LA6_0 <= 'Z')||LA6_0=='_'||(LA6_0 >= 'a' && LA6_0 <= 'z')) ) {
-					alt6=1;
+				int alt5=2;
+				int LA5_0 = input.LA(1);
+				if ( ((LA5_0 >= '0' && LA5_0 <= '9')||(LA5_0 >= 'A' && LA5_0 <= 'Z')||LA5_0=='_'||(LA5_0 >= 'a' && LA5_0 <= 'z')) ) {
+					alt5=1;
 				}
 
-				switch (alt6) {
+				switch (alt5) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
+					// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -1365,7 +1345,7 @@ public class C_MIPSLexer extends Lexer {
 					break;
 
 				default :
-					break loop6;
+					break loop5;
 				}
 			}
 
@@ -1380,268 +1360,296 @@ public class C_MIPSLexer extends Lexer {
 	}
 	// $ANTLR end "WORD"
 
+	// $ANTLR start "TOKEN_ERROR"
+	public final void mTOKEN_ERROR() throws RecognitionException {
+		try {
+			int _type = TOKEN_ERROR;
+			int _channel = DEFAULT_TOKEN_CHANNEL;
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:123:14: ( . )
+			// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:123:16: .
+			{
+			matchAny(); 
+			printMsg();
+			}
+
+			state.type = _type;
+			state.channel = _channel;
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "TOKEN_ERROR"
+
 	@Override
 	public void mTokens() throws RecognitionException {
-		// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:8: ( INCLUDE | WS | K_INT | K_FLOAT | K_CHAR | VOID | WHILE | FOR | IF | ELSE | RETURN | EQ | NEQ | GT | LT | GE | LE | PLUS | MIN | MULT | DIV | ASS | LPAREN | RPAREN | LBRACK | RBRACK | LCURL | RCURL | SEMICOL | ARROW | S_QUOTE | D_QUOTE | COMMA | AMP | INT | FLOAT | WORD )
-		int alt7=37;
-		alt7 = dfa7.predict(input);
-		switch (alt7) {
+		// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:8: ( INCLUDE | WS | K_INT | K_FLOAT | K_CHAR | VOID | WHILE | FOR | IF | ELSE | RETURN | EQ | NEQ | GT | LT | GE | LE | PLUS | MIN | MULT | DIV | ASS | LPAREN | RPAREN | LBRACK | RBRACK | LCURL | RCURL | SEMICOL | ARROW | S_QUOTE | D_QUOTE | COMMA | AMP | INT | FLOAT | WORD | TOKEN_ERROR )
+		int alt6=38;
+		alt6 = dfa6.predict(input);
+		switch (alt6) {
 			case 1 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:10: INCLUDE
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:10: INCLUDE
 				{
 				mINCLUDE(); 
 
 				}
 				break;
 			case 2 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:18: WS
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:18: WS
 				{
 				mWS(); 
 
 				}
 				break;
 			case 3 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:21: K_INT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:21: K_INT
 				{
 				mK_INT(); 
 
 				}
 				break;
 			case 4 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:27: K_FLOAT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:27: K_FLOAT
 				{
 				mK_FLOAT(); 
 
 				}
 				break;
 			case 5 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:35: K_CHAR
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:35: K_CHAR
 				{
 				mK_CHAR(); 
 
 				}
 				break;
 			case 6 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:42: VOID
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:42: VOID
 				{
 				mVOID(); 
 
 				}
 				break;
 			case 7 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:47: WHILE
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:47: WHILE
 				{
 				mWHILE(); 
 
 				}
 				break;
 			case 8 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:53: FOR
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:53: FOR
 				{
 				mFOR(); 
 
 				}
 				break;
 			case 9 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:57: IF
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:57: IF
 				{
 				mIF(); 
 
 				}
 				break;
 			case 10 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:60: ELSE
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:60: ELSE
 				{
 				mELSE(); 
 
 				}
 				break;
 			case 11 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:65: RETURN
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:65: RETURN
 				{
 				mRETURN(); 
 
 				}
 				break;
 			case 12 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:72: EQ
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:72: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 13 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:75: NEQ
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:75: NEQ
 				{
 				mNEQ(); 
 
 				}
 				break;
 			case 14 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:79: GT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:79: GT
 				{
 				mGT(); 
 
 				}
 				break;
 			case 15 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:82: LT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:82: LT
 				{
 				mLT(); 
 
 				}
 				break;
 			case 16 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:85: GE
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:85: GE
 				{
 				mGE(); 
 
 				}
 				break;
 			case 17 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:88: LE
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:88: LE
 				{
 				mLE(); 
 
 				}
 				break;
 			case 18 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:91: PLUS
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:91: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 19 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:96: MIN
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:96: MIN
 				{
 				mMIN(); 
 
 				}
 				break;
 			case 20 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:100: MULT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:100: MULT
 				{
 				mMULT(); 
 
 				}
 				break;
 			case 21 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:105: DIV
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:105: DIV
 				{
 				mDIV(); 
 
 				}
 				break;
 			case 22 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:109: ASS
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:109: ASS
 				{
 				mASS(); 
 
 				}
 				break;
 			case 23 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:113: LPAREN
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:113: LPAREN
 				{
 				mLPAREN(); 
 
 				}
 				break;
 			case 24 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:120: RPAREN
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:120: RPAREN
 				{
 				mRPAREN(); 
 
 				}
 				break;
 			case 25 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:127: LBRACK
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:127: LBRACK
 				{
 				mLBRACK(); 
 
 				}
 				break;
 			case 26 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:134: RBRACK
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:134: RBRACK
 				{
 				mRBRACK(); 
 
 				}
 				break;
 			case 27 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:141: LCURL
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:141: LCURL
 				{
 				mLCURL(); 
 
 				}
 				break;
 			case 28 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:147: RCURL
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:147: RCURL
 				{
 				mRCURL(); 
 
 				}
 				break;
 			case 29 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:153: SEMICOL
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:153: SEMICOL
 				{
 				mSEMICOL(); 
 
 				}
 				break;
 			case 30 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:161: ARROW
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:161: ARROW
 				{
 				mARROW(); 
 
 				}
 				break;
 			case 31 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:167: S_QUOTE
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:167: S_QUOTE
 				{
 				mS_QUOTE(); 
 
 				}
 				break;
 			case 32 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:175: D_QUOTE
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:175: D_QUOTE
 				{
 				mD_QUOTE(); 
 
 				}
 				break;
 			case 33 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:183: COMMA
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:183: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
 			case 34 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:189: AMP
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:189: AMP
 				{
 				mAMP(); 
 
 				}
 				break;
 			case 35 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:193: INT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:193: INT
 				{
 				mINT(); 
 
 				}
 				break;
 			case 36 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:197: FLOAT
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:197: FLOAT
 				{
 				mFLOAT(); 
 
 				}
 				break;
 			case 37 :
-				// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:203: WORD
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:203: WORD
 				{
 				mWORD(); 
+
+				}
+				break;
+			case 38 :
+				// C:\\Users\\susim\\Desktop\\Github_Clone\\Uni\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:1:208: TOKEN_ERROR
+				{
+				mTOKEN_ERROR(); 
 
 				}
 				break;
@@ -1650,78 +1658,55 @@ public class C_MIPSLexer extends Lexer {
 	}
 
 
-	protected DFA7 dfa7 = new DFA7(this);
-	static final String DFA7_eotS =
-		"\1\2\2\uffff\7\37\1\52\1\uffff\1\54\1\56\1\uffff\1\60\15\uffff\1\61\2"+
-		"\uffff\1\37\1\64\7\37\11\uffff\1\61\1\74\1\uffff\1\37\1\76\5\37\1\uffff"+
-		"\1\37\1\uffff\1\105\1\106\1\37\1\110\1\37\1\112\2\uffff\1\113\1\uffff"+
-		"\1\37\2\uffff\1\115\1\uffff";
-	static final String DFA7_eofS =
-		"\116\uffff";
-	static final String DFA7_minS =
-		"\1\41\2\uffff\1\146\1\154\1\150\1\157\1\150\1\154\1\145\1\75\1\uffff\2"+
-		"\75\1\uffff\1\76\15\uffff\1\54\2\uffff\1\164\1\60\1\157\1\162\1\141\2"+
-		"\151\1\163\1\164\11\uffff\1\54\1\60\1\uffff\1\141\1\60\1\162\1\144\1\154"+
-		"\1\145\1\165\1\uffff\1\164\1\uffff\2\60\1\145\1\60\1\162\1\60\2\uffff"+
-		"\1\60\1\uffff\1\156\2\uffff\1\60\1\uffff";
-	static final String DFA7_maxS =
-		"\1\175\2\uffff\1\156\1\157\1\150\1\157\1\150\1\154\1\145\1\75\1\uffff"+
-		"\2\75\1\uffff\1\76\15\uffff\1\71\2\uffff\1\164\1\172\1\157\1\162\1\141"+
-		"\2\151\1\163\1\164\11\uffff\1\71\1\172\1\uffff\1\141\1\172\1\162\1\144"+
-		"\1\154\1\145\1\165\1\uffff\1\164\1\uffff\2\172\1\145\1\172\1\162\1\172"+
-		"\2\uffff\1\172\1\uffff\1\156\2\uffff\1\172\1\uffff";
-	static final String DFA7_acceptS =
-		"\1\uffff\1\1\1\2\10\uffff\1\15\2\uffff\1\22\1\uffff\1\24\1\25\1\27\1\30"+
-		"\1\31\1\32\1\33\1\34\1\35\1\37\1\40\1\41\1\42\1\uffff\1\44\1\45\11\uffff"+
-		"\1\14\1\26\1\20\1\16\1\21\1\17\1\36\1\23\1\43\2\uffff\1\11\7\uffff\1\3"+
-		"\1\uffff\1\10\6\uffff\1\5\1\6\1\uffff\1\12\1\uffff\1\4\1\7\1\uffff\1\13";
-	static final String DFA7_specialS =
-		"\116\uffff}>";
-	static final String[] DFA7_transitionS = {
-			"\1\13\1\32\1\1\2\uffff\1\34\1\31\1\22\1\23\1\20\1\16\1\33\1\17\1\uffff"+
-			"\1\21\1\36\11\35\1\uffff\1\30\1\15\1\12\1\14\2\uffff\32\37\1\24\1\uffff"+
-			"\1\25\3\uffff\2\37\1\5\1\37\1\10\1\4\2\37\1\3\10\37\1\11\3\37\1\6\1\7"+
-			"\3\37\1\26\1\uffff\1\27",
+	protected DFA6 dfa6 = new DFA6(this);
+	static final String DFA6_eotS =
+		"\1\uffff\1\40\1\uffff\7\45\1\56\1\40\1\61\1\63\1\uffff\1\66\15\uffff\1"+
+		"\104\1\40\4\uffff\1\45\1\110\1\uffff\7\45\30\uffff\1\104\1\uffff\1\120"+
+		"\1\uffff\1\45\1\122\5\45\1\uffff\1\45\1\uffff\1\131\1\132\1\45\1\134\1"+
+		"\45\1\136\2\uffff\1\137\1\uffff\1\45\2\uffff\1\141\1\uffff";
+	static final String DFA6_eofS =
+		"\142\uffff";
+	static final String DFA6_minS =
+		"\1\0\1\151\1\uffff\1\146\1\154\1\150\1\157\1\150\1\154\1\145\4\75\1\uffff"+
+		"\1\76\15\uffff\2\54\4\uffff\1\164\1\60\1\uffff\1\157\1\162\1\141\2\151"+
+		"\1\163\1\164\30\uffff\1\54\1\uffff\1\60\1\uffff\1\141\1\60\1\162\1\144"+
+		"\1\154\1\145\1\165\1\uffff\1\164\1\uffff\2\60\1\145\1\60\1\162\1\60\2"+
+		"\uffff\1\60\1\uffff\1\156\2\uffff\1\60\1\uffff";
+	static final String DFA6_maxS =
+		"\1\uffff\1\151\1\uffff\1\156\1\157\1\150\1\157\1\150\1\154\1\145\4\75"+
+		"\1\uffff\1\76\15\uffff\2\71\4\uffff\1\164\1\172\1\uffff\1\157\1\162\1"+
+		"\141\2\151\1\163\1\164\30\uffff\1\71\1\uffff\1\172\1\uffff\1\141\1\172"+
+		"\1\162\1\144\1\154\1\145\1\165\1\uffff\1\164\1\uffff\2\172\1\145\1\172"+
+		"\1\162\1\172\2\uffff\1\172\1\uffff\1\156\2\uffff\1\172\1\uffff";
+	static final String DFA6_acceptS =
+		"\2\uffff\1\2\13\uffff\1\22\1\uffff\1\24\1\25\1\27\1\30\1\31\1\32\1\33"+
+		"\1\34\1\35\1\37\1\40\1\41\1\42\2\uffff\1\45\1\46\1\1\1\2\2\uffff\1\45"+
+		"\7\uffff\1\14\1\26\1\15\1\20\1\16\1\21\1\17\1\22\1\36\1\23\1\24\1\25\1"+
+		"\27\1\30\1\31\1\32\1\33\1\34\1\35\1\37\1\40\1\41\1\42\1\43\1\uffff\1\44"+
+		"\1\uffff\1\11\7\uffff\1\3\1\uffff\1\10\6\uffff\1\5\1\6\1\uffff\1\12\1"+
+		"\uffff\1\4\1\7\1\uffff\1\13";
+	static final String DFA6_specialS =
+		"\1\0\141\uffff}>";
+	static final String[] DFA6_transitionS = {
+			"\11\40\2\2\2\40\1\2\22\40\1\2\1\13\1\32\1\1\2\40\1\34\1\31\1\22\1\23"+
+			"\1\20\1\16\1\33\1\17\1\40\1\21\1\36\11\35\1\40\1\30\1\15\1\12\1\14\2"+
+			"\40\32\37\1\24\1\40\1\25\3\40\2\37\1\5\1\37\1\10\1\4\2\37\1\3\10\37\1"+
+			"\11\3\37\1\6\1\7\3\37\1\26\1\40\1\27\uff82\40",
+			"\1\41",
 			"",
-			"",
-			"\1\41\7\uffff\1\40",
-			"\1\42\2\uffff\1\43",
-			"\1\44",
-			"\1\45",
-			"\1\46",
-			"\1\47",
+			"\1\44\7\uffff\1\43",
+			"\1\46\2\uffff\1\47",
 			"\1\50",
 			"\1\51",
-			"",
+			"\1\52",
 			"\1\53",
+			"\1\54",
 			"\1\55",
-			"",
 			"\1\57",
+			"\1\60",
+			"\1\62",
 			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\36\3\uffff\12\62",
-			"",
-			"",
-			"\1\63",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\1\65",
-			"\1\66",
-			"\1\67",
-			"\1\70",
-			"\1\71",
-			"\1\72",
-			"\1\73",
 			"",
 			"",
 			"",
@@ -1731,68 +1716,161 @@ public class C_MIPSLexer extends Lexer {
 			"",
 			"",
 			"",
-			"\1\36\3\uffff\12\62",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"",
-			"\1\75",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\77",
-			"\1\100",
-			"\1\101",
-			"\1\102",
-			"\1\103",
 			"",
-			"\1\104",
 			"",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+			"",
+			"\1\106\3\uffff\12\105",
+			"\1\106\3\uffff\12\106",
+			"",
+			"",
+			"",
+			"",
 			"\1\107",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"",
 			"\1\111",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"",
-			"",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"",
+			"\1\112",
+			"\1\113",
 			"\1\114",
+			"\1\115",
+			"\1\116",
+			"\1\117",
 			"",
 			"",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"\1\106\3\uffff\12\105",
+			"",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"",
+			"\1\121",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\1\123",
+			"\1\124",
+			"\1\125",
+			"\1\126",
+			"\1\127",
+			"",
+			"\1\130",
+			"",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\1\133",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"\1\135",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"",
+			"",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
+			"",
+			"\1\140",
+			"",
+			"",
+			"\12\45\7\uffff\32\45\4\uffff\1\45\1\uffff\32\45",
 			""
 	};
 
-	static final short[] DFA7_eot = DFA.unpackEncodedString(DFA7_eotS);
-	static final short[] DFA7_eof = DFA.unpackEncodedString(DFA7_eofS);
-	static final char[] DFA7_min = DFA.unpackEncodedStringToUnsignedChars(DFA7_minS);
-	static final char[] DFA7_max = DFA.unpackEncodedStringToUnsignedChars(DFA7_maxS);
-	static final short[] DFA7_accept = DFA.unpackEncodedString(DFA7_acceptS);
-	static final short[] DFA7_special = DFA.unpackEncodedString(DFA7_specialS);
-	static final short[][] DFA7_transition;
+	static final short[] DFA6_eot = DFA.unpackEncodedString(DFA6_eotS);
+	static final short[] DFA6_eof = DFA.unpackEncodedString(DFA6_eofS);
+	static final char[] DFA6_min = DFA.unpackEncodedStringToUnsignedChars(DFA6_minS);
+	static final char[] DFA6_max = DFA.unpackEncodedStringToUnsignedChars(DFA6_maxS);
+	static final short[] DFA6_accept = DFA.unpackEncodedString(DFA6_acceptS);
+	static final short[] DFA6_special = DFA.unpackEncodedString(DFA6_specialS);
+	static final short[][] DFA6_transition;
 
 	static {
-		int numStates = DFA7_transitionS.length;
-		DFA7_transition = new short[numStates][];
+		int numStates = DFA6_transitionS.length;
+		DFA6_transition = new short[numStates][];
 		for (int i=0; i<numStates; i++) {
-			DFA7_transition[i] = DFA.unpackEncodedString(DFA7_transitionS[i]);
+			DFA6_transition[i] = DFA.unpackEncodedString(DFA6_transitionS[i]);
 		}
 	}
 
-	protected class DFA7 extends DFA {
+	protected class DFA6 extends DFA {
 
-		public DFA7(BaseRecognizer recognizer) {
+		public DFA6(BaseRecognizer recognizer) {
 			this.recognizer = recognizer;
-			this.decisionNumber = 7;
-			this.eot = DFA7_eot;
-			this.eof = DFA7_eof;
-			this.min = DFA7_min;
-			this.max = DFA7_max;
-			this.accept = DFA7_accept;
-			this.special = DFA7_special;
-			this.transition = DFA7_transition;
+			this.decisionNumber = 6;
+			this.eot = DFA6_eot;
+			this.eof = DFA6_eof;
+			this.min = DFA6_min;
+			this.max = DFA6_max;
+			this.accept = DFA6_accept;
+			this.special = DFA6_special;
+			this.transition = DFA6_transition;
 		}
 		@Override
 		public String getDescription() {
-			return "1:1: Tokens : ( INCLUDE | WS | K_INT | K_FLOAT | K_CHAR | VOID | WHILE | FOR | IF | ELSE | RETURN | EQ | NEQ | GT | LT | GE | LE | PLUS | MIN | MULT | DIV | ASS | LPAREN | RPAREN | LBRACK | RBRACK | LCURL | RCURL | SEMICOL | ARROW | S_QUOTE | D_QUOTE | COMMA | AMP | INT | FLOAT | WORD );";
+			return "1:1: Tokens : ( INCLUDE | WS | K_INT | K_FLOAT | K_CHAR | VOID | WHILE | FOR | IF | ELSE | RETURN | EQ | NEQ | GT | LT | GE | LE | PLUS | MIN | MULT | DIV | ASS | LPAREN | RPAREN | LBRACK | RBRACK | LCURL | RCURL | SEMICOL | ARROW | S_QUOTE | D_QUOTE | COMMA | AMP | INT | FLOAT | WORD | TOKEN_ERROR );";
+		}
+		@Override
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			IntStream input = _input;
+			int _s = s;
+			switch ( s ) {
+					case 0 : 
+						int LA6_0 = input.LA(1);
+						s = -1;
+						if ( (LA6_0=='#') ) {s = 1;}
+						else if ( ((LA6_0 >= '\t' && LA6_0 <= '\n')||LA6_0=='\r'||LA6_0==' ') ) {s = 2;}
+						else if ( (LA6_0=='i') ) {s = 3;}
+						else if ( (LA6_0=='f') ) {s = 4;}
+						else if ( (LA6_0=='c') ) {s = 5;}
+						else if ( (LA6_0=='v') ) {s = 6;}
+						else if ( (LA6_0=='w') ) {s = 7;}
+						else if ( (LA6_0=='e') ) {s = 8;}
+						else if ( (LA6_0=='r') ) {s = 9;}
+						else if ( (LA6_0=='=') ) {s = 10;}
+						else if ( (LA6_0=='!') ) {s = 11;}
+						else if ( (LA6_0=='>') ) {s = 12;}
+						else if ( (LA6_0=='<') ) {s = 13;}
+						else if ( (LA6_0=='+') ) {s = 14;}
+						else if ( (LA6_0=='-') ) {s = 15;}
+						else if ( (LA6_0=='*') ) {s = 16;}
+						else if ( (LA6_0=='/') ) {s = 17;}
+						else if ( (LA6_0=='(') ) {s = 18;}
+						else if ( (LA6_0==')') ) {s = 19;}
+						else if ( (LA6_0=='[') ) {s = 20;}
+						else if ( (LA6_0==']') ) {s = 21;}
+						else if ( (LA6_0=='{') ) {s = 22;}
+						else if ( (LA6_0=='}') ) {s = 23;}
+						else if ( (LA6_0==';') ) {s = 24;}
+						else if ( (LA6_0=='\'') ) {s = 25;}
+						else if ( (LA6_0=='\"') ) {s = 26;}
+						else if ( (LA6_0==',') ) {s = 27;}
+						else if ( (LA6_0=='&') ) {s = 28;}
+						else if ( ((LA6_0 >= '1' && LA6_0 <= '9')) ) {s = 29;}
+						else if ( (LA6_0=='0') ) {s = 30;}
+						else if ( ((LA6_0 >= 'A' && LA6_0 <= 'Z')||(LA6_0 >= 'a' && LA6_0 <= 'b')||LA6_0=='d'||(LA6_0 >= 'g' && LA6_0 <= 'h')||(LA6_0 >= 'j' && LA6_0 <= 'q')||(LA6_0 >= 's' && LA6_0 <= 'u')||(LA6_0 >= 'x' && LA6_0 <= 'z')) ) {s = 31;}
+						else if ( ((LA6_0 >= '\u0000' && LA6_0 <= '\b')||(LA6_0 >= '\u000B' && LA6_0 <= '\f')||(LA6_0 >= '\u000E' && LA6_0 <= '\u001F')||(LA6_0 >= '$' && LA6_0 <= '%')||LA6_0=='.'||LA6_0==':'||(LA6_0 >= '?' && LA6_0 <= '@')||LA6_0=='\\'||(LA6_0 >= '^' && LA6_0 <= '`')||LA6_0=='|'||(LA6_0 >= '~' && LA6_0 <= '\uFFFF')) ) {s = 32;}
+						if ( s>=0 ) return s;
+						break;
+			}
+			NoViableAltException nvae =
+				new NoViableAltException(getDescription(), 6, _s, input);
+			error(nvae);
+			throw nvae;
 		}
 	}
 

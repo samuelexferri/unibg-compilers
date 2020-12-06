@@ -1,9 +1,19 @@
 #include <stdio.h>
-int a;
 
-int func();
+float miao;
+int ciao=2;
 
-int func() {
-    int a = 1;
-    a = 3;
+int miao (int t){
+    int c +=3;
+    k-=9;
+    return miao;
 }
+
+int miao (int cosa, float bau){
+    float d;
+    f*=2;
+    return miao;
+}
+
+int function();
+
