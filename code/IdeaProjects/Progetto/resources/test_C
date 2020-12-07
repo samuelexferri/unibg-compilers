@@ -74,6 +74,9 @@ int miao (int cosa, float bau){
     function( miao);
     gino();
     return miao;
+    return p;
+    return *p;
+    return &p;
 }
 
 int function();
@@ -94,6 +97,8 @@ int function() {
         for(int b = a + 1; b <= (a + 5); b += 1) {
            f;
         }
+
+        printf("a", "b=2", a, "as ss for + * #", b);
 }
 
 
