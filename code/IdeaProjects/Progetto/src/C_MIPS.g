@@ -30,31 +30,62 @@ options {
 
 
 //PARSER
-start	: INCLUDE? (type_name identifier ((global_var? SEMICOL) | function) )* EOF
+start	: INCLUDE? (VOID function SEMICOL | type_name identifier (((global_var | vector_globals)? SEMICOL) | function) )* EOF
 				;
 
-global_var : (ASS type_value) 
+global_var : (ASS type_value)  
 				;
+				
+vector_globals 	: LBRACK INT? RBRACK ( ASS ((LCURL (INT|FLOAT|CHAR)(COMMA (INT|FLOAT|CHAR))* RCURL) | (INT|FLOAT|CHAR)))?
+				;
+
 				
 function : LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
 				;
+
+call_function 	:  LPAREN ( identifier (COMMA  identifier)*)? RPAREN
+				;
+
+vector 	:	LBRACK INT? RBRACK ( ASS ((LCURL (INT|FLOAT|CHAR)(COMMA (INT|FLOAT|CHAR))* RCURL) | (INT|FLOAT|CHAR)))? 
+				;
 				
-codeblock : LCURL (assignment SEMICOL)* RETURN valore SEMICOL RCURL   
+codeblock : LCURL (statement SEMICOL)*  RCURL   
 	    | SEMICOL				
 				;
  
+statement 		: type_name? identifier (assignment |call_function |vector )
+			  |RETURN valore 
+
+			;
 						
-assignment		: type_name? identifier (MIN | PLUS | MULT | DIV)? (ASS type_value)?
+assignment		: (SUB | ADD | MULT | DIV)? (ASS type_value)?
 			;
 
 type_name		: (K_INT | K_FLOAT| K_CHAR)
 				; 
 				
-identifier		: WORD 
+identifier		: WORD | CHAR 
 				;
 
-type_value		: (INT | FLOAT)
+type_value		: (INT | FLOAT | expression)
+	
 				;
+
+expression 
+    : multiplyExp ( ADD multiplyExp  | SUB multiplyExp  )* 
+    ;
+    
+multiplyExp 
+    : atomExp ( MULT atomExp  | DIV atomExp  )*
+    ;
+
+atomExp : 
+	INT    
+    | FLOAT  
+    | identifier     
+    | LPAREN expression RPAREN
+    ;
+
 
 valore 	:  (INT | identifier)
 				;
@@ -95,8 +126,8 @@ GT 			: '>' ;
 LT 			: '<' ;
 GE			: '>=' ;
 LE 			: '<=' ;
-PLUS 			: '+' ;
-MIN 			: '-' ;
+ADD 			: '+' ;
+SUB 			: '-' ;
 MULT 			: '*' ;
 DIV 			: '/' ;
 ASS 			: '=' ;
@@ -107,6 +138,7 @@ RBRACK   		: ']' ;
 LCURL 			: '{' ;
 RCURL 			: '}' ;
 SEMICOL			: ';' ;
+DOT 			: '.';
 ARROW 			: '->' ;
 S_QUOTE 		: '\'' ;
 D_QUOTE 		: '"' ;
@@ -114,11 +146,16 @@ COMMA			: ',' ;
 AMP      		: '&' ;
 
 INT			: DIGIT_NO_ZERO DIGIT* ;
-FLOAT			: DIGIT+ COMMA DIGIT+ ;
+FLOAT			: DIGIT+ DOT DIGIT+ ;
+CHAR 			: ('a'..'z' | 'A'..'Z')
+			;
 
-WORD 			: ('a'..'z' | 'A'..'Z') ('a'..'z' | 'A'..'Z' | UNDRSCR | DIGIT)* ;
+WORD 			: CHAR ('a'..'z' | 'A'..'Z' | UNDRSCR | DIGIT)+ ;
 
-
+COMMENT
+    :   '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
+    |   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
+    ;
 
 TOKEN_ERROR		: . {printMsg();} ;
 

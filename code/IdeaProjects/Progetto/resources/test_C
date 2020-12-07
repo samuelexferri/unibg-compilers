@@ -2,18 +2,58 @@
 
 float miao;
 int ciao=2;
+int vettore[4];
+char vettore [];    //char* vettore;  TODO: da fare puntatori
+char vettore []= { c, 5.4 , j, 4};
+float vector [4]= {5,6};
+int a = (5+b)*4;
 
 int miao (int t){
     int c +=3;
     k-=9;
-    return miao;
+    int a = (5+b)*4;
+    int vattore[5];
+    vettore[2]=2;
+    kkk[]={1,2,r};
 }
 
 int miao (int cosa, float bau){
     float d;
     f*=2;
+    return 2;       //non dovrebbe accettarla -->semantica
+    int pippo ();   //non dovrebbe accettarla -->semantica
+    function( miao);
     return miao;
 }
 
 int function();
 
+
+//ALTRE CASISTICHE
+/*
+int main() {
+   int vettore[4];
+
+   vettore[0] = 1;
+   vettore[1] = 2;
+   vettore[2] = 0;
+   vettore[3] = -2;
+}
+
+int main() {
+    int vettore[] = {1,2,3,4};  //inizializzazione e dichiarazione
+}
+
+int matrice[4][3] ={ {2,1,1}, {3,3,3}, {0,2,0}, {0,1,1} };
+
+
+int main(void) {
+    int *pa, a=10;
+
+        pa=&a;
+    printf("Indirizzo della variabile: %x ", pa);
+    printf("Valore variabile: %d ", *pa);
+//oppure avrei potuto scrivere: printf("Valore variabile: %d ", a);
+    return 0;
+}
+*/
