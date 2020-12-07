@@ -28,18 +28,18 @@ options {
 
 
 
-// TODO: Cicli, Puntatori
+// TODO: Cicli (Gestire AND OR), Puntatori
 // PARSER
-start			: INCLUDE? (VOID identifier function | type_name identifier ((((global_var_ass? (COMMA identifier global_var_ass?)*) | global_vector) SEMICOL) | function) | identifier LBRACK INT RBRACK global_var_ass SEMICOL)* EOF
+start			: INCLUDE? ( VOID identifier function | type_name? (puntator SEMICOL | identifier ((((variable_ass? (COMMA identifier variable_ass?)*) | vector) SEMICOL) | function)))* EOF
 				;
 
-global_var_ass 	: ASS type_value
-				;
-				
-global_vector 	: LBRACK INT? RBRACK (ASS ((LCURL type_value (COMMA type_value)* RCURL) | type_value))?
+variable_ass 	: ASS (type_value | AMP identifier) // Gestisce anche l'indirizzo puntato
 				;
 				
 vector 			: LBRACK INT? RBRACK (ASS ((LCURL type_value (COMMA type_value)* RCURL) | type_value))?
+				;
+				
+puntator		: MULT identifier (ASS ((AMP identifier) | (type_value)))? 
 				;
 					
 function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
@@ -49,14 +49,14 @@ call_function 	: LPAREN (identifier (COMMA  identifier)*)? RPAREN
 				;
 				
 codeblock 		: LCURL (statement SEMICOL)* RCURL   
-	    		| SEMICOL // SEMICOL		
+	    		| SEMICOL // SEMICOL di function	
 				;
  
-statement 		: type_name? identifier (assignment | call_function | vector)
+statement 		: type_name? (identifier (assignment | call_function | vector) | puntator)
 			  	| RETURN value 
 			  	;
 	
-assignment		: ((ADD | SUB | MULT | DIV)? ASS type_value)? // TODO: Oltre a type_value assegnare anche =vector[5]
+assignment		: ((ADD | SUB | MULT | DIV)? ASS (type_value | AMP identifier))?
 				;
 
 type_name		: (K_INT | K_FLOAT | K_CHAR)
@@ -81,7 +81,7 @@ atom_exp 		: INT
     			| LPAREN expression RPAREN
     			;
 
-value 			: (INT | identifier)
+value 			: (INT | identifier) // TODO: Ritornare puntatori
 				;
 
 

@@ -17,6 +17,27 @@ int vector[] = c;
 vector[3] = 4;
 int a = vector[3] + 'a';
 
+int *a;
+int *a = &b; // Verifica in semantica
+*a = &b; // Controllare prima che è stato assegnato l'indirizzo per reference
+
+
+int a = 3;
+
+int a; // Definirla una sola volta
+a = 3;
+
+int a;
+*a = 5;
+
+vectort[] = 5;
+*vectort = 5;
+
+// a = &b; // TODO
+
+int vector[];
+int *vector;
+
 int miao (int t){
     int c +=3;
     k-=9;
@@ -26,6 +47,23 @@ int miao (int t){
     int vettore[5];
     vettore[2]=2;
     kkk[]={1,2,r};
+
+    int *a;
+    int *a = &b; // Verifica in semantica
+
+    *a = 5;
+
+    int a = 3;
+
+    int a; // Definirla una sola volta
+    a = 3;
+
+    int a;
+    *a = 5;
+
+     a = &b; // TODO
+
+     a = &b;
 }
 
 int miao (int cosa, float bau){
