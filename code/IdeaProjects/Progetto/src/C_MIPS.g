@@ -30,10 +30,9 @@ options {
 
 
 //PARSER
-start	: INCLUDE? (VOID function SEMICOL | type_name identifier (((global_var | vector_globals)? SEMICOL) | function) )* EOF
-				;
+start	: INCLUDE? (VOID identifier function | type_name identifier ((( (global_var_ass? (COMMA identifier global_var_ass?)* ) | vector_globals) SEMICOL) | function) )* EOF				;
 
-global_var : (ASS type_value)  
+global_var_ass :  ASS type_value  
 				;
 				
 vector_globals 	: LBRACK INT? RBRACK ( ASS ((LCURL (INT|FLOAT|CHAR)(COMMA (INT|FLOAT|CHAR))* RCURL) | (INT|FLOAT|CHAR)))?
@@ -145,7 +144,7 @@ D_QUOTE 		: '"' ;
 COMMA			: ',' ;
 AMP      		: '&' ;
 
-INT			: DIGIT_NO_ZERO DIGIT* ;
+INT			: DIGIT_NO_ZERO DIGIT* | '0';
 FLOAT			: DIGIT+ DOT DIGIT+ ;
 CHAR 			: ('a'..'z' | 'A'..'Z')
 			;
