@@ -6,7 +6,7 @@ options {
 }
 
 @lexer::header {
-	//package myCompiler;
+	// package myCompiler;
 }
 
 @lexer::members {
@@ -19,7 +19,7 @@ options {
 }
 
 @header {
-	//package myCompiler;
+	// package myCompiler;
 }
 
 @members {
@@ -27,71 +27,66 @@ options {
 }
 
 
+// TODO: Cicli, Puntatori
 
+// PARSER
+start			: INCLUDE? (VOID identifier function | type_name identifier ((((global_var_ass? (COMMA identifier global_var_ass?)*) | global_vector) SEMICOL) | function))* EOF
+				;
 
-//PARSER
-start	: INCLUDE? (VOID identifier function | type_name identifier ((( (global_var_ass? (COMMA identifier global_var_ass?)* ) | vector_globals) SEMICOL) | function) )* EOF				;
-
-global_var_ass :  ASS type_value  
+global_var_ass 	: ASS type_value
 				;
 				
-vector_globals 	: LBRACK INT? RBRACK ( ASS ((LCURL (INT|FLOAT|CHAR)(COMMA (INT|FLOAT|CHAR))* RCURL) | (INT|FLOAT|CHAR)))?
-				;
-
-				
-function : LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
-				;
-
-call_function 	:  LPAREN ( identifier (COMMA  identifier)*)? RPAREN
-				;
-
-vector 	:	LBRACK INT? RBRACK ( ASS ((LCURL (INT|FLOAT|CHAR)(COMMA (INT|FLOAT|CHAR))* RCURL) | (INT|FLOAT|CHAR)))? 
+global_vector 	: LBRACK INT? RBRACK (ASS ((LCURL type_value (COMMA type_value)* RCURL) | type_value))?
 				;
 				
-codeblock : LCURL (statement SEMICOL)*  RCURL   
-	    | SEMICOL				
+vector 			: LBRACK INT? RBRACK (ASS ((LCURL type_value (COMMA type_value)* RCURL) | type_value))?
+				;
+					
+function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
+				;
+
+call_function 	: LPAREN (identifier (COMMA  identifier)*)? RPAREN
+				;
+				
+codeblock 		: LCURL (statement SEMICOL)* RCURL   
+	    		| SEMICOL // SEMICOL		
 				;
  
-statement 		: type_name? identifier (assignment |call_function |vector )
-			  |RETURN valore 
+statement 		: type_name? identifier (assignment | call_function | vector)
+			  	| RETURN value 
+			  	;
+	
+assignment		: ((ADD | SUB | MULT | DIV)? ASS type_value)? // TODO: Oltre a type_value assegnare anche =vector[5]
+				;
 
-			;
-						
-assignment		: (SUB | ADD | MULT | DIV)? (ASS type_value)?
-			;
-
-type_name		: (K_INT | K_FLOAT| K_CHAR)
+type_name		: (K_INT | K_FLOAT | K_CHAR)
 				; 
 				
-identifier		: WORD | CHAR 
+identifier		: (WORD | CHAR)
 				;
 
-type_value		: (INT | FLOAT | expression)
-	
+type_value		: expression
 				;
 
-expression 
-    : multiplyExp ( ADD multiplyExp  | SUB multiplyExp  )* 
-    ;
+expression 		: multiply_exp (ADD multiply_exp | SUB multiply_exp)* 
+    			;
     
-multiplyExp 
-    : atomExp ( MULT atomExp  | DIV atomExp  )*
-    ;
+multiply_exp 	: atom_exp (MULT atom_exp | DIV atom_exp)*
+    			;
 
-atomExp : 
-	INT    
-    | FLOAT  
-    | identifier     
-    | LPAREN expression RPAREN
-    ;
+atom_exp 		: INT
+				| FLOAT  
+				| CHAR_QUOTE
+    			| identifier     
+    			| LPAREN expression RPAREN
+    			;
 
-
-valore 	:  (INT | identifier)
+value 			: (INT | identifier)
 				;
 
 
 
-//LEXER
+// LEXER
 
 INCLUDE	: '#include <stdio.h>' | '#include <stdlib.h>';
 
@@ -103,68 +98,59 @@ fragment TAB	: '\t';
 fragment NEWL   : '\n';
 fragment SLASHR : '\r';
 
-WS : (
-	SPACE 
+WS 	: ( SPACE 
 	| TAB 
 	| NEWL 
-	| SLASHR) {$channel=HIDDEN;};
+	| SLASHR 
+	){$channel=HIDDEN;}
+	;
 
-K_INT			: 'int' ;
-K_FLOAT			: 'float' ;
-K_CHAR			: 'char' ;
+K_INT		: 'int' ;
+K_FLOAT		: 'float' ;
+K_CHAR		: 'char' ;
 
-VOID 			: 'void' ;
-WHILE 	 		: 'while' ;
-FOR 			: 'for' ;
+VOID 		: 'void' ;
+WHILE 	 	: 'while' ;
+FOR 		: 'for' ;
 IF 			: 'if' ;
-ELSE 			: 'else' ;
-RETURN 			: 'return' ;
+ELSE 		: 'else' ;
+RETURN 		: 'return' ;
+
 EQ 			: '==' ;
 NEQ			: '!=' ;
 GT 			: '>' ;
 LT 			: '<' ;
 GE			: '>=' ;
 LE 			: '<=' ;
-ADD 			: '+' ;
-SUB 			: '-' ;
-MULT 			: '*' ;
-DIV 			: '/' ;
-ASS 			: '=' ;
-LPAREN    		: '(' ;
-RPAREN 			: ')' ;
-LBRACK 			: '[' ;
-RBRACK   		: ']' ;
-LCURL 			: '{' ;
-RCURL 			: '}' ;
-SEMICOL			: ';' ;
-DOT 			: '.';
-ARROW 			: '->' ;
-S_QUOTE 		: '\'' ;
-D_QUOTE 		: '"' ;
-COMMA			: ',' ;
-AMP      		: '&' ;
 
-INT			: DIGIT_NO_ZERO DIGIT* | '0';
-FLOAT			: DIGIT+ DOT DIGIT+ ;
-CHAR 			: ('a'..'z' | 'A'..'Z')
-			;
+ADD 		: '+' ;
+SUB 		: '-' ;
+MULT 		: '*' ;
+DIV 		: '/' ;
+ASS 		: '=' ;
+LPAREN    	: '(' ;
+RPAREN 		: ')' ;
+LBRACK 		: '[' ;
+RBRACK   	: ']' ;
+LCURL 		: '{' ;
+RCURL 		: '}' ;
+SEMICOL		: ';' ;
+DOT 		: '.' ; // Float
+ARROW 		: '->' ; // Arrow
+S_QUOTE 	: '\'' ;
+D_QUOTE 	: '"' ;
+COMMA		: ',' ;
+AMP      	: '&' ;
 
-WORD 			: CHAR ('a'..'z' | 'A'..'Z' | UNDRSCR | DIGIT)+ ;
+INT			: DIGIT_NO_ZERO DIGIT* | '0' ;
+FLOAT		: DIGIT+ DOT DIGIT+ ;
+CHAR 		: ('a'..'z' | 'A'..'Z') ;
+CHAR_QUOTE	: S_QUOTE ('a'..'z' | 'A'..'Z') S_QUOTE ;
 
-COMMENT
-    :   '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
-    |   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
-    ;
+WORD 		: CHAR ('a'..'z' | 'A'..'Z' | UNDRSCR | DIGIT)+ ;
 
-TOKEN_ERROR		: . {printMsg();} ;
+COMMENT		: '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
+    		| '/*' (options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
+ 			;
 
-
-
-
-
-
-
-
-
-
-
+TOKEN_ERROR	: . {printMsg();} ;

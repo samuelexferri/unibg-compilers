@@ -10,20 +10,29 @@ int a = (5+b)*4;
 void gino();
 int a,b=220,c;
 
+int vector[] = {'a','a'+c,3*e};
+int vector[] = 'a'+c;
+int vector[] = c;
+
+vector[3]= 4;
+int a = vector[3];
+
 int miao (int t){
     int c +=3;
     k-=9;
+    char a = a;
+    char a = 'a';
     int a = (5+b)*4;
-    int vattore[5];
+    int vettore[5];
     vettore[2]=2;
     kkk[]={1,2,r};
 }
 
 int miao (int cosa, float bau){
     float d;
-    f*=2;
-    return 2;       //non dovrebbe accettarla -->semantica
-    int pippo ();   //non dovrebbe accettarla -->semantica
+    f*=2; // Si confonde con i puntatori
+    return 2; // Non accettare return in posizione impropria
+    int pippo (); // Non accettare
     function( miao);
     gino();
     return miao;
