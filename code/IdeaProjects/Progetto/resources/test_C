@@ -78,7 +78,35 @@ int miao (int cosa, float bau){
 
 int function();
 
+int function() {
+		if(a == 5) { // TODO Gestire one line senza parentesi
+			jhg;
+		}
+		else {
+			ghfj;
+		}
 
+
+		while(a > 0) {
+        			a = a - 1;
+        		}
+
+        for(int b = a + 1; b <= (a + 5); b += 1) {
+           f;
+        }
+}
+
+
+
+/*
+int function() {
+		if((a == 5) && (b == 5)) {
+			jhg;
+		}
+		else {
+			ghfj;
+		}
+}*/
 //ALTRE CASISTICHE
 /*
 int main() {

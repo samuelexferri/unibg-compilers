@@ -28,18 +28,18 @@ options {
 
 
 
-// TODO: Cicli (Gestire AND OR), Puntatori
+// TODO printf
 // PARSER
 start			: INCLUDE? ( VOID identifier function | type_name? (puntator SEMICOL | identifier ((((variable_ass? (COMMA identifier variable_ass?)*) | vector) SEMICOL) | function)))* EOF
 				;
 
-variable_ass 	: ASS (type_value | AMP identifier) // Gestisce anche l'indirizzo puntato
+variable_ass 	: ASS (expression | AMP identifier) // Gestisce anche l'indirizzo puntato
 				;
 				
-vector 			: LBRACK INT? RBRACK (ASS ((LCURL type_value (COMMA type_value)* RCURL) | type_value))?
+vector 			: LBRACK INT? RBRACK (ASS ((LCURL expression (COMMA expression)* RCURL) | expression))?
 				;
 				
-puntator		: MULT identifier (ASS ((AMP identifier) | (type_value)))? 
+puntator		: MULT identifier (ASS ((AMP identifier) | (expression)))? 
 				;
 					
 function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
@@ -48,24 +48,33 @@ function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN
 call_function 	: LPAREN (identifier (COMMA  identifier)*)? RPAREN
 				;
 				
-codeblock 		: LCURL (statement SEMICOL)* RCURL   
+codeblock 		: LCURL (statement)* RCURL   
 	    		| SEMICOL // SEMICOL di function	
 				;
- 
-statement 		: type_name? (identifier (assignment | call_function | vector) | puntator)
-			  	| RETURN value 
+
+statement 		: type_name? (identifier (assignment | call_function | vector) | puntator) SEMICOL
+				| ifStat
+				| whileStat
+				| forStat
+			  	| RETURN value SEMICOL 
 			  	;
-	
-assignment		: ((ADD | SUB | MULT | DIV)? ASS (type_value | AMP identifier))?
+			  	
+ifStat			: IF LPAREN (expression compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO OP LOGICI
+				;
+				
+whileStat		: WHILE LPAREN (expression compare expression) RPAREN codeblock
+				;
+				
+forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
+				;
+				
+assignment		: ((ADD | SUB | MULT | DIV)? ASS (expression | AMP identifier))?
 				;
 
 type_name		: (K_INT | K_FLOAT | K_CHAR)
 				; 
 				
 identifier		: (WORD | CHAR)
-				;
-
-type_value		: expression
 				;
 
 expression 		: multiply_exp (ADD multiply_exp | SUB multiply_exp)* 
@@ -84,7 +93,10 @@ atom_exp 		: INT
 value 			: (INT | identifier) // TODO: Ritornare puntatori
 				;
 
-
+compare			: EQ | NEQ | LT | GT | LE | GE | ((ADD | SUB | MULT | DIV)? ASS) // ASS negli If
+				;
+				
+				
 
 // LEXER
 
