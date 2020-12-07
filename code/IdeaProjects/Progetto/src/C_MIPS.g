@@ -27,10 +27,10 @@ options {
 }
 
 
-// TODO: Cicli, Puntatori
 
+// TODO: Cicli, Puntatori
 // PARSER
-start			: INCLUDE? (VOID identifier function | type_name identifier ((((global_var_ass? (COMMA identifier global_var_ass?)*) | global_vector) SEMICOL) | function))* EOF
+start			: INCLUDE? (VOID identifier function | type_name identifier ((((global_var_ass? (COMMA identifier global_var_ass?)*) | global_vector) SEMICOL) | function) | identifier LBRACK INT RBRACK global_var_ass SEMICOL)* EOF
 				;
 
 global_var_ass 	: ASS type_value
@@ -77,7 +77,7 @@ multiply_exp 	: atom_exp (MULT atom_exp | DIV atom_exp)*
 atom_exp 		: INT
 				| FLOAT  
 				| CHAR_QUOTE
-    			| identifier     
+				| identifier (LBRACK INT RBRACK)? // Variable or Vector   
     			| LPAREN expression RPAREN
     			;
 

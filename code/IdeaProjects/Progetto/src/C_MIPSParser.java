@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g 2020-12-07 11:49:39
+// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g 2020-12-07 13:03:16
 
 	// package myCompiler;
 
@@ -94,11 +94,11 @@ public class C_MIPSParser extends Parser {
 
 
 	// $ANTLR start "start"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:1: start : ( INCLUDE )? ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) )* EOF ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:1: start : ( INCLUDE )? ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) | identifier LBRACK INT RBRACK global_var_ass SEMICOL )* EOF ;
 	public final void start() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:9: ( ( INCLUDE )? ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) )* EOF )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:11: ( INCLUDE )? ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) )* EOF
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:9: ( ( INCLUDE )? ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) | identifier LBRACK INT RBRACK global_var_ass SEMICOL )* EOF )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:11: ( INCLUDE )? ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) | identifier LBRACK INT RBRACK global_var_ass SEMICOL )* EOF
 			{
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:11: ( INCLUDE )?
 			int alt1=2;
@@ -116,18 +116,30 @@ public class C_MIPSParser extends Parser {
 
 			}
 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:20: ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:20: ( VOID identifier function | type_name identifier ( ( ( ( ( global_var_ass )? ( COMMA identifier ( global_var_ass )? )* ) | global_vector ) SEMICOL ) | function ) | identifier LBRACK INT RBRACK global_var_ass SEMICOL )*
 			loop7:
 			while (true) {
-				int alt7=3;
-				int LA7_0 = input.LA(1);
-				if ( (LA7_0==VOID) ) {
+				int alt7=4;
+				switch ( input.LA(1) ) {
+				case VOID:
+					{
 					alt7=1;
-				}
-				else if ( ((LA7_0 >= K_CHAR && LA7_0 <= K_INT)) ) {
+					}
+					break;
+				case K_CHAR:
+				case K_FLOAT:
+				case K_INT:
+					{
 					alt7=2;
+					}
+					break;
+				case CHAR:
+				case WORD:
+					{
+					alt7=3;
+					}
+					break;
 				}
-
 				switch (alt7) {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:21: VOID identifier function
@@ -299,13 +311,30 @@ public class C_MIPSParser extends Parser {
 
 					}
 					break;
+				case 3 :
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:33:166: identifier LBRACK INT RBRACK global_var_ass SEMICOL
+					{
+					pushFollow(FOLLOW_identifier_in_start117);
+					identifier();
+					state._fsp--;
+
+					match(input,LBRACK,FOLLOW_LBRACK_in_start119); 
+					match(input,INT,FOLLOW_INT_in_start121); 
+					match(input,RBRACK,FOLLOW_RBRACK_in_start123); 
+					pushFollow(FOLLOW_global_var_ass_in_start125);
+					global_var_ass();
+					state._fsp--;
+
+					match(input,SEMICOL,FOLLOW_SEMICOL_in_start127); 
+					}
+					break;
 
 				default :
 					break loop7;
 				}
 			}
 
-			match(input,EOF,FOLLOW_EOF_in_start117); 
+			match(input,EOF,FOLLOW_EOF_in_start131); 
 			}
 
 		}
@@ -328,8 +357,8 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:36:17: ( ASS type_value )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:36:19: ASS type_value
 			{
-			match(input,ASS,FOLLOW_ASS_in_global_var_ass131); 
-			pushFollow(FOLLOW_type_value_in_global_var_ass133);
+			match(input,ASS,FOLLOW_ASS_in_global_var_ass145); 
+			pushFollow(FOLLOW_type_value_in_global_var_ass147);
 			type_value();
 			state._fsp--;
 
@@ -355,7 +384,7 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:16: ( LBRACK ( INT )? RBRACK ( ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value ) )? )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:18: LBRACK ( INT )? RBRACK ( ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value ) )?
 			{
-			match(input,LBRACK,FOLLOW_LBRACK_in_global_vector151); 
+			match(input,LBRACK,FOLLOW_LBRACK_in_global_vector165); 
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:25: ( INT )?
 			int alt8=2;
 			int LA8_0 = input.LA(1);
@@ -366,13 +395,13 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:25: INT
 					{
-					match(input,INT,FOLLOW_INT_in_global_vector153); 
+					match(input,INT,FOLLOW_INT_in_global_vector167); 
 					}
 					break;
 
 			}
 
-			match(input,RBRACK,FOLLOW_RBRACK_in_global_vector156); 
+			match(input,RBRACK,FOLLOW_RBRACK_in_global_vector170); 
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:37: ( ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value ) )?
 			int alt11=2;
 			int LA11_0 = input.LA(1);
@@ -383,7 +412,7 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:38: ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value )
 					{
-					match(input,ASS,FOLLOW_ASS_in_global_vector159); 
+					match(input,ASS,FOLLOW_ASS_in_global_vector173); 
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:42: ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value )
 					int alt10=2;
 					int LA10_0 = input.LA(1);
@@ -407,8 +436,8 @@ public class C_MIPSParser extends Parser {
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:43: ( LCURL type_value ( COMMA type_value )* RCURL )
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:44: LCURL type_value ( COMMA type_value )* RCURL
 							{
-							match(input,LCURL,FOLLOW_LCURL_in_global_vector163); 
-							pushFollow(FOLLOW_type_value_in_global_vector165);
+							match(input,LCURL,FOLLOW_LCURL_in_global_vector177); 
+							pushFollow(FOLLOW_type_value_in_global_vector179);
 							type_value();
 							state._fsp--;
 
@@ -425,8 +454,8 @@ public class C_MIPSParser extends Parser {
 								case 1 :
 									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:62: COMMA type_value
 									{
-									match(input,COMMA,FOLLOW_COMMA_in_global_vector168); 
-									pushFollow(FOLLOW_type_value_in_global_vector170);
+									match(input,COMMA,FOLLOW_COMMA_in_global_vector182); 
+									pushFollow(FOLLOW_type_value_in_global_vector184);
 									type_value();
 									state._fsp--;
 
@@ -438,7 +467,7 @@ public class C_MIPSParser extends Parser {
 								}
 							}
 
-							match(input,RCURL,FOLLOW_RCURL_in_global_vector174); 
+							match(input,RCURL,FOLLOW_RCURL_in_global_vector188); 
 							}
 
 							}
@@ -446,7 +475,7 @@ public class C_MIPSParser extends Parser {
 						case 2 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:39:90: type_value
 							{
-							pushFollow(FOLLOW_type_value_in_global_vector179);
+							pushFollow(FOLLOW_type_value_in_global_vector193);
 							type_value();
 							state._fsp--;
 
@@ -482,7 +511,7 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:11: ( LBRACK ( INT )? RBRACK ( ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value ) )? )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:13: LBRACK ( INT )? RBRACK ( ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value ) )?
 			{
-			match(input,LBRACK,FOLLOW_LBRACK_in_vector202); 
+			match(input,LBRACK,FOLLOW_LBRACK_in_vector216); 
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:20: ( INT )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
@@ -493,13 +522,13 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:20: INT
 					{
-					match(input,INT,FOLLOW_INT_in_vector204); 
+					match(input,INT,FOLLOW_INT_in_vector218); 
 					}
 					break;
 
 			}
 
-			match(input,RBRACK,FOLLOW_RBRACK_in_vector207); 
+			match(input,RBRACK,FOLLOW_RBRACK_in_vector221); 
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:32: ( ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value ) )?
 			int alt15=2;
 			int LA15_0 = input.LA(1);
@@ -510,7 +539,7 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:33: ASS ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value )
 					{
-					match(input,ASS,FOLLOW_ASS_in_vector210); 
+					match(input,ASS,FOLLOW_ASS_in_vector224); 
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:37: ( ( LCURL type_value ( COMMA type_value )* RCURL ) | type_value )
 					int alt14=2;
 					int LA14_0 = input.LA(1);
@@ -534,8 +563,8 @@ public class C_MIPSParser extends Parser {
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:38: ( LCURL type_value ( COMMA type_value )* RCURL )
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:39: LCURL type_value ( COMMA type_value )* RCURL
 							{
-							match(input,LCURL,FOLLOW_LCURL_in_vector214); 
-							pushFollow(FOLLOW_type_value_in_vector216);
+							match(input,LCURL,FOLLOW_LCURL_in_vector228); 
+							pushFollow(FOLLOW_type_value_in_vector230);
 							type_value();
 							state._fsp--;
 
@@ -552,8 +581,8 @@ public class C_MIPSParser extends Parser {
 								case 1 :
 									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:57: COMMA type_value
 									{
-									match(input,COMMA,FOLLOW_COMMA_in_vector219); 
-									pushFollow(FOLLOW_type_value_in_vector221);
+									match(input,COMMA,FOLLOW_COMMA_in_vector233); 
+									pushFollow(FOLLOW_type_value_in_vector235);
 									type_value();
 									state._fsp--;
 
@@ -565,7 +594,7 @@ public class C_MIPSParser extends Parser {
 								}
 							}
 
-							match(input,RCURL,FOLLOW_RCURL_in_vector225); 
+							match(input,RCURL,FOLLOW_RCURL_in_vector239); 
 							}
 
 							}
@@ -573,7 +602,7 @@ public class C_MIPSParser extends Parser {
 						case 2 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:42:85: type_value
 							{
-							pushFollow(FOLLOW_type_value_in_vector230);
+							pushFollow(FOLLOW_type_value_in_vector244);
 							type_value();
 							state._fsp--;
 
@@ -609,7 +638,7 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:45:12: ( LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:45:14: LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock
 			{
-			match(input,LPAREN,FOLLOW_LPAREN_in_function253); 
+			match(input,LPAREN,FOLLOW_LPAREN_in_function267); 
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:45:21: ( type_name identifier ( COMMA type_name identifier )* )?
 			int alt17=2;
 			int LA17_0 = input.LA(1);
@@ -620,11 +649,11 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:45:22: type_name identifier ( COMMA type_name identifier )*
 					{
-					pushFollow(FOLLOW_type_name_in_function256);
+					pushFollow(FOLLOW_type_name_in_function270);
 					type_name();
 					state._fsp--;
 
-					pushFollow(FOLLOW_identifier_in_function258);
+					pushFollow(FOLLOW_identifier_in_function272);
 					identifier();
 					state._fsp--;
 
@@ -641,12 +670,12 @@ public class C_MIPSParser extends Parser {
 						case 1 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:45:44: COMMA type_name identifier
 							{
-							match(input,COMMA,FOLLOW_COMMA_in_function261); 
-							pushFollow(FOLLOW_type_name_in_function263);
+							match(input,COMMA,FOLLOW_COMMA_in_function275); 
+							pushFollow(FOLLOW_type_name_in_function277);
 							type_name();
 							state._fsp--;
 
-							pushFollow(FOLLOW_identifier_in_function265);
+							pushFollow(FOLLOW_identifier_in_function279);
 							identifier();
 							state._fsp--;
 
@@ -663,8 +692,8 @@ public class C_MIPSParser extends Parser {
 
 			}
 
-			match(input,RPAREN,FOLLOW_RPAREN_in_function271); 
-			pushFollow(FOLLOW_codeblock_in_function273);
+			match(input,RPAREN,FOLLOW_RPAREN_in_function285); 
+			pushFollow(FOLLOW_codeblock_in_function287);
 			codeblock();
 			state._fsp--;
 
@@ -690,7 +719,7 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:48:16: ( LPAREN ( identifier ( COMMA identifier )* )? RPAREN )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:48:18: LPAREN ( identifier ( COMMA identifier )* )? RPAREN
 			{
-			match(input,LPAREN,FOLLOW_LPAREN_in_call_function287); 
+			match(input,LPAREN,FOLLOW_LPAREN_in_call_function301); 
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:48:25: ( identifier ( COMMA identifier )* )?
 			int alt19=2;
 			int LA19_0 = input.LA(1);
@@ -701,7 +730,7 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:48:26: identifier ( COMMA identifier )*
 					{
-					pushFollow(FOLLOW_identifier_in_call_function290);
+					pushFollow(FOLLOW_identifier_in_call_function304);
 					identifier();
 					state._fsp--;
 
@@ -718,8 +747,8 @@ public class C_MIPSParser extends Parser {
 						case 1 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:48:38: COMMA identifier
 							{
-							match(input,COMMA,FOLLOW_COMMA_in_call_function293); 
-							pushFollow(FOLLOW_identifier_in_call_function296);
+							match(input,COMMA,FOLLOW_COMMA_in_call_function307); 
+							pushFollow(FOLLOW_identifier_in_call_function310);
 							identifier();
 							state._fsp--;
 
@@ -736,7 +765,7 @@ public class C_MIPSParser extends Parser {
 
 			}
 
-			match(input,RPAREN,FOLLOW_RPAREN_in_call_function302); 
+			match(input,RPAREN,FOLLOW_RPAREN_in_call_function316); 
 			}
 
 		}
@@ -776,7 +805,7 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:51:15: LCURL ( statement SEMICOL )* RCURL
 					{
-					match(input,LCURL,FOLLOW_LCURL_in_codeblock321); 
+					match(input,LCURL,FOLLOW_LCURL_in_codeblock335); 
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:51:21: ( statement SEMICOL )*
 					loop20:
 					while (true) {
@@ -790,11 +819,11 @@ public class C_MIPSParser extends Parser {
 						case 1 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:51:22: statement SEMICOL
 							{
-							pushFollow(FOLLOW_statement_in_codeblock324);
+							pushFollow(FOLLOW_statement_in_codeblock338);
 							statement();
 							state._fsp--;
 
-							match(input,SEMICOL,FOLLOW_SEMICOL_in_codeblock326); 
+							match(input,SEMICOL,FOLLOW_SEMICOL_in_codeblock340); 
 							}
 							break;
 
@@ -803,13 +832,13 @@ public class C_MIPSParser extends Parser {
 						}
 					}
 
-					match(input,RCURL,FOLLOW_RCURL_in_codeblock330); 
+					match(input,RCURL,FOLLOW_RCURL_in_codeblock344); 
 					}
 					break;
 				case 2 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:52:10: SEMICOL
 					{
-					match(input,SEMICOL,FOLLOW_SEMICOL_in_codeblock344); 
+					match(input,SEMICOL,FOLLOW_SEMICOL_in_codeblock358); 
 					}
 					break;
 
@@ -861,7 +890,7 @@ public class C_MIPSParser extends Parser {
 						case 1 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:55:15: type_name
 							{
-							pushFollow(FOLLOW_type_name_in_statement361);
+							pushFollow(FOLLOW_type_name_in_statement375);
 							type_name();
 							state._fsp--;
 
@@ -870,7 +899,7 @@ public class C_MIPSParser extends Parser {
 
 					}
 
-					pushFollow(FOLLOW_identifier_in_statement364);
+					pushFollow(FOLLOW_identifier_in_statement378);
 					identifier();
 					state._fsp--;
 
@@ -906,7 +935,7 @@ public class C_MIPSParser extends Parser {
 						case 1 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:55:38: assignment
 							{
-							pushFollow(FOLLOW_assignment_in_statement367);
+							pushFollow(FOLLOW_assignment_in_statement381);
 							assignment();
 							state._fsp--;
 
@@ -915,7 +944,7 @@ public class C_MIPSParser extends Parser {
 						case 2 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:55:51: call_function
 							{
-							pushFollow(FOLLOW_call_function_in_statement371);
+							pushFollow(FOLLOW_call_function_in_statement385);
 							call_function();
 							state._fsp--;
 
@@ -924,7 +953,7 @@ public class C_MIPSParser extends Parser {
 						case 3 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:55:67: vector
 							{
-							pushFollow(FOLLOW_vector_in_statement375);
+							pushFollow(FOLLOW_vector_in_statement389);
 							vector();
 							state._fsp--;
 
@@ -938,8 +967,8 @@ public class C_MIPSParser extends Parser {
 				case 2 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:56:9: RETURN value
 					{
-					match(input,RETURN,FOLLOW_RETURN_in_statement386); 
-					pushFollow(FOLLOW_value_in_statement388);
+					match(input,RETURN,FOLLOW_RETURN_in_statement400); 
+					pushFollow(FOLLOW_value_in_statement402);
 					value();
 					state._fsp--;
 
@@ -1000,8 +1029,8 @@ public class C_MIPSParser extends Parser {
 
 					}
 
-					match(input,ASS,FOLLOW_ASS_in_assignment424); 
-					pushFollow(FOLLOW_type_value_in_assignment426);
+					match(input,ASS,FOLLOW_ASS_in_assignment438); 
+					pushFollow(FOLLOW_type_value_in_assignment440);
 					type_value();
 					state._fsp--;
 
@@ -1092,7 +1121,7 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:68:13: ( expression )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:68:15: expression
 			{
-			pushFollow(FOLLOW_expression_in_type_value492);
+			pushFollow(FOLLOW_expression_in_type_value506);
 			expression();
 			state._fsp--;
 
@@ -1118,7 +1147,7 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:71:14: ( multiply_exp ( ADD multiply_exp | SUB multiply_exp )* )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:71:16: multiply_exp ( ADD multiply_exp | SUB multiply_exp )*
 			{
-			pushFollow(FOLLOW_multiply_exp_in_expression507);
+			pushFollow(FOLLOW_multiply_exp_in_expression521);
 			multiply_exp();
 			state._fsp--;
 
@@ -1138,8 +1167,8 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:71:30: ADD multiply_exp
 					{
-					match(input,ADD,FOLLOW_ADD_in_expression510); 
-					pushFollow(FOLLOW_multiply_exp_in_expression512);
+					match(input,ADD,FOLLOW_ADD_in_expression524); 
+					pushFollow(FOLLOW_multiply_exp_in_expression526);
 					multiply_exp();
 					state._fsp--;
 
@@ -1148,8 +1177,8 @@ public class C_MIPSParser extends Parser {
 				case 2 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:71:49: SUB multiply_exp
 					{
-					match(input,SUB,FOLLOW_SUB_in_expression516); 
-					pushFollow(FOLLOW_multiply_exp_in_expression518);
+					match(input,SUB,FOLLOW_SUB_in_expression530); 
+					pushFollow(FOLLOW_multiply_exp_in_expression532);
 					multiply_exp();
 					state._fsp--;
 
@@ -1183,7 +1212,7 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:15: ( atom_exp ( MULT atom_exp | DIV atom_exp )* )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:17: atom_exp ( MULT atom_exp | DIV atom_exp )*
 			{
-			pushFollow(FOLLOW_atom_exp_in_multiply_exp542);
+			pushFollow(FOLLOW_atom_exp_in_multiply_exp556);
 			atom_exp();
 			state._fsp--;
 
@@ -1203,8 +1232,8 @@ public class C_MIPSParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:27: MULT atom_exp
 					{
-					match(input,MULT,FOLLOW_MULT_in_multiply_exp545); 
-					pushFollow(FOLLOW_atom_exp_in_multiply_exp547);
+					match(input,MULT,FOLLOW_MULT_in_multiply_exp559); 
+					pushFollow(FOLLOW_atom_exp_in_multiply_exp561);
 					atom_exp();
 					state._fsp--;
 
@@ -1213,8 +1242,8 @@ public class C_MIPSParser extends Parser {
 				case 2 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:74:43: DIV atom_exp
 					{
-					match(input,DIV,FOLLOW_DIV_in_multiply_exp551); 
-					pushFollow(FOLLOW_atom_exp_in_multiply_exp553);
+					match(input,DIV,FOLLOW_DIV_in_multiply_exp565); 
+					pushFollow(FOLLOW_atom_exp_in_multiply_exp567);
 					atom_exp();
 					state._fsp--;
 
@@ -1242,80 +1271,98 @@ public class C_MIPSParser extends Parser {
 
 
 	// $ANTLR start "atom_exp"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:77:1: atom_exp : ( INT | FLOAT | CHAR_QUOTE | identifier | LPAREN expression RPAREN );
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:77:1: atom_exp : ( INT | FLOAT | CHAR_QUOTE | identifier ( LBRACK INT RBRACK )? | LPAREN expression RPAREN );
 	public final void atom_exp() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:77:12: ( INT | FLOAT | CHAR_QUOTE | identifier | LPAREN expression RPAREN )
-			int alt29=5;
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:77:12: ( INT | FLOAT | CHAR_QUOTE | identifier ( LBRACK INT RBRACK )? | LPAREN expression RPAREN )
+			int alt30=5;
 			switch ( input.LA(1) ) {
 			case INT:
 				{
-				alt29=1;
+				alt30=1;
 				}
 				break;
 			case FLOAT:
 				{
-				alt29=2;
+				alt30=2;
 				}
 				break;
 			case CHAR_QUOTE:
 				{
-				alt29=3;
+				alt30=3;
 				}
 				break;
 			case CHAR:
 			case WORD:
 				{
-				alt29=4;
+				alt30=4;
 				}
 				break;
 			case LPAREN:
 				{
-				alt29=5;
+				alt30=5;
 				}
 				break;
 			default:
 				NoViableAltException nvae =
-					new NoViableAltException("", 29, 0, input);
+					new NoViableAltException("", 30, 0, input);
 				throw nvae;
 			}
-			switch (alt29) {
+			switch (alt30) {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:77:14: INT
 					{
-					match(input,INT,FOLLOW_INT_in_atom_exp573); 
+					match(input,INT,FOLLOW_INT_in_atom_exp587); 
 					}
 					break;
 				case 2 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:78:7: FLOAT
 					{
-					match(input,FLOAT,FOLLOW_FLOAT_in_atom_exp581); 
+					match(input,FLOAT,FOLLOW_FLOAT_in_atom_exp595); 
 					}
 					break;
 				case 3 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:79:7: CHAR_QUOTE
 					{
-					match(input,CHAR_QUOTE,FOLLOW_CHAR_QUOTE_in_atom_exp591); 
+					match(input,CHAR_QUOTE,FOLLOW_CHAR_QUOTE_in_atom_exp605); 
 					}
 					break;
 				case 4 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:80:10: identifier
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:80:7: identifier ( LBRACK INT RBRACK )?
 					{
-					pushFollow(FOLLOW_identifier_in_atom_exp602);
+					pushFollow(FOLLOW_identifier_in_atom_exp613);
 					identifier();
 					state._fsp--;
+
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:80:18: ( LBRACK INT RBRACK )?
+					int alt29=2;
+					int LA29_0 = input.LA(1);
+					if ( (LA29_0==LBRACK) ) {
+						alt29=1;
+					}
+					switch (alt29) {
+						case 1 :
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:80:19: LBRACK INT RBRACK
+							{
+							match(input,LBRACK,FOLLOW_LBRACK_in_atom_exp616); 
+							match(input,INT,FOLLOW_INT_in_atom_exp618); 
+							match(input,RBRACK,FOLLOW_RBRACK_in_atom_exp620); 
+							}
+							break;
+
+					}
 
 					}
 					break;
 				case 5 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:81:10: LPAREN expression RPAREN
 					{
-					match(input,LPAREN,FOLLOW_LPAREN_in_atom_exp618); 
-					pushFollow(FOLLOW_expression_in_atom_exp620);
+					match(input,LPAREN,FOLLOW_LPAREN_in_atom_exp634); 
+					pushFollow(FOLLOW_expression_in_atom_exp636);
 					expression();
 					state._fsp--;
 
-					match(input,RPAREN,FOLLOW_RPAREN_in_atom_exp622); 
+					match(input,RPAREN,FOLLOW_RPAREN_in_atom_exp638); 
 					}
 					break;
 
@@ -1341,32 +1388,32 @@ public class C_MIPSParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:12: ( INT | identifier )
 			{
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:12: ( INT | identifier )
-			int alt30=2;
-			int LA30_0 = input.LA(1);
-			if ( (LA30_0==INT) ) {
-				alt30=1;
+			int alt31=2;
+			int LA31_0 = input.LA(1);
+			if ( (LA31_0==INT) ) {
+				alt31=1;
 			}
-			else if ( (LA30_0==CHAR||LA30_0==WORD) ) {
-				alt30=2;
+			else if ( (LA31_0==CHAR||LA31_0==WORD) ) {
+				alt31=2;
 			}
 
 			else {
 				NoViableAltException nvae =
-					new NoViableAltException("", 30, 0, input);
+					new NoViableAltException("", 31, 0, input);
 				throw nvae;
 			}
 
-			switch (alt30) {
+			switch (alt31) {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:13: INT
 					{
-					match(input,INT,FOLLOW_INT_in_value642); 
+					match(input,INT,FOLLOW_INT_in_value658); 
 					}
 					break;
 				case 2 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:84:19: identifier
 					{
-					pushFollow(FOLLOW_identifier_in_value646);
+					pushFollow(FOLLOW_identifier_in_value662);
 					identifier();
 					state._fsp--;
 
@@ -1392,10 +1439,10 @@ public class C_MIPSParser extends Parser {
 
 
 
-	public static final BitSet FOLLOW_INCLUDE_in_start68 = new BitSet(new long[]{0x000200001C000000L});
+	public static final BitSet FOLLOW_INCLUDE_in_start68 = new BitSet(new long[]{0x000A00001C000100L});
 	public static final BitSet FOLLOW_VOID_in_start72 = new BitSet(new long[]{0x0008000000000100L});
 	public static final BitSet FOLLOW_identifier_in_start74 = new BitSet(new long[]{0x0000000100000000L});
-	public static final BitSet FOLLOW_function_in_start76 = new BitSet(new long[]{0x000200001C000000L});
+	public static final BitSet FOLLOW_function_in_start76 = new BitSet(new long[]{0x000A00001C000100L});
 	public static final BitSet FOLLOW_type_name_in_start80 = new BitSet(new long[]{0x0008000000000100L});
 	public static final BitSet FOLLOW_identifier_in_start82 = new BitSet(new long[]{0x0000020120000480L});
 	public static final BitSet FOLLOW_global_var_ass_in_start88 = new BitSet(new long[]{0x0000020000000400L});
@@ -1403,76 +1450,85 @@ public class C_MIPSParser extends Parser {
 	public static final BitSet FOLLOW_identifier_in_start94 = new BitSet(new long[]{0x0000020000000480L});
 	public static final BitSet FOLLOW_global_var_ass_in_start96 = new BitSet(new long[]{0x0000020000000400L});
 	public static final BitSet FOLLOW_global_vector_in_start104 = new BitSet(new long[]{0x0000020000000000L});
-	public static final BitSet FOLLOW_SEMICOL_in_start107 = new BitSet(new long[]{0x000200001C000000L});
-	public static final BitSet FOLLOW_function_in_start112 = new BitSet(new long[]{0x000200001C000000L});
-	public static final BitSet FOLLOW_EOF_in_start117 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ASS_in_global_var_ass131 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_type_value_in_global_var_ass133 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LBRACK_in_global_vector151 = new BitSet(new long[]{0x0000002002000000L});
-	public static final BitSet FOLLOW_INT_in_global_vector153 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_global_vector156 = new BitSet(new long[]{0x0000000000000082L});
-	public static final BitSet FOLLOW_ASS_in_global_vector159 = new BitSet(new long[]{0x0008000142080300L});
-	public static final BitSet FOLLOW_LCURL_in_global_vector163 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_type_value_in_global_vector165 = new BitSet(new long[]{0x0000004000000400L});
-	public static final BitSet FOLLOW_COMMA_in_global_vector168 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_type_value_in_global_vector170 = new BitSet(new long[]{0x0000004000000400L});
-	public static final BitSet FOLLOW_RCURL_in_global_vector174 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_type_value_in_global_vector179 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LBRACK_in_vector202 = new BitSet(new long[]{0x0000002002000000L});
-	public static final BitSet FOLLOW_INT_in_vector204 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_vector207 = new BitSet(new long[]{0x0000000000000082L});
-	public static final BitSet FOLLOW_ASS_in_vector210 = new BitSet(new long[]{0x0008000142080300L});
-	public static final BitSet FOLLOW_LCURL_in_vector214 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_type_value_in_vector216 = new BitSet(new long[]{0x0000004000000400L});
-	public static final BitSet FOLLOW_COMMA_in_vector219 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_type_value_in_vector221 = new BitSet(new long[]{0x0000004000000400L});
-	public static final BitSet FOLLOW_RCURL_in_vector225 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_type_value_in_vector230 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_function253 = new BitSet(new long[]{0x000001001C000000L});
-	public static final BitSet FOLLOW_type_name_in_function256 = new BitSet(new long[]{0x0008000000000100L});
-	public static final BitSet FOLLOW_identifier_in_function258 = new BitSet(new long[]{0x0000010000000400L});
-	public static final BitSet FOLLOW_COMMA_in_function261 = new BitSet(new long[]{0x000000001C000000L});
-	public static final BitSet FOLLOW_type_name_in_function263 = new BitSet(new long[]{0x0008000000000100L});
-	public static final BitSet FOLLOW_identifier_in_function265 = new BitSet(new long[]{0x0000010000000400L});
-	public static final BitSet FOLLOW_RPAREN_in_function271 = new BitSet(new long[]{0x0000020040000000L});
-	public static final BitSet FOLLOW_codeblock_in_function273 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_call_function287 = new BitSet(new long[]{0x0008010000000100L});
-	public static final BitSet FOLLOW_identifier_in_call_function290 = new BitSet(new long[]{0x0000010000000400L});
-	public static final BitSet FOLLOW_COMMA_in_call_function293 = new BitSet(new long[]{0x0008000000000100L});
-	public static final BitSet FOLLOW_identifier_in_call_function296 = new BitSet(new long[]{0x0000010000000400L});
-	public static final BitSet FOLLOW_RPAREN_in_call_function302 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LCURL_in_codeblock321 = new BitSet(new long[]{0x000800C01C000100L});
-	public static final BitSet FOLLOW_statement_in_codeblock324 = new BitSet(new long[]{0x0000020000000000L});
-	public static final BitSet FOLLOW_SEMICOL_in_codeblock326 = new BitSet(new long[]{0x000800C01C000100L});
-	public static final BitSet FOLLOW_RCURL_in_codeblock330 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SEMICOL_in_codeblock344 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_type_name_in_statement361 = new BitSet(new long[]{0x0008000000000100L});
-	public static final BitSet FOLLOW_identifier_in_statement364 = new BitSet(new long[]{0x0000100520004090L});
-	public static final BitSet FOLLOW_assignment_in_statement367 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_call_function_in_statement371 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_vector_in_statement375 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RETURN_in_statement386 = new BitSet(new long[]{0x0008000002000100L});
-	public static final BitSet FOLLOW_value_in_statement388 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ASS_in_assignment424 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_type_value_in_assignment426 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expression_in_type_value492 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_multiply_exp_in_expression507 = new BitSet(new long[]{0x0000100000000012L});
-	public static final BitSet FOLLOW_ADD_in_expression510 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_multiply_exp_in_expression512 = new BitSet(new long[]{0x0000100000000012L});
-	public static final BitSet FOLLOW_SUB_in_expression516 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_multiply_exp_in_expression518 = new BitSet(new long[]{0x0000100000000012L});
-	public static final BitSet FOLLOW_atom_exp_in_multiply_exp542 = new BitSet(new long[]{0x0000000400004002L});
-	public static final BitSet FOLLOW_MULT_in_multiply_exp545 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_atom_exp_in_multiply_exp547 = new BitSet(new long[]{0x0000000400004002L});
-	public static final BitSet FOLLOW_DIV_in_multiply_exp551 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_atom_exp_in_multiply_exp553 = new BitSet(new long[]{0x0000000400004002L});
-	public static final BitSet FOLLOW_INT_in_atom_exp573 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FLOAT_in_atom_exp581 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CHAR_QUOTE_in_atom_exp591 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_identifier_in_atom_exp602 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_atom_exp618 = new BitSet(new long[]{0x0008000102080300L});
-	public static final BitSet FOLLOW_expression_in_atom_exp620 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_atom_exp622 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_value642 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_identifier_in_value646 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SEMICOL_in_start107 = new BitSet(new long[]{0x000A00001C000100L});
+	public static final BitSet FOLLOW_function_in_start112 = new BitSet(new long[]{0x000A00001C000100L});
+	public static final BitSet FOLLOW_identifier_in_start117 = new BitSet(new long[]{0x0000000020000000L});
+	public static final BitSet FOLLOW_LBRACK_in_start119 = new BitSet(new long[]{0x0000000002000000L});
+	public static final BitSet FOLLOW_INT_in_start121 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_start123 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_global_var_ass_in_start125 = new BitSet(new long[]{0x0000020000000000L});
+	public static final BitSet FOLLOW_SEMICOL_in_start127 = new BitSet(new long[]{0x000A00001C000100L});
+	public static final BitSet FOLLOW_EOF_in_start131 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ASS_in_global_var_ass145 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_type_value_in_global_var_ass147 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LBRACK_in_global_vector165 = new BitSet(new long[]{0x0000002002000000L});
+	public static final BitSet FOLLOW_INT_in_global_vector167 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_global_vector170 = new BitSet(new long[]{0x0000000000000082L});
+	public static final BitSet FOLLOW_ASS_in_global_vector173 = new BitSet(new long[]{0x0008000142080300L});
+	public static final BitSet FOLLOW_LCURL_in_global_vector177 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_type_value_in_global_vector179 = new BitSet(new long[]{0x0000004000000400L});
+	public static final BitSet FOLLOW_COMMA_in_global_vector182 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_type_value_in_global_vector184 = new BitSet(new long[]{0x0000004000000400L});
+	public static final BitSet FOLLOW_RCURL_in_global_vector188 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_type_value_in_global_vector193 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LBRACK_in_vector216 = new BitSet(new long[]{0x0000002002000000L});
+	public static final BitSet FOLLOW_INT_in_vector218 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_vector221 = new BitSet(new long[]{0x0000000000000082L});
+	public static final BitSet FOLLOW_ASS_in_vector224 = new BitSet(new long[]{0x0008000142080300L});
+	public static final BitSet FOLLOW_LCURL_in_vector228 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_type_value_in_vector230 = new BitSet(new long[]{0x0000004000000400L});
+	public static final BitSet FOLLOW_COMMA_in_vector233 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_type_value_in_vector235 = new BitSet(new long[]{0x0000004000000400L});
+	public static final BitSet FOLLOW_RCURL_in_vector239 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_type_value_in_vector244 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_function267 = new BitSet(new long[]{0x000001001C000000L});
+	public static final BitSet FOLLOW_type_name_in_function270 = new BitSet(new long[]{0x0008000000000100L});
+	public static final BitSet FOLLOW_identifier_in_function272 = new BitSet(new long[]{0x0000010000000400L});
+	public static final BitSet FOLLOW_COMMA_in_function275 = new BitSet(new long[]{0x000000001C000000L});
+	public static final BitSet FOLLOW_type_name_in_function277 = new BitSet(new long[]{0x0008000000000100L});
+	public static final BitSet FOLLOW_identifier_in_function279 = new BitSet(new long[]{0x0000010000000400L});
+	public static final BitSet FOLLOW_RPAREN_in_function285 = new BitSet(new long[]{0x0000020040000000L});
+	public static final BitSet FOLLOW_codeblock_in_function287 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_call_function301 = new BitSet(new long[]{0x0008010000000100L});
+	public static final BitSet FOLLOW_identifier_in_call_function304 = new BitSet(new long[]{0x0000010000000400L});
+	public static final BitSet FOLLOW_COMMA_in_call_function307 = new BitSet(new long[]{0x0008000000000100L});
+	public static final BitSet FOLLOW_identifier_in_call_function310 = new BitSet(new long[]{0x0000010000000400L});
+	public static final BitSet FOLLOW_RPAREN_in_call_function316 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LCURL_in_codeblock335 = new BitSet(new long[]{0x000800C01C000100L});
+	public static final BitSet FOLLOW_statement_in_codeblock338 = new BitSet(new long[]{0x0000020000000000L});
+	public static final BitSet FOLLOW_SEMICOL_in_codeblock340 = new BitSet(new long[]{0x000800C01C000100L});
+	public static final BitSet FOLLOW_RCURL_in_codeblock344 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SEMICOL_in_codeblock358 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_type_name_in_statement375 = new BitSet(new long[]{0x0008000000000100L});
+	public static final BitSet FOLLOW_identifier_in_statement378 = new BitSet(new long[]{0x0000100520004090L});
+	public static final BitSet FOLLOW_assignment_in_statement381 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_call_function_in_statement385 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_vector_in_statement389 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RETURN_in_statement400 = new BitSet(new long[]{0x0008000002000100L});
+	public static final BitSet FOLLOW_value_in_statement402 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ASS_in_assignment438 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_type_value_in_assignment440 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_in_type_value506 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_multiply_exp_in_expression521 = new BitSet(new long[]{0x0000100000000012L});
+	public static final BitSet FOLLOW_ADD_in_expression524 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_multiply_exp_in_expression526 = new BitSet(new long[]{0x0000100000000012L});
+	public static final BitSet FOLLOW_SUB_in_expression530 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_multiply_exp_in_expression532 = new BitSet(new long[]{0x0000100000000012L});
+	public static final BitSet FOLLOW_atom_exp_in_multiply_exp556 = new BitSet(new long[]{0x0000000400004002L});
+	public static final BitSet FOLLOW_MULT_in_multiply_exp559 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_atom_exp_in_multiply_exp561 = new BitSet(new long[]{0x0000000400004002L});
+	public static final BitSet FOLLOW_DIV_in_multiply_exp565 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_atom_exp_in_multiply_exp567 = new BitSet(new long[]{0x0000000400004002L});
+	public static final BitSet FOLLOW_INT_in_atom_exp587 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FLOAT_in_atom_exp595 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CHAR_QUOTE_in_atom_exp605 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_identifier_in_atom_exp613 = new BitSet(new long[]{0x0000000020000002L});
+	public static final BitSet FOLLOW_LBRACK_in_atom_exp616 = new BitSet(new long[]{0x0000000002000000L});
+	public static final BitSet FOLLOW_INT_in_atom_exp618 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_atom_exp620 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_atom_exp634 = new BitSet(new long[]{0x0008000102080300L});
+	public static final BitSet FOLLOW_expression_in_atom_exp636 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_atom_exp638 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_value658 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_identifier_in_value662 = new BitSet(new long[]{0x0000000000000002L});
 }

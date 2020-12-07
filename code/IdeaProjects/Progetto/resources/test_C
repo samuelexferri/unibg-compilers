@@ -14,8 +14,8 @@ int vector[] = {'a','a'+c,3*e};
 int vector[] = 'a'+c;
 int vector[] = c;
 
-vector[3]= 4;
-int a = vector[3];
+vector[3] = 4;
+int a = vector[3] + 'a';
 
 int miao (int t){
     int c +=3;
