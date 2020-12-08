@@ -73,7 +73,6 @@ whileStat		: WHILE LPAREN (identifier compare expression) RPAREN codeblock
 forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
 				;
 
-
 type_name		: (K_INT | K_FLOAT | K_CHAR)
 				; 
 				
