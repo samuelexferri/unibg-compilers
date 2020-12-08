@@ -14,16 +14,34 @@ options {
 	
 	void printMsg () {
 		nErrori++;
-		System.out.println("-----------------------> ERRORE! Numero errori Trovati: \t" + nErrori);
+		System.out.println("Numero errori Trovati: \t" + nErrori);
 	}
 }
 
 @header {
 	// package myCompiler;
+
+    import util.*;
+    import java.util.Hashtable;
 }
 
 @members {
-	// int test;
+	  ParserEnvironment env;
+      ParserSemantic sem;
+
+      void init (boolean par, boolean postfissa) {
+        System.out.println("Inizio l'analisi\n");
+        env = new ParserEnvironment(par, postfissa);
+        sem = new ParserSemantic(env);
+      }
+
+      public String getTranslation () {
+        return env.translation.toString();
+      }
+
+      public Hashtable<String, Double> getVariables() {
+        return env.symbolTable;
+      }
 }
 
 

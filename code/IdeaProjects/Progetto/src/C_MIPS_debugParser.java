@@ -1,6 +1,9 @@
-// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g 2020-12-08 16:25:00
+// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g 2020-12-08 16:37:08
 
 	// package myCompiler;
+
+    import util.*;
+    import java.util.Hashtable;
 
 
 import org.antlr.runtime.*;
@@ -91,18 +94,33 @@ public class C_MIPS_debugParser extends Parser {
 	@Override public String getGrammarFileName() { return "C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g"; }
 
 
-		// int test;
+		  ParserEnvironment env;
+	      ParserSemantic sem;
+
+	      void init (boolean par, boolean postfissa) {
+	        System.out.println("Inizio l'analisi\n");
+	        env = new ParserEnvironment(par, postfissa);
+	        sem = new ParserSemantic(env);
+	      }
+
+	      public String getTranslation () {
+	        return env.translation.toString();
+	      }
+
+	      public Hashtable<String, Double> getVariables() {
+	        return env.symbolTable;
+	      }
 
 
 
 	// $ANTLR start "start"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:32:1: start : ( include )* ( global )* EOF ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:1: start : ( include )* ( global )* EOF ;
 	public final void start() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:32:9: ( ( include )* ( global )* EOF )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:32:11: ( include )* ( global )* EOF
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:9: ( ( include )* ( global )* EOF )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:11: ( include )* ( global )* EOF
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:32:11: ( include )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:11: ( include )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -113,7 +131,7 @@ public class C_MIPS_debugParser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:32:11: include
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:11: include
 					{
 					pushFollow(FOLLOW_include_in_start67);
 					include();
@@ -127,7 +145,7 @@ public class C_MIPS_debugParser extends Parser {
 				}
 			}
 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:32:20: ( global )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:20: ( global )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -138,7 +156,7 @@ public class C_MIPS_debugParser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:32:20: global
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:20: global
 					{
 					pushFollow(FOLLOW_global_in_start70);
 					global();
@@ -169,10 +187,10 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "global"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:35:1: global : ( VOID identifier function | ( type_name )? ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) ) );
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:1: global : ( VOID identifier function | ( type_name )? ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) ) );
 	public final void global() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:35:10: ( VOID identifier function | ( type_name )? ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:10: ( VOID identifier function | ( type_name )? ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) ) )
 			int alt8=2;
 			int LA8_0 = input.LA(1);
 			if ( (LA8_0==VOID) ) {
@@ -190,7 +208,7 @@ public class C_MIPS_debugParser extends Parser {
 
 			switch (alt8) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:35:12: VOID identifier function
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:12: VOID identifier function
 					{
 					match(input,VOID,FOLLOW_VOID_in_global92); 
 					System.out.print("VOID ");
@@ -205,9 +223,9 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:36:7: ( type_name )? ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:54:7: ( type_name )? ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) )
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:36:7: ( type_name )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:54:7: ( type_name )?
 					int alt3=2;
 					int LA3_0 = input.LA(1);
 					if ( ((LA3_0 >= K_CHAR && LA3_0 <= K_INT)) ) {
@@ -215,7 +233,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					switch (alt3) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:36:7: type_name
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:54:7: type_name
 							{
 							pushFollow(FOLLOW_type_name_in_global107);
 							type_name();
@@ -226,7 +244,7 @@ public class C_MIPS_debugParser extends Parser {
 
 					}
 
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:36:18: ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:54:18: ( pointer SEMICOL | identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function ) )
 					int alt7=2;
 					int LA7_0 = input.LA(1);
 					if ( (LA7_0==MULT) ) {
@@ -244,7 +262,7 @@ public class C_MIPS_debugParser extends Parser {
 
 					switch (alt7) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:36:20: pointer SEMICOL
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:54:20: pointer SEMICOL
 							{
 							pushFollow(FOLLOW_pointer_in_global112);
 							pointer();
@@ -255,13 +273,13 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:11: identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:11: identifier ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function )
 							{
 							pushFollow(FOLLOW_identifier_in_global128);
 							identifier();
 							state._fsp--;
 
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:22: ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:22: ( ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL ) | function )
 							int alt6=2;
 							int LA6_0 = input.LA(1);
 							if ( (LA6_0==ADD||LA6_0==ASS||LA6_0==COMMA||LA6_0==DIV||LA6_0==LBRACK||LA6_0==MULT||LA6_0==SEMICOL||LA6_0==SUB) ) {
@@ -279,12 +297,12 @@ public class C_MIPS_debugParser extends Parser {
 
 							switch (alt6) {
 								case 1 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:23: ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL )
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:23: ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL )
 									{
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:23: ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL )
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:24: ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:23: ( ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL )
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:24: ( assignment ( COMMA identifier assignment )* | vector ) SEMICOL
 									{
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:24: ( assignment ( COMMA identifier assignment )* | vector )
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:24: ( assignment ( COMMA identifier assignment )* | vector )
 									int alt5=2;
 									int LA5_0 = input.LA(1);
 									if ( (LA5_0==ADD||LA5_0==ASS||LA5_0==COMMA||LA5_0==DIV||LA5_0==MULT||LA5_0==SEMICOL||LA5_0==SUB) ) {
@@ -302,13 +320,13 @@ public class C_MIPS_debugParser extends Parser {
 
 									switch (alt5) {
 										case 1 :
-											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:25: assignment ( COMMA identifier assignment )*
+											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:25: assignment ( COMMA identifier assignment )*
 											{
 											pushFollow(FOLLOW_assignment_in_global133);
 											assignment();
 											state._fsp--;
 
-											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:36: ( COMMA identifier assignment )*
+											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:36: ( COMMA identifier assignment )*
 											loop4:
 											while (true) {
 												int alt4=2;
@@ -319,7 +337,7 @@ public class C_MIPS_debugParser extends Parser {
 
 												switch (alt4) {
 												case 1 :
-													// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:37: COMMA identifier assignment
+													// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:37: COMMA identifier assignment
 													{
 													match(input,COMMA,FOLLOW_COMMA_in_global136); 
 													System.out.print(", ");
@@ -342,7 +360,7 @@ public class C_MIPS_debugParser extends Parser {
 											}
 											break;
 										case 2 :
-											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:37:94: vector
+											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:55:94: vector
 											{
 											pushFollow(FOLLOW_vector_in_global147);
 											vector();
@@ -360,7 +378,7 @@ public class C_MIPS_debugParser extends Parser {
 									}
 									break;
 								case 2 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:38:15: function
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:56:15: function
 									{
 									pushFollow(FOLLOW_function_in_global170);
 									function();
@@ -394,13 +412,13 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "assignment"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:41:1: assignment : ( ( ADD | SUB | MULT | DIV )? ASS expression )? ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:59:1: assignment : ( ( ADD | SUB | MULT | DIV )? ASS expression )? ;
 	public final void assignment() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:41:13: ( ( ( ADD | SUB | MULT | DIV )? ASS expression )? )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:41:15: ( ( ADD | SUB | MULT | DIV )? ASS expression )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:59:13: ( ( ( ADD | SUB | MULT | DIV )? ASS expression )? )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:59:15: ( ( ADD | SUB | MULT | DIV )? ASS expression )?
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:41:15: ( ( ADD | SUB | MULT | DIV )? ASS expression )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:59:15: ( ( ADD | SUB | MULT | DIV )? ASS expression )?
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0==ADD||LA10_0==ASS||LA10_0==DIV||LA10_0==MULT||LA10_0==SUB) ) {
@@ -408,9 +426,9 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt10) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:41:16: ( ADD | SUB | MULT | DIV )? ASS expression
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:59:16: ( ADD | SUB | MULT | DIV )? ASS expression
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:41:16: ( ADD | SUB | MULT | DIV )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:59:16: ( ADD | SUB | MULT | DIV )?
 					int alt9=2;
 					int LA9_0 = input.LA(1);
 					if ( (LA9_0==ADD||LA9_0==DIV||LA9_0==MULT||LA9_0==SUB) ) {
@@ -460,17 +478,17 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "vector"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:1: vector : LBRACK (x= INT )? RBRACK ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )? ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:1: vector : LBRACK (x= INT )? RBRACK ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )? ;
 	public final void vector() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:11: ( LBRACK (x= INT )? RBRACK ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )? )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:13: LBRACK (x= INT )? RBRACK ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:11: ( LBRACK (x= INT )? RBRACK ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )? )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:13: LBRACK (x= INT )? RBRACK ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )?
 			{
 			System.out.print("[vector ");
 			match(input,LBRACK,FOLLOW_LBRACK_in_vector237); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:52: (x= INT )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:52: (x= INT )?
 			int alt11=2;
 			int LA11_0 = input.LA(1);
 			if ( (LA11_0==INT) ) {
@@ -478,7 +496,7 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt11) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:53: x= INT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:53: x= INT
 					{
 					x=(Token)match(input,INT,FOLLOW_INT_in_vector242); 
 					System.out.print("int=" + x.getText());
@@ -489,7 +507,7 @@ public class C_MIPS_debugParser extends Parser {
 
 			match(input,RBRACK,FOLLOW_RBRACK_in_vector248); 
 			System.out.print("] ");
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:137: ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:137: ( ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression ) )?
 			int alt14=2;
 			int LA14_0 = input.LA(1);
 			if ( (LA14_0==ASS) ) {
@@ -497,11 +515,11 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt14) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:138: ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:138: ASS ( ( LCURL expression ( COMMA expression )* RCURL ) | expression )
 					{
 					match(input,ASS,FOLLOW_ASS_in_vector253); 
 					System.out.print("\t-v-> ");
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:173: ( ( LCURL expression ( COMMA expression )* RCURL ) | expression )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:173: ( ( LCURL expression ( COMMA expression )* RCURL ) | expression )
 					int alt13=2;
 					int LA13_0 = input.LA(1);
 					if ( (LA13_0==LCURL) ) {
@@ -519,10 +537,10 @@ public class C_MIPS_debugParser extends Parser {
 
 					switch (alt13) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:174: ( LCURL expression ( COMMA expression )* RCURL )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:174: ( LCURL expression ( COMMA expression )* RCURL )
 							{
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:174: ( LCURL expression ( COMMA expression )* RCURL )
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:175: LCURL expression ( COMMA expression )* RCURL
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:174: ( LCURL expression ( COMMA expression )* RCURL )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:175: LCURL expression ( COMMA expression )* RCURL
 							{
 							System.out.print("{ ");
 							match(input,LCURL,FOLLOW_LCURL_in_vector261); 
@@ -530,7 +548,7 @@ public class C_MIPS_debugParser extends Parser {
 							expression();
 							state._fsp--;
 
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:218: ( COMMA expression )*
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:218: ( COMMA expression )*
 							loop12:
 							while (true) {
 								int alt12=2;
@@ -541,7 +559,7 @@ public class C_MIPS_debugParser extends Parser {
 
 								switch (alt12) {
 								case 1 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:219: COMMA expression
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:219: COMMA expression
 									{
 									match(input,COMMA,FOLLOW_COMMA_in_vector266); 
 									System.out.print(", ");
@@ -564,7 +582,7 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:44:299: expression
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:299: expression
 							{
 							pushFollow(FOLLOW_expression_in_vector281);
 							expression();
@@ -596,11 +614,11 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "pointer"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:47:1: pointer : MULT identifier ( ASS expression )? ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:65:1: pointer : MULT identifier ( ASS expression )? ;
 	public final void pointer() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:47:11: ( MULT identifier ( ASS expression )? )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:47:13: MULT identifier ( ASS expression )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:65:11: ( MULT identifier ( ASS expression )? )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:65:13: MULT identifier ( ASS expression )?
 			{
 			match(input,MULT,FOLLOW_MULT_in_pointer304); 
 			System.out.print("* ");
@@ -608,7 +626,7 @@ public class C_MIPS_debugParser extends Parser {
 			identifier();
 			state._fsp--;
 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:47:55: ( ASS expression )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:65:55: ( ASS expression )?
 			int alt15=2;
 			int LA15_0 = input.LA(1);
 			if ( (LA15_0==ASS) ) {
@@ -616,7 +634,7 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt15) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:47:56: ASS expression
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:65:56: ASS expression
 					{
 					match(input,ASS,FOLLOW_ASS_in_pointer311); 
 					System.out.print("\t-p-> ");
@@ -645,16 +663,16 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "function"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:1: function : LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:68:1: function : LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock ;
 	public final void function() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:12: ( LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:14: LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:68:12: ( LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:68:14: LPAREN ( type_name identifier ( COMMA type_name identifier )* )? RPAREN codeblock
 			{
 			System.out.print("FUNCTION ");
 			match(input,LPAREN,FOLLOW_LPAREN_in_function340); 
 			System.out.print("( ");
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:80: ( type_name identifier ( COMMA type_name identifier )* )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:68:80: ( type_name identifier ( COMMA type_name identifier )* )?
 			int alt17=2;
 			int LA17_0 = input.LA(1);
 			if ( ((LA17_0 >= K_CHAR && LA17_0 <= K_INT)) ) {
@@ -662,7 +680,7 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt17) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:81: type_name identifier ( COMMA type_name identifier )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:68:81: type_name identifier ( COMMA type_name identifier )*
 					{
 					pushFollow(FOLLOW_type_name_in_function345);
 					type_name();
@@ -672,7 +690,7 @@ public class C_MIPS_debugParser extends Parser {
 					identifier();
 					state._fsp--;
 
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:102: ( COMMA type_name identifier )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:68:102: ( COMMA type_name identifier )*
 					loop16:
 					while (true) {
 						int alt16=2;
@@ -683,7 +701,7 @@ public class C_MIPS_debugParser extends Parser {
 
 						switch (alt16) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:50:103: COMMA type_name identifier
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:68:103: COMMA type_name identifier
 							{
 							match(input,COMMA,FOLLOW_COMMA_in_function350); 
 							System.out.print(", ");
@@ -730,16 +748,16 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "call_function"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:1: call_function : LPAREN ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )? RPAREN ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:1: call_function : LPAREN ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )? RPAREN ;
 	public final void call_function() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:16: ( LPAREN ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )? RPAREN )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:18: LPAREN ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )? RPAREN
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:16: ( LPAREN ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )? RPAREN )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:18: LPAREN ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )? RPAREN
 			{
 			System.out.print("CALL_FUNCTION ");
 			match(input,LPAREN,FOLLOW_LPAREN_in_call_function382); 
 			System.out.print("( ");
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:89: ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:89: ( ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )* )?
 			int alt25=2;
 			int LA25_0 = input.LA(1);
 			if ( (LA25_0==CHAR||LA25_0==D_QUOTE||LA25_0==MULT||LA25_0==WORD) ) {
@@ -747,9 +765,9 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt25) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:90: ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:90: ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )*
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:90: ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:90: ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier )
 					int alt20=2;
 					int LA20_0 = input.LA(1);
 					if ( (LA20_0==D_QUOTE) ) {
@@ -767,13 +785,13 @@ public class C_MIPS_debugParser extends Parser {
 
 					switch (alt20) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:91: ( D_QUOTE ( anything )* D_QUOTE )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:91: ( D_QUOTE ( anything )* D_QUOTE )
 							{
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:91: ( D_QUOTE ( anything )* D_QUOTE )
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:92: D_QUOTE ( anything )* D_QUOTE
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:91: ( D_QUOTE ( anything )* D_QUOTE )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:92: D_QUOTE ( anything )* D_QUOTE
 							{
 							match(input,D_QUOTE,FOLLOW_D_QUOTE_in_call_function389); 
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:100: ( anything )*
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:100: ( anything )*
 							loop18:
 							while (true) {
 								int alt18=2;
@@ -784,7 +802,7 @@ public class C_MIPS_debugParser extends Parser {
 
 								switch (alt18) {
 								case 1 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:100: anything
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:100: anything
 									{
 									pushFollow(FOLLOW_anything_in_call_function391);
 									anything();
@@ -804,9 +822,9 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:121: ( MULT )? identifier
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:121: ( MULT )? identifier
 							{
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:121: ( MULT )?
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:121: ( MULT )?
 							int alt19=2;
 							int LA19_0 = input.LA(1);
 							if ( (LA19_0==MULT) ) {
@@ -814,7 +832,7 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							switch (alt19) {
 								case 1 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:121: MULT
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:121: MULT
 									{
 									match(input,MULT,FOLLOW_MULT_in_call_function399); 
 									}
@@ -831,7 +849,7 @@ public class C_MIPS_debugParser extends Parser {
 
 					}
 
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:139: ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:139: ( COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier ) )*
 					loop24:
 					while (true) {
 						int alt24=2;
@@ -842,10 +860,10 @@ public class C_MIPS_debugParser extends Parser {
 
 						switch (alt24) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:140: COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:140: COMMA ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier )
 							{
 							match(input,COMMA,FOLLOW_COMMA_in_call_function406); 
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:146: ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:146: ( ( D_QUOTE ( anything )* D_QUOTE ) | ( MULT )? identifier )
 							int alt23=2;
 							int LA23_0 = input.LA(1);
 							if ( (LA23_0==D_QUOTE) ) {
@@ -863,13 +881,13 @@ public class C_MIPS_debugParser extends Parser {
 
 							switch (alt23) {
 								case 1 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:147: ( D_QUOTE ( anything )* D_QUOTE )
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:147: ( D_QUOTE ( anything )* D_QUOTE )
 									{
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:147: ( D_QUOTE ( anything )* D_QUOTE )
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:148: D_QUOTE ( anything )* D_QUOTE
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:147: ( D_QUOTE ( anything )* D_QUOTE )
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:148: D_QUOTE ( anything )* D_QUOTE
 									{
 									match(input,D_QUOTE,FOLLOW_D_QUOTE_in_call_function410); 
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:156: ( anything )*
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:156: ( anything )*
 									loop21:
 									while (true) {
 										int alt21=2;
@@ -880,7 +898,7 @@ public class C_MIPS_debugParser extends Parser {
 
 										switch (alt21) {
 										case 1 :
-											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:156: anything
+											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:156: anything
 											{
 											pushFollow(FOLLOW_anything_in_call_function412);
 											anything();
@@ -900,9 +918,9 @@ public class C_MIPS_debugParser extends Parser {
 									}
 									break;
 								case 2 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:177: ( MULT )? identifier
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:177: ( MULT )? identifier
 									{
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:177: ( MULT )?
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:177: ( MULT )?
 									int alt22=2;
 									int LA22_0 = input.LA(1);
 									if ( (LA22_0==MULT) ) {
@@ -910,7 +928,7 @@ public class C_MIPS_debugParser extends Parser {
 									}
 									switch (alt22) {
 										case 1 :
-											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:53:177: MULT
+											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:71:177: MULT
 											{
 											match(input,MULT,FOLLOW_MULT_in_call_function420); 
 											}
@@ -958,10 +976,10 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "codeblock"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:56:1: codeblock : ( LCURL ( statement )* RCURL | SEMICOL );
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:74:1: codeblock : ( LCURL ( statement )* RCURL | SEMICOL );
 	public final void codeblock() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:56:13: ( LCURL ( statement )* RCURL | SEMICOL )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:74:13: ( LCURL ( statement )* RCURL | SEMICOL )
 			int alt27=2;
 			int LA27_0 = input.LA(1);
 			if ( (LA27_0==LCURL) ) {
@@ -979,12 +997,12 @@ public class C_MIPS_debugParser extends Parser {
 
 			switch (alt27) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:56:15: LCURL ( statement )* RCURL
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:74:15: LCURL ( statement )* RCURL
 					{
 					System.out.print("\n");
 					System.out.print("{\n");
 					match(input,LCURL,FOLLOW_LCURL_in_codeblock455); 
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:56:74: ( statement )*
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:74:74: ( statement )*
 					loop26:
 					while (true) {
 						int alt26=2;
@@ -995,7 +1013,7 @@ public class C_MIPS_debugParser extends Parser {
 
 						switch (alt26) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:56:75: statement
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:74:75: statement
 							{
 							pushFollow(FOLLOW_statement_in_codeblock458);
 							statement();
@@ -1014,7 +1032,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:57:10: SEMICOL
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:75:10: SEMICOL
 					{
 					match(input,SEMICOL,FOLLOW_SEMICOL_in_codeblock476); 
 					System.out.print("\n");
@@ -1036,10 +1054,10 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "statement"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:1: statement : ( ( type_name )? ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer ) SEMICOL | ifStat | whileStat | forStat | RETURN atom_exp SEMICOL );
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:1: statement : ( ( type_name )? ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer ) SEMICOL | ifStat | whileStat | forStat | RETURN atom_exp SEMICOL );
 	public final void statement() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:13: ( ( type_name )? ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer ) SEMICOL | ifStat | whileStat | forStat | RETURN atom_exp SEMICOL )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:13: ( ( type_name )? ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer ) SEMICOL | ifStat | whileStat | forStat | RETURN atom_exp SEMICOL )
 			int alt32=5;
 			switch ( input.LA(1) ) {
 			case CHAR:
@@ -1079,9 +1097,9 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt32) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:15: ( type_name )? ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer ) SEMICOL
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:15: ( type_name )? ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer ) SEMICOL
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:15: ( type_name )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:15: ( type_name )?
 					int alt28=2;
 					int LA28_0 = input.LA(1);
 					if ( ((LA28_0 >= K_CHAR && LA28_0 <= K_INT)) ) {
@@ -1089,7 +1107,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					switch (alt28) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:15: type_name
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:15: type_name
 							{
 							pushFollow(FOLLOW_type_name_in_statement494);
 							type_name();
@@ -1100,7 +1118,7 @@ public class C_MIPS_debugParser extends Parser {
 
 					}
 
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:26: ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:26: ( identifier ( assignment ( COMMA identifier assignment )* | call_function | vector ) | pointer )
 					int alt31=2;
 					int LA31_0 = input.LA(1);
 					if ( (LA31_0==CHAR||LA31_0==WORD) ) {
@@ -1118,13 +1136,13 @@ public class C_MIPS_debugParser extends Parser {
 
 					switch (alt31) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:27: identifier ( assignment ( COMMA identifier assignment )* | call_function | vector )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:27: identifier ( assignment ( COMMA identifier assignment )* | call_function | vector )
 							{
 							pushFollow(FOLLOW_identifier_in_statement498);
 							identifier();
 							state._fsp--;
 
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:38: ( assignment ( COMMA identifier assignment )* | call_function | vector )
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:38: ( assignment ( COMMA identifier assignment )* | call_function | vector )
 							int alt30=3;
 							switch ( input.LA(1) ) {
 							case ADD:
@@ -1155,13 +1173,13 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							switch (alt30) {
 								case 1 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:39: assignment ( COMMA identifier assignment )*
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:39: assignment ( COMMA identifier assignment )*
 									{
 									pushFollow(FOLLOW_assignment_in_statement501);
 									assignment();
 									state._fsp--;
 
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:50: ( COMMA identifier assignment )*
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:50: ( COMMA identifier assignment )*
 									loop29:
 									while (true) {
 										int alt29=2;
@@ -1172,7 +1190,7 @@ public class C_MIPS_debugParser extends Parser {
 
 										switch (alt29) {
 										case 1 :
-											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:51: COMMA identifier assignment
+											// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:51: COMMA identifier assignment
 											{
 											match(input,COMMA,FOLLOW_COMMA_in_statement504); 
 											System.out.print(", ");
@@ -1195,7 +1213,7 @@ public class C_MIPS_debugParser extends Parser {
 									}
 									break;
 								case 2 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:109: call_function
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:109: call_function
 									{
 									pushFollow(FOLLOW_call_function_in_statement516);
 									call_function();
@@ -1204,7 +1222,7 @@ public class C_MIPS_debugParser extends Parser {
 									}
 									break;
 								case 3 :
-									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:125: vector
+									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:125: vector
 									{
 									pushFollow(FOLLOW_vector_in_statement520);
 									vector();
@@ -1218,7 +1236,7 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:60:135: pointer
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:78:135: pointer
 							{
 							pushFollow(FOLLOW_pointer_in_statement525);
 							pointer();
@@ -1234,7 +1252,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:61:7: ifStat
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:79:7: ifStat
 					{
 					pushFollow(FOLLOW_ifStat_in_statement538);
 					ifStat();
@@ -1243,7 +1261,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					break;
 				case 3 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:62:7: whileStat
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:80:7: whileStat
 					{
 					pushFollow(FOLLOW_whileStat_in_statement546);
 					whileStat();
@@ -1252,7 +1270,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					break;
 				case 4 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:63:7: forStat
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:81:7: forStat
 					{
 					pushFollow(FOLLOW_forStat_in_statement554);
 					forStat();
@@ -1261,7 +1279,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					break;
 				case 5 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:64:9: RETURN atom_exp SEMICOL
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:9: RETURN atom_exp SEMICOL
 					{
 					System.out.print("return ");
 					match(input,RETURN,FOLLOW_RETURN_in_statement567); 
@@ -1289,18 +1307,18 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "ifStat"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:1: ifStat : IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:1: ifStat : IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? ;
 	public final void ifStat() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:10: ( IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:12: IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:10: ( IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:12: IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )?
 			{
 			System.out.print("IF ");
 			match(input,IF,FOLLOW_IF_in_ifStat598); 
 			System.out.print("( ");
 			match(input,LPAREN,FOLLOW_LPAREN_in_ifStat602); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:75: ( identifier compare expression )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:76: identifier compare expression
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:75: ( identifier compare expression )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:76: identifier compare expression
 			{
 			pushFollow(FOLLOW_identifier_in_ifStat605);
 			identifier();
@@ -1322,7 +1340,7 @@ public class C_MIPS_debugParser extends Parser {
 			codeblock();
 			state._fsp--;
 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:150: ( ELSE ( codeblock | ifStat | whileStat ) )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:150: ( ELSE ( codeblock | ifStat | whileStat ) )?
 			int alt34=2;
 			int LA34_0 = input.LA(1);
 			if ( (LA34_0==ELSE) ) {
@@ -1330,11 +1348,11 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt34) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:151: ELSE ( codeblock | ifStat | whileStat )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:151: ELSE ( codeblock | ifStat | whileStat )
 					{
 					match(input,ELSE,FOLLOW_ELSE_in_ifStat619); 
 					System.out.print("ELSE ");
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:184: ( codeblock | ifStat | whileStat )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:184: ( codeblock | ifStat | whileStat )
 					int alt33=3;
 					switch ( input.LA(1) ) {
 					case LCURL:
@@ -1360,7 +1378,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					switch (alt33) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:185: codeblock
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:185: codeblock
 							{
 							pushFollow(FOLLOW_codeblock_in_ifStat623);
 							codeblock();
@@ -1369,7 +1387,7 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:197: ifStat
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:197: ifStat
 							{
 							pushFollow(FOLLOW_ifStat_in_ifStat627);
 							ifStat();
@@ -1378,7 +1396,7 @@ public class C_MIPS_debugParser extends Parser {
 							}
 							break;
 						case 3 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:67:206: whileStat
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:206: whileStat
 							{
 							pushFollow(FOLLOW_whileStat_in_ifStat631);
 							whileStat();
@@ -1410,18 +1428,18 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "whileStat"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:70:1: whileStat : WHILE LPAREN ( identifier compare expression ) RPAREN codeblock ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:1: whileStat : WHILE LPAREN ( identifier compare expression ) RPAREN codeblock ;
 	public final void whileStat() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:70:12: ( WHILE LPAREN ( identifier compare expression ) RPAREN codeblock )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:70:14: WHILE LPAREN ( identifier compare expression ) RPAREN codeblock
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:12: ( WHILE LPAREN ( identifier compare expression ) RPAREN codeblock )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:14: WHILE LPAREN ( identifier compare expression ) RPAREN codeblock
 			{
 			System.out.print("WHILE ");
 			match(input,WHILE,FOLLOW_WHILE_in_whileStat657); 
 			System.out.print("( ");
 			match(input,LPAREN,FOLLOW_LPAREN_in_whileStat661); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:70:83: ( identifier compare expression )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:70:84: identifier compare expression
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:83: ( identifier compare expression )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:84: identifier compare expression
 			{
 			pushFollow(FOLLOW_identifier_in_whileStat664);
 			identifier();
@@ -1459,20 +1477,20 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "forStat"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:1: forStat : FOR LPAREN ( ( type_name )? identifier ASS expression ) SEMICOL ( identifier compare expression ) SEMICOL ( identifier compare expression ) RPAREN codeblock ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:1: forStat : FOR LPAREN ( ( type_name )? identifier ASS expression ) SEMICOL ( identifier compare expression ) SEMICOL ( identifier compare expression ) RPAREN codeblock ;
 	public final void forStat() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:11: ( FOR LPAREN ( ( type_name )? identifier ASS expression ) SEMICOL ( identifier compare expression ) SEMICOL ( identifier compare expression ) RPAREN codeblock )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:13: FOR LPAREN ( ( type_name )? identifier ASS expression ) SEMICOL ( identifier compare expression ) SEMICOL ( identifier compare expression ) RPAREN codeblock
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:11: ( FOR LPAREN ( ( type_name )? identifier ASS expression ) SEMICOL ( identifier compare expression ) SEMICOL ( identifier compare expression ) RPAREN codeblock )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:13: FOR LPAREN ( ( type_name )? identifier ASS expression ) SEMICOL ( identifier compare expression ) SEMICOL ( identifier compare expression ) RPAREN codeblock
 			{
 			System.out.print("FOR ");
 			match(input,FOR,FOLLOW_FOR_in_forStat697); 
 			System.out.print("( ");
 			match(input,LPAREN,FOLLOW_LPAREN_in_forStat701); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:78: ( ( type_name )? identifier ASS expression )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:79: ( type_name )? identifier ASS expression
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:78: ( ( type_name )? identifier ASS expression )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:79: ( type_name )? identifier ASS expression
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:79: ( type_name )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:79: ( type_name )?
 			int alt35=2;
 			int LA35_0 = input.LA(1);
 			if ( ((LA35_0 >= K_CHAR && LA35_0 <= K_INT)) ) {
@@ -1480,7 +1498,7 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt35) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:79: type_name
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:79: type_name
 					{
 					pushFollow(FOLLOW_type_name_in_forStat704);
 					type_name();
@@ -1504,8 +1522,8 @@ public class C_MIPS_debugParser extends Parser {
 
 			System.out.print("; ");
 			match(input,SEMICOL,FOLLOW_SEMICOL_in_forStat716); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:151: ( identifier compare expression )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:152: identifier compare expression
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:151: ( identifier compare expression )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:152: identifier compare expression
 			{
 			pushFollow(FOLLOW_identifier_in_forStat719);
 			identifier();
@@ -1523,8 +1541,8 @@ public class C_MIPS_debugParser extends Parser {
 
 			System.out.print("; ");
 			match(input,SEMICOL,FOLLOW_SEMICOL_in_forStat728); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:217: ( identifier compare expression )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:73:218: identifier compare expression
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:217: ( identifier compare expression )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:218: identifier compare expression
 			{
 			pushFollow(FOLLOW_identifier_in_forStat731);
 			identifier();
@@ -1562,15 +1580,15 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "type_name"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:76:1: type_name : (x= K_INT |x= K_FLOAT |x= K_CHAR ) ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:94:1: type_name : (x= K_INT |x= K_FLOAT |x= K_CHAR ) ;
 	public final void type_name() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:76:12: ( (x= K_INT |x= K_FLOAT |x= K_CHAR ) )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:76:14: (x= K_INT |x= K_FLOAT |x= K_CHAR )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:94:12: ( (x= K_INT |x= K_FLOAT |x= K_CHAR ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:94:14: (x= K_INT |x= K_FLOAT |x= K_CHAR )
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:76:14: (x= K_INT |x= K_FLOAT |x= K_CHAR )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:94:14: (x= K_INT |x= K_FLOAT |x= K_CHAR )
 			int alt36=3;
 			switch ( input.LA(1) ) {
 			case K_INT:
@@ -1595,19 +1613,19 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt36) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:76:15: x= K_INT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:94:15: x= K_INT
 					{
 					x=(Token)match(input,K_INT,FOLLOW_K_INT_in_type_name760); 
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:76:25: x= K_FLOAT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:94:25: x= K_FLOAT
 					{
 					x=(Token)match(input,K_FLOAT,FOLLOW_K_FLOAT_in_type_name766); 
 					}
 					break;
 				case 3 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:76:37: x= K_CHAR
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:94:37: x= K_CHAR
 					{
 					x=(Token)match(input,K_CHAR,FOLLOW_K_CHAR_in_type_name772); 
 					}
@@ -1632,15 +1650,15 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "identifier"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:79:1: identifier : (x= WORD |x= CHAR ) ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:97:1: identifier : (x= WORD |x= CHAR ) ;
 	public final void identifier() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:79:13: ( (x= WORD |x= CHAR ) )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:79:15: (x= WORD |x= CHAR )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:97:13: ( (x= WORD |x= CHAR ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:97:15: (x= WORD |x= CHAR )
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:79:15: (x= WORD |x= CHAR )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:97:15: (x= WORD |x= CHAR )
 			int alt37=2;
 			int LA37_0 = input.LA(1);
 			if ( (LA37_0==WORD) ) {
@@ -1658,13 +1676,13 @@ public class C_MIPS_debugParser extends Parser {
 
 			switch (alt37) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:79:16: x= WORD
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:97:16: x= WORD
 					{
 					x=(Token)match(input,WORD,FOLLOW_WORD_in_identifier796); 
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:79:25: x= CHAR
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:97:25: x= CHAR
 					{
 					x=(Token)match(input,CHAR,FOLLOW_CHAR_in_identifier802); 
 					}
@@ -1689,19 +1707,19 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "expression"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:1: expression : multiply_exp ( (x= ADD |x= SUB ) multiply_exp )* ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:1: expression : multiply_exp ( (x= ADD |x= SUB ) multiply_exp )* ;
 	public final void expression() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:14: ( multiply_exp ( (x= ADD |x= SUB ) multiply_exp )* )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:16: multiply_exp ( (x= ADD |x= SUB ) multiply_exp )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:14: ( multiply_exp ( (x= ADD |x= SUB ) multiply_exp )* )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:16: multiply_exp ( (x= ADD |x= SUB ) multiply_exp )*
 			{
 			pushFollow(FOLLOW_multiply_exp_in_expression819);
 			multiply_exp();
 			state._fsp--;
 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:29: ( (x= ADD |x= SUB ) multiply_exp )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:29: ( (x= ADD |x= SUB ) multiply_exp )*
 			loop39:
 			while (true) {
 				int alt39=2;
@@ -1712,9 +1730,9 @@ public class C_MIPS_debugParser extends Parser {
 
 				switch (alt39) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:30: (x= ADD |x= SUB ) multiply_exp
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:30: (x= ADD |x= SUB ) multiply_exp
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:30: (x= ADD |x= SUB )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:30: (x= ADD |x= SUB )
 					int alt38=2;
 					int LA38_0 = input.LA(1);
 					if ( (LA38_0==ADD) ) {
@@ -1732,13 +1750,13 @@ public class C_MIPS_debugParser extends Parser {
 
 					switch (alt38) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:31: x= ADD
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:31: x= ADD
 							{
 							x=(Token)match(input,ADD,FOLLOW_ADD_in_expression825); 
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:82:39: x= SUB
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:100:39: x= SUB
 							{
 							x=(Token)match(input,SUB,FOLLOW_SUB_in_expression831); 
 							}
@@ -1775,19 +1793,19 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "multiply_exp"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:1: multiply_exp : atom_exp ( (x= MULT |x= DIV ) atom_exp )* ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:1: multiply_exp : atom_exp ( (x= MULT |x= DIV ) atom_exp )* ;
 	public final void multiply_exp() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:15: ( atom_exp ( (x= MULT |x= DIV ) atom_exp )* )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:17: atom_exp ( (x= MULT |x= DIV ) atom_exp )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:15: ( atom_exp ( (x= MULT |x= DIV ) atom_exp )* )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:17: atom_exp ( (x= MULT |x= DIV ) atom_exp )*
 			{
 			pushFollow(FOLLOW_atom_exp_in_multiply_exp860);
 			atom_exp();
 			state._fsp--;
 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:26: ( (x= MULT |x= DIV ) atom_exp )*
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:26: ( (x= MULT |x= DIV ) atom_exp )*
 			loop41:
 			while (true) {
 				int alt41=2;
@@ -1798,9 +1816,9 @@ public class C_MIPS_debugParser extends Parser {
 
 				switch (alt41) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:27: (x= MULT |x= DIV ) atom_exp
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:27: (x= MULT |x= DIV ) atom_exp
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:27: (x= MULT |x= DIV )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:27: (x= MULT |x= DIV )
 					int alt40=2;
 					int LA40_0 = input.LA(1);
 					if ( (LA40_0==MULT) ) {
@@ -1818,13 +1836,13 @@ public class C_MIPS_debugParser extends Parser {
 
 					switch (alt40) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:28: x= MULT
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:28: x= MULT
 							{
 							x=(Token)match(input,MULT,FOLLOW_MULT_in_multiply_exp866); 
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:85:35: x= DIV
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:103:35: x= DIV
 							{
 							x=(Token)match(input,DIV,FOLLOW_DIV_in_multiply_exp870); 
 							}
@@ -1861,12 +1879,12 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "atom_exp"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:1: atom_exp : (x= INT |x= FLOAT |x= CHAR_QUOTE | ( MULT | AMP )? identifier ( LBRACK INT RBRACK )? | LPAREN expression RPAREN );
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:106:1: atom_exp : (x= INT |x= FLOAT |x= CHAR_QUOTE | ( MULT | AMP )? identifier ( LBRACK INT RBRACK )? | LPAREN expression RPAREN );
 	public final void atom_exp() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:12: (x= INT |x= FLOAT |x= CHAR_QUOTE | ( MULT | AMP )? identifier ( LBRACK INT RBRACK )? | LPAREN expression RPAREN )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:106:12: (x= INT |x= FLOAT |x= CHAR_QUOTE | ( MULT | AMP )? identifier ( LBRACK INT RBRACK )? | LPAREN expression RPAREN )
 			int alt44=5;
 			switch ( input.LA(1) ) {
 			case INT:
@@ -1904,30 +1922,30 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt44) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:88:14: x= INT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:106:14: x= INT
 					{
 					x=(Token)match(input,INT,FOLLOW_INT_in_atom_exp897); 
 					System.out.print("int=" + x.getText() + " ");
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:89:7: x= FLOAT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:107:7: x= FLOAT
 					{
 					x=(Token)match(input,FLOAT,FOLLOW_FLOAT_in_atom_exp909); 
 					System.out.print("float=" + x.getText() + " ");
 					}
 					break;
 				case 3 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:90:7: x= CHAR_QUOTE
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:108:7: x= CHAR_QUOTE
 					{
 					x=(Token)match(input,CHAR_QUOTE,FOLLOW_CHAR_QUOTE_in_atom_exp921); 
 					System.out.print("char_quote=" + x.getText() + " ");
 					}
 					break;
 				case 4 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:7: ( MULT | AMP )? identifier ( LBRACK INT RBRACK )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:109:7: ( MULT | AMP )? identifier ( LBRACK INT RBRACK )?
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:7: ( MULT | AMP )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:109:7: ( MULT | AMP )?
 					int alt42=3;
 					int LA42_0 = input.LA(1);
 					if ( (LA42_0==MULT) ) {
@@ -1938,14 +1956,14 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					switch (alt42) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:8: MULT
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:109:8: MULT
 							{
 							match(input,MULT,FOLLOW_MULT_in_atom_exp932); 
 							System.out.print("* ");
 							}
 							break;
 						case 2 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:41: AMP
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:109:41: AMP
 							{
 							match(input,AMP,FOLLOW_AMP_in_atom_exp938); 
 							System.out.print("& ");
@@ -1958,7 +1976,7 @@ public class C_MIPS_debugParser extends Parser {
 					identifier();
 					state._fsp--;
 
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:84: ( LBRACK INT RBRACK )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:109:84: ( LBRACK INT RBRACK )?
 					int alt43=2;
 					int LA43_0 = input.LA(1);
 					if ( (LA43_0==LBRACK) ) {
@@ -1966,7 +1984,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					switch (alt43) {
 						case 1 :
-							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:91:85: LBRACK INT RBRACK
+							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:109:85: LBRACK INT RBRACK
 							{
 							match(input,LBRACK,FOLLOW_LBRACK_in_atom_exp947); 
 							match(input,INT,FOLLOW_INT_in_atom_exp949); 
@@ -1979,7 +1997,7 @@ public class C_MIPS_debugParser extends Parser {
 					}
 					break;
 				case 5 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:92:10: LPAREN expression RPAREN
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:110:10: LPAREN expression RPAREN
 					{
 					match(input,LPAREN,FOLLOW_LPAREN_in_atom_exp965); 
 					System.out.print("( ");
@@ -2007,13 +2025,13 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "anything"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:95:1: anything : x= ( INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS ) ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:113:1: anything : x= ( INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS ) ;
 	public final void anything() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:95:11: (x= ( INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS ) )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:95:13: x= ( INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:113:11: (x= ( INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:113:13: x= ( INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS )
 			{
 			x=input.LT(1);
 			if ( (input.LA(1) >= ADD && input.LA(1) <= AMP)||(input.LA(1) >= ASS && input.LA(1) <= CHAR)||input.LA(1)==DIV||(input.LA(1) >= FLOAT && input.LA(1) <= FOR)||(input.LA(1) >= HASHTAG && input.LA(1) <= IF)||input.LA(1)==INT||input.LA(1)==MULT||input.LA(1)==PERC||(input.LA(1) >= SPACE && input.LA(1) <= SUB)||(input.LA(1) >= WHILE && input.LA(1) <= WS) ) {
@@ -2041,15 +2059,15 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "compare"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:1: compare : (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) ) ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:1: compare : (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) ) ;
 	public final void compare() throws RecognitionException {
 		Token x=null;
 
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:11: ( (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) ) )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:13: (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:11: ( (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:13: (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) )
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:13: (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:13: (x= EQ |x= NEQ |x= LT |x= GT |x= LE |x= GE | ( ( ADD | SUB | MULT | DIV )? x= ASS ) )
 			int alt46=7;
 			switch ( input.LA(1) ) {
 			case EQ:
@@ -2098,48 +2116,48 @@ public class C_MIPS_debugParser extends Parser {
 			}
 			switch (alt46) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:14: x= EQ
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:14: x= EQ
 					{
 					x=(Token)match(input,EQ,FOLLOW_EQ_in_compare1084); 
 					}
 					break;
 				case 2 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:21: x= NEQ
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:21: x= NEQ
 					{
 					x=(Token)match(input,NEQ,FOLLOW_NEQ_in_compare1090); 
 					}
 					break;
 				case 3 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:29: x= LT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:29: x= LT
 					{
 					x=(Token)match(input,LT,FOLLOW_LT_in_compare1096); 
 					}
 					break;
 				case 4 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:36: x= GT
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:36: x= GT
 					{
 					x=(Token)match(input,GT,FOLLOW_GT_in_compare1102); 
 					}
 					break;
 				case 5 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:43: x= LE
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:43: x= LE
 					{
 					x=(Token)match(input,LE,FOLLOW_LE_in_compare1108); 
 					}
 					break;
 				case 6 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:50: x= GE
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:50: x= GE
 					{
 					x=(Token)match(input,GE,FOLLOW_GE_in_compare1114); 
 					}
 					break;
 				case 7 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:57: ( ( ADD | SUB | MULT | DIV )? x= ASS )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:57: ( ( ADD | SUB | MULT | DIV )? x= ASS )
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:57: ( ( ADD | SUB | MULT | DIV )? x= ASS )
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:58: ( ADD | SUB | MULT | DIV )? x= ASS
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:57: ( ( ADD | SUB | MULT | DIV )? x= ASS )
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:58: ( ADD | SUB | MULT | DIV )? x= ASS
 					{
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:98:58: ( ADD | SUB | MULT | DIV )?
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:116:58: ( ADD | SUB | MULT | DIV )?
 					int alt45=2;
 					int LA45_0 = input.LA(1);
 					if ( (LA45_0==ADD||LA45_0==DIV||LA45_0==MULT||LA45_0==SUB) ) {
@@ -2187,11 +2205,11 @@ public class C_MIPS_debugParser extends Parser {
 
 
 	// $ANTLR start "include"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:101:1: include : INCLUDE ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:119:1: include : INCLUDE ;
 	public final void include() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:101:11: ( INCLUDE )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:101:13: INCLUDE
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:119:11: ( INCLUDE )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_debug.g:119:13: INCLUDE
 			{
 			match(input,INCLUDE,FOLLOW_INCLUDE_in_include1158); 
 			System.out.println("INCLUDE");
