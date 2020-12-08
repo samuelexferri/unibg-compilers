@@ -1,4 +1,4 @@
-grammar C_MIPS;
+grammar C_MIPS_debug;
 
 options {
 	language = Java;
@@ -38,7 +38,7 @@ global			: VOID identifier function
 										  | function))
 				;
 				
-assignment		: ((ADD | SUB | MULT | DIV)? ASS {System.out.print("Assegnamento ") ;} expression )? // ASS OPZ, Gestisce anche l'indirizzo puntato
+assignment		: ((ADD | SUB | MULT | DIV)? ASS {System.out.print("Assegnamento ");} expression)? // ASS OPZ, Gestisce anche l'indirizzo puntato
 				;
 				
 vector 			: LBRACK INT? RBRACK (ASS ((LCURL expression (COMMA expression)* RCURL) | expression))? // ASS OPZ
@@ -64,19 +64,14 @@ statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* 
 			  	| RETURN atom_exp SEMICOL {System.out.println("Return");}
 			  	;
 			  	
-ifStat			: IF LPAREN (identifier compare expression) RPAREN codeblock 
-			  (ELSE {System.out.println("Else");}(codeblock | ifStat | whileStat))? // TODO: Operatori logici
-				
+ifStat			: IF LPAREN (identifier compare expression) RPAREN codeblock (ELSE {System.out.println("Else");}(codeblock | ifStat | whileStat))? // TODO: Operatori logici
 				;
 						
 whileStat		: WHILE LPAREN (identifier compare expression) RPAREN codeblock 
-				
 				;
 				
 forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
-				
 				;
-
 
 type_name		: (x=K_INT | x=K_FLOAT | x=K_CHAR){System.out.println("Type_name:\t" + $x.getText());}
 				; 
@@ -84,18 +79,16 @@ type_name		: (x=K_INT | x=K_FLOAT | x=K_CHAR){System.out.println("Type_name:\t" 
 identifier		: (x=WORD | x=CHAR){System.out.println("Identifier:\t" + $x.getText());}
 				;
 
-expression 		: multiply_exp ((x=ADD | x=SUB) {System.out.print("expression:\t" + $x.getText());}
-			 multiply_exp)* 
+expression 		: multiply_exp ((x=ADD | x=SUB) {System.out.print("expression:\t" + $x.getText());} multiply_exp)* 
     			;
     
-multiply_exp 		: atom_exp ((x=MULT|x=DIV) {System.out.println("Multiply_exp:\t" + $x.getText());}
-		  	atom_exp)*
+multiply_exp 	: atom_exp ((x=MULT|x=DIV) {System.out.println("Multiply_exp:\t" + $x.getText());} atom_exp)*
     			;
 
 atom_exp 		: x=INT {System.out.println("int:\t" + $x.getText());}
-			| x=FLOAT  {System.out.println("float:\t" + $x.getText());}
-			| CHAR_QUOTE {System.out.println("If");}
-			| (MULT | AMP)? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
+				| x=FLOAT  {System.out.println("float:\t" + $x.getText());}
+				| CHAR_QUOTE {System.out.println("If");}
+				| (MULT | AMP)? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
     			| LPAREN {System.out.print("Aperta tonda ");} expression RPAREN {System.out.println(" Chiusa tonda");}
     			;
 				
@@ -105,9 +98,7 @@ anything		: INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | 
 compare			: x=EQ | x=NEQ | x=LT | x=GT | x=LE | x=GE | ((ADD | SUB | MULT | DIV)? x=ASS) {System.out.print("Compare:\t" + $x.getText());} // TODO: ASS negli If
 				;
 
-include 		:INCLUDE
-			{ System.out.print ("Include Instrucion\n"); }
-			;			
+include 		: INCLUDE {System.out.print ("Include Instrucion\n");} ;			
 
 
 // LEXER
