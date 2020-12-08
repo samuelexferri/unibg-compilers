@@ -29,16 +29,22 @@ options {
 
 
 // PARSER
-start			: INCLUDE? ( VOID identifier function | type_name? (puntator SEMICOL | identifier ((((variable_ass? (COMMA identifier variable_ass?)*) | vector) SEMICOL) | function)))* EOF
-				;
-
-variable_ass 	: ASS (expression | AMP identifier) // Gestisce anche l'indirizzo puntato
+start			: INCLUDE? global* EOF
 				;
 				
-vector 			: LBRACK INT? RBRACK (ASS ((LCURL expression (COMMA expression)* RCURL) | expression))?
+global			: VOID identifier function 
+				| type_name? ( pointer SEMICOL 
+							 | identifier (((assignment (COMMA identifier assignment)*| vector) SEMICOL) 
+										  | function))
 				;
 				
-puntator		: MULT identifier (ASS ((AMP identifier) | (expression)))? 
+assignment		: ((ADD | SUB | MULT | DIV)? ASS expression)? // ASS OPZ, Gestisce anche l'indirizzo puntato
+				;
+				
+vector 			: LBRACK INT? RBRACK (ASS ((LCURL expression (COMMA expression)* RCURL) | expression))? // ASS OPZ
+				;
+				
+pointer			: MULT identifier (ASS expression)? // ASS OPZ
 				;
 					
 function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
@@ -47,18 +53,15 @@ function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN
 call_function 	: LPAREN (((D_QUOTE anything* D_QUOTE) | identifier) (COMMA ((D_QUOTE anything* D_QUOTE) | identifier))*)? RPAREN
 				;
 				
-anything		: INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS // TODO
-				;
-				
 codeblock 		: LCURL (statement)* RCURL   
 	    		| SEMICOL // SEMICOL di function	
 				;
 
-statement 		: type_name? (identifier (assignment | call_function | vector) | puntator) SEMICOL
+statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* | call_function | vector) | pointer) SEMICOL
 				| ifStat
 				| whileStat
 				| forStat
-			  	| RETURN value SEMICOL 
+			  	| RETURN atom_exp SEMICOL 
 			  	;
 			  	
 ifStat			: IF LPAREN (expression compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO: Operatori logici
@@ -69,9 +72,7 @@ whileStat		: WHILE LPAREN (expression compare expression) RPAREN codeblock
 				
 forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
 				;
-				
-assignment		: ((ADD | SUB | MULT | DIV)? ASS (expression | AMP identifier))?
-				;
+
 
 type_name		: (K_INT | K_FLOAT | K_CHAR)
 				; 
@@ -88,17 +89,17 @@ multiply_exp 	: atom_exp (MULT atom_exp | DIV atom_exp)*
 atom_exp 		: INT
 				| FLOAT  
 				| CHAR_QUOTE
-				| identifier (LBRACK INT RBRACK)? // Variable or Vector   
+				| (MULT | AMP)? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
     			| LPAREN expression RPAREN
     			;
-
-value 			: (INT | (MULT | AMP)? identifier)
+				
+anything		: INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS // TODO: Aggiungere
 				;
 
 compare			: EQ | NEQ | LT | GT | LE | GE | ((ADD | SUB | MULT | DIV)? ASS) // TODO: ASS negli If
 				;
 				
-			
+
 
 // LEXER
 

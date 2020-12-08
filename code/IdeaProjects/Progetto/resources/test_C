@@ -3,7 +3,7 @@
 float miao;
 int ciao=2;
 int vettore[4];
-char vettore [];    //char* vettore;  TODO: da fare puntatori
+char vettore [];
 char vettore []= { c, 5.4 , j, 4};
 float vector [4]= {5,6};
 int a = (5+b)*4;
@@ -33,7 +33,7 @@ int a;
 vectort[] = 5;
 *vectort = 5;
 
-// a = &b; // TODO
+a = &b;
 
 int vector[];
 int *vector;
@@ -48,6 +48,8 @@ int miao (int t){
     vettore[2]=2;
     kkk[]={1,2,r};
 
+    int a,b=3,c = 3;
+
     int *a;
     int *a = &b; // Verifica in semantica
 
@@ -61,7 +63,7 @@ int miao (int t){
     int a;
     *a = 5;
 
-     a = &b; // TODO
+     a = &b;
 
      a = &b;
 }
