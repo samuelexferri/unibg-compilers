@@ -33,7 +33,7 @@ vettore[] = 5;
 
 void gino();
 
-int main (int j, char k){
+int main (int j, char k) {
     int a;
     float b;
     char c;

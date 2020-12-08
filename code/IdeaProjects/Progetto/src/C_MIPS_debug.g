@@ -32,73 +32,73 @@ options {
 start			: include* global* EOF
 				;
 				
-global			: VOID identifier function 
-				| type_name? ( pointer SEMICOL 
-							 | identifier (((assignment (COMMA identifier assignment)*| vector) SEMICOL) 
+global			: VOID {System.out.print("VOID ");} identifier function 
+				| type_name? ( pointer SEMICOL {System.out.print("\n");}
+							 | identifier (((assignment (COMMA {System.out.print(", ");} identifier assignment)*| vector) SEMICOL {System.out.print("\n");}) 
 										  | function))
 				;
 				
-assignment		: ((ADD | SUB | MULT | DIV)? ASS {System.out.print("Assegnamento ");} expression)? // ASS OPZ, Gestisce anche l'indirizzo puntato
+assignment		: ((ADD | SUB | MULT | DIV)? ASS {System.out.print("\t---> ");} expression)? // ASS OPZ, Gestisce anche l'indirizzo puntato
 				;
 				
-vector 			: LBRACK INT? RBRACK (ASS ((LCURL expression (COMMA expression)* RCURL) | expression))? // ASS OPZ
+vector 			: {System.out.print("[vector ");} LBRACK (x=INT {System.out.print("int=" + $x.getText());})? RBRACK {System.out.print("] ");} (ASS {System.out.print("\t-v-> ");} (({System.out.print("{ ");} LCURL expression (COMMA {System.out.print(", ");} expression)* RCURL {System.out.print("} ");}) | expression))? // ASS OPZ
 				;
 				
-pointer			: MULT identifier (ASS expression)? // ASS OPZ
+pointer			: MULT {System.out.print("* ");} identifier (ASS {System.out.print("\t-p-> ");} expression)? // ASS OPZ
 				;
 					
-function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
+function 		: {System.out.print("FUNCTION ");} LPAREN {System.out.print("( ");} (type_name identifier (COMMA {System.out.print(", ");} type_name identifier)*)? RPAREN {System.out.print(") ");} codeblock
 				;
 
-call_function 	: LPAREN (((D_QUOTE anything* D_QUOTE) | MULT? identifier) (COMMA ((D_QUOTE anything* D_QUOTE) | MULT? identifier))*)? RPAREN
+call_function 	: {System.out.print("CALL_FUNCTION ");} LPAREN {System.out.print("( ");} (((D_QUOTE anything* D_QUOTE) | MULT? identifier) (COMMA ((D_QUOTE anything* D_QUOTE) | MULT? identifier))*)? RPAREN {System.out.print(") ");}
 				;
 				
-codeblock 		: LCURL (statement)* RCURL   
-	    		| SEMICOL // SEMICOL di function	
+codeblock 		: {System.out.print("\n");} {System.out.print("{\n");} LCURL (statement)* RCURL {System.out.print("}\n");} 
+	    		| SEMICOL {System.out.print("\n");} // SEMICOL di function	
 				;
 
-statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* | call_function | vector) | pointer) SEMICOL
-				| ifStat {System.out.println("If");}
-				| whileStat {System.out.println("While");}
-				| forStat {System.out.println("For");}
-			  	| RETURN atom_exp SEMICOL {System.out.println("Return");}
+statement 		: type_name? (identifier (assignment (COMMA {System.out.print(", ");} identifier assignment)* | call_function | vector) | pointer) SEMICOL {System.out.print("\n");}
+				| ifStat
+				| whileStat
+				| forStat 
+			  	| {System.out.print("return ");} RETURN atom_exp SEMICOL {System.out.print("\n");}
 			  	;
 			  	
-ifStat			: IF LPAREN (identifier compare expression) RPAREN codeblock (ELSE {System.out.println("Else");}(codeblock | ifStat | whileStat))? // TODO: Operatori logici
+ifStat			: {System.out.print("IF ");} IF {System.out.print("( ");} LPAREN (identifier compare expression) RPAREN {System.out.print(") ");} codeblock (ELSE {System.out.print("ELSE ");}(codeblock | ifStat | whileStat))? // TODO: Operatori logici
 				;
 						
-whileStat		: WHILE LPAREN (identifier compare expression) RPAREN codeblock 
+whileStat		: {System.out.print("WHILE ");} WHILE {System.out.print("( ");} LPAREN (identifier compare expression) RPAREN {System.out.print(") ");} codeblock 
 				;
 				
-forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
+forStat			: {System.out.print("FOR ");} FOR {System.out.print("( ");} LPAREN (type_name? identifier ASS expression) {System.out.print("; ");} SEMICOL (identifier compare expression) {System.out.print("; ");} SEMICOL (identifier compare expression) RPAREN {System.out.print(") ");} codeblock 
 				;
 
-type_name		: (x=K_INT | x=K_FLOAT | x=K_CHAR){System.out.println("Type_name:\t" + $x.getText());}
+type_name		: (x=K_INT | x=K_FLOAT | x=K_CHAR){System.out.print("type:" + $x.getText() + " ");}
 				; 
 				
-identifier		: (x=WORD | x=CHAR){System.out.println("Identifier:\t" + $x.getText());}
+identifier		: (x=WORD | x=CHAR){System.out.print("id:" + $x.getText() + " ");}
 				;
 
-expression 		: multiply_exp ((x=ADD | x=SUB) {System.out.print("expression:\t" + $x.getText());} multiply_exp)* 
+expression 		: multiply_exp ((x=ADD | x=SUB) {System.out.print("exp:" + $x.getText() + " ");} multiply_exp)* 
     			;
     
-multiply_exp 	: atom_exp ((x=MULT|x=DIV) {System.out.println("Multiply_exp:\t" + $x.getText());} atom_exp)*
+multiply_exp 	: atom_exp ((x=MULT|x=DIV) {System.out.print("mexp:" + $x.getText() + " ");} atom_exp)*
     			;
 
-atom_exp 		: x=INT {System.out.println("int:\t" + $x.getText());}
-				| x=FLOAT  {System.out.println("float:\t" + $x.getText());}
-				| CHAR_QUOTE {System.out.println("If");}
-				| (MULT | AMP)? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
-    			| LPAREN {System.out.print("Aperta tonda ");} expression RPAREN {System.out.println(" Chiusa tonda");}
+atom_exp 		: x=INT {System.out.print("int=" + $x.getText() + " ");}
+				| x=FLOAT {System.out.print("float=" + $x.getText() + " ");}
+				| x=CHAR_QUOTE {System.out.print("char_quote=" + $x.getText() + " ");}
+				| (MULT {System.out.print("* ");} | AMP {System.out.print("& ");})? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
+    			| LPAREN {System.out.print("( ");} expression RPAREN {System.out.print(") ");}
     			;
 				
-anything		: INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS // TODO: Aggiungere
+anything		: x=(INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS)  {System.out.print("#A_" + $x.getText() + " ");} // TODO: Aggiungere
 				;
 
-compare			: x=EQ | x=NEQ | x=LT | x=GT | x=LE | x=GE | ((ADD | SUB | MULT | DIV)? x=ASS) {System.out.print("Compare:\t" + $x.getText());} // TODO: ASS negli If
+compare			: (x=EQ | x=NEQ | x=LT | x=GT | x=LE | x=GE | ((ADD | SUB | MULT | DIV)? x=ASS)) {System.out.print("#C_" + $x.getText() + " ");} // TODO: ASS negli If
 				;
 
-include 		: INCLUDE {System.out.print ("Include Instrucion\n");} ;			
+include 		: INCLUDE {System.out.println("INCLUDE");} ;			
 
 
 // LEXER
