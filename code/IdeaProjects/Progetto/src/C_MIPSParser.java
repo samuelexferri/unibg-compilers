@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g 2020-12-08 10:44:13
+// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g 2020-12-08 11:04:29
 
 	// package myCompiler;
 
@@ -1255,19 +1255,19 @@ public class C_MIPSParser extends Parser {
 
 
 	// $ANTLR start "ifStat"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:1: ifStat : IF LPAREN ( expression compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:1: ifStat : IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? ;
 	public final void ifStat() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:10: ( IF LPAREN ( expression compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:12: IF LPAREN ( expression compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:10: ( IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )? )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:12: IF LPAREN ( identifier compare expression ) RPAREN codeblock ( ELSE ( codeblock | ifStat | whileStat ) )?
 			{
 			match(input,IF,FOLLOW_IF_in_ifStat537); 
 			match(input,LPAREN,FOLLOW_LPAREN_in_ifStat539); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:22: ( expression compare expression )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:23: expression compare expression
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:22: ( identifier compare expression )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:67:23: identifier compare expression
 			{
-			pushFollow(FOLLOW_expression_in_ifStat542);
-			expression();
+			pushFollow(FOLLOW_identifier_in_ifStat542);
+			identifier();
 			state._fsp--;
 
 			pushFollow(FOLLOW_compare_in_ifStat544);
@@ -1372,19 +1372,19 @@ public class C_MIPSParser extends Parser {
 
 
 	// $ANTLR start "whileStat"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:1: whileStat : WHILE LPAREN ( expression compare expression ) RPAREN codeblock ;
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:1: whileStat : WHILE LPAREN ( identifier compare expression ) RPAREN codeblock ;
 	public final void whileStat() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:12: ( WHILE LPAREN ( expression compare expression ) RPAREN codeblock )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:14: WHILE LPAREN ( expression compare expression ) RPAREN codeblock
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:12: ( WHILE LPAREN ( identifier compare expression ) RPAREN codeblock )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:14: WHILE LPAREN ( identifier compare expression ) RPAREN codeblock
 			{
 			match(input,WHILE,FOLLOW_WHILE_in_whileStat589); 
 			match(input,LPAREN,FOLLOW_LPAREN_in_whileStat591); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:27: ( expression compare expression )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:28: expression compare expression
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:27: ( identifier compare expression )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS.g:70:28: identifier compare expression
 			{
-			pushFollow(FOLLOW_expression_in_whileStat594);
-			expression();
+			pushFollow(FOLLOW_identifier_in_whileStat594);
+			identifier();
 			state._fsp--;
 
 			pushFollow(FOLLOW_compare_in_whileStat596);
@@ -2084,8 +2084,8 @@ public class C_MIPSParser extends Parser {
 	public static final BitSet FOLLOW_atom_exp_in_statement511 = new BitSet(new long[]{0x0000080000000000L});
 	public static final BitSet FOLLOW_SEMICOL_in_statement513 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_IF_in_ifStat537 = new BitSet(new long[]{0x0000000200000000L});
-	public static final BitSet FOLLOW_LPAREN_in_ifStat539 = new BitSet(new long[]{0x0020000A04080320L});
-	public static final BitSet FOLLOW_expression_in_ifStat542 = new BitSet(new long[]{0x0000401D00644090L});
+	public static final BitSet FOLLOW_LPAREN_in_ifStat539 = new BitSet(new long[]{0x0020000000000100L});
+	public static final BitSet FOLLOW_identifier_in_ifStat542 = new BitSet(new long[]{0x0000401D00644090L});
 	public static final BitSet FOLLOW_compare_in_ifStat544 = new BitSet(new long[]{0x0020000A04080320L});
 	public static final BitSet FOLLOW_expression_in_ifStat546 = new BitSet(new long[]{0x0000040000000000L});
 	public static final BitSet FOLLOW_RPAREN_in_ifStat549 = new BitSet(new long[]{0x0000080080000000L});
@@ -2095,8 +2095,8 @@ public class C_MIPSParser extends Parser {
 	public static final BitSet FOLLOW_ifStat_in_ifStat561 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_whileStat_in_ifStat565 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_WHILE_in_whileStat589 = new BitSet(new long[]{0x0000000200000000L});
-	public static final BitSet FOLLOW_LPAREN_in_whileStat591 = new BitSet(new long[]{0x0020000A04080320L});
-	public static final BitSet FOLLOW_expression_in_whileStat594 = new BitSet(new long[]{0x0000401D00644090L});
+	public static final BitSet FOLLOW_LPAREN_in_whileStat591 = new BitSet(new long[]{0x0020000000000100L});
+	public static final BitSet FOLLOW_identifier_in_whileStat594 = new BitSet(new long[]{0x0000401D00644090L});
 	public static final BitSet FOLLOW_compare_in_whileStat596 = new BitSet(new long[]{0x0020000A04080320L});
 	public static final BitSet FOLLOW_expression_in_whileStat598 = new BitSet(new long[]{0x0000040000000000L});
 	public static final BitSet FOLLOW_RPAREN_in_whileStat601 = new BitSet(new long[]{0x0000080080000000L});

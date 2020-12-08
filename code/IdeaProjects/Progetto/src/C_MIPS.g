@@ -64,10 +64,10 @@ statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* 
 			  	| RETURN atom_exp SEMICOL 
 			  	;
 			  	
-ifStat			: IF LPAREN (expression compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO: Operatori logici
+ifStat			: IF LPAREN (identifier compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO: Operatori logici
 				;
 						
-whileStat		: WHILE LPAREN (expression compare expression) RPAREN codeblock
+whileStat		: WHILE LPAREN (identifier compare expression) RPAREN codeblock
 				;
 				
 forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
