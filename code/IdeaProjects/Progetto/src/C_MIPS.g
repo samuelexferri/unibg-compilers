@@ -29,7 +29,7 @@ options {
 
 
 // PARSER
-start			: INCLUDE? global* EOF
+start			: INCLUDE* global* EOF
 				;
 				
 global			: VOID identifier function 
@@ -50,7 +50,7 @@ pointer			: MULT identifier (ASS expression)? // ASS OPZ
 function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
 				;
 
-call_function 	: LPAREN (((D_QUOTE anything* D_QUOTE) | identifier) (COMMA ((D_QUOTE anything* D_QUOTE) | identifier))*)? RPAREN
+call_function 	: LPAREN (((D_QUOTE anything* D_QUOTE) | MULT? identifier) (COMMA ((D_QUOTE anything* D_QUOTE) | MULT? identifier))*)? RPAREN
 				;
 				
 codeblock 		: LCURL (statement)* RCURL   
@@ -66,7 +66,7 @@ statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* 
 			  	
 ifStat			: IF LPAREN (expression compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO: Operatori logici
 				;
-				
+						
 whileStat		: WHILE LPAREN (expression compare expression) RPAREN codeblock
 				;
 				
