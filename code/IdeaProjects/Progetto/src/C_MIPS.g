@@ -51,8 +51,8 @@ start			: INCLUDE* global* EOF
 				;
 				
 global			: VOID identifier function 
-				| type_name? ( pointer SEMICOL 
-							 | identifier (((assignment (COMMA identifier assignment)*| vector) SEMICOL) 
+			| type_name? ( pointer SEMICOL 
+				     | identifier (((assignment (COMMA identifier assignment)*| vector) SEMICOL)   //TODO spostare sopra punto di domanda
 										  | function))
 				;
 				
@@ -65,7 +65,7 @@ vector 			: LBRACK INT? RBRACK (ASS ((LCURL expression (COMMA expression)* RCURL
 pointer			: MULT identifier (ASS expression)? // ASS OPZ
 				;
 					
-function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock
+function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock //TODO rename paramaters
 				;
 
 call_function 	: LPAREN (((D_QUOTE anything* D_QUOTE) | MULT? identifier) (COMMA ((D_QUOTE anything* D_QUOTE) | MULT? identifier))*)? RPAREN
@@ -75,48 +75,53 @@ codeblock 		: LCURL (statement)* RCURL
 	    		| SEMICOL // SEMICOL di function	
 				;
 
-statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* | call_function | vector) | pointer) SEMICOL
-				| ifStat
-				| whileStat
-				| forStat
-			  	| RETURN atom_exp SEMICOL 
-			  	;
+statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* | call_function | vector) | pointer) SEMICOL //TODO: dare nome e togliere
+			| ifStat
+			| whileStat
+			| forStat
+			| RETURN atom_exp SEMICOL 
+			  ; //TODO: dentro lo statment inserire il codeblock 
 			  	
-ifStat			: IF LPAREN (identifier compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO: Operatori logici
-				;
+ifStat			: IF LPAREN (expression compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO: Operatori logici
+				; // if (confronto statement) else statement 
 						
 whileStat		: WHILE LPAREN (identifier compare expression) RPAREN codeblock
 				;
 				
 forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
-				;
+				; //TODO dare nome alle 4 parti del for 
+				// TODO una regola come expression compare expression
 
 type_name		: (K_INT | K_FLOAT | K_CHAR)
 				; 
 				
-identifier		: (WORD | CHAR)
+identifier		: (WORD) //TODO: non serve più identifier
 				;
 
 expression 		: multiply_exp (ADD multiply_exp | SUB multiply_exp)* 
     			;
     
-multiply_exp 	: atom_exp (MULT atom_exp | DIV atom_exp)*
+multiply_exp 		: atom_exp (MULT atom_exp | DIV atom_exp)*
     			;
 
 atom_exp 		: INT
-				| FLOAT  
-				| CHAR_QUOTE
-				| (MULT | AMP)? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
+			| FLOAT  
+			| CHAR_QUOTE
+			| (MULT | AMP)? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
     			| LPAREN expression RPAREN
     			;
 				
 anything		: INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS // TODO: Aggiungere
 				;
 
-compare			: EQ | NEQ | LT | GT | LE | GE | ((ADD | SUB | MULT | DIV)? ASS) // TODO: ASS negli If
+compare			: EQ | NEQ | LT | GT | LE | GE | ((ADD | SUB | MULT | DIV)? ASS); // TODO: ASS negli If
+
+//compareIF  	: EQ | NEQ | LT | GT | LE | GE ;
+//TODO compareIF
+//TODO compareFor
 				;
 				
-
+//TODO: include nella sintassi?
 
 // LEXER
 
@@ -129,6 +134,7 @@ fragment SPACE	: ' ' ;
 fragment TAB	: '\t';
 fragment NEWL   : '\n';
 fragment SLASHR : '\r';
+fragment CHAR 	: ('a'..'z' | 'A'..'Z') ;
 
 WS 	: ( SPACE 
 	| TAB 
@@ -176,12 +182,11 @@ AMP      	: '&' ;
 PERC		: '%' ;
 HASHTAG		: '#' ;
 
-INT			: DIGIT_NO_ZERO DIGIT* | '0' ;
+INT		: DIGIT_NO_ZERO DIGIT* | '0' ;
 FLOAT		: DIGIT+ DOT DIGIT+ ;
-CHAR 		: ('a'..'z' | 'A'..'Z') ;
-CHAR_QUOTE	: S_QUOTE ('a'..'z' | 'A'..'Z') S_QUOTE ;
+CHAR_QUOTE	: S_QUOTE CHAR S_QUOTE ;  //TODO: anche \n
 
-WORD 		: CHAR ('a'..'z' | 'A'..'Z' | UNDRSCR | DIGIT)+ ;
+WORD 		: CHAR (CHAR | UNDRSCR | DIGIT)* ;
 
 COMMENT		: '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
     		| '/*' (options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}

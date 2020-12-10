@@ -85,12 +85,12 @@ int funzione(int t) {
 		}
 
         if (a == 5) {
-            a;
-        } else if (a == 5) {
-            b;
-        } else while (a > 0) {
-            c;
-        }
+                     a;
+         } else if (a == 5) {
+             b;
+         } else while (a > 0) {
+             c;
+         }
 
 		while(a > 0) {
         	a = a - 1;
@@ -102,3 +102,4 @@ int funzione(int t) {
 
         printf("a", "b=2", a, "Text for + * #", *b);
 }
+int pippo;
