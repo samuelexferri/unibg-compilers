@@ -1,4 +1,4 @@
-PROGRAMMA C (NON C++):
+PRIMO INCONTRO:
 Include (Leggere e basta, non tradurlo)
 Costanti
 Preambolo
@@ -36,3 +36,42 @@ Differenza tra assegnamento (=) e confronto (==)
 Main prefedinito obbligatorio in qualsiasi ordine, demandiamo a livello semantico, ha una struttura come tutte le altre funzioni: int main(...) {return 0}
 Variabile ridefinita è errore semantico
 Cercare parole chiave di C, forse const, if, for, while, return, main (no), include (forse), sqrt, printf sono funzioni predefinite (la semantica deve dire che è di una funzione predefinita)
+
+SECONDO INCONTRO:
+Scrivere le regole in verticale
+
+bool, stringhe, and e or e not (NON TRATTATE)
+
+#include è un token, tra le <> riconoscere la libreria
+
+Indentare meglio OR
+
+char è un fragment, usato per definire altri token
+
+\n all'interno del CHAR_QUOTE
+
+identifier diventa solo WORD
+
+function chiamata in params
+
+spostiamo il ? sopra ad assignment
+
+nel pointer usare assignment
+
+tirare fuori assegnamento di variabili e puntatori (anche funzioni)
+
+expression compare expression, dividere due versioni di compare (senza i +=, ...)
+
+nei for c'è il a++ (non gestito)
+
+nel for dividere le tre parti (assegnamento, condizione (stessa di if e while), incremento)
+
+errori è una lista di stringhe
+
+una variabile globale può essere dichiarata alla fine (controllo posticipato dopo)
+
+symbol table separata per ogni blocco locale (pensare in maniera ricorsiva) più quella globale (salvare una struttura per i controlli successivi da fare a fine parsing; errori da riordinare in base alle linee crescente)
+
+la traduzione la facciamo in ogni nodi ogni volta
+
+dentro in statement menttere codeblock senzaz * e toglierlo da sopra in codeblock anche (togliere *). IF ... statement ELSE statement
