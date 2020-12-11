@@ -47,94 +47,146 @@ options {
 
 
 // PARSER
-start			: INCLUDE* global* EOF
-				;
-				
-global			: VOID identifier function 
-			| type_name? ( pointer SEMICOL 
-				     | identifier (((assignment (COMMA identifier assignment)*| vector) SEMICOL)   //TODO spostare sopra punto di domanda
-										  | function))
-				;
-				
-assignment		: ((ADD | SUB | MULT | DIV)? ASS expression)? // ASS OPZ, Gestisce anche l'indirizzo puntato
-				;
-				
-vector 			: LBRACK INT? RBRACK (ASS ((LCURL expression (COMMA expression)* RCURL) | expression))? // ASS OPZ
-				;
-				
-pointer			: MULT identifier (ASS expression)? // ASS OPZ
-				;
-					
-function 		: LPAREN (type_name identifier (COMMA type_name identifier)*)? RPAREN codeblock //TODO rename paramaters
+start			: include* global* EOF
 				;
 
-call_function 	: LPAREN (((D_QUOTE anything* D_QUOTE) | MULT? identifier) (COMMA ((D_QUOTE anything* D_QUOTE) | MULT? identifier))*)? RPAREN
+include			: INCLUDE LT WORD (DOT WORD)? GT
 				;
 				
-codeblock 		: LCURL (statement)* RCURL   
+global			: funct_void
+				| type_name? ( pointer SEMICOL 
+				     		 | WORD ((ass_multiple
+				     		 		 | vector) SEMICOL
+									 | funct_params))
+				;
+				
+funct_void		: VOID WORD funct_params 
+				;
+				
+funct_params 	: LPAREN (type_name WORD (COMMA type_name WORD)*)? RPAREN codeblock
+				;
+				
+assignment		: ((ADD | SUB | MULT | DIV)? ASS expression)
+				;
+
+ass_multiple	: assignment? (COMMA WORD assignment?)* // Assegnamento multiplo: int a, b=2, c...
+				;
+				
+ass_vector		: ASS ((LCURL expression (COMMA expression)* RCURL) 
+				| expression)
+				;
+				
+vector 			: LBRACK INT? RBRACK ass_vector?
+				;
+				
+pointer			: MULT (WORD | LPAREN expression RPAREN) assignment? // Puntatori: *p o *(p+1)
+				;
+					
+call_function 	: LPAREN (call_args (COMMA call_args)*)? RPAREN
+				;
+
+call_args		: D_QUOTE anything* D_QUOTE
+				| MULT? WORD
+				;
+				
+codeblock 		: LCURL statement* RCURL 
 	    		| SEMICOL // SEMICOL di function	
 				;
 
-statement 		: type_name? (identifier (assignment (COMMA identifier assignment)* | call_function | vector) | pointer) SEMICOL //TODO: dare nome e togliere
-			| ifStat
-			| whileStat
-			| forStat
-			| RETURN atom_exp SEMICOL 
-			  ; //TODO: dentro lo statment inserire il codeblock 
-			  	
-ifStat			: IF LPAREN (expression compare expression) RPAREN codeblock (ELSE (codeblock | ifStat | whileStat))? // TODO: Operatori logici
-				; // if (confronto statement) else statement 
-						
-whileStat		: WHILE LPAREN (identifier compare expression) RPAREN codeblock
+statement 		: local
+				| codeblock
+				| ifStat
+				| whileStat
+				| forStat
+				| returnStat
 				;
-				
-forStat			: FOR LPAREN (type_name? identifier ASS expression) SEMICOL (identifier compare expression) SEMICOL (identifier compare expression) RPAREN codeblock 
-				; //TODO dare nome alle 4 parti del for 
-				// TODO una regola come expression compare expression
 
-type_name		: (K_INT | K_FLOAT | K_CHAR)
-				; 
-				
-identifier		: (WORD) //TODO: non serve più identifier
+local			: type_name? ( pointer
+				     		 | WORD (ass_multiple
+				     		 		 | vector 
+									 | call_function)) SEMICOL
 				;
+			  	
+ifStat			: IF LPAREN condition RPAREN codeblock (ELSE statement)? // TODO: Codeblock, Operatori logici
+				;
+						
+whileStat		: WHILE LPAREN condition RPAREN statement
+				;
+				
+forStat			: FOR LPAREN initialization SEMICOL condition SEMICOL increment RPAREN statement 
+				;
+
+returnStat		: RETURN atom_exp SEMICOL 
+				;
+
+type_name		: K_INT 
+				| K_FLOAT 
+				| K_CHAR
+				; 
 
 expression 		: multiply_exp (ADD multiply_exp | SUB multiply_exp)* 
     			;
     
-multiply_exp 		: atom_exp (MULT atom_exp | DIV atom_exp)*
+multiply_exp 	: atom_exp (MULT atom_exp | DIV atom_exp)*
     			;
 
 atom_exp 		: INT
-			| FLOAT  
-			| CHAR_QUOTE
-			| (MULT | AMP)? identifier (LBRACK INT RBRACK)? // Variabili, Vettori o Puntatori 
-    			| LPAREN expression RPAREN
+				| FLOAT  
+				| CHAR_QUOTE
+				| WORD ((LBRACK INT? RBRACK) | call_function)? // Variabile o Vettore
+				| MULT WORD // Puntatore
+				| AMP WORD // Indirizzo
+    			| LPAREN expression RPAREN // Parentes
     			;
-				
-anything		: INT | FLOAT | CHAR | WORD | IF | WHILE | FOR | PERC | SPACE | ADD | SUB | MULT | DIV | AMP | HASHTAG | ASS | WS // TODO: Aggiungere
+
+initialization	: type_name? WORD assignment?
 				;
 
-compare			: EQ | NEQ | LT | GT | LE | GE | ((ADD | SUB | MULT | DIV)? ASS); // TODO: ASS negli If
-
-//compareIF  	: EQ | NEQ | LT | GT | LE | GE ;
-//TODO compareIF
-//TODO compareFor
+condition		: expression compare expression
 				;
 				
-//TODO: include nella sintassi?
+increment		: WORD assignment
+				;
+
+compare			: EQ 
+				| NEQ 
+				| LT 
+				| GT 
+				| LE 
+				| GE
+				;
+				
+anything		: INT 
+				| FLOAT 
+				| CHAR 
+				| WORD 
+				| IF 
+				| WHILE 
+				| FOR 
+				| PERC 
+				| SPACE 
+				| ADD 
+				| SUB 
+				| MULT 
+				| DIV 
+				| AMP 
+				| HASHTAG 
+				| ASS 
+				| WS
+				;
+
+
 
 // LEXER
-
-INCLUDE	: '#include <stdio.h>' | '#include <stdlib.h>';
-
-fragment DIGIT	: '0'..'9' ;
+fragment DIGIT			: '0'..'9' ;
 fragment DIGIT_NO_ZERO	: '1'..'9' ;
-fragment UNDRSCR: '_' ;
-fragment SPACE	: ' ' ;
-fragment TAB	: '\t';
-fragment NEWL   : '\n';
-fragment SLASHR : '\r';
-fragment CHAR 	: ('a'..'z' | 'A'..'Z') ;
+fragment UNDRSCR	: '_' ;
+fragment SPACE		: ' ' ;
+fragment TAB		: '\t';
+fragment NEWL   	: '\n';
+fragment SLASHR 	: '\r';
+fragment CHAR 		: ('a'..'z' | 'A'..'Z') ;
+fragment SLASH 		: '\\';
 
 WS 	: ( SPACE 
 	| TAB 
@@ -142,6 +194,8 @@ WS 	: ( SPACE
 	| SLASHR 
 	){$channel=HIDDEN;}
 	;
+
+INCLUDE		: '#include';
 
 K_INT		: 'int' ;
 K_FLOAT		: 'float' ;
@@ -161,11 +215,12 @@ LT 			: '<' ;
 GE			: '>=' ;
 LE 			: '<=' ;
 
+ASS 		: '=' ;
+
 ADD 		: '+' ;
 SUB 		: '-' ;
 MULT 		: '*' ;
 DIV 		: '/' ;
-ASS 		: '=' ;
 LPAREN    	: '(' ;
 RPAREN 		: ')' ;
 LBRACK 		: '[' ;
@@ -174,7 +229,7 @@ LCURL 		: '{' ;
 RCURL 		: '}' ;
 SEMICOL		: ';' ;
 DOT 		: '.' ; // Float
-ARROW 		: '->' ; // Arrow
+ARROW 		: '->' ; // TODO: Arrow
 S_QUOTE 	: '\'' ;
 D_QUOTE 	: '"' ;
 COMMA		: ',' ;
@@ -182,9 +237,12 @@ AMP      	: '&' ;
 PERC		: '%' ;
 HASHTAG		: '#' ;
 
-INT		: DIGIT_NO_ZERO DIGIT* | '0' ;
+INT			: DIGIT_NO_ZERO DIGIT* 
+			| '0' ;
 FLOAT		: DIGIT+ DOT DIGIT+ ;
-CHAR_QUOTE	: S_QUOTE CHAR S_QUOTE ;  //TODO: anche \n
+CHAR_QUOTE	: S_QUOTE (DIGIT 
+					  | CHAR 
+					  | SLASH ('0' | 'n')) S_QUOTE ;
 
 WORD 		: CHAR (CHAR | UNDRSCR | DIGIT)* ;
 

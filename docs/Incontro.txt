@@ -1,77 +1,12 @@
-PRIMO INCONTRO:
-Include (Leggere e basta, non tradurlo)
-Costanti
-Preambolo
-Definizione delle variabili (int, float, char, array (puntatori?) di stringhe)
-Blocco con variabili interni
-Assegnamenti
-Chiamate a funzione (func(args))
-If
-For
-Ciclo (While, Do-While)
-Commenti
-Operazioni (*/+-)
-
+SINTASSI:
+Mancante: const, bool, and, or, not, a++
 Prospezione LL(1) k=1
-
-ATTENZIONE:
 Scope variabili (globali, locali a funzioni)
-Symbol table deve essere strutturata in modo da oscurare e tenere traccia i { blocchi }: prima cercare nel blocco in cui si è, poi quelli sopra
-
-b = sqrt(a)+2 (non si confonde con la variabile "sqrt(", si legge la prima parentesi)
-
-Blocco soltanto
-{
-a
-}
-
-Chiamare una variabile include
-
-Symbol table necessaria nella semantica e capire i pattern di traduzione
-
 Testare su vari files e anche sbagliati (.html) per verificare lo scanner e il parser, in seguito passare alla semantica
 
-Differenza tra assegnamento (=) e confronto (==)
-
+SEMANTICA:
+Errori è una lista di stringhe (errori da riordinare in base alle linee crescente)
+Una variabile globale può essere dichiarata alla fine (controllo posticipato dopo, salvare una struttura per i controlli successivi da fare a fine parsing)
+Symbol table separata per ogni blocco locale (pensare in maniera ricorsiva) più quella globale
 Main prefedinito obbligatorio in qualsiasi ordine, demandiamo a livello semantico, ha una struttura come tutte le altre funzioni: int main(...) {return 0}
 Variabile ridefinita è errore semantico
-Cercare parole chiave di C, forse const, if, for, while, return, main (no), include (forse), sqrt, printf sono funzioni predefinite (la semantica deve dire che è di una funzione predefinita)
-
-SECONDO INCONTRO:
-Scrivere le regole in verticale
-
-bool, stringhe, and e or e not (NON TRATTATE)
-
-#include è un token, tra le <> riconoscere la libreria
-
-Indentare meglio OR
-
-char è un fragment, usato per definire altri token
-
-\n all'interno del CHAR_QUOTE
-
-identifier diventa solo WORD
-
-function chiamata in params
-
-spostiamo il ? sopra ad assignment
-
-nel pointer usare assignment
-
-tirare fuori assegnamento di variabili e puntatori (anche funzioni)
-
-expression compare expression, dividere due versioni di compare (senza i +=, ...)
-
-nei for c'è il a++ (non gestito)
-
-nel for dividere le tre parti (assegnamento, condizione (stessa di if e while), incremento)
-
-errori è una lista di stringhe
-
-una variabile globale può essere dichiarata alla fine (controllo posticipato dopo)
-
-symbol table separata per ogni blocco locale (pensare in maniera ricorsiva) più quella globale (salvare una struttura per i controlli successivi da fare a fine parsing; errori da riordinare in base alle linee crescente)
-
-la traduzione la facciamo in ogni nodi ogni volta
-
-dentro in statement menttere codeblock senzaz * e toglierlo da sopra in codeblock anche (togliere *). IF ... statement ELSE statement

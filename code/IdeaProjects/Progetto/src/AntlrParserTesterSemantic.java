@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 public class AntlrParserTesterSemantic {
-    static C_MIPS_debugParser parser;
+    static C_MIPSParser parser;
     static String fileIn = ".\\resources\\test_C";
     static String fileOut = ".\\resources\\parser.ANTLR.out.txt";
     static String fileMsg = ".\\resources\\parser.ANTLR.msg.txt";
@@ -19,9 +19,9 @@ public class AntlrParserTesterSemantic {
             System.out.println("-----------------------");
             System.out.println("Parsing con ANTLR lexer");
             System.out.println("-----------------------");
-            C_MIPS_debugLexer lexer = new C_MIPS_debugLexer(new ANTLRReaderStream(new FileReader(fileIn)));
+            C_MIPSLexer lexer = new C_MIPSLexer(new ANTLRReaderStream(new FileReader(fileIn)));
             tokens = new CommonTokenStream(lexer);
-            parser = new C_MIPS_debugParser(tokens);
+            parser = new C_MIPSParser(tokens);
 
             parser.start();
 

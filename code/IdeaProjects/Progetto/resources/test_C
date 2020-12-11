@@ -10,7 +10,7 @@
 int a;
 float b;
 char c;
-int a = 1; // Semantica: definirla una sola volta
+int a = 1; // TODO: In semantica definirla una sola volta
 int a = 1, b, c = 2;
 a;
 a = 2;
@@ -22,14 +22,27 @@ a = 1, b = 3;
 int vettore[5];
 float vettore[4] = {5, 6};
 char vettore [];
-char vettore [] = {c, 5.4 , 3*b, 4}; // Semantica: non dovrebbe accettarlo
+char vettore [] = {c, 5.4 , 3*b, 4}; // TODO: In semantica non dovrebbe accettarlo
 
 int *a;
-int *a = &b; // Semantica: verifica indirizzo
-*a = &b; // Semantica: controllare prima che è stato assegnato l'indirizzo per reference
+int *a = &b; // TODO: In semantica verifica indirizzo
+*a = &b; // TODO: In semantica controllare prima che è stato assegnato l'indirizzo per reference
 *a = 5;
 vettore[] = 5;
 *vettore = 5;
+
+char a = 'a';
+char *b = &a;
+*(b + 1) = 3;
+
+a = '\n';
+a = '\0';
+
+// TODO: Non fatto
+// int a;
+// a++;
+
+b = sqrt(a)+2;
 
 void gino();
 
@@ -58,16 +71,29 @@ int main (int j, char k) {
     vettore[] = 5;
     *vettore = 5;
 
+    char a = 'a';
+    char *b = &a;
+    *(b + 1) = 3;
+
+    a = '\n';
+    a = '\0';
+
+    // TODO: Non fatto
+    // int a;
+    // a++;
+
+    b = sqrt(a)+2;
+
     funzione(t);
     funzione();
 
     // void pippo(); // Ok, non lo accetta
-    int pippo(); // TODO:: Non dovrebbe accettarlo
+    int pippo(); // TODO: In semantica non dovrebbe accettarlo
 
     return p;
     return *p;
     return &p;
-    // return funzione(t); // TODO: Dovrebbe accettarla
+    return funzione(t);
 }
 
 int funzione();
@@ -102,4 +128,5 @@ int funzione(int t) {
 
         printf("a", "b=2", a, "Text for + * #", *b);
 }
-int pippo;
+
+int pippo; // TODO: In semantica gestirla alla fine
