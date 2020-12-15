@@ -1,5 +1,1 @@
-
------------------------------
-*****	Errori: #	1	*****
------------------------------
-1: *** SINTAX ERROR [1] in (15, 0) - Found SEMICOL (';') - missing EOF at ';'
+Nessun errore!
