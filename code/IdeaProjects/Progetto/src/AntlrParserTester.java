@@ -2,35 +2,72 @@ import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CommonTokenStream;
 
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Enumeration;
 
 public class AntlrParserTester {
+    static C_MIPS_semanticParser parser;
+    static String fileIn = ".\\resources\\test_semantic_C";
+    static String fileOut = ".\\resources\\ANTLR_translate.txt";
+    static String fileMsg = ".\\resources\\ANTLR_symbol_table.txt";
+
     public static void main(String[] args) {
-        C_MIPSParser parser;
-        String fileIn = ".\\resources\\test_C";
+        CommonTokenStream tokens;
 
         try {
-            // Inizializzazione del parser (antlr docet):
-            // 1. Si inizializza il lexer
-            // 2. Si crea uno stream di token
-            // 3. si istanzia il parser passandogli lo stream di token
+            System.out.println("\n--------------------------\n" + "*****\tParsing\t*****\n"  + "--------------------------");
+            C_MIPS_semanticLexer lexer = new C_MIPS_semanticLexer(new ANTLRReaderStream(new FileReader(fileIn)));
+            tokens = new CommonTokenStream(lexer);
+            parser = new C_MIPS_semanticParser(tokens);
 
-            // 1. Usare la classe del lexer generato
-            C_MIPSLexer lexer = new C_MIPSLexer(new ANTLRReaderStream(new FileReader(fileIn)));
+            parser.init();
 
-            // 2. Token
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-            // 3. Usare la classe del parser generato
-            parser = new C_MIPSParser(tokens);
-
-            // Si lancia il parser dallo start symbol (prima produzione specificata)
             parser.start();
 
-            System.out.println("Parsing con ANTLR terminato con successo\n\n");
+            saveMessages();
+            saveTranslation();
 
         } catch (Exception e) {
-            System.out.println("Parsing con ANTLR abortito\n\n");
+            System.out.println("\nParsing con ANTLR abortito\n");
             e.printStackTrace();
         }
+    }
+
+    static void saveMessages() throws IOException {
+        FileWriter fOut = new FileWriter(fileMsg);
+
+        fOut.append("\n---------------------------------\n" + "*****\tGlobal Symbol Table\t*****\n"  + "---------------------------------\n");
+        System.out.println("\n---------------------------------\n" + "*****\tGlobal Symbol Table\t*****\n"  + "---------------------------------");
+        Enumeration<String> varList = parser.getSymbolTable().keys();
+        int v = 0;
+        while (varList.hasMoreElements()) {
+            String var = varList.nextElement();
+            Object value = parser.getSymbolTable().get(var);
+            fOut.append(++v + ":\t" + var + "=" + value + "\n");
+            System.out.println(v + ":\t" + var + "=" + value);
+        }
+
+        // TODO: Per ora solo l'ultima locale
+        fOut.append("\n---------------------------------\n" + "*****\tLocal Symbol Table\t*****\n"  + "---------------------------------\n");
+        System.out.println("\n---------------------------------\n" + "*****\tLocal Symbol Table\t*****\n"  + "---------------------------------");
+        Enumeration<String> varList2 = parser.getSymbolTableLocal().keys();
+        v = 0;
+        while (varList2.hasMoreElements()) {
+            String var = varList2.nextElement();
+            Object value = parser.getSymbolTableLocal().get(var);
+            fOut.append(++v + ":\t" + var + "=" + value + "\n");
+            System.out.println(v + ":\t" + var + "=" + value);
+        }
+
+        fOut.close();
+    }
+
+    static void saveTranslation() throws IOException {
+        FileWriter fOut = new FileWriter(fileOut);
+        fOut.append(parser.getTranslation());
+        fOut.close();
+        System.out.println("\n--------------------------\n" + "*****\tTraduzione\t*****\n"  + "--------------------------");
+        System.out.println(parser.getTranslation());
     }
 }

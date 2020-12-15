@@ -8,14 +8,10 @@ import java.util.Hashtable;
 //                         --> uscita eliminare le variabili
 public class ParserEnvironment {
     public StringBuffer translation;
-    public Hashtable<String, Double> symbolTable;
-    public boolean par;
-    public boolean postfissa;
+    public Hashtable<String, Object> symbolTable;
 
-    public ParserEnvironment(boolean par, boolean postfissa) {
+    public ParserEnvironment() {
         translation = new StringBuffer();
-        symbolTable = new Hashtable<String, Double>(101);
-        this.par = par;
-        this.postfissa = postfissa;
+        symbolTable = new Hashtable<String, Object>(101);
     }
 }
