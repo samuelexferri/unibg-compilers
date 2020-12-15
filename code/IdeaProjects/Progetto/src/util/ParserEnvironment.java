@@ -1,6 +1,8 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+// TODO: Leggere qua sotto
 // + campo lista errori come lista di stringhe
 // Gli errori in output non nell'ordine in cui sono rilevanti ma viceversa
 // una symbol table globale

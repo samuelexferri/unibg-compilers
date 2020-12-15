@@ -14,7 +14,7 @@ options {
 	
 	void printMsg () {
 		nErrori++;
-		System.out.println("Numero errori Trovati: \t" + nErrori);
+		System.out.println("\n*********************************************\n" + "*****\tLexing completato con " + nErrori + " errori\t*****" + "\n*********************************************");
 	}
 }
 
@@ -26,26 +26,50 @@ options {
 }
 
 @members {
-	  ParserEnvironment env;
-      ParserSemantic sem;
+	ParserEnvironment env;
+	ParserSemantic sem;
 
-      void init () {
-        System.out.println("Inizio l'analisi\n");
+    void init() {
+    	System.out.println("Inizio l'analisi\n");
         env = new ParserEnvironment();
         sem = new ParserSemantic(env);
-      }
+    }
 
-      public String getTranslation () {
-        return env.translation.toString();
-      }
+    public String getTranslation() {
+    	return env.translation.toString();
+    }
 
-      public Hashtable<String, Object> getSymbolTable() {
-        return env.symbolTable;
-      }
-      
-      public Hashtable<String, Object> getSymbolTableLocal() {
-        return sem.symbolTableLocal;
-      }
+    public Hashtable<String, Object> getSymbolTable() {
+		return env.symbolTable;
+    }
+    
+    public Hashtable<String, Object> getSymbolTableLocal() {
+	    return sem.symbolTableLocal;
+    }
+    
+    /*
+    // Gestione errori delegata alla semantica
+    // Ovverride del metodo; getErrorHeader e getErrorMessage, sono altri due metodi della classe org.antlr.runtime.Parser da cui deriva il parser
+    public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+		String hdr = getErrorHeader(e);
+	    String msg = getErrorMessage(e, tokenNames);
+
+     	// Accodo il messaggio alla lista degli errori
+        errorList.addErrorMessage("Sintax Error. " + hdr + "\t" + msg);         
+    }
+    */
+    
+    public ArrayList<String> getErrors () {
+    	return sem.errorList;
+  	}
+
+  	public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+		String hdr = " * " + getErrorHeader(e);
+		String msg = " - " + getErrorMessage(e, tokenNames);
+		  
+		Token tk = input.LT(1);
+		sem.handleError(tokenNames, e, hdr, msg);
+  }
 }
 
 
@@ -135,7 +159,7 @@ expression 		returns [double value]
 multiply_exp 	returns [double value]
 				: v1=atom_exp {$value=$v1.value;} (MULT v2=atom_exp {$value=sem.doMul($value, $v2.value);} | DIV v2=atom_exp {$value=sem.doDiv($value, $v2.value);})*
     			;
-
+    			
 atom_exp 		returns [double value]
 				: n=INT {$value = sem.getValue($n);}
 				| n=FLOAT {$value = sem.getValue($n);}

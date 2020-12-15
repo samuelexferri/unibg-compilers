@@ -1,22 +1,29 @@
 package util;
 
+import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class ParserSemantic {
-    ParserEnvironment env;
-    String parOpen, parClose;
-
+    public final int ERR_ON_SYNTAX = 1;
+    public final int ERR_ALREADY_DECLARED = 10;
+    public final int ERR_UNDECLARED = 11;
+    public final int ERR_NO_VALUE = 12;
+    public final int ERR_NO_VALUES = 13;
+    public final int ERR_DIV_BY_0 = 14;
+    public final int ERR_UNDEFINED_OP = 15;
+    public final int ERR_TYPE_MISMATCH = 16;
+    public ArrayList<String> errorList = new ArrayList();
     public Boolean is_global = false;
     public Boolean type_bool = false;
     public Token var_name;
     public Double exp;
-
     public Hashtable<String, Object> symbolTableLocal = new Hashtable();
     public ArrayList<Object> paramsList = new ArrayList();
+    ParserEnvironment env;
+    String parOpen, parClose;
 
     public ParserSemantic(ParserEnvironment e) {
         env = e;
@@ -27,10 +34,10 @@ public class ParserSemantic {
 
         // GLOBAL
         if (is_global) {
-            if (!type_bool && getVarValue(tk)==null) {
+            if (!type_bool && getVarValue(tk) == null) {
                 System.out.println("Variabile '" + tk.getText() + "' non trovata");
                 // TODO: Controllo posticipato
-            } else if (!type_bool && getVarValue(tk)!=null){
+            } else if (!type_bool && getVarValue(tk) != null) {
                 System.out.println("Assegnamento");
 
                 if (value == null)
@@ -38,7 +45,7 @@ public class ParserSemantic {
                 else
                     env.symbolTable.replace(tk.getText(), value); // TODO: Controllo sui tipi
 
-            } else if (type_bool && getVarValue(tk)==null) {
+            } else if (type_bool && getVarValue(tk) == null) {
                 System.out.println("Definizione");
 
                 if (value == null)
@@ -46,16 +53,16 @@ public class ParserSemantic {
                 else
                     env.symbolTable.put(tk.getText(), value); // TODO: Controllo sui tipi
 
-            } else if (type_bool && getVarValue(tk)!=null) {
+            } else if (type_bool && getVarValue(tk) != null) {
                 System.out.println("Variabile '" + tk.getText() + "' ridefinita");
             }
-        // FUNCTION
+            // FUNCTION
         } else {
             System.out.println("LOCAL" + getVarValue(tk));
-            if (!type_bool && getVarValue(tk)==null &&  getVarValueLocal(tk)==null) {
+            if (!type_bool && getVarValue(tk) == null && getVarValueLocal(tk) == null) {
                 System.out.println("Variabile '" + tk.getText() + "' non trovata");
                 // TODO: Controllo posticipato
-            } else if (!type_bool && getVarValueLocal(tk)!=null){
+            } else if (!type_bool && getVarValueLocal(tk) != null) {
                 System.out.println("Assegnamento in locale");
 
                 if (value == null)
@@ -63,7 +70,7 @@ public class ParserSemantic {
                 else
                     symbolTableLocal.replace(tk.getText(), value); // TODO: Controllo sui tipi
 
-            } else if (!type_bool && getVarValueLocal(tk)==null && getVarValue(tk)!=null) {
+            } else if (!type_bool && getVarValueLocal(tk) == null && getVarValue(tk) != null) {
                 System.out.println("Assegnamento in globale");
 
                 if (value == null)
@@ -71,7 +78,7 @@ public class ParserSemantic {
                 else
                     env.symbolTable.replace(tk.getText(), value); // TODO: Controllo sui tipi
 
-            } else if (type_bool && getVarValue(tk)==null &&  getVarValueLocal(tk)==null) {
+            } else if (type_bool && getVarValue(tk) == null && getVarValueLocal(tk) == null) {
                 System.out.println("Definizione in locale");
 
                 if (value == null)
@@ -79,7 +86,7 @@ public class ParserSemantic {
                 else
                     symbolTableLocal.put(tk.getText(), value); // TODO: Controllo sui tipi
 
-            } else if (type_bool && (getVarValue(tk)!=null ||  getVarValueLocal(tk)!=null)) {
+            } else if (type_bool && (getVarValue(tk) != null || getVarValueLocal(tk) != null)) {
                 System.out.println("Variabile '" + tk.getText() + "' ridefinita");
             }
         }
@@ -151,6 +158,44 @@ public class ParserSemantic {
     public void clearParamsList() {
         if (paramsList != null)
             paramsList.clear();
+    }
+
+
+    // Errore semantico
+    public void addErrorMessage(Token tk, int code) {
+        String msg = "Errore Semantico [" + code + "] " + "in (" + tk.getLine() + "," + tk.getCharPositionInLine() + ") - ";
+
+        if (code == ERR_ALREADY_DECLARED)
+            msg += "La variabile <" + tk.getText() + "> è già stata dichiarata";
+        else if (code == ERR_UNDECLARED)
+            msg += "La variabile <" + tk.getText() + "> non è stata dichiarata";
+        else if (code == ERR_TYPE_MISMATCH)
+            msg += "Valore di tipo non compatibile";
+        else if (code == ERR_UNDEFINED_OP)
+            msg += "L'operatore <" + tk.getText() + "> non è definito per i due operandi";
+        else if (code == ERR_DIV_BY_0)
+            msg += "Divisione per 0";
+        else if (code == ERR_NO_VALUE)
+            msg += "La variabile <" + tk.getText() + "> non è stata inizializzata";
+        else if (code == ERR_NO_VALUES)
+            msg += "L'operazione <" + tk.getText() + "> non può essere eseguita perché almeno uno dei due operandi non ha valore";
+        else
+            msg += "Errore non definito sul token <" + tk.getText() + ">";
+
+        errorList.add(msg);
+    }
+
+    // Errore sintattico
+    public void handleError(String[] tokenNames, RecognitionException e, String h, String m) {
+
+        String st = " *** SINTAX ERROR [" + ERR_ON_SYNTAX + "] in " +
+                "(" + e.token.getLine() + ", " + e.token.getCharPositionInLine() + ") - " +
+                "Found ";
+        if (e.token.getType() >= 0)
+            st += tokenNames[e.token.getType()];
+        st += " ('" + e.token.getText() + "')" + m;
+
+        errorList.add(st);
     }
 
     public String translateValue(Token tk) {
