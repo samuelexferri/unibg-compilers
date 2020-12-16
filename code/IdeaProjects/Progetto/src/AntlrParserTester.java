@@ -31,7 +31,10 @@ public class AntlrParserTester {
             if (parser.getErrors().size() == 0) {
                 System.out.println("\n*********************************************\n" + "*****\tParsing completato con successo\t*****" + "\n*********************************************");
 
-                System.out.println("\n--------------------------\n" + "*****\tTraduzione\t*****\n" + "--------------------------");
+                System.out.println("\n--------------------------\n" + "*****\tDebug\t*****\n" + "--------------------------");
+                System.out.println(parser.getDebug());
+
+                System.out.println("--------------------------\n" + "*****\tTraduzione\t*****\n" + "--------------------------");
                 System.out.println(parser.getTranslation());
                 fOut = new FileWriter(fileOut);
                 fOut.append(parser.getTranslation());

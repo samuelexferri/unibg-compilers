@@ -2,20 +2,19 @@
 #include <stdlib.h>
 
 int a;
-int b;
+float b;
 char c;
-int a = 1;
-a = 1;
-int a = 1;
-b = 1;
-int a;
-int c = 1, d = 2;
-int e = 1, f, a;
-f = 1;
 
+//int a = 1;
+int d = 1;
+a = 55;
+
+int e = 1, f = 2, g;
+
+/*
 int main (int j, char k) {
    a = 2; // TODO: Non viene modificata
    int z = 1;
    int y = 1, b = 1;
-
 }
+*/

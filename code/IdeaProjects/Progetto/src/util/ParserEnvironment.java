@@ -1,19 +1,408 @@
 package util;
 
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
-// TODO: Leggere qua sotto
-// + campo lista errori come lista di stringhe
-// Gli errori in output non nell'ordine in cui sono rilevanti ma viceversa
-// una symbol table globale
-// una symbol table locale --> entrata inserire variabili
-//                         --> uscita eliminare le variabili
+
 public class ParserEnvironment {
-    public StringBuffer translation;
-    public Hashtable<String, Object> symbolTable;
+    public final int ERR_ON_SYNTAX = 1;
+    public final int ERR_ALREADY_DECLARED = 10;
+    public final int ERR_UNDECLARED = 11;
+    public final int ERR_NO_VALUE = 12;
+    public final int ERR_NO_VALUES = 13;
+    public final int ERR_DIV_BY_0 = 14;
+    public final int ERR_UNDEFINED_OP = 15;
+    public final int ERR_TYPE_MISMATCH = 16;
+
+    public Hashtable<String, Value> symbolTable = null;
+    public Hashtable<String, Value> symbolTableLocal = null;
+    public ArrayList<String> errorList = null;
+    public StringBuffer debug = null;
+    public StringBuffer translation = null;
+
+    public Token var_name; // Nome della variabile
+    public String var_type; // Tipo della variabile
+
+    // TODO
+    public Double exp;
+    public ArrayList<Value> paramsList = new ArrayList();
+    public Boolean is_global = false;
+    public Boolean type_bool = false;
 
     public ParserEnvironment() {
+        symbolTable = new Hashtable<String, Value>(101); // 101 numero primo
+        symbolTableLocal = new Hashtable<String, Value>(101); // 101 numero primo
+        errorList = new ArrayList<String>();
+        debug = new StringBuffer();
         translation = new StringBuffer();
-        symbolTable = new Hashtable<String, Object>(101);
+    }
+
+    // TODO: Traduzione
+    // Translation
+    public void doTranslation(Value v) {
+        if (v != null) {
+            debug.append("Ho tradotto questa stringa: '" + v.value + "'\n");
+            translation.append(v.value + "\n");
+        }
+    }
+
+    // Concatenazione di strighe
+    public Value concat(Value v1, Value v2) {
+        if (v1 == null || v2 == null)
+            return null;
+        Value value = new Value(v1.type, (v1.value + v2.value), false);
+        return value;
+    }
+
+    // Inserisce una variabile nella symbol table gloable
+    public void addNewVariableGlobal(String type, Token name) {
+        if (type != null && name != null) {
+            if (symbolTable.containsKey(name.getText()))
+                addErrorMessage(name, ERR_ALREADY_DECLARED);
+            else {
+                symbolTable.put(name.getText(), new Value(name.getText(), type));
+                debug.append("Ho dichiarato la variabile '" + name.getText() + "' come '" + type + "'\n");
+            }
+        } else if (type == null && name != null) {
+            checkDeclarationGlobal(name);
+        }
+    }
+
+    // Controlla se una var è in symbol table
+    public void checkDeclarationGlobal(Token var) {
+        if (!isDeclaredGlobal(var))
+            addErrorMessage(var, ERR_UNDECLARED);
+    }
+
+    // Verifica se una var è in symbol table (true)
+    public boolean isDeclaredGlobal(Token var) {
+        if (var == null)
+            return false;
+        return symbolTable.containsKey(var.getText());
+    }
+
+
+    // Assegna un valore ad una variabile (dichiarata)
+    public void assignValueGlobal(Token name_var, Value exp, Token eq) {
+        if (name_var != null && exp != null && eq != null)
+            if (!isDeclaredGlobal(name_var))
+                addErrorMessage(name_var, ERR_UNDECLARED);
+            else {
+                Value var = symbolTable.get(name_var.getText());
+                if (!ValueTypes.isCoherent(exp.type, var.type))
+                    addErrorMessage(name_var, ERR_TYPE_MISMATCH);
+                else {
+                    var.value = exp.value;
+                    debug.append("Ho assegnato alla variabile '" + var.name + "' il valore '" + var.value + "'\n");
+                }
+            }
+    }
+
+    // Valore temporaneo
+    public Value setValue(Token vl, String type, String expectedType) {
+        String value = vl.getText();
+        if (!ValueTypes.isCoherent(type, expectedType)) {
+            type = ValueTypes.UNDEFINED_STR;
+            addErrorMessage(vl, ERR_TYPE_MISMATCH);
+        }
+        if (type.equals(ValueTypes.STRING_STR))
+            value = value.substring(1, value.lastIndexOf("\""));
+        return new Value(type, value, false);
+    }
+
+    // Recupera il valore di una variabile dichiarata
+    public Value getDeclaredValueGlobal(Token var, String expectedType) {
+        Value value = null;
+        if (!isDeclaredGlobal(var)) {
+            addErrorMessage(var, ERR_UNDECLARED);
+            value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // creo un oggetto fittizio di comodo
+        } else {
+            value = symbolTable.get(var.getText());  // recupero il valore della variabile dalla symboltable
+            if (!value.isInitialized())
+                addErrorMessage(var, ERR_NO_VALUE);
+            if (!ValueTypes.isCoherent(value.type, expectedType))
+                addErrorMessage(var, ERR_TYPE_MISMATCH);
+        }
+
+        return value;
+    }
+
+    // TODO: Distinguerlo dal locale in assignment con un booleano?
+    // Restituisce il tipo di una variabile
+    public String getVarTypeGlobal(Token var) {
+        if (isDeclaredGlobal(var))
+            return symbolTable.get(var.getText()).type;
+        return ValueTypes.UNDEFINED_STR;
+    }
+
+    // Esegue l'operazione +
+    public Value doAdd(Token op, Value v1, Value v2) {
+        if (op == null || v1 == null || v2 == null)
+            return null;
+        String value;
+        String type = ValueTypes.returnType("+", v1.type, v2.type);
+        if (type.equals(ValueTypes.UNDEFINED_STR)) {
+            addErrorMessage(op, ERR_UNDEFINED_OP);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+
+        if (!v1.isInitialized() || !v2.isInitialized()) {
+            addErrorMessage(op, ERR_NO_VALUES);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+
+        if (type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
+            value = v1.value + v2.value;
+        } else if (type.equals(ValueTypes.FLOAT_STR) || type.equals(ValueTypes.NUMERIC_STR))
+            value = new Float(Float.parseFloat(v1.value) + Float.parseFloat(v2.value)).toString();
+        else  // if (type.equals(ValueTypes.INT_STR))
+            value = new Integer(Integer.parseInt(v1.value) + Integer.parseInt(v2.value)).toString();
+
+        return new Value(type, value, false);
+    }
+
+    // Esegue l'operazione -
+    public Value doSub(Token op, Value v1, Value v2) {
+        if (op == null || v1 == null || v2 == null)
+            return null;
+        String value;
+        String type = ValueTypes.returnType("-", v1.type, v2.type);
+        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
+            addErrorMessage(op, ERR_UNDEFINED_OP);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+
+        if (!v1.isInitialized() || !v2.isInitialized()) {
+            addErrorMessage(op, ERR_NO_VALUES);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+
+        if (type.equals(ValueTypes.FLOAT_STR) || type.equals(ValueTypes.NUMERIC_STR))
+            value = new Float(Float.parseFloat(v1.value) - Float.parseFloat(v2.value)).toString();
+        else  // if (type.equals(ValueTypes.INT_STR))
+            value = new Integer(Integer.parseInt(v1.value) - Integer.parseInt(v2.value)).toString();
+        return new Value(type, value, false);
+    }
+
+    // Esegue l'operazione *
+    public Value doMul(Token op, Value v1, Value v2) {
+        if (op == null || v1 == null || v2 == null)
+            return null;
+        String value;
+        String type = ValueTypes.returnType("*", v1.type, v2.type);
+        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
+            addErrorMessage(op, ERR_UNDEFINED_OP);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+
+        if (!v1.isInitialized() || !v2.isInitialized()) {
+            addErrorMessage(op, ERR_NO_VALUES);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+
+        if (type.equals(ValueTypes.FLOAT_STR) || type.equals(ValueTypes.NUMERIC_STR))
+            value = new Float(Float.parseFloat(v1.value) * Float.parseFloat(v2.value)).toString();
+        else  // if (type.equals(ValueTypes.INT_STR))
+            value = new Integer(Integer.parseInt(v1.value) * Integer.parseInt(v2.value)).toString();
+        return new Value(type, value, false);
+    }
+
+    // Esegue l'operazione /
+    public Value doDiv(Token op, Value v1, Value v2) {
+        if (op == null || v1 == null || v2 == null)
+            return null;
+        String value;
+        String type = ValueTypes.returnType("/", v1.type, v2.type);
+
+        if (!v1.isInitialized() || !v2.isInitialized()) {
+            addErrorMessage(op, ERR_NO_VALUES);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+
+        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
+            addErrorMessage(op, ERR_UNDEFINED_OP);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+        if (Float.parseFloat(v2.value) == 0) {
+            addErrorMessage(op, ERR_DIV_BY_0);
+            return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
+        }
+        if (type.equals(ValueTypes.FLOAT_STR) || type.equals(ValueTypes.NUMERIC_STR))
+            value = new Float(Float.parseFloat(v1.value) / Float.parseFloat(v2.value)).toString();
+        else  // if (type.equals(ValueTypes.INT_STR))
+            value = new Integer(Integer.parseInt(v1.value) / Integer.parseInt(v2.value)).toString();
+        return new Value(type, value, false);
+    }
+
+/*
+    public void registerVar(Boolean is_function, Token tk, Double value, Boolean type_bool) {
+        System.out.println("[registerVar " + type_bool.toString() + " " + value + " " + tk.getText() + " getVarValue(tk)=" + getVarValue(tk) + "]");
+
+        // GLOBAL
+        if (is_global) {
+            if (!type_bool && getVarValue(tk) == null) {
+                System.out.println("Variabile '" + tk.getText() + "' non trovata");
+                // TODO: Controllo posticipato
+            } else if (!type_bool && getVarValue(tk) != null) {
+                System.out.println("Assegnamento");
+
+                if (value == null)
+                    symbolTable.replace(tk.getText(), "NULL"); // TODO: Controllo sui tipi
+                else
+                    symbolTable.replace(tk.getText(), value); // TODO: Controllo sui tipi
+
+            } else if (type_bool && getVarValue(tk) == null) {
+                System.out.println("Definizione");
+
+                if (value == null)
+                    symbolTable.put(tk.getText(), "NULL"); // TODO: Controllo sui tipi
+                else
+                    symbolTable.put(tk.getText(), value); // TODO: Controllo sui tipi
+
+            } else if (type_bool && getVarValue(tk) != null) {
+                System.out.println("Variabile '" + tk.getText() + "' ridefinita");
+            }
+            // FUNCTION
+        } else {
+            System.out.println("LOCAL" + getVarValue(tk));
+            if (!type_bool && getVarValue(tk) == null && getVarValueLocal(tk) == null) {
+                System.out.println("Variabile '" + tk.getText() + "' non trovata");
+                // TODO: Controllo posticipato
+            } else if (!type_bool && getVarValueLocal(tk) != null) {
+                System.out.println("Assegnamento in locale");
+
+                if (value == null)
+                    symbolTableLocal.replace(tk.getText(), "NULL"); // TODO: Controllo sui tipi
+                else
+                    symbolTableLocal.replace(tk.getText(), value); // TODO: Controllo sui tipi
+
+            } else if (!type_bool && getVarValueLocal(tk) == null && getVarValue(tk) != null) {
+                System.out.println("Assegnamento in globale");
+
+                if (value == null)
+                    symbolTable.replace(tk.getText(), "NULL"); // TODO: Controllo sui tipi
+                else
+                    symbolTable.replace(tk.getText(), value); // TODO: Controllo sui tipi
+
+            } else if (type_bool && getVarValue(tk) == null && getVarValueLocal(tk) == null) {
+                System.out.println("Definizione in locale");
+
+                if (value == null)
+                    symbolTableLocal.put(tk.getText(), "NULL"); // TODO: Controllo sui tipi
+                else
+                    symbolTableLocal.put(tk.getText(), value); // TODO: Controllo sui tipi
+
+            } else if (type_bool && (getVarValue(tk) != null || getVarValueLocal(tk) != null)) {
+                System.out.println("Variabile '" + tk.getText() + "' ridefinita");
+            }
+        }
+    }
+
+    // public Boolean checkType(Token tk, float value) // TODO: Controllo sui tipi
+
+    public double getValue(Token tk) {
+        return new Double(tk.getText()); // TODO: Double
+    }
+
+    public String getVarValue(Token tk) {
+        if (symbolTable.containsKey(tk.getText()))
+            return symbolTable.get(tk.getText()).toString();
+
+        return null;
+    }
+
+    public String getVarValueLocal(Token tk) {
+        if (symbolTableLocal.containsKey(tk.getText()))
+            return symbolTableLocal.get(tk.getText()).toString();
+
+        return null;
+    }
+
+    public double doAdd(double v1, double v2) {
+        return v1 + v2;
+    }
+
+    public double doSub(double v1, double v2) {
+        return v1 - v2;
+    }
+
+    public double doMul(double v1, double v2) {
+        return v1 * v2;
+    }
+
+    public double doDiv(double v1, double v2) {
+        if (v2 != 0)
+            return v1 / v2;
+
+        System.out.println("Divisione per zero");
+        return 0.0;
+    }
+
+    public void newFunction() {
+        System.out.println("---NEW FUNCTION---");
+        if (type_bool == false) {
+            System.out.println("Funzione senza aver specificato il tipo");
+            return;
+        }
+
+        if (symbolTableLocal != null)
+            symbolTableLocal.clear();
+
+        // TODO: Controllo parametri
+
+        if (paramsList != null) {
+            for (Object var : paramsList) {
+                symbolTableLocal.put(var.toString(), "NULL");
+            }
+        }
+    }
+
+    public void addParamsList(Token tk) {
+        paramsList.add(tk.getText());
+    }
+
+    public void clearParamsList() {
+        if (paramsList != null)
+            paramsList.clear();
+    }
+    */
+
+    // Errore semantico
+    public void addErrorMessage(Token tk, int code) {
+        String msg = " Errore Semantico [" + code + "] " + "in (" + tk.getLine() + "," + tk.getCharPositionInLine() + ") - ";
+
+        if (code == ERR_ALREADY_DECLARED)
+            msg += "La variabile <" + tk.getText() + "> è già stata dichiarata";
+        else if (code == ERR_UNDECLARED)
+            msg += "La variabile <" + tk.getText() + "> non è stata dichiarata";
+        else if (code == ERR_TYPE_MISMATCH)
+            msg += "Valore di tipo non compatibile";
+        else if (code == ERR_UNDEFINED_OP)
+            msg += "L'operatore <" + tk.getText() + "> non è definito per i due operandi";
+        else if (code == ERR_DIV_BY_0)
+            msg += "Divisione per 0";
+        else if (code == ERR_NO_VALUE)
+            msg += "La variabile <" + tk.getText() + "> non è stata inizializzata";
+        else if (code == ERR_NO_VALUES)
+            msg += "L'operazione <" + tk.getText() + "> non può essere eseguita perché almeno uno dei due operandi non ha valore";
+        else
+            msg += "Errore non definito sul token <" + tk.getText() + ">";
+
+        errorList.add(msg);
+    }
+
+    // Errore sintattico
+    public void handleError(String[] tokenNames, RecognitionException e, String h, String m) {
+        String st = " *** SINTAX ERROR [" + ERR_ON_SYNTAX + "] in " +
+                "(" + e.token.getLine() + ", " + e.token.getCharPositionInLine() + ") - " +
+                "Found ";
+
+        if (e.token.getType() >= 0)
+            st += tokenNames[e.token.getType()];
+        st += " ('" + e.token.getText() + "')" + m;
+
+        errorList.add(st);
     }
 }

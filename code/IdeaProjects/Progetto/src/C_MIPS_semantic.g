@@ -12,7 +12,7 @@ options {
 @lexer::members {
 	int nErrori = 0;
 	
-	void printMsg () {
+	void printMsg() {
 		nErrori++;
 		System.out.println("\n*********************************************\n" + "*****\tLexing completato con " + nErrori + " errori\t*****" + "\n*********************************************");
 	}
@@ -27,40 +27,30 @@ options {
 
 @members {
 	ParserEnvironment env;
-	ParserSemantic sem;
 
     void init() {
     	System.out.println("Inizio l'analisi\n");
         env = new ParserEnvironment();
-        sem = new ParserSemantic(env);
     }
 
-    public String getTranslation() {
-    	return env.translation.toString();
-    }
-
-    public Hashtable<String, Object> getSymbolTable() {
+    public Hashtable<String, Value> getSymbolTable() {
 		return env.symbolTable;
     }
     
-    public Hashtable<String, Object> getSymbolTableLocal() {
-	    return sem.symbolTableLocal;
+    public Hashtable<String, Value> getSymbolTableLocal() {
+	    return env.symbolTableLocal;
     }
-    
-    /*
-    // Gestione errori delegata alla semantica
-    // Ovverride del metodo; getErrorHeader e getErrorMessage, sono altri due metodi della classe org.antlr.runtime.Parser da cui deriva il parser
-    public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
-		String hdr = getErrorHeader(e);
-	    String msg = getErrorMessage(e, tokenNames);
+  
+	public String getDebug() {
+		return env.debug.toString();
+	}
+	
+	public String getTranslation() {
+    	return env.translation.toString();
+    }
 
-     	// Accodo il messaggio alla lista degli errori
-        errorList.addErrorMessage("Sintax Error. " + hdr + "\t" + msg);         
-    }
-    */
-    
-    public ArrayList<String> getErrors () {
-    	return sem.errorList;
+    public ArrayList<String> getErrors() {
+    	return env.errorList;
   	}
 
   	public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
@@ -68,7 +58,7 @@ options {
 		String msg = " - " + getErrorMessage(e, tokenNames);
 		  
 		Token tk = input.LT(1);
-		sem.handleError(tokenNames, e, hdr, msg);
+		env.handleError(tokenNames, e, hdr, msg);
   }
 }
 
@@ -81,33 +71,33 @@ start			: include* global* EOF
 include			: INCLUDE LT WORD (DOT WORD)? GT
 				;
 				
-global			: {sem.is_global = true;} funct_void
-				| {sem.is_global = true; sem.type_bool=false;} (type_name {sem.type_bool=true;})? ( pointer SEMICOL 
-				     		 | var_name=WORD {sem.var_name = $var_name;} ((ass_multiple
-				     		 		 | vector) SEMICOL
-									 | funct_params))
+global			: funct_void
+				| {env.var_type = null;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
+				     		 		| name=WORD {env.var_name = $name; env.addNewVariableGlobal(env.var_type, $name);} ((ass_multiple
+				     		 		 	| vector) SEMICOL
+									 	| funct_params))
 				;
 				
 funct_void		: VOID WORD funct_params 
 				;
 				
-funct_params 	: {sem.is_global = false;} LPAREN ({sem.clearParamsList();} type_name p=WORD {sem.addParamsList($p);} (COMMA type_name p=WORD {sem.addParamsList($p);})*)? RPAREN {sem.newFunction();} codeblock
+funct_params 	: LPAREN (type_name WORD (COMMA type_name WORD)*)? RPAREN codeblock
 				;
 				
-assignment		: ((ADD | SUB | MULT | DIV)? ASS exp=expression {sem.exp = $exp.value;})
+assignment		: {env.var_type = env.getVarTypeGlobal(env.var_name);}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValueGlobal(env.var_name, exp, eq);}) // TODO += -=...
 				;
 
-ass_multiple	: {sem.exp = null;} assignment? {sem.registerVar(sem.is_global, sem.var_name, sem.exp, sem.type_bool);} (COMMA var_name=WORD {sem.var_name = $var_name; sem.exp = null;} assignment? {sem.registerVar(sem.is_global, sem.var_name, sem.exp, sem.type_bool);})* // Assegnamento multiplo: int a, b=2, c...
+ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariableGlobal(env.var_type, $name);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
 				;
-				
-ass_vector		: ASS ((LCURL expression (COMMA expression)* RCURL) 
-				| expression)
+							
+ass_vector		: ASS ((LCURL expression[null] (COMMA expression[null])* RCURL) 
+				| expression[null])
 				;
 				
 vector 			: LBRACK INT? RBRACK ass_vector?
 				;
 				
-pointer			: MULT (WORD | LPAREN expression RPAREN) assignment? // Puntatori: *p o *(p+1)
+pointer			: MULT (WORD | LPAREN expression[null] RPAREN) assignment? // Puntatori: *p o *(p+1)
 				;
 					
 call_function 	: LPAREN (call_args (COMMA call_args)*)? RPAREN
@@ -129,8 +119,8 @@ statement 		: local
 				| returnStat
 				;
 
-local			: {sem.type_bool=false;} (type_name {sem.type_bool=true;})? ( pointer
-				     		 | var_name=WORD {sem.var_name = $var_name;} (ass_multiple
+local			: (type_name)? (pointer
+				     		 	| var_name=WORD (ass_multiple
 				     		 		 | vector 
 									 | call_function)) SEMICOL
 				;
@@ -144,36 +134,41 @@ whileStat		: WHILE LPAREN condition RPAREN statement
 forStat			: FOR LPAREN initialization SEMICOL condition SEMICOL increment RPAREN statement 
 				;
 
-returnStat		: RETURN atom_exp SEMICOL 
+returnStat		: RETURN atom_exp[null] SEMICOL 
 				;
 
-type_name		: K_INT 
-				| K_FLOAT 
-				| K_CHAR
+type_name		returns [Token token]
+				: (tk=K_INT
+				| tk=K_FLOAT 
+				| tk=K_CHAR) {token = tk;}
 				; 
 
-expression 		returns [double value]
-				: v1=multiply_exp {$value=$v1.value;} (ADD v2=multiply_exp {$value=sem.doAdd($value, $v2.value);} | SUB v2=multiply_exp {$value=sem.doSub($value, $v2.value);})*
+expression 		[String type] returns [Value value]
+				: v1=multiply_exp[type] ( op=ADD v2=multiply_exp[type] {v1 = env.doAdd($op, v1, v2);} 
+										| op=SUB v2=multiply_exp[type] {v1 = env.doSub($op, v1, v2);})* 
+										{value = v1;}
     			;
     
-multiply_exp 	returns [double value]
-				: v1=atom_exp {$value=$v1.value;} (MULT v2=atom_exp {$value=sem.doMul($value, $v2.value);} | DIV v2=atom_exp {$value=sem.doDiv($value, $v2.value);})*
+multiply_exp 	[String type] returns [Value value]
+				: v1=atom_exp[type] ( op=MULT v2=atom_exp[type] {v1 = env.doMul($op, v1, v2);} 
+									| op=DIV v2=atom_exp[type] {v1 = env.doDiv($op, v1, v2);})* 
+									{value = v1;}
     			;
     			
-atom_exp 		returns [double value]
-				: n=INT {$value = sem.getValue($n);}
-				| n=FLOAT {$value = sem.getValue($n);}
-				| CHAR_QUOTE {$value = 777;}
-				| WORD ((LBRACK INT? RBRACK) | call_function)? {$value = 777;} // Variabile o Vettore
-				| MULT WORD {$value = 777;} // Puntatore
-				| AMP WORD {$value = 777;} // Indirizzo
-    			| LPAREN expression RPAREN {$value = 777;} // Parentes
+atom_exp 		[String type] returns [Value value]
+				: tk=INT {value = env.setValue($tk, ValueTypes.INT_STR, type);}
+				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
+				| tk=CHAR_QUOTE // TODO
+				| WORD ((LBRACK INT? RBRACK) | call_function | {value = env.getDeclaredValueGlobal($tk, type);}) // Variabile o Vettore // TODO
+				| MULT WORD // Puntatore // TODO
+				| AMP WORD // Indirizzo // TODO
+    			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi
     			;
 
 initialization	: type_name? WORD assignment?
 				;
 
-condition		: expression compare expression
+condition		: expression[null] compare expression[null]
 				;
 				
 increment		: WORD assignment
