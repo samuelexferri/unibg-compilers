@@ -11,12 +11,18 @@ a = 5;
 
 int e = 1, f = 2, g;
 
+int test() {
+    // return 1; // TODO
+}
+
 int main (int j, char k) {
     int h = 3;
     h = 5;
     a = 7;
     //z = 5; // Errore, globali definite prima (sequenziale)
-    test(); // TODO Verificare e Return
+    float ret = test(); // TODO Verificare il value INT FLOAT CHAR
+
+    //a = test() + 1; // TODO Calcolare il valore di return, per ora solo controllo sui tipi ritornati
 }
 
 void function (int l, char m) {

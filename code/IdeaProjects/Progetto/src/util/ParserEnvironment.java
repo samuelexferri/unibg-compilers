@@ -19,6 +19,8 @@ public class ParserEnvironment {
     public final int ERR_MAIN_TYPE_NOT_INT = 104;
     public final int ERR_UNDECLARED = 11;
     public final int ERR_FUNC_UNDECLARED = 111;
+    public final int ERR_TYPE_CALL_FUNCT = 112;
+    public final int ERR_TYPE_CALL_FUNCT_RETURN = 113;
     public final int ERR_NO_VALUE = 12;
     public final int ERR_NO_VALUES = 13;
     public final int ERR_DIV_BY_0 = 14;
@@ -34,6 +36,7 @@ public class ParserEnvironment {
     public Token var_name; // Nome della variabile
     public String var_type; // Tipo della variabile
     public Token funct_name; // Nome della funzione
+    public String funct_type; // Nome della funzione
     public Boolean is_local; // Indica se siamo all'interno di una funzione
 
     // TODO
@@ -200,6 +203,13 @@ public class ParserEnvironment {
         return new Value(type, value, false);
     }
 
+    // Valore temporaneo per le call function
+    public void checkFunctionReturnType(String func_type, String expectedType) {
+
+        if (!func_type.matches(expectedType))
+            addErrorMessage(Token.SKIP_TOKEN, ERR_TYPE_CALL_FUNCT_RETURN); // Token inutile
+    }
+
     // Recupera il valore di una variabile dichiarata
     public Value getDeclaredValue(Token var, String expectedType) {
         Value value = null;
@@ -304,6 +314,17 @@ public class ParserEnvironment {
 
         if (!var.type.matches("int"))
             addErrorMessage(tk, ERR_MAIN_TYPE_NOT_INT);
+    }
+
+    // Verifica una chiamata di funzione
+    public void checkCallFunction(String type, Token name) {
+        if (type != null)
+            addErrorMessage(name, ERR_TYPE_CALL_FUNCT);
+        else {
+            if (!symbolTable.containsKey(name.getText())) {
+                addErrorMessage(name, ERR_FUNC_UNDECLARED);
+            }
+        }
     }
 
     // OPERAZIONI
@@ -426,6 +447,10 @@ public class ParserEnvironment {
             msg += "La funzione <" + tk.getText() + "> è già stata dichiarata";
         else if (code == ERR_FUNC_UNDECLARED)
             msg += "La funzione <" + tk.getText() + "> non è stata dichiarata";
+        else if (code == ERR_TYPE_CALL_FUNCT)
+            msg += "La chiamta di funzione <" + tk.getText() + "> non deve avere il type";
+        else if (code == ERR_TYPE_CALL_FUNCT_RETURN)
+            msg += "La chiamta di funzione non ha lo stesso type dell'expression attesa";
         else if (code == ERR_CALL_FUNC_IN_GLOBAL)
             msg += "La chiamata di funzione <" + tk.getText() + "> non può essere fatta globalmente";
         else if (code == ERR_MAIN_NOT_FOUND)

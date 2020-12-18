@@ -120,10 +120,10 @@ statement 		: local
 				| returnStat
 				;
 
-local			: {env.var_type = null; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
+local			: {env.var_type = null; env.funct_type = null; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
 													     		 												  | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
 																									     		 		 	  | vector 
-																														      | call_function)) SEMICOL
+																														      | {env.var_name = $name; env.funct_name = $name; env.funct_type = env.getVarType(env.funct_name); env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
 				;
 			  	
 ifStat			: IF LPAREN condition RPAREN codeblock (ELSE statement)? // TODO: Codeblock, Operatori logici
@@ -160,7 +160,9 @@ atom_exp 		[String type] returns [Value value]
 				: tk=INT {value = env.setValue($tk, ValueTypes.INT_STR, type);}
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
 				| tk=CHAR_QUOTE // TODO
-				| WORD ((LBRACK INT? RBRACK) | call_function | {value = env.getDeclaredValue($tk, type);}) // Variabile o Vettore // TODO
+				| name=WORD ((LBRACK INT? RBRACK) 
+					   | call_function {env.funct_name = $name; env.funct_type = env.getVarType($name); env.checkFunctionReturnType(env.funct_type, type); value = env.setValue($name, ValueTypes.INT_STR, type);} // TODO FITTIZIO IL VALUEEEEEEEEEEEEEEEEEEEEEEE
+					   | {value = env.getDeclaredValue($tk, type);}) // Variabile o Vettore // TODO
 				| MULT WORD // Puntatore // TODO
 				| AMP WORD // Indirizzo // TODO
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi

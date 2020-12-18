@@ -1,1 +1,5 @@
-Nessun errore!
+
+-----------------------------
+*****	Errori: #	1	*****
+-----------------------------
+1: Errore Semantico [113] in (0,-1) - La chiamta di funzione non ha lo stesso type dell'expression attesa
