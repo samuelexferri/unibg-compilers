@@ -13,6 +13,7 @@ public class ValueTypes {
     public static final String NUMERIC_STR = "NUMERIC";
     public static final String INT_STR = "int";
     public static final String FLOAT_STR = "float";
+    public static final String CHAR_STR = "char";
     public static final String STRING_STR = "String";
     public static final String ANYVALUE_STR = "ANYVALUE";
 
@@ -46,8 +47,9 @@ public class ValueTypes {
     // Associazione tra tipi di dati e codici
     public static String[] stringTypes = new String[]{
             UNDEFINED_STR, NUMERIC_STR,
-            INT_STR, FLOAT_STR,
-            STRING_STR, ANYVALUE_STR
+            INT_STR, FLOAT_STR, CHAR_STR,
+            //STRING_STR,  // TODO
+            ANYVALUE_STR
     };
 
     public static Hashtable<String, Integer> types;

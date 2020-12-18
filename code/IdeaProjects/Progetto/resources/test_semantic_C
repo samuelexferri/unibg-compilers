@@ -12,7 +12,11 @@ a = 5;
 int e = 1, f = 2, g;
 
 int test() {
-    // return 1; // TODO
+    // return 1; // TODO Return delle funzioni
+}
+
+char funct_char() {
+
 }
 
 int main (int j, char k) {
@@ -20,9 +24,18 @@ int main (int j, char k) {
     h = 5;
     a = 7;
     //z = 5; // Errore, globali definite prima (sequenziale)
-    float ret = test(); // TODO Verificare il value INT FLOAT CHAR
+    int ret = test() + 1; // TODO Valori fittizi del return
+
+    test();
+
+    char a = 'a' + 'a';
+    // char a = 'a' - 'a'; // Errore
+
+    char f = funct_char() + 'a';
 
     //a = test() + 1; // TODO Calcolare il valore di return, per ora solo controllo sui tipi ritornati
+
+    return 0; // TODO Obbligatorio return 0 nel main
 }
 
 void function (int l, char m) {

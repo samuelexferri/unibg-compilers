@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g 2020-12-18 15:12:31
+// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g 2020-12-18 15:38:31
 
 	// package myCompiler;
 
@@ -1880,12 +1880,13 @@ public class C_MIPS_semanticParser extends Parser {
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:162:7: tk= CHAR_QUOTE
 					{
 					tk=(Token)match(input,CHAR_QUOTE,FOLLOW_CHAR_QUOTE_in_atom_exp1219); 
+					value = env.setValue(tk, ValueTypes.CHAR_STR, type);
 					}
 					break;
 				case 4 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:163:7: name= WORD ( ( LBRACK ( INT )? RBRACK ) | call_function |)
 					{
-					name=(Token)match(input,WORD,FOLLOW_WORD_in_atom_exp1230); 
+					name=(Token)match(input,WORD,FOLLOW_WORD_in_atom_exp1231); 
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:163:17: ( ( LBRACK ( INT )? RBRACK ) | call_function |)
 					int alt37=3;
 					switch ( input.LA(1) ) {
@@ -1929,7 +1930,7 @@ public class C_MIPS_semanticParser extends Parser {
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:163:18: ( LBRACK ( INT )? RBRACK )
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:163:19: LBRACK ( INT )? RBRACK
 							{
-							match(input,LBRACK,FOLLOW_LBRACK_in_atom_exp1234); 
+							match(input,LBRACK,FOLLOW_LBRACK_in_atom_exp1235); 
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:163:26: ( INT )?
 							int alt36=2;
 							int LA36_0 = input.LA(1);
@@ -1940,13 +1941,13 @@ public class C_MIPS_semanticParser extends Parser {
 								case 1 :
 									// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:163:26: INT
 									{
-									match(input,INT,FOLLOW_INT_in_atom_exp1236); 
+									match(input,INT,FOLLOW_INT_in_atom_exp1237); 
 									}
 									break;
 
 							}
 
-							match(input,RBRACK,FOLLOW_RBRACK_in_atom_exp1239); 
+							match(input,RBRACK,FOLLOW_RBRACK_in_atom_exp1240); 
 							}
 
 							}
@@ -1954,11 +1955,11 @@ public class C_MIPS_semanticParser extends Parser {
 						case 2 :
 							// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:164:11: call_function
 							{
-							pushFollow(FOLLOW_call_function_in_atom_exp1253);
+							pushFollow(FOLLOW_call_function_in_atom_exp1254);
 							call_function();
 							state._fsp--;
 
-							env.funct_name = name; env.funct_type = env.getVarType(name); env.checkFunctionReturnType(env.funct_type, type); value = env.setValue(name, ValueTypes.INT_STR, type);
+							env.funct_name = name; env.funct_type = env.getVarType(name); env.checkFunctionReturnType(env.funct_type, type); value = env.setValueCallFunction(name, env.funct_type, type);
 							}
 							break;
 						case 3 :
@@ -1975,27 +1976,27 @@ public class C_MIPS_semanticParser extends Parser {
 				case 5 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:166:7: MULT WORD
 					{
-					match(input,MULT,FOLLOW_MULT_in_atom_exp1278); 
-					match(input,WORD,FOLLOW_WORD_in_atom_exp1280); 
+					match(input,MULT,FOLLOW_MULT_in_atom_exp1279); 
+					match(input,WORD,FOLLOW_WORD_in_atom_exp1281); 
 					}
 					break;
 				case 6 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:167:7: AMP WORD
 					{
-					match(input,AMP,FOLLOW_AMP_in_atom_exp1289); 
-					match(input,WORD,FOLLOW_WORD_in_atom_exp1291); 
+					match(input,AMP,FOLLOW_AMP_in_atom_exp1290); 
+					match(input,WORD,FOLLOW_WORD_in_atom_exp1292); 
 					}
 					break;
 				case 7 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:168:10: LPAREN v= expression[type] RPAREN
 					{
-					match(input,LPAREN,FOLLOW_LPAREN_in_atom_exp1303); 
-					pushFollow(FOLLOW_expression_in_atom_exp1307);
+					match(input,LPAREN,FOLLOW_LPAREN_in_atom_exp1304); 
+					pushFollow(FOLLOW_expression_in_atom_exp1308);
 					v=expression(type);
 					state._fsp--;
 
 					 value = v;
-					match(input,RPAREN,FOLLOW_RPAREN_in_atom_exp1312); 
+					match(input,RPAREN,FOLLOW_RPAREN_in_atom_exp1313); 
 					}
 					break;
 
@@ -2031,7 +2032,7 @@ public class C_MIPS_semanticParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:171:18: type_name
 					{
-					pushFollow(FOLLOW_type_name_in_initialization1328);
+					pushFollow(FOLLOW_type_name_in_initialization1329);
 					type_name();
 					state._fsp--;
 
@@ -2040,7 +2041,7 @@ public class C_MIPS_semanticParser extends Parser {
 
 			}
 
-			match(input,WORD,FOLLOW_WORD_in_initialization1331); 
+			match(input,WORD,FOLLOW_WORD_in_initialization1332); 
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:171:34: ( assignment )?
 			int alt40=2;
 			int LA40_0 = input.LA(1);
@@ -2051,7 +2052,7 @@ public class C_MIPS_semanticParser extends Parser {
 				case 1 :
 					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:171:34: assignment
 					{
-					pushFollow(FOLLOW_assignment_in_initialization1333);
+					pushFollow(FOLLOW_assignment_in_initialization1334);
 					assignment();
 					state._fsp--;
 
@@ -2082,15 +2083,15 @@ public class C_MIPS_semanticParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:174:12: ( expression[null] compare expression[null] )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:174:14: expression[null] compare expression[null]
 			{
-			pushFollow(FOLLOW_expression_in_condition1348);
+			pushFollow(FOLLOW_expression_in_condition1349);
 			expression(null);
 			state._fsp--;
 
-			pushFollow(FOLLOW_compare_in_condition1351);
+			pushFollow(FOLLOW_compare_in_condition1352);
 			compare();
 			state._fsp--;
 
-			pushFollow(FOLLOW_expression_in_condition1353);
+			pushFollow(FOLLOW_expression_in_condition1354);
 			expression(null);
 			state._fsp--;
 
@@ -2116,8 +2117,8 @@ public class C_MIPS_semanticParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:177:12: ( WORD assignment )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:177:14: WORD assignment
 			{
-			match(input,WORD,FOLLOW_WORD_in_increment1372); 
-			pushFollow(FOLLOW_assignment_in_increment1374);
+			match(input,WORD,FOLLOW_WORD_in_increment1373); 
+			pushFollow(FOLLOW_assignment_in_increment1375);
 			assignment();
 			state._fsp--;
 
@@ -2317,24 +2318,24 @@ public class C_MIPS_semanticParser extends Parser {
 	public static final BitSet FOLLOW_INT_in_atom_exp1195 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_FLOAT_in_atom_exp1207 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_CHAR_QUOTE_in_atom_exp1219 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WORD_in_atom_exp1230 = new BitSet(new long[]{0x0000000240000002L});
-	public static final BitSet FOLLOW_LBRACK_in_atom_exp1234 = new BitSet(new long[]{0x0000008004000000L});
-	public static final BitSet FOLLOW_INT_in_atom_exp1236 = new BitSet(new long[]{0x0000008000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_atom_exp1239 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_call_function_in_atom_exp1253 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MULT_in_atom_exp1278 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_WORD_in_atom_exp1280 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AMP_in_atom_exp1289 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_WORD_in_atom_exp1291 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_atom_exp1303 = new BitSet(new long[]{0x0040000A04080220L});
-	public static final BitSet FOLLOW_expression_in_atom_exp1307 = new BitSet(new long[]{0x0000040000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_atom_exp1312 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_type_name_in_initialization1328 = new BitSet(new long[]{0x0040000000000000L});
-	public static final BitSet FOLLOW_WORD_in_initialization1331 = new BitSet(new long[]{0x0000800800004092L});
-	public static final BitSet FOLLOW_assignment_in_initialization1333 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expression_in_condition1348 = new BitSet(new long[]{0x0000001500640000L});
-	public static final BitSet FOLLOW_compare_in_condition1351 = new BitSet(new long[]{0x0040000A04080220L});
-	public static final BitSet FOLLOW_expression_in_condition1353 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WORD_in_increment1372 = new BitSet(new long[]{0x0000800800004090L});
-	public static final BitSet FOLLOW_assignment_in_increment1374 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WORD_in_atom_exp1231 = new BitSet(new long[]{0x0000000240000002L});
+	public static final BitSet FOLLOW_LBRACK_in_atom_exp1235 = new BitSet(new long[]{0x0000008004000000L});
+	public static final BitSet FOLLOW_INT_in_atom_exp1237 = new BitSet(new long[]{0x0000008000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_atom_exp1240 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_call_function_in_atom_exp1254 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MULT_in_atom_exp1279 = new BitSet(new long[]{0x0040000000000000L});
+	public static final BitSet FOLLOW_WORD_in_atom_exp1281 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AMP_in_atom_exp1290 = new BitSet(new long[]{0x0040000000000000L});
+	public static final BitSet FOLLOW_WORD_in_atom_exp1292 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_atom_exp1304 = new BitSet(new long[]{0x0040000A04080220L});
+	public static final BitSet FOLLOW_expression_in_atom_exp1308 = new BitSet(new long[]{0x0000040000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_atom_exp1313 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_type_name_in_initialization1329 = new BitSet(new long[]{0x0040000000000000L});
+	public static final BitSet FOLLOW_WORD_in_initialization1332 = new BitSet(new long[]{0x0000800800004092L});
+	public static final BitSet FOLLOW_assignment_in_initialization1334 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expression_in_condition1349 = new BitSet(new long[]{0x0000001500640000L});
+	public static final BitSet FOLLOW_compare_in_condition1352 = new BitSet(new long[]{0x0040000A04080220L});
+	public static final BitSet FOLLOW_expression_in_condition1354 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WORD_in_increment1373 = new BitSet(new long[]{0x0000800800004090L});
+	public static final BitSet FOLLOW_assignment_in_increment1375 = new BitSet(new long[]{0x0000000000000002L});
 }

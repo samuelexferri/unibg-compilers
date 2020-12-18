@@ -65,16 +65,6 @@ public class ParserEnvironment {
         }
     }
 
-    /*
-    // Concatenazione di strighe
-    public Value concat(Value v1, Value v2) {
-        if (v1 == null || v2 == null)
-            return null;
-        Value value = new Value(v1.type, (v1.value + v2.value), false);
-        return value;
-    }
-     */
-
     // VARIABILI
     // Inserisce una variabile nelle symbol tables
     public void addNewVariable(String type, Token name) {
@@ -197,6 +187,9 @@ public class ParserEnvironment {
             addErrorMessage(vl, ERR_TYPE_MISMATCH);
         }
 
+        if (type.equals(ValueTypes.CHAR_STR))
+            value = value.substring(1, value.length() - 1);
+
         if (type.equals(ValueTypes.STRING_STR))
             value = value.substring(1, value.lastIndexOf("\""));
 
@@ -204,8 +197,27 @@ public class ParserEnvironment {
     }
 
     // Valore temporaneo per le call function
-    public void checkFunctionReturnType(String func_type, String expectedType) {
+    public Value setValueCallFunction(Token vl, String type, String expectedType) {
+        String value = vl.getText();
+        if (!ValueTypes.isCoherent(type, expectedType)) {
+            type = ValueTypes.UNDEFINED_STR;
+            addErrorMessage(vl, ERR_TYPE_MISMATCH);
+        }
 
+        // TODO Fittizio per i return dop aver esguito tutti i calcoli delle funzioni
+        if (type.matches(ValueTypes.INT_STR))
+            return new Value(type, "777", false);
+        else if (type.matches(ValueTypes.FLOAT_STR))
+            return new Value(type, "777.77", false);
+        else if (type.matches(ValueTypes.CHAR_STR)) {
+            return new Value(type, "a", false);
+        }
+
+        return null;
+    }
+
+    // Verifica il tipo ritornato dall funzione e quello atteso
+    public void checkFunctionReturnType(String func_type, String expectedType) {
         if (!func_type.matches(expectedType))
             addErrorMessage(Token.SKIP_TOKEN, ERR_TYPE_CALL_FUNCT_RETURN); // Token inutile
     }
@@ -328,12 +340,21 @@ public class ParserEnvironment {
     }
 
     // OPERAZIONI
+    // Concatenazione di char/stringhe
+    public Value concat(Value v1, Value v2) {
+        if (v1 == null || v2 == null)
+            return null;
+
+        Value value = new Value(v1.type, (v1.value + v2.value), false);
+        return value;
+    }
+
     // Esegue l'operazione +
     public Value doAdd(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
 
-        String value;
+        String value = "";
         String type = ValueTypes.returnType("+", v1.type, v2.type);
 
         if (type.equals(ValueTypes.UNDEFINED_STR)) {
@@ -346,14 +367,19 @@ public class ParserEnvironment {
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
         }
 
-        if (type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
-            value = v1.value + v2.value;
-        } else if (type.equals(ValueTypes.FLOAT_STR) || type.equals(ValueTypes.NUMERIC_STR))
-            value = new Float(Float.parseFloat(v1.value) + Float.parseFloat(v2.value)).toString();
-        else  // if (type.equals(ValueTypes.INT_STR))
-            value = new Integer(Integer.parseInt(v1.value) + Integer.parseInt(v2.value)).toString();
+        if (type.equals(ValueTypes.CHAR_STR) || type.equals(ValueTypes.CHAR_STR)) {
+            return concat(v1, v2); // Concatenazione tra char
+        }
+        else {
+            if (type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR))
+                value = v1.value + v2.value; // Concatenazione tra stringhe
+            else if (type.equals(ValueTypes.FLOAT_STR) || type.equals(ValueTypes.NUMERIC_STR))
+                value = new Float(Float.parseFloat(v1.value) + Float.parseFloat(v2.value)).toString();
+            else if (type.equals(ValueTypes.INT_STR))
+                value = new Integer(Integer.parseInt(v1.value) + Integer.parseInt(v2.value)).toString();
 
-        return new Value(type, value, false);
+            return new Value(type, value, false);
+        }
     }
 
     // Esegue l'operazione -
@@ -364,7 +390,7 @@ public class ParserEnvironment {
         String value;
         String type = ValueTypes.returnType("-", v1.type, v2.type);
 
-        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
+        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.CHAR_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
         }
@@ -389,7 +415,7 @@ public class ParserEnvironment {
         String value;
         String type = ValueTypes.returnType("*", v1.type, v2.type);
 
-        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
+        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.CHAR_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
         }
@@ -419,7 +445,7 @@ public class ParserEnvironment {
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
         }
 
-        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
+        if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.CHAR_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
         }

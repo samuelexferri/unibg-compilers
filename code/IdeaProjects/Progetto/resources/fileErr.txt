@@ -1,5 +1,6 @@
 
 -----------------------------
-*****	Errori: #	1	*****
+*****	Errori: #	2	*****
 -----------------------------
-1: Errore Semantico [113] in (0,-1) - La chiamta di funzione non ha lo stesso type dell'expression attesa
+1: Errore Semantico [15] in (31,17) - L'operatore <-> non è definito per i due operandi
+2: Errore Semantico [16] in (31,9) - Valore di tipo non compatibile

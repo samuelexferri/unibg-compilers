@@ -159,9 +159,9 @@ multiply_exp 	[String type] returns [Value value]
 atom_exp 		[String type] returns [Value value]
 				: tk=INT {value = env.setValue($tk, ValueTypes.INT_STR, type);}
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
-				| tk=CHAR_QUOTE // TODO
+				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
 				| name=WORD ((LBRACK INT? RBRACK) 
-					   | call_function {env.funct_name = $name; env.funct_type = env.getVarType($name); env.checkFunctionReturnType(env.funct_type, type); value = env.setValue($name, ValueTypes.INT_STR, type);} // TODO FITTIZIO IL VALUEEEEEEEEEEEEEEEEEEEEEEE
+					   | call_function {env.funct_name = $name; env.funct_type = env.getVarType($name); env.checkFunctionReturnType(env.funct_type, type); value = env.setValueCallFunction($name, env.funct_type, type);} // TODO FITTIZIO IL VALUEEEEEEEEEEEEEEEEEEEEEEE
 					   | {value = env.getDeclaredValue($tk, type);}) // Variabile o Vettore // TODO
 				| MULT WORD // Puntatore // TODO
 				| AMP WORD // Indirizzo // TODO
