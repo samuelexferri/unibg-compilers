@@ -23,14 +23,15 @@ options {
 
     import util.*;
     import java.util.Hashtable;
+    import java.io.FileWriter;
 }
 
 @members {
 	ParserEnvironment env;
 
-    void init() {
+    void init(FileWriter fOut) {
     	System.out.println("Inizio l'analisi\n");
-        env = new ParserEnvironment();
+        env = new ParserEnvironment(fOut);
     }
 
     public Hashtable<String, Value> getSymbolTable() {
@@ -72,22 +73,22 @@ include			: INCLUDE LT WORD (DOT WORD)? GT
 				;
 				
 global			: funct_void
-				| {env.var_type = null;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
-				     		 		| name=WORD {env.var_name = $name; env.addNewVariableGlobal(env.var_type, $name);} ((ass_multiple
+				| {env.var_type = null; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
+				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
 				     		 		 	| vector) SEMICOL
-									 	| funct_params))
+									 	| {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params))
 				;
 				
-funct_void		: VOID WORD funct_params 
+funct_void		: VOID WORD {env.is_local = true;} funct_params 
 				;
 				
-funct_params 	: LPAREN (type_name WORD (COMMA type_name WORD)*)? RPAREN codeblock
-				;
+funct_params 	: LPAREN {env.var_type = null;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);})*)? RPAREN codeblock {env.is_local = false; env.clearSymbolTableLocal();} // {Eliminare Local}
+				; 
 				
-assignment		: {env.var_type = env.getVarTypeGlobal(env.var_name);}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValueGlobal(env.var_name, exp, eq);}) // TODO += -=...
+assignment		: {env.var_type = env.getVarType(env.var_name);}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValue(env.var_name, exp, eq);}) // TODO += -=...
 				;
 
-ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariableGlobal(env.var_type, $name);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
+ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
 				;
 							
 ass_vector		: ASS ((LCURL expression[null] (COMMA expression[null])* RCURL) 
@@ -159,7 +160,7 @@ atom_exp 		[String type] returns [Value value]
 				: tk=INT {value = env.setValue($tk, ValueTypes.INT_STR, type);}
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
 				| tk=CHAR_QUOTE // TODO
-				| WORD ((LBRACK INT? RBRACK) | call_function | {value = env.getDeclaredValueGlobal($tk, type);}) // Variabile o Vettore // TODO
+				| WORD ((LBRACK INT? RBRACK) | call_function | {value = env.getDeclaredValue($tk, type);}) // Variabile o Vettore // TODO
 				| MULT WORD // Puntatore // TODO
 				| AMP WORD // Indirizzo // TODO
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi

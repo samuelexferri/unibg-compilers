@@ -3,13 +3,19 @@ package util;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 
+import javax.swing.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class ParserEnvironment {
     public final int ERR_ON_SYNTAX = 1;
     public final int ERR_ALREADY_DECLARED = 10;
+    public final int ERR_FUNC_ALREADY_DECLARED = 101;
     public final int ERR_UNDECLARED = 11;
+    public final int ERR_FUNC_UNDECLARED = 111;
     public final int ERR_NO_VALUE = 12;
     public final int ERR_NO_VALUES = 13;
     public final int ERR_DIV_BY_0 = 14;
@@ -24,6 +30,8 @@ public class ParserEnvironment {
 
     public Token var_name; // Nome della variabile
     public String var_type; // Tipo della variabile
+    public Token funct_name; // Nome della funzione
+    public Boolean is_local; // Indica se siamo all'interno di una funzione
 
     // TODO
     public Double exp;
@@ -31,12 +39,15 @@ public class ParserEnvironment {
     public Boolean is_global = false;
     public Boolean type_bool = false;
 
-    public ParserEnvironment() {
+    FileWriter fOut;
+
+    public ParserEnvironment(FileWriter fOutMain) {
         symbolTable = new Hashtable<String, Value>(101); // 101 numero primo
         symbolTableLocal = new Hashtable<String, Value>(101); // 101 numero primo
         errorList = new ArrayList<String>();
         debug = new StringBuffer();
         translation = new StringBuffer();
+        fOut = fOutMain;
     }
 
     // TODO: Traduzione
@@ -48,6 +59,7 @@ public class ParserEnvironment {
         }
     }
 
+    /*
     // Concatenazione di strighe
     public Value concat(Value v1, Value v2) {
         if (v1 == null || v2 == null)
@@ -55,49 +67,120 @@ public class ParserEnvironment {
         Value value = new Value(v1.type, (v1.value + v2.value), false);
         return value;
     }
+     */
 
-    // Inserisce una variabile nella symbol table gloable
-    public void addNewVariableGlobal(String type, Token name) {
-        if (type != null && name != null) {
-            if (symbolTable.containsKey(name.getText()))
-                addErrorMessage(name, ERR_ALREADY_DECLARED);
-            else {
-                symbolTable.put(name.getText(), new Value(name.getText(), type));
-                debug.append("Ho dichiarato la variabile '" + name.getText() + "' come '" + type + "'\n");
+    // VARIABILI
+    // Inserisce una variabile nelle symbol tables
+    public void addNewVariable(String type, Token name) {
+        if (!is_local) { // Globale
+            if (type != null && name != null) {
+                if (symbolTable.containsKey(name.getText()))
+                    addErrorMessage(name, ERR_ALREADY_DECLARED);
+                else {
+                    symbolTable.put(name.getText(), new Value(name.getText(), type));
+                    debug.append("Ho dichiarato la variabile '" + name.getText() + "' come '" + type + "'\n");
+                }
+            } else if (type == null && name != null) {
+                checkDeclarationGlobal(name);
             }
-        } else if (type == null && name != null) {
-            checkDeclarationGlobal(name);
+        } else { // Locale
+            if (type != null && name != null) {
+                if (symbolTableLocal.containsKey(name.getText()))
+                    addErrorMessage(name, ERR_ALREADY_DECLARED);
+                else {
+                    // Variabile locale può oscurare una globale
+                    symbolTableLocal.put(name.getText(), new Value(name.getText(), type));
+                    debug.append("Ho dichiarato la variabile locale '" + name.getText() + "' come '" + type + "'\n");
+                }
+            } else if (type == null && name != null) {
+                checkDeclarationLocal(name);
+            }
         }
     }
 
-    // Controlla se una var è in symbol table
+    // Controlla se una var è in symbol table globale
     public void checkDeclarationGlobal(Token var) {
         if (!isDeclaredGlobal(var))
             addErrorMessage(var, ERR_UNDECLARED);
     }
 
-    // Verifica se una var è in symbol table (true)
+    // Verifica se una var è in symbol table globale (true)
     public boolean isDeclaredGlobal(Token var) {
         if (var == null)
             return false;
         return symbolTable.containsKey(var.getText());
     }
 
+    // Controlla se una var è in symbol table globale o locale
+    public void checkDeclarationLocal(Token var) {
+        if (!isDeclaredLocal(var) && !isDeclaredGlobal(var))
+            addErrorMessage(var, ERR_UNDECLARED);
+    }
+
+    // Verifica se una var è in symbol table (true)
+    public boolean isDeclaredLocal(Token var) {
+        if (var == null)
+            return false;
+        return symbolTableLocal.containsKey(var.getText());
+    }
+
+    // ASSEGNAMENTI
+    // Restituisce il tipo di una variabile
+    public String getVarType(Token var) {
+        if (is_local) { // Locale
+            if (isDeclaredLocal(var))
+                return symbolTableLocal.get(var.getText()).type;
+            else if (isDeclaredGlobal(var))
+                return symbolTable.get(var.getText()).type;
+            else
+                return ValueTypes.UNDEFINED_STR;
+        } else { // Globale
+            if (isDeclaredGlobal(var))
+                return symbolTable.get(var.getText()).type;
+            else
+                return ValueTypes.UNDEFINED_STR;
+        }
+    }
 
     // Assegna un valore ad una variabile (dichiarata)
-    public void assignValueGlobal(Token name_var, Value exp, Token eq) {
-        if (name_var != null && exp != null && eq != null)
-            if (!isDeclaredGlobal(name_var))
-                addErrorMessage(name_var, ERR_UNDECLARED);
-            else {
-                Value var = symbolTable.get(name_var.getText());
-                if (!ValueTypes.isCoherent(exp.type, var.type))
-                    addErrorMessage(name_var, ERR_TYPE_MISMATCH);
+    public void assignValue(Token name_var, Value exp, Token eq) {
+        if (!is_local) { // Globale
+            if (name_var != null && exp != null && eq != null) {
+                if (!isDeclaredGlobal(name_var))
+                    addErrorMessage(name_var, ERR_UNDECLARED);
                 else {
-                    var.value = exp.value;
-                    debug.append("Ho assegnato alla variabile '" + var.name + "' il valore '" + var.value + "'\n");
+                    Value var = symbolTable.get(name_var.getText()); // Reference
+                    if (!ValueTypes.isCoherent(exp.type, var.type))
+                        addErrorMessage(name_var, ERR_TYPE_MISMATCH);
+                    else {
+                        var.value = exp.value;
+                        debug.append("Ho assegnato alla variabile '" + var.name + "' il valore '" + var.value + "'\n");
+                    }
                 }
             }
+        } else { // Locale
+            if (name_var != null && exp != null && eq != null) {
+                if (!isDeclaredLocal(name_var) && !isDeclaredGlobal(name_var))
+                    addErrorMessage(name_var, ERR_UNDECLARED);
+                else if (isDeclaredLocal(name_var)) { // Locale
+                    Value var = symbolTableLocal.get(name_var.getText()); // Reference
+                    if (!ValueTypes.isCoherent(exp.type, var.type))
+                        addErrorMessage(name_var, ERR_TYPE_MISMATCH);
+                    else {
+                        var.value = exp.value;
+                        debug.append("Ho assegnato alla variabile locale '" + var.name + "' il valore '" + var.value + "'\n");
+                    }
+                } else { // Globale
+                    Value var = symbolTable.get(name_var.getText()); // Reference
+                    if (!ValueTypes.isCoherent(exp.type, var.type))
+                        addErrorMessage(name_var, ERR_TYPE_MISMATCH);
+                    else {
+                        var.value = exp.value;
+                        debug.append("Ho assegnato alla variabile '" + var.name + "' il valore '" + var.value + "'\n");
+                    }
+                }
+            }
+        }
     }
 
     // Valore temporaneo
@@ -107,42 +190,112 @@ public class ParserEnvironment {
             type = ValueTypes.UNDEFINED_STR;
             addErrorMessage(vl, ERR_TYPE_MISMATCH);
         }
+
         if (type.equals(ValueTypes.STRING_STR))
             value = value.substring(1, value.lastIndexOf("\""));
+
         return new Value(type, value, false);
     }
 
     // Recupera il valore di una variabile dichiarata
-    public Value getDeclaredValueGlobal(Token var, String expectedType) {
+    public Value getDeclaredValue(Token var, String expectedType) {
         Value value = null;
-        if (!isDeclaredGlobal(var)) {
-            addErrorMessage(var, ERR_UNDECLARED);
-            value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // creo un oggetto fittizio di comodo
-        } else {
-            value = symbolTable.get(var.getText());  // recupero il valore della variabile dalla symboltable
-            if (!value.isInitialized())
-                addErrorMessage(var, ERR_NO_VALUE);
-            if (!ValueTypes.isCoherent(value.type, expectedType))
-                addErrorMessage(var, ERR_TYPE_MISMATCH);
+
+        if (!is_local) { // Globale
+            if (!isDeclaredGlobal(var)) {
+                addErrorMessage(var, ERR_UNDECLARED);
+                value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
+            } else {
+                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symboltable
+                if (!value.isInitialized())
+                    addErrorMessage(var, ERR_NO_VALUE);
+                if (!ValueTypes.isCoherent(value.type, expectedType))
+                    addErrorMessage(var, ERR_TYPE_MISMATCH);
+            }
+        } else { // Locale
+            if (!isDeclaredLocal(var) && !isDeclaredGlobal(var)) {
+                addErrorMessage(var, ERR_UNDECLARED);
+                value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
+            } else if (isDeclaredLocal(var)) {
+                value = symbolTableLocal.get(var.getText());  // Recupero il valore della variabile dalla symboltable
+                if (!value.isInitialized())
+                    addErrorMessage(var, ERR_NO_VALUE);
+                if (!ValueTypes.isCoherent(value.type, expectedType))
+                    addErrorMessage(var, ERR_TYPE_MISMATCH);
+            } else {
+                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symboltable
+                if (!value.isInitialized())
+                    addErrorMessage(var, ERR_NO_VALUE);
+                if (!ValueTypes.isCoherent(value.type, expectedType))
+                    addErrorMessage(var, ERR_TYPE_MISMATCH);
+            }
         }
 
         return value;
     }
 
-    // TODO: Distinguerlo dal locale in assignment con un booleano?
-    // Restituisce il tipo di una variabile
-    public String getVarTypeGlobal(Token var) {
-        if (isDeclaredGlobal(var))
-            return symbolTable.get(var.getText()).type;
-        return ValueTypes.UNDEFINED_STR;
+    // FUNZIONI
+    // Symbol table locale stampata e in seguito ripulita
+    public void clearSymbolTableLocal() {
+        try {
+            fOut.append("\n-----------------------------------------\n" + "*****\tLocal Symbol Table: " + funct_name.getText() + "\t*****\n" + "-----------------------------------------\n");
+            System.out.println("\n-----------------------------------------\n" + "*****\tLocal Symbol Table: " + funct_name.getText() + "\t*****\n" + "-----------------------------------------\n");
+
+            Enumeration<String> varList2 = symbolTableLocal.keys();
+            int v = 0;
+            while (varList2.hasMoreElements()) {
+                String var = varList2.nextElement();
+                Object value = symbolTableLocal.get(var);
+                fOut.append(++v + ":\t" + var + "=" + value + "\n");
+                System.out.println(v + ":\t" + var + "=" + value);
+            }
+            symbolTableLocal.clear();
+        } catch (IOException i) {
+            System.out.println("IOException");
+        }
     }
 
+    // Inserisce una funzione nella symbol table gloable
+    public void addFunction(String type, Token name) {
+        if (type != null && name != null) {
+            if (symbolTable.containsKey(name.getText()))
+                addErrorMessage(name, ERR_FUNC_ALREADY_DECLARED);
+            else {
+                symbolTable.put(name.getText(), new Value(name.getText(), type, null, false));
+                debug.append("Ho dichiarato la funzione '" + name.getText() + "' con tipo '" + type + "'\n");
+            }
+        } else if (type == null && name != null) {
+            checkDeclaratioFunction(name); // TODO Risolvere
+        }
+    }
+
+    // Controlla se una funzione è in symbol table globale
+    public void checkDeclaratioFunction(Token var) {
+        if (!isDeclaredFunction(var))
+            addErrorMessage(var, ERR_FUNC_UNDECLARED);
+    }
+
+    // Verifica se una funzione è in symbol table (true)
+    public boolean isDeclaredFunction(Token var) {
+        if (var == null)
+            return false;
+
+        if (symbolTable.containsKey(var.getText())) {
+            Value func = symbolTable.get(var.getText());
+            return !func.isVar;
+        } else
+            return false;
+    }
+
+    // OPERAZIONI
     // Esegue l'operazione +
     public Value doAdd(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
+
         String value;
         String type = ValueTypes.returnType("+", v1.type, v2.type);
+
         if (type.equals(ValueTypes.UNDEFINED_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
@@ -167,8 +320,10 @@ public class ParserEnvironment {
     public Value doSub(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
+
         String value;
         String type = ValueTypes.returnType("-", v1.type, v2.type);
+
         if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
@@ -190,8 +345,10 @@ public class ParserEnvironment {
     public Value doMul(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
+
         String value;
         String type = ValueTypes.returnType("*", v1.type, v2.type);
+
         if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
             return new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR, false);
@@ -213,6 +370,7 @@ public class ParserEnvironment {
     public Value doDiv(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
+
         String value;
         String type = ValueTypes.returnType("/", v1.type, v2.type);
 
@@ -377,6 +535,10 @@ public class ParserEnvironment {
             msg += "La variabile <" + tk.getText() + "> è già stata dichiarata";
         else if (code == ERR_UNDECLARED)
             msg += "La variabile <" + tk.getText() + "> non è stata dichiarata";
+        if (code == ERR_FUNC_ALREADY_DECLARED)
+            msg += "La funzione <" + tk.getText() + "> è già stata dichiarata";
+        else if (code == ERR_FUNC_UNDECLARED)
+            msg += "La funzione <" + tk.getText() + "> non è stata dichiarata";
         else if (code == ERR_TYPE_MISMATCH)
             msg += "Valore di tipo non compatibile";
         else if (code == ERR_UNDEFINED_OP)

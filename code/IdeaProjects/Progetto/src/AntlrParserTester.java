@@ -23,10 +23,12 @@ public class AntlrParserTester {
             tokens = new CommonTokenStream(lexer);
             parser = new C_MIPS_semanticParser(tokens);
 
-            parser.init();
+            fOut = new FileWriter(fileMsg); // Symbol Table
+
+            parser.init(fOut);
             parser.start();
 
-            saveMessages();
+            saveMessages(fOut);
 
             if (parser.getErrors().size() == 0) {
                 System.out.println("\n*********************************************\n" + "*****\tParsing completato con successo\t*****" + "\n*********************************************");
@@ -61,28 +63,15 @@ public class AntlrParserTester {
         }
     }
 
-    static void saveMessages() throws IOException {
-        FileWriter fOut = new FileWriter(fileMsg);
-
+    static void saveMessages(FileWriter fOut) throws IOException {
         fOut.append("\n---------------------------------\n" + "*****\tGlobal Symbol Table\t*****\n" + "---------------------------------\n");
         System.out.println("\n---------------------------------\n" + "*****\tGlobal Symbol Table\t*****\n" + "---------------------------------");
+
         Enumeration<String> varList = parser.getSymbolTable().keys();
         int v = 0;
         while (varList.hasMoreElements()) {
             String var = varList.nextElement();
             Object value = parser.getSymbolTable().get(var);
-            fOut.append(++v + ":\t" + var + "=" + value + "\n");
-            System.out.println(v + ":\t" + var + "=" + value);
-        }
-
-        // TODO: Per ora solo l'ultima locale
-        fOut.append("\n---------------------------------\n" + "*****\tLocal Symbol Table\t*****\n" + "---------------------------------\n");
-        System.out.println("\n---------------------------------\n" + "*****\tLocal Symbol Table\t*****\n" + "---------------------------------");
-        Enumeration<String> varList2 = parser.getSymbolTableLocal().keys();
-        v = 0;
-        while (varList2.hasMoreElements()) {
-            String var = varList2.nextElement();
-            Object value = parser.getSymbolTableLocal().get(var);
             fOut.append(++v + ":\t" + var + "=" + value + "\n");
             System.out.println(v + ":\t" + var + "=" + value);
         }

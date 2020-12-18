@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 int a;
 float b;
 char c;
@@ -11,10 +12,15 @@ a = 55;
 
 int e = 1, f = 2, g;
 
-/*
 int main (int j, char k) {
-   a = 2; // TODO: Non viene modificata
-   int z = 1;
-   int y = 1, b = 1;
+
 }
-*/
+
+//int z = 3;
+
+
+int main2 (int j, char k) {
+}
+
+
+//main() // TODO Risolvere

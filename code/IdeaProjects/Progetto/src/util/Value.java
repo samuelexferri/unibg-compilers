@@ -14,6 +14,14 @@ public class Value {
         isVar = true;
     }
 
+    // Costruttore per funzioni
+    public Value(String n, String t, String v, boolean b) {
+        name = n;
+        type = t;
+        value = v; // Null
+        isVar = b; // False
+    }
+
     // Costruttore per valori temporanei
     public Value(String t, String v, boolean b) {
         name = "";
