@@ -183,6 +183,7 @@ public class ParserEnvironment {
     // Valore temporaneo
     public Value setValue(Token vl, String type, String expectedType) {
         String value = vl.getText();
+
         if (!ValueTypes.isCoherent(type, expectedType)) {
             type = ValueTypes.UNDEFINED_STR;
             addErrorMessage(vl, ERR_TYPE_MISMATCH);
@@ -241,10 +242,10 @@ public class ParserEnvironment {
                 addErrorMessage(var, ERR_UNDECLARED);
                 value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
             } else {
-                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symboltable
+                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symbol table
                 if (!value.isInitialized())
                     addErrorMessage(var, ERR_NO_VALUE);
-                if (!ValueTypes.isCoherent(value.type, expectedType))
+                else if (!ValueTypes.isCoherent(value.type, expectedType))
                     addErrorMessage(var, ERR_TYPE_MISMATCH);
             }
         } else { // Locale
@@ -252,16 +253,16 @@ public class ParserEnvironment {
                 addErrorMessage(var, ERR_UNDECLARED);
                 value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
             } else if (isDeclaredLocal(var)) {
-                value = symbolTableLocal.get(var.getText());  // Recupero il valore della variabile dalla symboltable
+                value = symbolTableLocal.get(var.getText());  // Recupero il valore della variabile dalla symbol table
                 if (!value.isInitialized())
                     addErrorMessage(var, ERR_NO_VALUE);
-                if (!ValueTypes.isCoherent(value.type, expectedType))
+                else if (!ValueTypes.isCoherent(value.type, expectedType))
                     addErrorMessage(var, ERR_TYPE_MISMATCH);
             } else {
-                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symboltable
+                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symbol table
                 if (!value.isInitialized())
                     addErrorMessage(var, ERR_NO_VALUE);
-                if (!ValueTypes.isCoherent(value.type, expectedType))
+                else if (!ValueTypes.isCoherent(value.type, expectedType))
                     addErrorMessage(var, ERR_TYPE_MISMATCH);
             }
         }
@@ -271,22 +272,26 @@ public class ParserEnvironment {
 
     // FUNZIONI
     // Symbol table locale stampata e in seguito ripulita
-    public void clearSymbolTableLocal() {
-        try {
-            fOut.append("\n-----------------------------------------\n" + "*****\tLocal Symbol Table: " + funct_name.getText() + "\t*****\n" + "-----------------------------------------\n");
-            System.out.println("\n-----------------------------------------\n" + "*****\tLocal Symbol Table: " + funct_name.getText() + "\t*****\n" + "-----------------------------------------\n");
+    public void clearSymbolTableLocal(Boolean isBlock) {
+        if (isBlock) {
+            try {
+                fOut.append("\n-----------------------------------------\n" + "*****\tLocal Symbol Table: " + funct_name.getText() + "\t*****\n" + "-----------------------------------------\n");
+                System.out.println("\n-----------------------------------------\n" + "*****\tLocal Symbol Table: " + funct_name.getText() + "\t*****\n" + "-----------------------------------------\n");
 
-            Enumeration<String> varList2 = symbolTableLocal.keys();
-            int v = 0;
-            while (varList2.hasMoreElements()) {
-                String var = varList2.nextElement();
-                Object value = symbolTableLocal.get(var);
-                fOut.append(++v + ":\t" + var + "=" + value + "\n");
-                System.out.println(v + ":\t" + var + "=" + value);
+                Enumeration<String> varList2 = symbolTableLocal.keys();
+                int v = 0;
+                while (varList2.hasMoreElements()) {
+                    String var = varList2.nextElement();
+                    Object value = symbolTableLocal.get(var);
+                    fOut.append(++v + ":\t" + var + "=" + value + "\n");
+                    System.out.println(v + ":\t" + var + "=" + value);
+                }
+
+                // Pulisce
+                symbolTableLocal.clear();
+            } catch (IOException i) {
+                System.out.println("IOException");
             }
-            symbolTableLocal.clear();
-        } catch (IOException i) {
-            System.out.println("IOException");
         }
     }
 

@@ -73,16 +73,16 @@ include			: INCLUDE LT WORD (DOT WORD)? GT
 				;
 				
 global			: funct_void
-				| {env.var_type = null; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
+				| {env.var_type = null; env.funct_type = null; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
 				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
-				     		 		 			| vector) SEMICOL
+				     		 		 			| {env.var_name = $name; env.addNewVariable(env.var_type, $name);} vector) SEMICOL
 									 			| {env.var_name = $name; env.funct_name = $name; env.funct_type = type.getText(); env.addFunction(env.var_type, $name);} funct_params))
 				;
 				
 funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params 
 				;
 				
-funct_params 	: LPAREN {env.is_local = true; env.var_type = null;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);})*)? RPAREN codeblock {env.is_local = false; env.clearSymbolTableLocal();}
+funct_params 	: LPAREN {env.is_local = true; env.var_type = null;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);})*)? RPAREN isBlock=codeblock {env.is_local = false; env.clearSymbolTableLocal(isBlock);}
 				; 
 				
 assignment		: {env.var_type = env.getVarType(env.var_name);}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValue(env.var_name, exp, eq);}) // TODO += -=...
@@ -91,11 +91,12 @@ assignment		: {env.var_type = env.getVarType(env.var_name);}((ADD | SUB | MULT |
 ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
 				;
 							
-ass_vector		: ASS ((LCURL expression[null] (COMMA expression[null])* RCURL) 
-				| expression[null])
+ass_vector		[String vect_type]
+				: ASS ((LCURL expression[vect_type] (COMMA expression[vect_type])* RCURL) 
+				| expression[vect_type])
 				;
 				
-vector 			: LBRACK INT? RBRACK ass_vector?
+vector 			: LBRACK INT? RBRACK ass_vector[env.var_type]?
 				;
 				
 pointer			: MULT (WORD | LPAREN expression[null] RPAREN) assignment? // Puntatori: *p o *(p+1)
@@ -108,8 +109,9 @@ call_args		: D_QUOTE anything* D_QUOTE
 				| MULT? WORD
 				;
 				
-codeblock 		: LCURL statement* RCURL 
-	    		| SEMICOL // SEMICOL di function	
+codeblock 		returns [Boolean isBlock]
+				: LCURL statement* RCURL {isBlock = true;}
+	    		| SEMICOL {isBlock = false;} // SEMICOL di function	
 				;
 
 statement 		: local
@@ -120,10 +122,10 @@ statement 		: local
 				| returnStat
 				;
 
-local			: {env.var_type = null; env.funct_type = null; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
+local			: {env.var_type = null; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
 													     		 												  | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
-																									     		 		 	  | vector 
-																														      | {env.var_name = $name; env.funct_name = $name; env.funct_type = env.getVarType(env.funct_name); env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
+																									     		 		 	  						| {env.var_name = $name; env.addNewVariable(env.var_type, $name);} vector 
+																														      						| {env.var_name = $name; env.funct_type = env.getVarType($name); env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
 				;
 			  	
 ifStat			: IF LPAREN condition RPAREN codeblock (ELSE statement)? // TODO: Codeblock, Operatori logici
@@ -135,7 +137,7 @@ whileStat		: WHILE LPAREN condition RPAREN statement
 forStat			: FOR LPAREN initialization SEMICOL condition SEMICOL increment RPAREN statement 
 				;
 
-returnStat		: RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(env.var_type, env.funct_type);}SEMICOL 
+returnStat		: RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(env.var_type, env.funct_type);} SEMICOL 
 				;
 
 type_name		returns [Token token]
