@@ -116,7 +116,7 @@ whileStat		: WHILE LPAREN condition RPAREN statement
 forStat			: FOR LPAREN initialization SEMICOL condition SEMICOL increment RPAREN statement 
 				;
 
-returnStat		: RETURN atom_exp SEMICOL 
+returnStat		: RETURN atom_exp? SEMICOL
 				;
 
 type_name		: K_INT 

@@ -12,10 +12,13 @@ a = 5;
 int e = 1, f = 2, g;
 
 int test() {
-    // return 1; // TODO Return delle funzioni
+    return 1; // TODO Il fatto che ci sia almeno uno (Controllo blando)
+    return a;
+    return;
+    //return; // TODO Return delle funzioni
 }
 
-char funct_char() {
+char funct_char(int a, int b) { // TODO Controllo call_params
 
 }
 
@@ -35,7 +38,7 @@ int main (int j, char k) {
 
     //a = test() + 1; // TODO Calcolare il valore di return, per ora solo controllo sui tipi ritornati
 
-    return 0; // TODO Obbligatorio return 0 nel main
+    //return 0; // TODO Obbligatorio return 0 nel main
 }
 
 void function (int l, char m) {

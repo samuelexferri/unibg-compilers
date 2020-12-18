@@ -76,7 +76,7 @@ global			: funct_void
 				| {env.var_type = null; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
 				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
 				     		 		 			| vector) SEMICOL
-									 			| {env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params))
+									 			| {env.var_name = $name; env.funct_name = $name; env.funct_type = type.getText(); env.addFunction(env.var_type, $name);} funct_params))
 				;
 				
 funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params 
@@ -135,13 +135,13 @@ whileStat		: WHILE LPAREN condition RPAREN statement
 forStat			: FOR LPAREN initialization SEMICOL condition SEMICOL increment RPAREN statement 
 				;
 
-returnStat		: RETURN atom_exp[null] SEMICOL 
+returnStat		: RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(env.var_type, env.funct_type);}SEMICOL 
 				;
 
 type_name		returns [Token token]
 				: (tk=K_INT
-								| tk=K_FLOAT 
-								| tk=K_CHAR) {token = tk;}
+				| tk=K_FLOAT 
+				| tk=K_CHAR) {token = tk;}
 				; 
 
 expression 		[String type] returns [Value value]
@@ -161,8 +161,8 @@ atom_exp 		[String type] returns [Value value]
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
 				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
 				| name=WORD ((LBRACK INT? RBRACK) 
-					   | call_function {env.funct_name = $name; env.funct_type = env.getVarType($name); env.checkFunctionReturnType(env.funct_type, type); value = env.setValueCallFunction($name, env.funct_type, type);} // TODO FITTIZIO IL VALUEEEEEEEEEEEEEEEEEEEEEEE
-					   | {value = env.getDeclaredValue($tk, type);}) // Variabile o Vettore // TODO
+					   | call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);} // TODO FITTIZIO IL VALUEEEEEEEEEEEEEEEEEEEEEEE
+					   | {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore // TODO
 				| MULT WORD // Puntatore // TODO
 				| AMP WORD // Indirizzo // TODO
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi

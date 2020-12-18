@@ -20,7 +20,8 @@ public class ParserEnvironment {
     public final int ERR_UNDECLARED = 11;
     public final int ERR_FUNC_UNDECLARED = 111;
     public final int ERR_TYPE_CALL_FUNCT = 112;
-    public final int ERR_TYPE_CALL_FUNCT_RETURN = 113;
+    public final int ERR_TYPE_FUNCT_RETURN = 113;
+    public final int ERR_TYPE_CALL_FUNCT_RETURN = 114;
     public final int ERR_NO_VALUE = 12;
     public final int ERR_NO_VALUES = 13;
     public final int ERR_DIV_BY_0 = 14;
@@ -216,8 +217,17 @@ public class ParserEnvironment {
         return null;
     }
 
-    // Verifica il tipo ritornato dall funzione e quello atteso
+    // Verifica che il tipo ritornato dalla funzione e quello atteso siano coerenti
     public void checkFunctionReturnType(String func_type, String expectedType) {
+        if (func_type.matches("void"))
+            return;
+
+        if (!func_type.matches(expectedType))
+            addErrorMessage(Token.SKIP_TOKEN, ERR_TYPE_FUNCT_RETURN); // Token inutile
+    }
+
+    // Verifica che il tipo ritornato dalla chiamata funzione e quello atteso siano coerenti
+    public void checkCallFunctionReturnType(String func_type, String expectedType) {
         if (!func_type.matches(expectedType))
             addErrorMessage(Token.SKIP_TOKEN, ERR_TYPE_CALL_FUNCT_RETURN); // Token inutile
     }
@@ -463,7 +473,7 @@ public class ParserEnvironment {
     // ERRORE
     // Errore semantico
     public void addErrorMessage(Token tk, int code) {
-        String msg = " Errore Semantico [" + code + "] " + "in (" + tk.getLine() + "," + tk.getCharPositionInLine() + ") - ";
+        String msg = " Errore semantico [" + code + "] " + "in (" + tk.getLine() + "," + tk.getCharPositionInLine() + ") - ";
 
         if (code == ERR_ALREADY_DECLARED)
             msg += "La variabile <" + tk.getText() + "> è già stata dichiarata";
@@ -475,8 +485,10 @@ public class ParserEnvironment {
             msg += "La funzione <" + tk.getText() + "> non è stata dichiarata";
         else if (code == ERR_TYPE_CALL_FUNCT)
             msg += "La chiamta di funzione <" + tk.getText() + "> non deve avere il type";
+        else if (code == ERR_TYPE_FUNCT_RETURN)
+            msg += "La chiamata di funzione non ha lo stesso type dell'expression attesa";
         else if (code == ERR_TYPE_CALL_FUNCT_RETURN)
-            msg += "La chiamta di funzione non ha lo stesso type dell'expression attesa";
+            msg += "La chiamata di funzione non ha lo stesso type dell'expression attesa";
         else if (code == ERR_CALL_FUNC_IN_GLOBAL)
             msg += "La chiamata di funzione <" + tk.getText() + "> non può essere fatta globalmente";
         else if (code == ERR_MAIN_NOT_FOUND)
