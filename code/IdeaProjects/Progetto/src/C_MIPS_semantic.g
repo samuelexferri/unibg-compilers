@@ -66,7 +66,7 @@ options {
 
 
 // PARSER
-start			: include* global* EOF
+start			: include* global* tk=EOF {env.checkMain(tk);}
 				;
 
 include			: INCLUDE LT WORD (DOT WORD)? GT
@@ -75,14 +75,14 @@ include			: INCLUDE LT WORD (DOT WORD)? GT
 global			: funct_void
 				| {env.var_type = null; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
 				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
-				     		 		 	| vector) SEMICOL
-									 	| {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params))
+				     		 		 			| vector) SEMICOL
+									 			| {env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params))
 				;
 				
-funct_void		: VOID WORD {env.is_local = true;} funct_params 
+funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params 
 				;
 				
-funct_params 	: LPAREN {env.var_type = null;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);})*)? RPAREN codeblock {env.is_local = false; env.clearSymbolTableLocal();} // {Eliminare Local}
+funct_params 	: LPAREN {env.is_local = true; env.var_type = null;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);})*)? RPAREN codeblock {env.is_local = false; env.clearSymbolTableLocal();}
 				; 
 				
 assignment		: {env.var_type = env.getVarType(env.var_name);}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValue(env.var_name, exp, eq);}) // TODO += -=...
@@ -120,10 +120,10 @@ statement 		: local
 				| returnStat
 				;
 
-local			: (type_name)? (pointer
-				     		 	| var_name=WORD (ass_multiple
-				     		 		 | vector 
-									 | call_function)) SEMICOL
+local			: {env.var_type = null; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
+													     		 												  | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
+																									     		 		 	  | vector 
+																														      | call_function)) SEMICOL
 				;
 			  	
 ifStat			: IF LPAREN condition RPAREN codeblock (ELSE statement)? // TODO: Codeblock, Operatori logici
@@ -140,8 +140,8 @@ returnStat		: RETURN atom_exp[null] SEMICOL
 
 type_name		returns [Token token]
 				: (tk=K_INT
-				| tk=K_FLOAT 
-				| tk=K_CHAR) {token = tk;}
+								| tk=K_FLOAT 
+								| tk=K_CHAR) {token = tk;}
 				; 
 
 expression 		[String type] returns [Value value]

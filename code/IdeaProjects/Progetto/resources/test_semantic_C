@@ -1,26 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int a;
 float b;
 char c;
 
-//int a = 1;
+//int a = 1; // Errore
 int d = 1;
-a = 55;
+a = 5;
 
 int e = 1, f = 2, g;
 
 int main (int j, char k) {
-
+    int h = 3;
+    h = 5;
+    a = 7;
+    //z = 5; // Errore, globali definite prima (sequenziale)
+    test(); // TODO Verificare e Return
 }
 
-//int z = 3;
-
-
-int main2 (int j, char k) {
+void function (int l, char m) {
 }
 
+int z = 3; // Errore, globali definite prima (sequenziale)
 
-//main() // TODO Risolvere
+//test(); // Errore

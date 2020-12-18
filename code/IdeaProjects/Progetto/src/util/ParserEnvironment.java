@@ -14,6 +14,9 @@ public class ParserEnvironment {
     public final int ERR_ON_SYNTAX = 1;
     public final int ERR_ALREADY_DECLARED = 10;
     public final int ERR_FUNC_ALREADY_DECLARED = 101;
+    public final int ERR_CALL_FUNC_IN_GLOBAL = 102;
+    public final int ERR_MAIN_NOT_FOUND = 103;
+    public final int ERR_MAIN_TYPE_NOT_INT = 104;
     public final int ERR_UNDECLARED = 11;
     public final int ERR_FUNC_UNDECLARED = 111;
     public final int ERR_NO_VALUE = 12;
@@ -264,8 +267,10 @@ public class ParserEnvironment {
                 symbolTable.put(name.getText(), new Value(name.getText(), type, null, false));
                 debug.append("Ho dichiarato la funzione '" + name.getText() + "' con tipo '" + type + "'\n");
             }
-        } else if (type == null && name != null) {
-            checkDeclaratioFunction(name); // TODO Risolvere
+        } else if (type == null && name != null && !is_local) {
+            addErrorMessage(name, ERR_CALL_FUNC_IN_GLOBAL);
+        } else if (type == null && name != null && is_local) {
+            checkDeclaratioFunction(name);
         }
     }
 
@@ -285,6 +290,20 @@ public class ParserEnvironment {
             return !func.isVar;
         } else
             return false;
+    }
+
+    // Verifica se è stato definito il main
+    public void checkMain(Token tk) {
+        if (!symbolTable.containsKey("main")) {
+            addErrorMessage(tk, ERR_MAIN_NOT_FOUND);
+            return;
+        }
+
+        Value var = symbolTable.get("main");
+        System.out.println(var.type);
+
+        if (!var.type.matches("int"))
+            addErrorMessage(tk, ERR_MAIN_TYPE_NOT_INT);
     }
 
     // OPERAZIONI
@@ -394,139 +413,7 @@ public class ParserEnvironment {
         return new Value(type, value, false);
     }
 
-/*
-    public void registerVar(Boolean is_function, Token tk, Double value, Boolean type_bool) {
-        System.out.println("[registerVar " + type_bool.toString() + " " + value + " " + tk.getText() + " getVarValue(tk)=" + getVarValue(tk) + "]");
-
-        // GLOBAL
-        if (is_global) {
-            if (!type_bool && getVarValue(tk) == null) {
-                System.out.println("Variabile '" + tk.getText() + "' non trovata");
-                // TODO: Controllo posticipato
-            } else if (!type_bool && getVarValue(tk) != null) {
-                System.out.println("Assegnamento");
-
-                if (value == null)
-                    symbolTable.replace(tk.getText(), "NULL"); // TODO: Controllo sui tipi
-                else
-                    symbolTable.replace(tk.getText(), value); // TODO: Controllo sui tipi
-
-            } else if (type_bool && getVarValue(tk) == null) {
-                System.out.println("Definizione");
-
-                if (value == null)
-                    symbolTable.put(tk.getText(), "NULL"); // TODO: Controllo sui tipi
-                else
-                    symbolTable.put(tk.getText(), value); // TODO: Controllo sui tipi
-
-            } else if (type_bool && getVarValue(tk) != null) {
-                System.out.println("Variabile '" + tk.getText() + "' ridefinita");
-            }
-            // FUNCTION
-        } else {
-            System.out.println("LOCAL" + getVarValue(tk));
-            if (!type_bool && getVarValue(tk) == null && getVarValueLocal(tk) == null) {
-                System.out.println("Variabile '" + tk.getText() + "' non trovata");
-                // TODO: Controllo posticipato
-            } else if (!type_bool && getVarValueLocal(tk) != null) {
-                System.out.println("Assegnamento in locale");
-
-                if (value == null)
-                    symbolTableLocal.replace(tk.getText(), "NULL"); // TODO: Controllo sui tipi
-                else
-                    symbolTableLocal.replace(tk.getText(), value); // TODO: Controllo sui tipi
-
-            } else if (!type_bool && getVarValueLocal(tk) == null && getVarValue(tk) != null) {
-                System.out.println("Assegnamento in globale");
-
-                if (value == null)
-                    symbolTable.replace(tk.getText(), "NULL"); // TODO: Controllo sui tipi
-                else
-                    symbolTable.replace(tk.getText(), value); // TODO: Controllo sui tipi
-
-            } else if (type_bool && getVarValue(tk) == null && getVarValueLocal(tk) == null) {
-                System.out.println("Definizione in locale");
-
-                if (value == null)
-                    symbolTableLocal.put(tk.getText(), "NULL"); // TODO: Controllo sui tipi
-                else
-                    symbolTableLocal.put(tk.getText(), value); // TODO: Controllo sui tipi
-
-            } else if (type_bool && (getVarValue(tk) != null || getVarValueLocal(tk) != null)) {
-                System.out.println("Variabile '" + tk.getText() + "' ridefinita");
-            }
-        }
-    }
-
-    // public Boolean checkType(Token tk, float value) // TODO: Controllo sui tipi
-
-    public double getValue(Token tk) {
-        return new Double(tk.getText()); // TODO: Double
-    }
-
-    public String getVarValue(Token tk) {
-        if (symbolTable.containsKey(tk.getText()))
-            return symbolTable.get(tk.getText()).toString();
-
-        return null;
-    }
-
-    public String getVarValueLocal(Token tk) {
-        if (symbolTableLocal.containsKey(tk.getText()))
-            return symbolTableLocal.get(tk.getText()).toString();
-
-        return null;
-    }
-
-    public double doAdd(double v1, double v2) {
-        return v1 + v2;
-    }
-
-    public double doSub(double v1, double v2) {
-        return v1 - v2;
-    }
-
-    public double doMul(double v1, double v2) {
-        return v1 * v2;
-    }
-
-    public double doDiv(double v1, double v2) {
-        if (v2 != 0)
-            return v1 / v2;
-
-        System.out.println("Divisione per zero");
-        return 0.0;
-    }
-
-    public void newFunction() {
-        System.out.println("---NEW FUNCTION---");
-        if (type_bool == false) {
-            System.out.println("Funzione senza aver specificato il tipo");
-            return;
-        }
-
-        if (symbolTableLocal != null)
-            symbolTableLocal.clear();
-
-        // TODO: Controllo parametri
-
-        if (paramsList != null) {
-            for (Object var : paramsList) {
-                symbolTableLocal.put(var.toString(), "NULL");
-            }
-        }
-    }
-
-    public void addParamsList(Token tk) {
-        paramsList.add(tk.getText());
-    }
-
-    public void clearParamsList() {
-        if (paramsList != null)
-            paramsList.clear();
-    }
-    */
-
+    // ERRORE
     // Errore semantico
     public void addErrorMessage(Token tk, int code) {
         String msg = " Errore Semantico [" + code + "] " + "in (" + tk.getLine() + "," + tk.getCharPositionInLine() + ") - ";
@@ -535,10 +422,16 @@ public class ParserEnvironment {
             msg += "La variabile <" + tk.getText() + "> è già stata dichiarata";
         else if (code == ERR_UNDECLARED)
             msg += "La variabile <" + tk.getText() + "> non è stata dichiarata";
-        if (code == ERR_FUNC_ALREADY_DECLARED)
+        else if (code == ERR_FUNC_ALREADY_DECLARED)
             msg += "La funzione <" + tk.getText() + "> è già stata dichiarata";
         else if (code == ERR_FUNC_UNDECLARED)
             msg += "La funzione <" + tk.getText() + "> non è stata dichiarata";
+        else if (code == ERR_CALL_FUNC_IN_GLOBAL)
+            msg += "La chiamata di funzione <" + tk.getText() + "> non può essere fatta globalmente";
+        else if (code == ERR_MAIN_NOT_FOUND)
+            msg += "La funzione int main() è richiesta ma non è stata trovata";
+        else if (code == ERR_MAIN_TYPE_NOT_INT)
+            msg += "La funzione int main() è richiesta ma non è stata trovata";
         else if (code == ERR_TYPE_MISMATCH)
             msg += "Valore di tipo non compatibile";
         else if (code == ERR_UNDEFINED_OP)

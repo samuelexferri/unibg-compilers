@@ -4,12 +4,13 @@
 -----------------------------------------
 1:	k=Value{name='k', type='char', value='null', isVar=true}
 2:	j=Value{name='j', type='int', value='null', isVar=true}
+3:	h=Value{name='h', type='int', value='5', isVar=true}
 
 -----------------------------------------
-*****	Local Symbol Table: main2	*****
+*****	Local Symbol Table: function	*****
 -----------------------------------------
-1:	k=Value{name='k', type='char', value='null', isVar=true}
-2:	j=Value{name='j', type='int', value='null', isVar=true}
+1:	m=Value{name='m', type='char', value='null', isVar=true}
+2:	l=Value{name='l', type='int', value='null', isVar=true}
 
 ---------------------------------
 *****	Global Symbol Table	*****
@@ -17,9 +18,10 @@
 1:	d=Value{name='d', type='int', value='1', isVar=true}
 2:	c=Value{name='c', type='char', value='null', isVar=true}
 3:	b=Value{name='b', type='float', value='null', isVar=true}
-4:	a=Value{name='a', type='int', value='55', isVar=true}
+4:	a=Value{name='a', type='int', value='7', isVar=true}
 5:	main=Value{name='main', type='int', value='null', isVar=false}
-6:	main2=Value{name='main2', type='int', value='null', isVar=false}
-7:	g=Value{name='g', type='int', value='null', isVar=true}
-8:	f=Value{name='f', type='int', value='2', isVar=true}
-9:	e=Value{name='e', type='int', value='1', isVar=true}
+6:	function=Value{name='function', type='void', value='null', isVar=false}
+7:	z=Value{name='z', type='int', value='3', isVar=true}
+8:	g=Value{name='g', type='int', value='null', isVar=true}
+9:	f=Value{name='f', type='int', value='2', isVar=true}
+10:	e=Value{name='e', type='int', value='1', isVar=true}
