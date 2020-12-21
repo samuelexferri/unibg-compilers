@@ -445,7 +445,12 @@ public class ParserEnvironment {
     }
 
     // PUNTATORI
-    // TODO
+    // Usano alcune funzioni dei vettori
+
+    // Indirizzo di memoria di una variabile
+    public Value getAddress(Token var, String expectedType) {
+        return  new Value(expectedType, "0x77777777", false);  // TODO Indirizzo fittizzio
+    }
 
     // OPERAZIONI
     // Concatenazione di char/stringhe
@@ -565,6 +570,18 @@ public class ParserEnvironment {
         else  // if (type.equals(ValueTypes.INT_STR))
             value = new Integer(Integer.parseInt(v1.value) / Integer.parseInt(v2.value)).toString();
         return new Value(type, value, false);
+    }
+
+    // STATEMENTS
+    // Valuta le condizioni date le due espressioni e il comparatore
+    public Boolean compareEvaluator(Token comp, Value exp1, Value exp2) {
+        if (comp == null || exp1 == null || exp2 == null) {
+            //addErrorMessage(op, ERR_DIV_BY_0); // TODO Compare
+        }
+
+        //switch-case // TODO Compare
+
+        return true;
     }
 
     // ERRORE

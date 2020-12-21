@@ -11,16 +11,12 @@ Symbol table separata per ogni blocco locale (pensare in maniera ricorsiva) più
 Errori è una lista di stringhe (errori da riordinare in base alle linee crescente)
 
 Vettori: Lunghezza da salvare nella symbol table
-Puntatori: TODO
+Puntatori: Indirizzo fittizzio, Aggiugnere isPunct usando value come indirizzo e vect come valori puntati
 Funzioni: Valori fittizzi per i return dopo aver eseguito tutti i calcoli delle funzioni, per ora solo controllo sui tipi ritornati
 Call Function: Controllo call_params, possiamo chiamarla come si vuole per ora
 Return: Almeno un return (Controllo blando), Obbligatorio nel main return 0
 Operazioni: +=...
 
-Puntatori
+If, For, While: Compare
 
-If
-For
-While
-
-Traduzione: Operazioni
+Traduzione

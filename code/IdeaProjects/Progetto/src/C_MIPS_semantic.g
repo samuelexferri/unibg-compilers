@@ -85,7 +85,7 @@ funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local
 funct_params 	: LPAREN {env.is_local = true; env.var_type = null;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);})*)? RPAREN isBlock=codeblock {env.is_local = false; env.clearSymbolTableLocal(isBlock);}
 				; 
 				
-assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name;}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValue(var_temp, exp, eq);}) // TODO += -=...
+assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name;}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValue(var_temp, exp, eq);})
 				;
 
 ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
@@ -99,7 +99,7 @@ ass_vector		[String vect_type]
 vector 			: LBRACK INT? RBRACK {env.addNewVector(env.var_type, env.var_name);} ass_vector[env.var_type]?
 				;
 				
-pointer			: MULT (WORD | LPAREN expression[null] RPAREN) assignment? // Puntatori: *p o *(p+1)
+pointer			: MULT (name=WORD {env.var_name = $name; env.addNewVector(env.var_type, env.var_name);} | LPAREN expression[null] RPAREN) assignment? // Puntatori: *p o *(p+1)
 				;
 					
 call_function 	: LPAREN (call_args (COMMA call_args)*)? RPAREN
@@ -128,13 +128,13 @@ local			: {env.var_type = null; env.is_local = true;} (type=type_name {env.var_t
 																														      						| {env.var_name = $name; env.funct_type = env.getVarType($name); env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
 				;
 			  	
-ifStat			: IF LPAREN condition RPAREN codeblock (ELSE statement)? // TODO: Codeblock, Operatori logici
+ifStat			: IF LPAREN bool=condition RPAREN codeblock (ELSE statement)?
 				;
 						
-whileStat		: WHILE LPAREN condition RPAREN statement
+whileStat		: WHILE LPAREN bool=condition RPAREN statement
 				;
 				
-forStat			: FOR LPAREN initialization SEMICOL condition SEMICOL increment RPAREN statement 
+forStat			: FOR LPAREN initialization SEMICOL bool=condition SEMICOL increment RPAREN statement 
 				;
 
 returnStat		: RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(env.var_type, env.funct_type);} SEMICOL 
@@ -144,7 +144,7 @@ type_name		returns [Token token]
 				: (tk=K_INT
 				| tk=K_FLOAT 
 				| tk=K_CHAR) {token = tk;}
-				; 
+				;
 
 expression 		[String type] returns [Value value]
 				: v1=multiply_exp[type] ( op=ADD v2=multiply_exp[type] {v1 = env.doAdd($op, v1, v2);} 
@@ -163,28 +163,31 @@ atom_exp 		[String type] returns [Value value]
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
 				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
 				| name=WORD ((LBRACK pos=INT? RBRACK) {value = env.getVectorValue($name, type, $pos);}
-					   | call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);} // TODO FITTIZIO IL VALUEEEEEEEEEEEEEEEEEEEEEEE
-					   | {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore // TODO
-				| MULT WORD // Puntatore // TODO
-				| AMP WORD // Indirizzo // TODO
+					   | call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);}
+					   | {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore
+				| MULT name=WORD {value = env.getDeclaredValue($name, type);} // Puntatore
+				| AMP name=WORD {value = env.getAddress($name, type);} // Indirizzo
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi
     			;
 
-initialization	: type_name? WORD assignment?
+initialization	: type_name? name=WORD {env.var_name = $name;} assignment?
 				;
 
-condition		: expression[null] compare expression[null]
+condition		returns [Boolean bool]
+				: exp1=expression[ValueTypes.ANYVALUE_STR] comp=compare exp2=expression[ValueTypes.ANYVALUE_STR] {bool = env.compareEvaluator(comp,exp1,exp2);}
 				;
 				
-increment		: WORD assignment
+increment		: name=WORD {env.var_name = $name;} assignment
 				;
 
-compare			: EQ 
+compare			returns [Token tk]
+				:comp=
+				( EQ 
 				| NEQ 
 				| LT 
 				| GT 
 				| LE 
-				| GE
+				| GE ) {tk = comp;}
 				;
 				
 anything		: INT 
