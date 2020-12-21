@@ -125,7 +125,7 @@ statement 		: local
 local			: {env.var_type = ValueTypes.UNDEFINED_STR; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
 													     		 												  | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
 																									     		 		 	  						| {env.var_name = $name;} vector 
-																														      						| {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
+																														      						| {env.var_name = $name; env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
 				;
 			  	
 ifStat			: IF LPAREN bool=condition RPAREN codeblock (ELSE statement)?
@@ -162,9 +162,9 @@ atom_exp 		[String type] returns [Value value]
 				: tk=INT {value = env.setValue($tk, ValueTypes.INT_STR, type);}
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
 				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
-				| name=WORD ((LBRACK pos=INT? RBRACK) {value = env.getVectorValue($name, type, $pos);}
-					   | call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);}
-					   | {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore
+				| name=WORD ((LBRACK {env.vect_pos = "0";} (pos=INT {env.vect_pos = $pos.getText();})? RBRACK) {value = env.getVectorValue($name, type, env.vect_pos);}
+					   		| call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);}
+					   		| {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore
 				| MULT name=WORD {value = env.getDeclaredValue($name, type);} // Puntatore
 				| AMP {env.is_amp_punct = true;} name=WORD {value = env.getDeclaredValue($name, type);} // Indirizzo (da estrarre)
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi

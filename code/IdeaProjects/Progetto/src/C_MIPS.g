@@ -85,9 +85,9 @@ pointer			: MULT (WORD | LPAREN expression RPAREN) assignment? // Puntatori: *p 
 call_function 	: LPAREN (call_args (COMMA call_args)*)? RPAREN
 				;
 
-call_args		: D_QUOTE anything* D_QUOTE
-				| MULT? WORD
-				;
+call_args    	: anything
+        		| MULT? WORD
+        		;
 				
 codeblock 		: LCURL statement* RCURL 
 	    		| SEMICOL // SEMICOL di function	
@@ -136,7 +136,7 @@ atom_exp 		: INT
 				| WORD ((LBRACK INT? RBRACK) | call_function)? // Variabile o Vettore
 				| MULT WORD // Puntatore
 				| AMP WORD // Indirizzo
-    			| LPAREN expression RPAREN // Parentes
+    			| LPAREN expression RPAREN // Parentesi
     			;
 
 initialization	: type_name? WORD assignment?
@@ -156,24 +156,8 @@ compare			: EQ
 				| GE
 				;
 				
-anything		: INT 
-				| FLOAT 
-				| CHAR 
-				| WORD 
-				| IF 
-				| WHILE 
-				| FOR 
-				| PERC 
-				| SPACE 
-				| ADD 
-				| SUB 
-				| MULT 
-				| DIV 
-				| AMP 
-				| HASHTAG 
-				| ASS 
-				| WS
-				;
+anything    	: D_QUOTE ~(D_QUOTE)* D_QUOTE // Qualsiasi cosa all'interno delle doppie virgolette
+        		;
 
 
 
@@ -186,7 +170,7 @@ fragment TAB		: '\t';
 fragment NEWL   	: '\n';
 fragment SLASHR 	: '\r';
 fragment CHAR 		: ('a'..'z' | 'A'..'Z') ;
-fragment SLASH 		: '\\';
+fragment BACKSLASH 	: '\\';
 
 WS 	: ( SPACE 
 	| TAB 
@@ -242,7 +226,7 @@ INT			: DIGIT_NO_ZERO DIGIT*
 FLOAT		: DIGIT+ DOT DIGIT+ ;
 CHAR_QUOTE	: S_QUOTE (DIGIT 
 					  | CHAR 
-					  | SLASH ('0' | 'n')) S_QUOTE ;
+					  | BACKSLASH ('0' | 'n')) S_QUOTE ;
 
 WORD 		: CHAR (CHAR | UNDRSCR | DIGIT)* ;
 

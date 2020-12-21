@@ -41,6 +41,7 @@ public class ParserEnvironment {
     public Boolean is_local; // Indica se siamo all'interno di una funzione
     public ArrayList<Value> vect; // Vettore temporaneo
     public String vect_size; // Dimensione del vettore specificata tra parentesi quadre
+    public String vect_pos; // Posizione del vettore specificata tra parentesi quadre
     public Boolean is_amp_punct;
     ArrayList<String> excluded_functions;
 
@@ -55,6 +56,7 @@ public class ParserEnvironment {
         fOut = fOutMain;
         vect = new ArrayList<Value>();
         vect_size = "0";
+        vect_pos = "0";
         is_amp_punct = false;
 
         // Funzioni escluse
@@ -75,18 +77,18 @@ public class ParserEnvironment {
     // Inserisce una variabile nelle symbol tables
     public void addNewVariable(String type, Token name) {
         if (!is_local) { // Globale
-            if (type != ValueTypes.UNDEFINED_STR && name != null) {
+            if (!type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 if (symbolTable.containsKey(name.getText()))
                     addErrorMessage(name, ERR_ALREADY_DECLARED);
                 else {
                     symbolTable.put(name.getText(), new Value(name.getText(), type));
                     debug.append("Ho dichiarato la variabile '" + name.getText() + "' come '" + type + "'\n");
                 }
-            } else if (type == ValueTypes.UNDEFINED_STR && name != null) {
+            } else if (type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 checkDeclarationGlobal(name);
             }
         } else { // Locale
-            if (type != ValueTypes.UNDEFINED_STR && name != null) {
+            if (!type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 if (symbolTableLocal.containsKey(name.getText()))
                     addErrorMessage(name, ERR_ALREADY_DECLARED);
                 else {
@@ -94,7 +96,7 @@ public class ParserEnvironment {
                     symbolTableLocal.put(name.getText(), new Value(name.getText(), type));
                     debug.append("Ho dichiarato la variabile locale '" + name.getText() + "' come '" + type + "'\n");
                 }
-            } else if (type == ValueTypes.UNDEFINED_STR && name != null) {
+            } else if (type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 checkDeclarationLocal(name);
             }
         }
@@ -103,18 +105,18 @@ public class ParserEnvironment {
     // Inserisce un vettore nelle symbol tables
     public void addNewVector(String type, Token name, String size) {
         if (!is_local) { // Globale
-            if (type != ValueTypes.UNDEFINED_STR && name != null) {
+            if (!type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 if (symbolTable.containsKey(name.getText()))
                     addErrorMessage(name, ERR_ALREADY_DECLARED);
                 else {
                     symbolTable.put(name.getText(), new Value(name.getText(), type, null, true, true, null, Integer.parseInt(size)));
                     debug.append("Ho dichiarato il vettore '" + name.getText() + "' come '" + type + "'\n");
                 }
-            } else if (type == ValueTypes.UNDEFINED_STR && name != null) {
+            } else if (type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 checkDeclarationGlobal(name);
             }
         } else { // Locale
-            if (type != ValueTypes.UNDEFINED_STR && name != null) {
+            if (!type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 if (symbolTableLocal.containsKey(name.getText()))
                     addErrorMessage(name, ERR_ALREADY_DECLARED);
                 else {
@@ -122,7 +124,7 @@ public class ParserEnvironment {
                     symbolTableLocal.put(name.getText(), new Value(name.getText(), type, null, true, true, null, Integer.parseInt(size)));
                     debug.append("Ho dichiarato il vettore locale '" + name.getText() + "' come '" + type + "'\n");
                 }
-            } else if (type == ValueTypes.UNDEFINED_STR && name != null) {
+            } else if (type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 checkDeclarationLocal(name);
             }
         }
@@ -268,7 +270,7 @@ public class ParserEnvironment {
         else if (type.matches(ValueTypes.FLOAT_STR))
             return new Value(type, "777.77", false);
         else if (type.matches(ValueTypes.CHAR_STR)) {
-            return new Value(type, "f", false);
+            return new Value(type, "x", false);
         }
 
         return null;
@@ -327,7 +329,7 @@ public class ParserEnvironment {
     }
 
     // Recupera il valore di una variabile dichiarata
-    public Value getVectorValue(Token var, String expectedType, Token position) {
+    public Value getVectorValue(Token var, String expectedType, String position) {
         Value value = null;
 
         // TODO Rinominare gli errori per i vettori
@@ -348,7 +350,7 @@ public class ParserEnvironment {
                 addErrorMessage(var, ERR_UNDECLARED);
                 value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
             } else if (isDeclaredLocal(var)) {
-                value = symbolTableLocal.get(var.getText());  // Recupero il valore della variabile dalla symbol table
+                value = symbolTableLocal.get(var.getText());  // Recupero il valore della variabile dalla symbol table locale
                 if (value.vect == null)
                     addErrorMessage(var, ERR_NO_VALUE);
                 else if (!ValueTypes.isCoherent(value.type, expectedType))
@@ -362,7 +364,7 @@ public class ParserEnvironment {
             }
         }
 
-        return (Value) value.vect.get(Integer.parseInt(position.getText()));
+        return (Value) value.vect.get(Integer.parseInt(position));
     }
 
     // FUNZIONI
@@ -438,14 +440,16 @@ public class ParserEnvironment {
     }
 
     // Verifica una chiamata di funzione
-    public void checkCallFunction(String type, Token name) {
-        if (excluded_functions.contains(name.getText())) { // Funzioni escluse
-            return; // Ignora la funzione
+    public void checkCallFunction(String var_type, Token name) {
+        if (excluded_functions.contains(name.getText())) { // Funzioni escluse (es. printf...)
+            return; // Ignora la funzione ed esce subito
         }
 
-        if (type != null) {
+        if (!var_type.matches(ValueTypes.UNDEFINED_STR)) // In locale si ha "int funct()" che è sbagliato avere il type
             addErrorMessage(name, ERR_TYPE_CALL_FUNCT);
-        } else if (!symbolTable.containsKey(name.getText())) {
+
+
+        if (!symbolTable.containsKey(name.getText())) {
             addErrorMessage(name, ERR_FUNC_UNDECLARED);
         }
     }
@@ -465,11 +469,12 @@ public class ParserEnvironment {
     // Inserisci il vettore creato nella symbol table
     public void insertVectorST() {
         // Costruisco il Value
+
         Value vect_val = new Value(var_name.getText(), getVarType(var_name), null, true, true, vect, vect.size());
 
-        if (is_local && symbolTableLocal.contains(var_name.getText())) {
+        if (is_local && symbolTableLocal.containsKey(var_name.getText())) {
             symbolTableLocal.replace(var_name.getText(), vect_val);
-        } else if (symbolTable.contains(var_name.getText())) {
+        } else if (symbolTable.containsKey(var_name.getText())) {
             symbolTable.replace(var_name.getText(), vect_val);
         }
 

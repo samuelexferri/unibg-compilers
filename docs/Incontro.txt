@@ -12,9 +12,10 @@ SEMANTICA:
 Una variabile globale può essere dichiarata alla fine (controllo posticipato dopo, salvare una struttura per i controlli successivi da fare a fine parsing)
 Symbol table separata per ogni blocco locale (pensare in maniera ricorsiva) più quella globale
 Errori è una lista di stringhe (errori da riordinare in base alle linee crescente)
+Variabili globali come le funzioni devono essere all'inizio, ma non è un'errore (sequenziale)
 
 TODO:
-Mancante: Do-While, const, bool, and, or, not, a++
+Mancante: Cast, Do-While, const, bool, and, or, not, a++
 
 Vettori: Lunghezza da salvare nella symbol table, 
 Puntatori: Indirizzo fittizzio, Puntatori tra parentesi *(cb + 1)

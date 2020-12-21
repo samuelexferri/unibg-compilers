@@ -5,19 +5,19 @@ int a;
 float b;
 char c;
 
-//int a = 1; // Errore giusto
+//int a = 1;
 int d = 1;
 a = 5;
 //a = b; // TODO Cast
 
-int vect0[5]; // TODO Lunghezza da salvare nella symbol table
+int vect0[5];
 int vect1[] = {1,2,3,4};
-//int vect2[] = {1.1,3,4}; // Errore giusto
+//int vect2[] = {1.1,3,4};
 
 int *p1;
 *p1 = 4;
 a = 5 + *p1;
-p1 = &a; // TODO Indirizzo fittizzio
+p1 = &a;
 
 int e = 1, f = 2, g;
 
@@ -27,16 +27,16 @@ int func_test(int j, char k) {
 
     int vect3[5];
     int vect4[] = {5,6};
-    //int vect5[] = {1.1,3,4}; // Errore giusto
-    int vect6[]; //
+    //int vect5[] = {1.1,3,4};
+    int vect6[];
 
-    a = vect1[3];
+    a = vect1[2];
 
-    //int vect7[] = {'a', 'b', 'c'}; // Errore giusto
+    //int vect7[] = {'a', 'b', 'c'};
     char vect8[] = {'a', 'b', 'c'};
 
-    c = vect8[1];
-    //a = vect8[1]; // Errore giusto
+    //c = vect8[1];
+    //a = vect8[1];
 
     return 1; // TODO Almeno un return (Controllo blando)
     return a;
@@ -47,14 +47,14 @@ char funct_char(int a, int b) { // TODO Controllo call_params, possiamo chiamarl
 }
 
 int main (int j, char k) {
-    //z = 5; // Errore giusto, globali definite solamente prima (sequenziale)
+    //z = 5; // Variabili globali come le funzioni devono essere all'inizio, ma non è un'errore (sequenziale)
 
     char a = 'a' + 'a';
     char f = funct_char() + 'a';
-    //char a = 'a' - 'a'; // Errore giusto
+    //char a = 'a' - 'a';
 
     int ret = func_test() + 1; // TODO Valori fittizzi per i return dopo aver eseguito tutti i calcoli delle funzioni, per ora solo controllo sui tipi ritornati
-    //int ret = func_char() + 1; // Errore giusto
+    //int ret = func_char() + 1;
 
     return 0; // TODO Obbligatorio nel main return 0
 }
@@ -62,6 +62,6 @@ int main (int j, char k) {
 void funct_void(int l, char m) {
 }
 
-int z = 3; // Errore giusto, globali definite solamente prima (sequenziale)
+int z = 3; // Variabili globali come le funzioni devono essere all'inizio, ma non è un'errore (sequenziale)
 
-//test(); // Errore giusto
+//test();

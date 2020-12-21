@@ -32,22 +32,22 @@ int *p2 = &a;
 //vettore5[] = {5,6};
 //*vettore5 = 5;
 
-
 char ca = 'a';
 char *cb = &ca;
 //*(cb + 1) = 3; // TODO Puntatori tra parentesi
 
-
 char special1 = '\n';
 char special2 = '\0';
 
-// a++; // TODO Non fatto
+//a++; // TODO Non fatto
 
 int sqrt();
 
 int radice = sqrt(a)+2;
 
 void func_void();
+
+int funzione();
 
 int main (int j, char k) {
     int a;
@@ -75,35 +75,28 @@ int main (int j, char k) {
     //vettore5[] = {5,6};
     //*vettore5 = 5;
 
-
     char ca = 'a';
     char *cb = &ca;
     //*(cb + 1) = 3; // TODO Puntatori tra parentesi
 
-
     char special1 = '\n';
     char special2 = '\0';
 
-    // a++; // TODO Non fatto
+    //a++; // TODO Non fatto
 
-}
-/*
     funzione(t);
     funzione();
 
-    // void pippo(); // Ok, non lo accetta
-    int pippo(); // TODO: In semantica non dovrebbe accettarlo
+    //void pippo();
+    //int pippo();
 
-    return p;
-    return *p;
-    return &p;
-    return funzione(t);
+    return p1;
+    return *p1;
+    return &p1;
+    return funzione();
 }
 
-
-int funzione();
-
-int funzione(int t) {
+int statements(int t) {
 		if (a == 5) {
 			a;
 		} else if (a == 5) {
@@ -134,5 +127,4 @@ int funzione(int t) {
         printf("a", "b=2", a, "Text for + * #", *b);
 }
 
-int pippo; // TODO: In semantica gestirla alla fine
-*/
+int pippo; // Variabili globali come le funzioni devono essere all'inizio, ma non è un'errore (sequenziale)
