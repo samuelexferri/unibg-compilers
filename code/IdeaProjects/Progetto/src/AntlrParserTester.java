@@ -8,7 +8,20 @@ import java.util.Enumeration;
 
 public class AntlrParserTester {
     static C_MIPS_semanticParser parser;
-    static String fileIn = ".\\resources\\test_semantic_C";
+
+    //static String fileIn = ".\\resources\\arithmetic_ops_C";
+    //static String fileIn = ".\\resources\\array_ops_C"; // TODO Errore grave
+    //static String fileIn = ".\\resources\\conditional_ops_C"; // TODO Errore (Char)
+    //static String fileIn = ".\\resources\\factorial_C"; // TODO Errore (Call args)
+    //static String fileIn = ".\\resources\\fibonacci_C"; // TODO Errore (Call args)
+    //static String fileIn = ".\\resources\\function_ops_C"; // TODO Errore (Call args)
+    //static String fileIn = ".\\resources\\pointer_type_C"; // TODO Errore grave
+    //static String fileIn = ".\\resources\\regular_type_C"; // TODO Errore (Tipi)
+    //static String fileIn = ".\\resources\\array_ops_C"; // TODO Errore grave
+    //static String fileIn = ".\\resources\\towers_of_hanoi_C"; // TODO Errore
+    static String fileIn = ".\\resources\\test_C";
+    //static String fileIn = ".\\resources\\test_semantic_C";
+
     static String fileOut = ".\\resources\\fileOut.txt";
     static String fileMsg = ".\\resources\\fileMsg.txt";
     static String fileErr = ".\\resources\\fileErr.txt";

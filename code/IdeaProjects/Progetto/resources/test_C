@@ -8,82 +8,86 @@
 */
 
 int a;
-float b;
+float b = 2.2;
 char c;
-int a = 1; // TODO: In semantica definirla una sola volta
-int a = 1, b, c = 2;
+//int a = 1;
+int d = 1, e, f = 2;
 a;
 a = 2;
-a = b;
-int a = (5+b)*4-5*3;
-a = (5+b)*4;
-a = 1, b = 3;
+float g = (5+b)*4-5*3;
+g = (5+b)*4;
+//a = 1, b = 3;
 
-int vettore[5];
-float vettore[4] = {5, 6};
-char vettore [];
-char vettore [] = {c, 5.4 , 3*b, 4}; // TODO: In semantica non dovrebbe accettarlo
+int vettore1[] = {2, 3};
+//int vettore2[5] = {5, 6}; // TODO Errore semantico non gestito: richiede 5 elementi e ne si assegnano 2
+char vettore3[];
+//char vettore4[] = {c, 5.4 , 3*b, 4};
+//vettore5[5] = {2};
 
-int *a;
-int *a = &b; // TODO: In semantica verifica indirizzo
-*a = &b; // TODO: In semantica controllare prima che è stato assegnato l'indirizzo per reference
-*a = 5;
-vettore[] = 5;
-*vettore = 5;
+int *p1;
+int *p2 = &a;
+*p1 = &a;
+*p1 = 5;
 
-char a = 'a';
-char *b = &a;
-*(b + 1) = 3;
+//vettore5[] = {5,6};
+//*vettore5 = 5;
 
-a = '\n';
-a = '\0';
 
-// TODO: Non fatto
-// int a;
-// a++;
+char ca = 'a';
+char *cb = &ca;
+//*(cb + 1) = 3; // TODO Puntatori tra parentesi
 
-b = sqrt(a)+2;
 
-void gino();
+char special1 = '\n';
+char special2 = '\0';
+
+// a++; // TODO Non fatto
+
+int sqrt();
+
+int radice = sqrt(a)+2;
+
+void func_void();
 
 int main (int j, char k) {
     int a;
-    float b;
+    float b = 2.2;
     char c;
-    int a = 1; // Semantica: definirla una sola volta
-    int a = 1, b, c = 2;
+    //int a = 1;
+    int d = 1, e, f = 2;
     a;
     a = 2;
-    a = b;
-    int a = (5+b)*4-5*3;
-    a = (5+b)*4;
-    a = 1, b = 3;
+    float g = (5+b)*4-5*3;
+    g = (5+b)*4;
+    //a = 1, b = 3;
 
-    int vettore[5];
-    float vettore[4] = {5, 6};
-    char vettore [];
-    char vettore [] = {c, 5.4 , 3*b, 4}; // Semantica: non dovrebbe accettarlo
+    int vettore1[] = {2, 3};
+    //int vettore2[5] = {5, 6}; // TODO Errore semantico non gestito: richiede 5 elementi e ne si assegnano 2
+    char vettore3[];
+    //char vettore4[] = {c, 5.4 , 3*b, 4};
+    //vettore5[5] = {2};
 
-    int *a;
-    int *a = &b; // Semantica: verifica indirizzo
-    *a = &b; // Semantica: controllare prima che è stato assegnato l'indirizzo per reference
-    *a = 5;
-    vettore[] = 5;
-    *vettore = 5;
+    int *p1;
+    int *p2 = &a;
+    *p1 = &a;
+    *p2 = 5;
 
-    char a = 'a';
-    char *b = &a;
-    *(b + 1) = 3;
+    //vettore5[] = {5,6};
+    //*vettore5 = 5;
 
-    a = '\n';
-    a = '\0';
 
-    // TODO: Non fatto
-    // int a;
-    // a++;
+    char ca = 'a';
+    char *cb = &ca;
+    //*(cb + 1) = 3; // TODO Puntatori tra parentesi
 
-    b = sqrt(a)+2;
 
+    char special1 = '\n';
+    char special2 = '\0';
+
+    // a++; // TODO Non fatto
+
+}
+/*
     funzione(t);
     funzione();
 
@@ -95,6 +99,7 @@ int main (int j, char k) {
     return &p;
     return funzione(t);
 }
+
 
 int funzione();
 
@@ -130,3 +135,4 @@ int funzione(int t) {
 }
 
 int pippo; // TODO: In semantica gestirla alla fine
+*/

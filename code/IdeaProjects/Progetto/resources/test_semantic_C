@@ -8,6 +8,7 @@ char c;
 //int a = 1; // Errore giusto
 int d = 1;
 a = 5;
+//a = b; // TODO Cast
 
 int vect0[5]; // TODO Lunghezza da salvare nella symbol table
 int vect1[] = {1,2,3,4};

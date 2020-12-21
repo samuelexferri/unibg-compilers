@@ -107,7 +107,7 @@ local			: type_name? ( pointer
 									 | call_function)) SEMICOL
 				;
 			  	
-ifStat			: IF LPAREN condition RPAREN codeblock (ELSE statement)? // TODO: Codeblock, Operatori logici
+ifStat			: IF LPAREN condition RPAREN codeblock (ELSE statement)?
 				;
 						
 whileStat		: WHILE LPAREN condition RPAREN statement

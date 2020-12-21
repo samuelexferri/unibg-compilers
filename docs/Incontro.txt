@@ -1,21 +1,29 @@
+CODE:
+C_MIPS (Sintassi)
+C_MIPS_debug (Sintassi ma deprecata)
+C_MIPS_semantic (Semantica)
+
 SINTASSI:
 Prospezione LL(1) k=1
 Scope variabili (globali, locali a funzioni)
 Testare su vari files e anche sbagliati (.html) per verificare lo scanner e il parser, in seguito passare alla semantica
-
-Mancante: Do-While, const, bool, and, or, not, a++
 
 SEMANTICA:
 Una variabile globale può essere dichiarata alla fine (controllo posticipato dopo, salvare una struttura per i controlli successivi da fare a fine parsing)
 Symbol table separata per ogni blocco locale (pensare in maniera ricorsiva) più quella globale
 Errori è una lista di stringhe (errori da riordinare in base alle linee crescente)
 
-Vettori: Lunghezza da salvare nella symbol table
-Puntatori: Indirizzo fittizzio, Aggiugnere isPunct usando value come indirizzo e vect come valori puntati
+TODO:
+Mancante: Do-While, const, bool, and, or, not, a++
+
+Vettori: Lunghezza da salvare nella symbol table, 
+Puntatori: Indirizzo fittizzio, Puntatori tra parentesi *(cb + 1)
 Funzioni: Valori fittizzi per i return dopo aver eseguito tutti i calcoli delle funzioni, per ora solo controllo sui tipi ritornati
-Call Function: Controllo call_params, possiamo chiamarla come si vuole per ora
+Call Function: Controllo call_params possiamo chiamarla come si vuole per ora
+Call Args: Non funzionano (Fibonacci...)
 Return: Almeno un return (Controllo blando), Obbligatorio nel main return 0
 Operazioni: +=...
+Program counter: Fittizio
 
 If, For, While: Compare
 
