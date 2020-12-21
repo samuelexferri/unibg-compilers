@@ -5,28 +5,27 @@ int a;
 float b;
 char c;
 
-//int a = 1; // Errore
+//int a = 1; // Errore giusto
 int d = 1;
 a = 5;
 
-int vect1[] = {1,3,4}; // TODO Assegnamento dei vettori
-//int vect[] = {1.1,3,4}; // Errore
-int vect2[5]; // TODO Lunghezza da salvare nella symbol table
+int vect0[5]; // TODO Lunghezza da salvare nella symbol table
+int vect1[] = {1,2,3,4};
+//int vect2[] = {1.1,3,4}; // Errore giusto
 
 // TODO Puntatori
 
 int e = 1, f = 2, g;
 
 int test(int j, char k) {
-    int vect[] = {1,3,4};
-    int vect2[5];
-
     int a;
     a = 1;
 
-    int vect3[] = {1,3,4};
-    //int vect[] = {1.1,3,4}; // Errore
-    int vect4[5]; // TODO Nella Symbol Table
+    int vect3[5];
+    int vect4[] = {5,6};
+    //int vect5[] = {1.1,3,4}; // Errore
+    //a = vect1[0];
+    vect3[];
 
     return 1; // TODO Il fatto che ci sia almeno uno (Controllo blando)
     return a;
@@ -62,21 +61,3 @@ void funct_void(int l, char m) {
 int z = 3; // Errore, globali definite prima (sequenziale)
 
 //test(); // Errore
-
-/*
-Valori fittizi dei return
-Call args
-Return controllato in modo blando e nel main
-Contare i vettori
-
-Vettori
-Puntatori
-
-If
-For
-While
-
-Traduzione: operazioni
-
-NO: +=
-*/

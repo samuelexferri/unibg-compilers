@@ -39,12 +39,7 @@ public class ParserEnvironment {
     public Token funct_name; // Nome della funzione
     public String funct_type; // Nome della funzione
     public Boolean is_local; // Indica se siamo all'interno di una funzione
-
-    // TODO
-    public Double exp;
-    public ArrayList<Value> paramsList = new ArrayList();
-    public Boolean is_global = false;
-    public Boolean type_bool = false;
+    public ArrayList<Value> vect;
 
     FileWriter fOut;
 
@@ -55,6 +50,7 @@ public class ParserEnvironment {
         debug = new StringBuffer();
         translation = new StringBuffer();
         fOut = fOutMain;
+        vect = new ArrayList<Value>();
     }
 
     // TODO: Traduzione
@@ -87,6 +83,34 @@ public class ParserEnvironment {
                 else {
                     // Variabile locale può oscurare una globale
                     symbolTableLocal.put(name.getText(), new Value(name.getText(), type));
+                    debug.append("Ho dichiarato la variabile locale '" + name.getText() + "' come '" + type + "'\n");
+                }
+            } else if (type == null && name != null) {
+                checkDeclarationLocal(name);
+            }
+        }
+    }
+
+    // Inserisce un vettore nelle symbol tables
+    public void addNewVector(String type, Token name) {
+        if (!is_local) { // Globale
+            if (type != null && name != null) {
+                if (symbolTable.containsKey(name.getText()))
+                    addErrorMessage(name, ERR_ALREADY_DECLARED);
+                else {
+                    symbolTable.put(name.getText(), new Value(name.getText(), type, null, true, true, null));
+                    debug.append("Ho dichiarato la variabile '" + name.getText() + "' come '" + type + "'\n");
+                }
+            } else if (type == null && name != null) {
+                checkDeclarationGlobal(name);
+            }
+        } else { // Locale
+            if (type != null && name != null) {
+                if (symbolTableLocal.containsKey(name.getText()))
+                    addErrorMessage(name, ERR_ALREADY_DECLARED);
+                else {
+                    // Variabile locale può oscurare una globale
+                    symbolTableLocal.put(name.getText(), new Value(name.getText(), type, null, true, true, null));
                     debug.append("Ho dichiarato la variabile locale '" + name.getText() + "' come '" + type + "'\n");
                 }
             } else if (type == null && name != null) {
@@ -270,6 +294,50 @@ public class ParserEnvironment {
         return value;
     }
 
+    // Recupera il valore di una variabile dichiarata
+    public Value getVectorValue(Token var, String expectedType, Token position) {
+        Value value = null;
+
+        System.out.println("XXXXXXXXX"+ var.getText()+ expectedType+ position.getText());
+
+        // TODO Rinominare gli errori per i vettori
+
+        if (!is_local) { // Globale
+            if (!isDeclaredGlobal(var)) {
+                addErrorMessage(var, ERR_UNDECLARED);
+                value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
+            } else {
+                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symbol table
+                if (value.vect == null)
+                    addErrorMessage(var, ERR_NO_VALUE);
+                else if (!ValueTypes.isCoherent(value.type, expectedType))
+                    addErrorMessage(var, ERR_TYPE_MISMATCH);
+            }
+        } else { // Locale
+            if (!isDeclaredLocal(var) && !isDeclaredGlobal(var)) {
+                addErrorMessage(var, ERR_UNDECLARED);
+                value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
+            } else if (isDeclaredLocal(var)) {
+                value = symbolTableLocal.get(var.getText());  // Recupero il valore della variabile dalla symbol table
+                System.out.println("YYYYY"+ value.toString());
+                if (value.vect == null)
+                    addErrorMessage(var, ERR_NO_VALUE);
+                else if (!ValueTypes.isCoherent(value.type, expectedType))
+                    addErrorMessage(var, ERR_TYPE_MISMATCH);
+            } else {
+                value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symbol table
+                System.out.println("YYYYY"+ value.toString());
+                if (value.vect == null)
+                    addErrorMessage(var, ERR_NO_VALUE);
+                else if (!ValueTypes.isCoherent(value.type, expectedType))
+                    addErrorMessage(var, ERR_TYPE_MISMATCH);
+            }
+        }
+        System.out.println("XXXXXXXXX"+ value.vect.get(Integer.parseInt(position.getText())));
+
+        return (Value) value.vect.get(Integer.parseInt(position.getText()));
+    }
+
     // FUNZIONI
     // Symbol table locale stampata e in seguito ripulita
     public void clearSymbolTableLocal(Boolean isBlock) {
@@ -354,6 +422,40 @@ public class ParserEnvironment {
         }
     }
 
+    // VETTORI
+    // Creare il vettore di sostegno, controllo di tipi già fatto con env.var_type
+    public void createVector(Value val) {
+        // Pulire il precedente vettore
+        vect.clear();
+
+        vect.add(val);
+    }
+
+    // Aggiungi un valore al vettore
+    public void addValueVector(Value val) {
+        vect.add(val);
+    }
+
+    // Inserisci il vettore creato nella symbol table
+    public void insertVectorST(){
+        // Costruisco il Value
+        Value vect_val = new Value(var_name.getText(), getVarType(var_name), null, true, true, vect);
+
+        if (is_local) {
+            symbolTableLocal.replace(var_name.getText(), vect_val);
+        } else {
+            symbolTable.replace(var_name.getText(), vect_val);
+        }
+        System.out.println("A" + vect);
+        vect.clear();
+        System.out.println("A" + vect);
+        //System.out.println("A" + var_name + vect_val.toString());
+        //System.out.println("PROVAA" + symbolTable.get("vect999999").toString());
+    }
+
+    // PUNTATORI
+    // TODO
+
     // OPERAZIONI
     // Concatenazione di char/stringhe
     public Value concat(Value v1, Value v2) {
@@ -384,8 +486,7 @@ public class ParserEnvironment {
 
         if (type.equals(ValueTypes.CHAR_STR) || type.equals(ValueTypes.CHAR_STR)) {
             return concat(v1, v2); // Concatenazione tra char
-        }
-        else {
+        } else {
             if (type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR))
                 value = v1.value + v2.value; // Concatenazione tra stringhe
             else if (type.equals(ValueTypes.FLOAT_STR) || type.equals(ValueTypes.NUMERIC_STR))

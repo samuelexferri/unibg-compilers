@@ -1,12 +1,30 @@
 SINTASSI:
-Mancante: const, bool, and, or, not, a++
 Prospezione LL(1) k=1
 Scope variabili (globali, locali a funzioni)
 Testare su vari files e anche sbagliati (.html) per verificare lo scanner e il parser, in seguito passare alla semantica
 
+Mancante: const, bool, and, or, not, a++, Do-While
+
 SEMANTICA:
-Errori è una lista di stringhe (errori da riordinare in base alle linee crescente)
 Una variabile globale può essere dichiarata alla fine (controllo posticipato dopo, salvare una struttura per i controlli successivi da fare a fine parsing)
 Symbol table separata per ogni blocco locale (pensare in maniera ricorsiva) più quella globale
-Main prefedinito obbligatorio in qualsiasi ordine, demandiamo a livello semantico, ha una struttura come tutte le altre funzioni: int main(...) {return 0}
-Variabile ridefinita è errore semantico
+Errori è una lista di stringhe (errori da riordinare in base alle linee crescente)
+
+Valori fittizi dei return
+Call Args
+Return controllato in modo blando e nel main
+Contare i vettori
+
+Vettori: Lunghezza da salvare nella symbol table
+Puntatori
+
+If
+For
+While
+
+Traduzione: operazioni
+
+NO: +=
+
+
+isVect

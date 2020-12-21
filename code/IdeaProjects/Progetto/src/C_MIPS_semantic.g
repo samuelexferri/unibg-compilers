@@ -75,7 +75,7 @@ include			: INCLUDE LT WORD (DOT WORD)? GT
 global			: funct_void
 				| {env.var_type = null; env.funct_type = null; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
 				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
-				     		 		 			| {env.var_name = $name; env.addNewVariable(env.var_type, $name);} vector) SEMICOL
+				     		 		 			| {env.var_name = $name;} vector) SEMICOL
 									 			| {env.var_name = $name; env.funct_name = $name; env.funct_type = type.getText(); env.addFunction(env.var_type, $name);} funct_params))
 				;
 				
@@ -92,11 +92,11 @@ ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVar
 				;
 							
 ass_vector		[String vect_type]
-				: ASS ((LCURL expression[vect_type] (COMMA expression[vect_type])* RCURL) 
+				: ASS ((LCURL e1=expression[vect_type] {env.createVector(e1);} (COMMA e2=expression[vect_type] {env.addValueVector(e2);})* RCURL) {env.insertVectorST();} 
 				| expression[vect_type])
 				;
 				
-vector 			: LBRACK INT? RBRACK ass_vector[env.var_type]?
+vector 			: LBRACK INT? RBRACK {env.addNewVector(env.var_type, env.var_name);} ass_vector[env.var_type]?
 				;
 				
 pointer			: MULT (WORD | LPAREN expression[null] RPAREN) assignment? // Puntatori: *p o *(p+1)
@@ -124,7 +124,7 @@ statement 		: local
 
 local			: {env.var_type = null; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
 													     		 												  | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
-																									     		 		 	  						| {env.var_name = $name; env.addNewVariable(env.var_type, $name);} vector 
+																									     		 		 	  						| {env.var_name = $name;} vector 
 																														      						| {env.var_name = $name; env.funct_type = env.getVarType($name); env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
 				;
 			  	
@@ -162,7 +162,7 @@ atom_exp 		[String type] returns [Value value]
 				: tk=INT {value = env.setValue($tk, ValueTypes.INT_STR, type);}
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
 				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
-				| name=WORD ((LBRACK INT? RBRACK) 
+				| name=WORD ((LBRACK pos=INT? RBRACK) {value = env.getVectorValue($name, type, $pos);}
 					   | call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);} // TODO FITTIZIO IL VALUEEEEEEEEEEEEEEEEEEEEEEE
 					   | {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore // TODO
 				| MULT WORD // Puntatore // TODO
