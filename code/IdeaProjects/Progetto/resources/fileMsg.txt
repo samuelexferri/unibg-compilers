@@ -1,12 +1,14 @@
 
 -----------------------------------------
-*****	Local Symbol Table: test	*****
+*****	Local Symbol Table: func_test	*****
 -----------------------------------------
-1:	a=Value{name='a', type='int', value='1', isVar=true, isVect=false, vect=[]}
-2:	vect4=Value{name='vect4', type='int', value='null', isVar=true, isVect=true, vect=[Value{name='', type='int', value='5', isVar=false, isVect=false, vect=[]}, Value{name='', type='int', value='6', isVar=false, isVect=false, vect=[]}]}
-3:	vect3=Value{name='vect3', type='int', value='null', isVar=true, isVect=true, vect=[]}
-4:	k=Value{name='k', type='char', value='null', isVar=true, isVect=false, vect=[]}
-5:	j=Value{name='j', type='int', value='null', isVar=true, isVect=false, vect=[]}
+1:	a=Value{name='a', type='int', value='4', isVar=true, isVect=false, vect=[]}
+2:	vect8=Value{name='vect8', type='char', value='null', isVar=true, isVect=true, vect=[Value{name='', type='char', value='a', isVar=false, isVect=false, vect=[]}, Value{name='', type='char', value='b', isVar=false, isVect=false, vect=[]}, Value{name='', type='char', value='c', isVar=false, isVect=false, vect=[]}]}
+3:	vect6=Value{name='vect6', type='int', value='null', isVar=true, isVect=true, vect=[]}
+4:	vect4=Value{name='vect4', type='int', value='null', isVar=true, isVect=true, vect=[Value{name='', type='int', value='5', isVar=false, isVect=false, vect=[]}, Value{name='', type='int', value='6', isVar=false, isVect=false, vect=[]}]}
+5:	vect3=Value{name='vect3', type='int', value='null', isVar=true, isVect=true, vect=[]}
+6:	k=Value{name='k', type='char', value='null', isVar=true, isVect=false, vect=[]}
+7:	j=Value{name='j', type='int', value='null', isVar=true, isVect=false, vect=[]}
 
 -----------------------------------------
 *****	Local Symbol Table: funct_char	*****
@@ -18,11 +20,10 @@
 *****	Local Symbol Table: main	*****
 -----------------------------------------
 1:	a=Value{name='a', type='char', value='aa', isVar=true, isVect=false, vect=[]}
-2:	ret=Value{name='ret', type='int', value='null', isVar=true, isVect=false, vect=[]}
+2:	ret=Value{name='ret', type='int', value='778', isVar=true, isVect=false, vect=[]}
 3:	k=Value{name='k', type='char', value='null', isVar=true, isVect=false, vect=[]}
 4:	j=Value{name='j', type='int', value='null', isVar=true, isVect=false, vect=[]}
-5:	h=Value{name='h', type='int', value='5', isVar=true, isVect=false, vect=[]}
-6:	f=Value{name='f', type='char', value='null', isVar=true, isVect=false, vect=[]}
+5:	f=Value{name='f', type='char', value='fa', isVar=true, isVect=false, vect=[]}
 
 -----------------------------------------
 *****	Local Symbol Table: funct_void	*****
@@ -34,13 +35,13 @@
 *****	Global Symbol Table	*****
 ---------------------------------
 1:	d=Value{name='d', type='int', value='1', isVar=true, isVect=false, vect=[]}
-2:	c=Value{name='c', type='char', value='null', isVar=true, isVect=false, vect=[]}
+2:	c=Value{name='c', type='char', value='b', isVar=true, isVect=false, vect=[]}
 3:	b=Value{name='b', type='float', value='null', isVar=true, isVect=false, vect=[]}
-4:	a=Value{name='a', type='int', value='7', isVar=true, isVect=false, vect=[]}
+4:	a=Value{name='a', type='int', value='5', isVar=true, isVect=false, vect=[]}
 5:	main=Value{name='main', type='int', value='null', isVar=false, isVect=false, vect=[]}
-6:	test=Value{name='test', type='int', value='778', isVar=false, isVect=false, vect=[]}
-7:	funct_void=Value{name='funct_void', type='void', value='null', isVar=false, isVect=false, vect=[]}
-8:	funct_char=Value{name='funct_char', type='char', value='aa', isVar=false, isVect=false, vect=[]}
+6:	funct_void=Value{name='funct_void', type='void', value='null', isVar=false, isVect=false, vect=[]}
+7:	funct_char=Value{name='funct_char', type='char', value='null', isVar=false, isVect=false, vect=[]}
+8:	func_test=Value{name='func_test', type='int', value='null', isVar=false, isVect=false, vect=[]}
 9:	z=Value{name='z', type='int', value='3', isVar=true, isVect=false, vect=[]}
 10:	vect1=Value{name='vect1', type='int', value='null', isVar=true, isVect=true, vect=[Value{name='', type='int', value='1', isVar=false, isVect=false, vect=[]}, Value{name='', type='int', value='2', isVar=false, isVect=false, vect=[]}, Value{name='', type='int', value='3', isVar=false, isVect=false, vect=[]}, Value{name='', type='int', value='4', isVar=false, isVect=false, vect=[]}]}
 11:	vect0=Value{name='vect0', type='int', value='null', isVar=true, isVect=true, vect=[]}

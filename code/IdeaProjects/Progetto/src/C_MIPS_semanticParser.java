@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g 2020-12-21 10:06:09
+// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g 2020-12-21 10:53:53
 
 	// package myCompiler;
 
@@ -564,11 +564,11 @@ public class C_MIPS_semanticParser extends Parser {
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:13: ( ( ( ADD | SUB | MULT | DIV )? eq= ASS exp= expression[env.var_type] ) )
 			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:15: ( ( ADD | SUB | MULT | DIV )? eq= ASS exp= expression[env.var_type] )
 			{
-			env.var_type = env.getVarType(env.var_name);
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:61: ( ( ADD | SUB | MULT | DIV )? eq= ASS exp= expression[env.var_type] )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:62: ( ADD | SUB | MULT | DIV )? eq= ASS exp= expression[env.var_type]
+			env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name;
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:92: ( ( ADD | SUB | MULT | DIV )? eq= ASS exp= expression[env.var_type] )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:93: ( ADD | SUB | MULT | DIV )? eq= ASS exp= expression[env.var_type]
 			{
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:62: ( ADD | SUB | MULT | DIV )?
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:88:93: ( ADD | SUB | MULT | DIV )?
 			int alt11=2;
 			int LA11_0 = input.LA(1);
 			if ( (LA11_0==ADD||LA11_0==DIV||LA11_0==MULT||LA11_0==SUB) ) {
@@ -596,7 +596,7 @@ public class C_MIPS_semanticParser extends Parser {
 			exp=expression(env.var_type);
 			state._fsp--;
 
-			env.assignValue(env.var_name, exp, eq);
+			env.assignValue(var_temp, exp, eq);
 			}
 
 			}

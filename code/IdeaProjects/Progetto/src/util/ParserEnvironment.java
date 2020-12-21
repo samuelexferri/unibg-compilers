@@ -230,13 +230,13 @@ public class ParserEnvironment {
             addErrorMessage(vl, ERR_TYPE_MISMATCH);
         }
 
-        // TODO Fittizio per i return dop aver esguito tutti i calcoli delle funzioni
+        // TODO Valori fittizzi per i return dopo aver eseguito tutti i calcoli delle funzioni, per ora solo controllo sui tipi ritornati
         if (type.matches(ValueTypes.INT_STR))
             return new Value(type, "777", false);
         else if (type.matches(ValueTypes.FLOAT_STR))
             return new Value(type, "777.77", false);
         else if (type.matches(ValueTypes.CHAR_STR)) {
-            return new Value(type, "a", false);
+            return new Value(type, "f", false);
         }
 
         return null;
@@ -298,8 +298,6 @@ public class ParserEnvironment {
     public Value getVectorValue(Token var, String expectedType, Token position) {
         Value value = null;
 
-        System.out.println("XXXXXXXXX"+ var.getText()+ expectedType+ position.getText());
-
         // TODO Rinominare gli errori per i vettori
 
         if (!is_local) { // Globale
@@ -319,21 +317,18 @@ public class ParserEnvironment {
                 value = new Value(ValueTypes.UNDEFINED_STR, ValueTypes.UNDEFINED_STR); // Creo un oggetto fittizio di comodo
             } else if (isDeclaredLocal(var)) {
                 value = symbolTableLocal.get(var.getText());  // Recupero il valore della variabile dalla symbol table
-                System.out.println("YYYYY"+ value.toString());
                 if (value.vect == null)
                     addErrorMessage(var, ERR_NO_VALUE);
                 else if (!ValueTypes.isCoherent(value.type, expectedType))
                     addErrorMessage(var, ERR_TYPE_MISMATCH);
             } else {
                 value = symbolTable.get(var.getText());  // Recupero il valore della variabile dalla symbol table
-                System.out.println("YYYYY"+ value.toString());
                 if (value.vect == null)
                     addErrorMessage(var, ERR_NO_VALUE);
                 else if (!ValueTypes.isCoherent(value.type, expectedType))
                     addErrorMessage(var, ERR_TYPE_MISMATCH);
             }
         }
-        System.out.println("XXXXXXXXX"+ value.vect.get(Integer.parseInt(position.getText())));
 
         return (Value) value.vect.get(Integer.parseInt(position.getText()));
     }
@@ -425,7 +420,6 @@ public class ParserEnvironment {
     // VETTORI
     // Creare il vettore di sostegno, controllo di tipi già fatto con env.var_type
     public void createVector(Value val) {
-        // Pulire il precedente vettore
         vect.clear();
 
         vect.add(val);
@@ -437,7 +431,7 @@ public class ParserEnvironment {
     }
 
     // Inserisci il vettore creato nella symbol table
-    public void insertVectorST(){
+    public void insertVectorST() {
         // Costruisco il Value
         Value vect_val = new Value(var_name.getText(), getVarType(var_name), null, true, true, vect);
 
@@ -446,11 +440,8 @@ public class ParserEnvironment {
         } else {
             symbolTable.replace(var_name.getText(), vect_val);
         }
-        System.out.println("A" + vect);
+
         vect.clear();
-        System.out.println("A" + vect);
-        //System.out.println("A" + var_name + vect_val.toString());
-        //System.out.println("PROVAA" + symbolTable.get("vect999999").toString());
     }
 
     // PUNTATORI
