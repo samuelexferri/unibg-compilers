@@ -6,6 +6,10 @@
 
 Formal Languages and Compilers project
 
+Creation of a compiler (lexicon, syntax, semantics) for C using ANTLR which also performs simplified translation in MIPS
+
+![ANTLR](https://www.antlr.org/)
+
 ![alt text](https://img.shields.io/badge/Language-Italian-infomrmational?style=for-the-badge)
 
 ## Authors
