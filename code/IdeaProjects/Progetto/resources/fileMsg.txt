@@ -2,10 +2,8 @@
 -----------------------------------------
 *****	Local Symbol Table: main	*****
 -----------------------------------------
-1:	c=Value{name='c', type='float', value='4', address='1010', isVar=true, isVect=false, vect=[]}
-2:	b=Value{name='b', type='char', value='b', address='1009', isVar=true, isVect=false, vect=[]}
-3:	a=Value{name='a', type='int', value='null', address='1005', isVar=true, isVect=true, vect=[Value{name='', type='int', value='10', address='-1', isVar=false, isVect=false, vect=[]}, Value{name='', type='int', value='20', address='-1', isVar=false, isVect=false, vect=[]}, Value{name='', type='int', value='5', address='-1', isVar=false, isVect=false, vect=[]}]}
-4:	x=Value{name='x', type='float', value='null', address='1016', isVar=true, isVect=true, vect=[Value{name='', type='float', value='5.5', address='-1', isVar=false, isVect=false, vect=[]}, Value{name='', type='float', value='2.5', address='-1', isVar=false, isVect=false, vect=[]}, Value{name='', type='float', value='3.5', address='-1', isVar=false, isVect=false, vect=[]}, Value{name='', type='float', value='4.5', address='-1', isVar=false, isVect=false, vect=[]}]}
+1:	b=Value{name='b', type='int', value='2', address='1002', isVar=true, isVect=false, vect=[]}
+2:	a=Value{name='a', type='int', value='0', address='1001', isVar=true, isVect=false, vect=[]}
 
 ---------------------------------
 *****	Global Symbol Table	*****

@@ -106,7 +106,8 @@ call_function 	: LPAREN (call_args (COMMA call_args)*)? RPAREN
 				;
 
 call_args		: stringquote
-				| MULT? WORD
+				| MULT WORD
+				| WORD (LBRACK INT RBRACK)?
 				;
 				
 codeblock 		returns [Boolean isBlock = false]
@@ -170,7 +171,7 @@ atom_exp 		[String type] returns [Value value]
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi
     			;
 
-initialization	: type_name? name=WORD {env.var_name = $name;} assignment?
+initialization	: {env.var_type = ValueTypes.UNDEFINED_STR;} type=type_name? {env.var_type = type.getText();} name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name);} assignment?
 				;
 
 condition		returns [Boolean bool = false]

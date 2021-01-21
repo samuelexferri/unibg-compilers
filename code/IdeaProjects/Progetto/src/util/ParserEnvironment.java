@@ -177,9 +177,9 @@ public class ParserEnvironment {
     }
 
     // Assegna un valore ad una variabile (dichiarata)
-    public void assignValue(Token name_var, Value exp, Token eq) {
+    public void assignValue(Token name_var, Value exp, Token operator) {
         if (!is_local) { // Globale
-            if (name_var != null && exp != null && eq != null) {
+            if (name_var != null && exp != null && operator != null) {
                 if (!isDeclaredGlobal(name_var))
                     addErrorMessage(name_var, ERR_UNDECLARED);
                 else {
@@ -200,7 +200,7 @@ public class ParserEnvironment {
                 }
             }
         } else { // Locale
-            if (name_var != null && exp != null && eq != null) {
+            if (name_var != null && exp != null && operator != null) {
                 if (!isDeclaredLocal(name_var) && !isDeclaredGlobal(name_var)) // Locale e variabile in locale
                     addErrorMessage(name_var, ERR_UNDECLARED);
                 else if (isDeclaredLocal(name_var)) { // Locale

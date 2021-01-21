@@ -1,7 +1,1 @@
-
------------------------------
-*****	Errori: #	3	*****
------------------------------
-1: Errore sintattico [1] in (13, 17) - Found LBRACK ('[') - mismatched input '[' expecting RPAREN
-2: Errore sintattico [1] in (16, 32) - Found LBRACK ('[') - mismatched input '[' expecting RPAREN
-3: Errore sintattico [1] in (18, 43) - Found LBRACK ('[') - mismatched input '[' expecting RPAREN
+Nessun errore!
