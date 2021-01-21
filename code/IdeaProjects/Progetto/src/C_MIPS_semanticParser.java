@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g 2021-01-21 12:34:11
+// $ANTLR 3.5.1 C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g 2021-01-21 12:40:25
 
 	// package myCompiler;
 
@@ -1019,10 +1019,10 @@ public class C_MIPS_semanticParser extends Parser {
 
 
 	// $ANTLR start "call_args"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:108:1: call_args : ( anything | ( MULT )? WORD );
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:108:1: call_args : ( stringquote | ( MULT )? WORD );
 	public final void call_args() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:108:12: ( anything | ( MULT )? WORD )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:108:12: ( stringquote | ( MULT )? WORD )
 			int alt24=2;
 			int LA24_0 = input.LA(1);
 			if ( (LA24_0==D_QUOTE) ) {
@@ -1040,10 +1040,10 @@ public class C_MIPS_semanticParser extends Parser {
 
 			switch (alt24) {
 				case 1 :
-					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:108:14: anything
+					// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:108:14: stringquote
 					{
-					pushFollow(FOLLOW_anything_in_call_args587);
-					anything();
+					pushFollow(FOLLOW_stringquote_in_call_args587);
+					stringquote();
 					state._fsp--;
 
 					}
@@ -2227,15 +2227,15 @@ public class C_MIPS_semanticParser extends Parser {
 
 
 
-	// $ANTLR start "anything"
-	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:1: anything : D_QUOTE (~ ( D_QUOTE ) )* D_QUOTE ;
-	public final void anything() throws RecognitionException {
+	// $ANTLR start "stringquote"
+	// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:1: stringquote : D_QUOTE (~ ( D_QUOTE ) )* D_QUOTE ;
+	public final void stringquote() throws RecognitionException {
 		try {
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:11: ( D_QUOTE (~ ( D_QUOTE ) )* D_QUOTE )
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:13: D_QUOTE (~ ( D_QUOTE ) )* D_QUOTE
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:14: ( D_QUOTE (~ ( D_QUOTE ) )* D_QUOTE )
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:16: D_QUOTE (~ ( D_QUOTE ) )* D_QUOTE
 			{
-			match(input,D_QUOTE,FOLLOW_D_QUOTE_in_anything1591); 
-			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:21: (~ ( D_QUOTE ) )*
+			match(input,D_QUOTE,FOLLOW_D_QUOTE_in_stringquote1591); 
+			// C:\\GitHub\\unibg-compilers\\code\\IdeaProjects\\Progetto\\src\\C_MIPS_semantic.g:193:24: (~ ( D_QUOTE ) )*
 			loop41:
 			while (true) {
 				int alt41=2;
@@ -2264,7 +2264,7 @@ public class C_MIPS_semanticParser extends Parser {
 				}
 			}
 
-			match(input,D_QUOTE,FOLLOW_D_QUOTE_in_anything1599); 
+			match(input,D_QUOTE,FOLLOW_D_QUOTE_in_stringquote1599); 
 			}
 
 		}
@@ -2276,7 +2276,7 @@ public class C_MIPS_semanticParser extends Parser {
 			// do for sure before leaving
 		}
 	}
-	// $ANTLR end "anything"
+	// $ANTLR end "stringquote"
 
 	// Delegated rules
 
@@ -2339,7 +2339,7 @@ public class C_MIPS_semanticParser extends Parser {
 	public static final BitSet FOLLOW_COMMA_in_call_function565 = new BitSet(new long[]{0x0040001000020000L});
 	public static final BitSet FOLLOW_call_args_in_call_function567 = new BitSet(new long[]{0x0000080000000800L});
 	public static final BitSet FOLLOW_RPAREN_in_call_function573 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_anything_in_call_args587 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_stringquote_in_call_args587 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_MULT_in_call_args595 = new BitSet(new long[]{0x0040000000000000L});
 	public static final BitSet FOLLOW_WORD_in_call_args598 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_LCURL_in_codeblock625 = new BitSet(new long[]{0x0060161172200000L});
@@ -2420,6 +2420,6 @@ public class C_MIPS_semanticParser extends Parser {
 	public static final BitSet FOLLOW_WORD_in_increment1489 = new BitSet(new long[]{0x0000801000008090L});
 	public static final BitSet FOLLOW_assignment_in_increment1493 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_set_in_compare1522 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_D_QUOTE_in_anything1591 = new BitSet(new long[]{0x00FFFFFFFFFFFFF0L});
-	public static final BitSet FOLLOW_D_QUOTE_in_anything1599 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_D_QUOTE_in_stringquote1591 = new BitSet(new long[]{0x00FFFFFFFFFFFFF0L});
+	public static final BitSet FOLLOW_D_QUOTE_in_stringquote1599 = new BitSet(new long[]{0x0000000000000002L});
 }

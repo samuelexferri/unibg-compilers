@@ -105,7 +105,7 @@ pointer			: MULT (name=WORD {env.var_name = $name; env.addNewVector(env.var_type
 call_function 	: LPAREN (call_args (COMMA call_args)*)? RPAREN
 				;
 
-call_args		: anything
+call_args		: stringquote
 				| MULT? WORD
 				;
 				
@@ -190,7 +190,7 @@ compare			returns [Token tk]
 				| GE ) {tk = comp;}
 				;
 				
-anything		: D_QUOTE ~(D_QUOTE)* D_QUOTE // Qualsiasi cosa all'interno delle doppie virgolette
+stringquote		: D_QUOTE ~(D_QUOTE)* D_QUOTE
 				;
 
 

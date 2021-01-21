@@ -27,3 +27,5 @@ Program Counter: Fittizio
 If, For, While: Compare, and-or-not, Definizone interna del for int i = 1 non funziona
 
 Traduzione
+
+Anithing non tra virgole ma parentesi delle excluded function!
