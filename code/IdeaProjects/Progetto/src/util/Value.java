@@ -3,27 +3,28 @@ package util;
 import java.util.ArrayList;
 
 public class Value {
+    public static int stack_pointer = 1000; // Program counter fittizio
     public String name;
     public String type;
     public String value;
     public int address;
     public boolean isVar;
+    public boolean isVarPassed; // Variabile che si riceverà da una chiamata di funzione
     public boolean isVect;
     public ArrayList<Value> vect;
-
-    public static int program_counter = 1000; // Program counter fittizio
 
     // Costruttore per variabili
     public Value(String n, String t) {
         name = n;
         type = t;
         value = null;
-        address = program_counter;
+        address = stack_pointer;
         isVar = true;
+        isVarPassed = false;
         isVect = false;
         vect = null;
 
-        program_counter += 1;
+        stack_pointer += 4;
     }
 
     // Costruttore per funzioni
@@ -31,12 +32,13 @@ public class Value {
         name = n;
         type = t;
         value = v;
-        address = program_counter;
+        address = stack_pointer;
         isVar = b; // False
+        isVarPassed = false;
         isVect = false;
         vect = null;
 
-        program_counter += 1;
+        stack_pointer += 4;
     }
 
     // Costruttore per valori temporanei
@@ -44,8 +46,9 @@ public class Value {
         name = ""; // Vuoto
         type = t;
         value = v;
-        address = -1; // Valore temporaneo usato per gestire gli indirizzi dei puntatori
+        address = 8888; // Valore temporaneo usato per gestire gli indirizzi dei puntatori TODO
         isVar = b;
+        isVarPassed = false;
         isVect = false;
         vect = null;
 
@@ -57,8 +60,9 @@ public class Value {
         name = n;
         type = t;
         value = v;
-        address = program_counter;
+        address = stack_pointer;
         isVar = b;
+        isVarPassed = false;
         isVect = bvect;
 
         if (list != null)
@@ -66,7 +70,7 @@ public class Value {
         else
             vect = new ArrayList<Value>();
 
-        program_counter += size + 1;
+        stack_pointer += size*4 + 4; // Incrementa lo stack pointer per avere spazio per i vettori
     }
 
     @Override
@@ -78,6 +82,7 @@ public class Value {
                     ", value='" + value + '\'' +
                     ", address='" + address + '\'' +
                     ", isVar=" + isVar +
+                    ", isVarPassed=" + isVarPassed +
                     ", isVect=" + isVect +
                     ", vect=" + vect.toString() +
                     '}';
@@ -88,6 +93,7 @@ public class Value {
                     ", value='" + value + '\'' +
                     ", address='" + address + '\'' +
                     ", isVar=" + isVar +
+                    ", isVarPassed=" + isVarPassed +
                     ", isVect=" + isVect +
                     ", vect=[]" +
                     '}';
@@ -95,6 +101,9 @@ public class Value {
     }
 
     public boolean isInitialized() {
-        return value != null;
+        if (isVarPassed)
+            return true; // In caso di variabile ricevuta da una funzione, si è sicuri a monte che è inizializzata
+        else
+            return value != null;
     }
 }

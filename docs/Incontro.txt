@@ -15,16 +15,20 @@ Symbol Table separata per ogni blocco locale (pensare in maniera ricorsiva) più
 Errori è una lista di stringhe da riordinare in ordine crescente in base alle linee.
 
 TODO:
-Mancante: 	cast, do-while, const, bool, a++, +=
+Mancante: 	cast, do-while, const, bool, a++, !a
 
 Variabili:	Ridefinizione (senza type iniziale) globale in teoria da non permettere (anche vettori, puntatori)
-Vettori: 	Lunghezza da salvare nella symbol table, Errore non dato nel caso manca il size o la definizione tra graffe
+Vettori: 	Lunghezza da salvare nella symbol table, Errore non dato nel caso manca il size o la definizione tra graffe, Non hanno l'indirizzo i loro valori (-1)
 Puntatori: 	Indirizzo fittizio, Puntatori tra parentesi *(cb + 1)
 Call Function: 	Controllo call_params, possiamo chiamarla con qualsiasi tipo per ora
 Return: 	Almeno un return (controllo blando), Obbligatorio nel main return 0
 
-Anithing non tra virgole ma parentesi delle excluded function!
-Program Counter: Fittizio
-If, For, While: Compare, and-or-not, Definizone interna del for int i = 1 non funziona
+If, For, While: Per ora non gestiamo le cose in esecuzione, eseguirà l'inizializzazione e l'incremento lo stesso una sola volta..., Parentesi nei compare non fatte
 
+Program Counter vs Stack Pointer
 Traduzione
+
+MARS
+TODO
+
+Ipotesi tutti word

@@ -41,7 +41,9 @@ char special2 = '\0';
 
 //a++; // TODO Non fatto
 
-int sqrt();
+int sqrt(int a) {
+    return 1;
+}
 
 int radice = sqrt(a)+2;
 

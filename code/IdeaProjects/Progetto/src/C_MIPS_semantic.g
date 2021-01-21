@@ -74,7 +74,7 @@ include			: INCLUDE LT WORD (DOT WORD)? GT
 				
 global			: funct_void
 				| {env.var_type = ValueTypes.UNDEFINED_STR; env.funct_type = ValueTypes.UNDEFINED_STR; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
-				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
+				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} ass_multiple
 				     		 		 			| {env.var_name = $name;} vector) SEMICOL
 									 			| {env.var_name = $name; env.funct_name = $name; env.funct_type = type.getText(); env.addFunction(env.var_type, $name);} funct_params))
 				;
@@ -82,13 +82,13 @@ global			: funct_void
 funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params 
 				;
 				
-funct_params 	: LPAREN {env.is_local = true; env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name);})*)? RPAREN isBlock=codeblock {env.is_local = false; env.clearSymbolTableLocal(isBlock);}
+funct_params 	: LPAREN {env.is_local = true; env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);})*)? RPAREN isBlock=codeblock {env.is_local = false; env.clearSymbolTableLocal(isBlock);}
 				; 
 				
-assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name;}((ADD | SUB | MULT | DIV)? eq=ASS exp=expression[env.var_type]  {env.assignValue(var_temp, exp, eq);})
+assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name;}((eq=ADD ASS | eq=SUB ASS | eq=MULT ASS | eq=DIV ASS | eq=ASS) exp=expression[env.var_type] {env.assignValue(var_temp, exp, eq);})
 				;
 
-ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
+ass_multiple	: (assignment {env.transAssignment();})? (COMMA name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
 				;
 							
 ass_vector		[String vect_type]
@@ -107,7 +107,7 @@ call_function 	: LPAREN (call_args (COMMA call_args)*)? RPAREN
 
 call_args		: stringquote
 				| MULT WORD
-				| WORD (LBRACK INT RBRACK)?
+				| WORD ((LBRACK INT RBRACK)? | call_function)
 				;
 				
 codeblock 		returns [Boolean isBlock = false]
@@ -124,9 +124,9 @@ statement 		: local
 				;
 
 local			: {env.var_type = ValueTypes.UNDEFINED_STR; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
-													     		 												  | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name);} ass_multiple
-																									     		 		 	  						| {env.var_name = $name;} vector 
-																														      						| {env.var_name = $name; env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
+													     		 												  					 | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} ass_multiple
+																									     		 		 	  					 | {env.var_name = $name;} vector 
+																														      					 | {env.var_name = $name; env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
 				;
 			  	
 ifStat			: IF LPAREN bool=condition RPAREN codeblock (ELSE statement)?
@@ -168,14 +168,15 @@ atom_exp 		[String type] returns [Value value]
 					   		| {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore
 				| MULT name=WORD {value = env.getDeclaredValue($name, type);} // Puntatore
 				| AMP {env.is_amp_punct = true;} name=WORD {value = env.getDeclaredValue($name, type);} // Indirizzo (da estrarre)
-    			| LPAREN v=expression[type] {{ value = v;}} RPAREN// Parentesi
+    			| LPAREN v=expression[type] {{ value = v;}} RPAREN // Parentesi
     			;
 
-initialization	: {env.var_type = ValueTypes.UNDEFINED_STR;} type=type_name? {env.var_type = type.getText();} name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name);} assignment?
+initialization	: {env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name {env.var_type = type.getText();})? name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} assignment?
 				;
 
 condition		returns [Boolean bool = false]
-				: exp1=expression[ValueTypes.ANYVALUE_STR] comp=compare exp2=expression[ValueTypes.ANYVALUE_STR] {bool = env.compareEvaluator(comp,exp1,exp2);}
+				: exp1=expression[ValueTypes.ANYVALUE_STR] comp=compare exp2=expression[ValueTypes.ANYVALUE_STR] {bool = env.compareEvaluator(comp,exp1,exp2);} 
+				  (op=operator exp1=expression[ValueTypes.ANYVALUE_STR] comp=compare exp2=expression[ValueTypes.ANYVALUE_STR] { bool = env.compareEvaluatorSeries(bool, op, env.compareEvaluator(comp,exp1,exp2));})*
 				;
 				
 increment		: name=WORD {env.var_name = $name;} assignment
@@ -189,6 +190,13 @@ compare			returns [Token tk]
 				| GT 
 				| LE 
 				| GE ) {tk = comp;}
+				;
+				
+operator		returns [Token tk]
+				:
+				( op=AMP AMP
+				| op=OR OR
+				)
 				;
 				
 stringquote		: D_QUOTE ~(D_QUOTE)* D_QUOTE
@@ -205,7 +213,8 @@ fragment TAB		: '\t';
 fragment NEWL   	: '\n';
 fragment SLASHR 	: '\r';
 fragment CHAR 		: ('a'..'z' | 'A'..'Z') ;
-fragment BACKSLASH 	: '\\';
+
+BACKSLASH 	: '\\';
 
 WS 	: ( SPACE 
 	| TAB 
@@ -248,13 +257,14 @@ LCURL 		: '{' ;
 RCURL 		: '}' ;
 SEMICOL		: ';' ;
 DOT 		: '.' ; // Float
-ARROW 		: '->' ; // TODO: Arrow
+ARROW 		: '->' ;
 S_QUOTE 	: '\'' ;
 D_QUOTE 	: '"' ;
 COMMA		: ',' ;
 AMP      	: '&' ;
 PERC		: '%' ;
 HASHTAG		: '#' ;
+OR			: '|' ;
 
 INT			: DIGIT_NO_ZERO DIGIT* 
 			| '0' ;

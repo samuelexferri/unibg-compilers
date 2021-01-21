@@ -2,10 +2,9 @@
 -----------------------------------------
 *****	Local Symbol Table: main	*****
 -----------------------------------------
-1:	b=Value{name='b', type='int', value='2', address='1002', isVar=true, isVect=false, vect=[]}
-2:	a=Value{name='a', type='int', value='0', address='1001', isVar=true, isVect=false, vect=[]}
 
 ---------------------------------
 *****	Global Symbol Table	*****
 ---------------------------------
-1:	main=Value{name='main', type='int', value='0', address='1000', isVar=false, isVect=false, vect=[]}
+1:	a=Value{name='a', type='int', value='6', address='1000', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+2:	main=Value{name='main', type='int', value='null', address='1004', isVar=false, isVarPassed=false, isVect=false, vect=[]}

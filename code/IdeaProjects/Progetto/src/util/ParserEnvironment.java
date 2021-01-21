@@ -43,8 +43,8 @@ public class ParserEnvironment {
     public String vect_size; // Dimensione del vettore specificata tra parentesi quadre
     public String vect_pos; // Posizione del vettore specificata tra parentesi quadre
     public Boolean is_amp_punct;
+    public int program_counter = 5000; // Program counter TODO
     ArrayList<String> excluded_functions;
-
     FileWriter fOut;
 
     public ParserEnvironment(FileWriter fOutMain) {
@@ -64,24 +64,28 @@ public class ParserEnvironment {
         excluded_functions.add("printf");
     }
 
-    // TODO: Traduzione
+    // TODO Traduzione
     // Translation
-    public void doTranslation(Value v) {
-        if (v != null) {
-            debug.append("Ho tradotto questa stringa: '" + v.value + "'\n");
-            translation.append(v.value + "\n");
-        }
+    private void emit(String s) {
+        translation.append(s + "\n");
+        program_counter += 4;
     }
 
     // VARIABILI
     // Inserisce una variabile nelle symbol tables
-    public void addNewVariable(String type, Token name) {
+    public void addNewVariable(String type, Token name, boolean isVarPassed) {
         if (!is_local) { // Globale
             if (!type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 if (symbolTable.containsKey(name.getText()))
                     addErrorMessage(name, ERR_ALREADY_DECLARED);
                 else {
-                    symbolTable.put(name.getText(), new Value(name.getText(), type));
+                    if (isVarPassed) { // Variabile passata da una chiamata di funzione
+                        Value temp = new Value(name.getText(), type);
+                        temp.isVarPassed = true;
+                        symbolTable.put(name.getText(), temp);
+                    } else {
+                        symbolTable.put(name.getText(), new Value(name.getText(), type));
+                    }
                     debug.append("Ho dichiarato la variabile '" + name.getText() + "' come '" + type + "'\n");
                 }
             } else if (type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
@@ -91,9 +95,14 @@ public class ParserEnvironment {
             if (!type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
                 if (symbolTableLocal.containsKey(name.getText()))
                     addErrorMessage(name, ERR_ALREADY_DECLARED);
-                else {
-                    // Variabile locale può oscurare una globale
-                    symbolTableLocal.put(name.getText(), new Value(name.getText(), type));
+                else { // Variabile locale può oscurare una globale
+                    if (isVarPassed) { // Variabile passata da una chiamata di funzione
+                        Value temp = new Value(name.getText(), type);
+                        temp.isVarPassed = true;
+                        symbolTableLocal.put(name.getText(), temp);
+                    } else {
+                        symbolTableLocal.put(name.getText(), new Value(name.getText(), type));
+                    }
                     debug.append("Ho dichiarato la variabile locale '" + name.getText() + "' come '" + type + "'\n");
                 }
             } else if (type.matches(ValueTypes.UNDEFINED_STR) && name != null) {
@@ -193,7 +202,11 @@ public class ParserEnvironment {
                             debug.append("Ho assegnato alla variabile '" + var.name + "' l'indirizzo di memoria '" + var.address + "'\n");
                             is_amp_punct = false;
                         } else {
-                            var.value = exp.value;
+                            // Operatori +=, -=, *=, /=
+                            if (operator.getText().compareTo("+") == 0 || operator.getText().compareTo("-") == 0 || operator.getText().compareTo("*") == 0 || operator.getText().compareTo("/") == 0)
+                                var.value = doOperation(operator, var, exp).value;
+                            else
+                                var.value = exp.value;
                             debug.append("Ho assegnato alla variabile '" + var.name + "' il valore '" + var.value + "'\n");
                         }
                     }
@@ -214,7 +227,11 @@ public class ParserEnvironment {
                             debug.append("Ho assegnato alla variabile '" + var.name + "' l'indirizzo di memoria '" + var.address + "'\n");
                             is_amp_punct = false;
                         } else {
-                            var.value = exp.value;
+                            // Operatori +=, -=, *=, /=
+                            if (operator.getText().compareTo("+") == 0 || operator.getText().compareTo("-") == 0 || operator.getText().compareTo("*") == 0 || operator.getText().compareTo("/") == 0)
+                                var.value = doOperation(operator, var, exp).value;
+                            else
+                                var.value = exp.value;
                             debug.append("Ho assegnato alla variabile '" + var.name + "' il valore '" + var.value + "'\n");
                         }
                     }
@@ -229,7 +246,11 @@ public class ParserEnvironment {
                             debug.append("Ho assegnato alla variabile '" + var.name + "' l'indirizzo di memoria '" + var.address + "'\n");
                             is_amp_punct = false;
                         } else {
-                            var.value = exp.value;
+                            // Operatori +=, -=, *=, /=
+                            if (operator.getText().compareTo("+") == 0 || operator.getText().compareTo("-") == 0 || operator.getText().compareTo("*") == 0 || operator.getText().compareTo("/") == 0)
+                                var.value = doOperation(operator, var, exp).value;
+                            else
+                                var.value = exp.value;
                             debug.append("Ho assegnato alla variabile '" + var.name + "' il valore '" + var.value + "'\n");
                         }
                     }
@@ -265,7 +286,7 @@ public class ParserEnvironment {
         }
     }
 
-    // Valore temporaneo
+    // Valore di una costante (non variabile e non temporaneo)
     public Value setValue(Token vl, String type, String expectedType) {
         String value = vl.getText();
 
@@ -280,7 +301,34 @@ public class ParserEnvironment {
         if (type.equals(ValueTypes.STRING_STR))
             value = value.substring(1, value.lastIndexOf("\""));
 
+        // TODO Non posso chiamarlo qua
+        transSetValue(new Value(type, value, false));
+
         return new Value(type, value, false);
+    }
+
+    boolean alternate_transSetValue = true;
+
+    public void transSetValue(Value value) {
+        if (alternate_transSetValue) {
+            if (value.isVar) {
+                emit("-la $t1, 0x" + value.address + " #Value " + value.value);
+                emit("-lw $s1, 0($t1)");
+            } else { // Costante
+                emit("-lw $s1, " + value.value);
+            }
+            emit("-sw $s1, 0(0x8000)");
+        } else {
+            if (value.isVar) {
+                emit("-la $t2, 0x" + value.address + " #Value " + value.value);
+                emit("-lw $s2, 0($t2)");
+            } else { // Costante
+                emit("-lw $s2, " + value.value);
+            }
+            emit("-sw $s2, 0(0x8004)");
+        }
+
+        alternate_transSetValue = !alternate_transSetValue;
     }
 
     // Valore temporaneo per le call function
@@ -361,8 +409,6 @@ public class ParserEnvironment {
     // Recupera il valore di una variabile dichiarata
     public Value getVectorValue(Token var, String expectedType, String position) {
         Value value = null;
-
-        // TODO Rinominare gli errori per i vettori
 
         if (!is_local) { // Globale
             if (!isDeclaredGlobal(var)) {
@@ -524,10 +570,40 @@ public class ParserEnvironment {
         return value;
     }
 
+    // Gestione delle operazioni
+    public Value doOperation(Token op, Value v1, Value v2) {
+        if (op.getText().compareTo("+") == 0) {
+            return doAdd(op, v1, v2);
+        } else if (op.getText().compareTo("-") == 0) {
+            return doSub(op, v1, v2);
+        } else if (op.getText().compareTo("*") == 0) {
+            return doMul(op, v1, v2);
+        } else if (op.getText().compareTo("/") == 0) {
+            return doDiv(op, v1, v2);
+        }
+
+        return null;
+    }
+
+    public void transDoAdd(Token op, Value v1, Value v2) {
+        emit("add $s0, $s1, $s2");
+        emit("sw $s0, 0(0x8888)");
+    }
+
+    public void transAssignment() {
+        Value output = getDeclaredValue(var_name, var_type);
+
+        emit("lw $t1, 0(0x8888) + #Assignment");
+        emit("sw $t1, 0(0x" + output.address + ") + #Assignment");
+    }
+
     // Esegue l'operazione +
     public Value doAdd(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
+
+        // TODO Spostare
+        transDoAdd(op, v1, v2);
 
         String value = "";
         String type = ValueTypes.returnType("+", v1.type, v2.type);
@@ -552,7 +628,7 @@ public class ParserEnvironment {
             else if (type.equals(ValueTypes.INT_STR))
                 value = new Integer(Integer.parseInt(v1.value) + Integer.parseInt(v2.value)).toString();
 
-            return new Value(type, value, false);
+            return new Value(type, value, true);
         }
     }
 
@@ -578,7 +654,7 @@ public class ParserEnvironment {
             value = new Float(Float.parseFloat(v1.value) - Float.parseFloat(v2.value)).toString();
         else  // if (type.equals(ValueTypes.INT_STR))
             value = new Integer(Integer.parseInt(v1.value) - Integer.parseInt(v2.value)).toString();
-        return new Value(type, value, false);
+        return new Value(type, value, true);
     }
 
     // Esegue l'operazione *
@@ -603,7 +679,7 @@ public class ParserEnvironment {
             value = new Float(Float.parseFloat(v1.value) * Float.parseFloat(v2.value)).toString();
         else  // if (type.equals(ValueTypes.INT_STR))
             value = new Integer(Integer.parseInt(v1.value) * Integer.parseInt(v2.value)).toString();
-        return new Value(type, value, false);
+        return new Value(type, value, true);
     }
 
     // Esegue l'operazione /
@@ -631,19 +707,26 @@ public class ParserEnvironment {
             value = new Float(Float.parseFloat(v1.value) / Float.parseFloat(v2.value)).toString();
         else  // if (type.equals(ValueTypes.INT_STR))
             value = new Integer(Integer.parseInt(v1.value) / Integer.parseInt(v2.value)).toString();
-        return new Value(type, value, false);
+        return new Value(type, value, true);
     }
 
     // STATEMENTS
     // Valuta le condizioni date le due espressioni e il comparatore
     public Boolean compareEvaluator(Token comp, Value exp1, Value exp2) {
         if (comp == null || exp1 == null || exp2 == null) {
-            //addErrorMessage(op, ERR_DIV_BY_0); // TODO Compare
+            // TODO Compare errors
         }
+        // TODO Compare
+        return false;
+    }
 
-        //switch-case // TODO Compare
-
-        return true;
+    // Valuta le condizioni in serie
+    public Boolean compareEvaluatorSeries(Boolean b1, Token op, Boolean b2) {
+        if (op == null) {
+            // TODO Compare errors
+        }
+        // TODO Compare
+        return false;
     }
 
     // ERRORE
@@ -698,9 +781,5 @@ public class ParserEnvironment {
         st += " ('" + e.token.getText() + "')" + m;
 
         errorList.add(st);
-    }
-
-    private void emit(String s) {
-        translation.append(s + "\n");
     }
 }

@@ -11,17 +11,17 @@ public class AntlrParserTester {
 
     //static String fileIn = ".\\resources\\arithmetic_ops_C";
     //static String fileIn = ".\\resources\\array_ops_C";
-
-    static String fileIn = ".\\resources\\conditional_ops_C";
-    //static String fileIn = ".\\resources\\factorial_C";
-    //static String fileIn = ".\\resources\\fibonacci_C";
+    //static String fileIn = ".\\resources\\conditional_ops_C";
+    //static String fileIn = ".\\resources\\factorial_C"; // NO
+    //static String fileIn = ".\\resources\\fibonacci_C"; // NO
     //static String fileIn = ".\\resources\\function_ops_C";
-    //static String fileIn = ".\\resources\\pointer_type_C";
-    //static String fileIn = ".\\resources\\regular_type_C";
-    //static String fileIn = ".\\resources\\array_ops_C";
-    //static String fileIn = ".\\resources\\towers_of_hanoi_C";
+    //static String fileIn = ".\\resources\\pointer_type_C"; // MAI (Puntatori strani
+    //static String fileIn = ".\\resources\\regular_type_C"; // NO (Cast)
+    // static String fileIn = ".\\resources\\towers_of_hanoi_C"; // NO (Call args)
+
     //static String fileIn = ".\\resources\\test_C";
     //static String fileIn = ".\\resources\\test_semantic_C";
+    static String fileIn = ".\\resources\\test_translation_MIPS";
 
     static String fileOut = ".\\resources\\fileOut.txt";
     static String fileMsg = ".\\resources\\fileMsg.txt";
