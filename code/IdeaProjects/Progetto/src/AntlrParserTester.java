@@ -10,6 +10,7 @@ public class AntlrParserTester {
     static C_MIPS_semanticParser parser;
 
     //static String fileIn = ".\\resources\\arithmetic_ops_C";
+
     //static String fileIn = ".\\resources\\array_ops_C";
     //static String fileIn = ".\\resources\\conditional_ops_C";
     //static String fileIn = ".\\resources\\factorial_C";

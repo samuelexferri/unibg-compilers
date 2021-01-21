@@ -1,1 +1,5 @@
-Nessun errore!
+
+-----------------------------
+*****	Errori: #	1	*****
+-----------------------------
+1: Errore semantico [16] in (35,15) - Valore di tipo non compatibile (null)

@@ -93,7 +93,7 @@ ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVar
 							
 ass_vector		[String vect_type]
 				: ASS ((LCURL e1=expression[vect_type] {env.createVector(e1);} (COMMA e2=expression[vect_type] {env.addValueVector(e2);})* RCURL) {env.insertVectorST();} 
-				| expression[vect_type])
+					  | exp=expression[vect_type] {env.assignVectorValue(env.var_name, env.vect_size, exp);})
 				;
 				
 vector 			: LBRACK {env.vect_size = "0";} (size=INT {env.vect_size = $size.getText();})? RBRACK {env.addNewVector(env.var_type, env.var_name, env.vect_size);} ass_vector[env.var_type]?
@@ -137,7 +137,7 @@ whileStat		: WHILE LPAREN bool=condition RPAREN statement
 forStat			: FOR LPAREN initialization SEMICOL bool=condition SEMICOL increment RPAREN statement 
 				;
 
-returnStat		: RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(env.var_type, env.funct_type);} SEMICOL 
+returnStat		: tk=RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(tk, value, env.var_type, env.funct_type);} SEMICOL 
 				;
 
 type_name		returns [Token token]
@@ -163,7 +163,7 @@ atom_exp 		[String type] returns [Value value]
 				| tk=FLOAT {value = env.setValue($tk, ValueTypes.FLOAT_STR, type);}
 				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
 				| name=WORD ((LBRACK {env.vect_pos = "0";} (pos=INT {env.vect_pos = $pos.getText();})? RBRACK) {value = env.getVectorValue($name, type, env.vect_pos);}
-					   		| call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);}
+					   		| call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(name, env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);}
 					   		| {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore
 				| MULT name=WORD {value = env.getDeclaredValue($name, type);} // Puntatore
 				| AMP {env.is_amp_punct = true;} name=WORD {value = env.getDeclaredValue($name, type);} // Indirizzo (da estrarre)

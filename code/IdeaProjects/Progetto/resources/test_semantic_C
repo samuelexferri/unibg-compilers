@@ -16,8 +16,8 @@ int vect1[] = {1,2,3,4};
 
 int *p1;
 *p1 = 4;
-a = 5 + *p1;
-p1 = &a;
+a = 5 + *p1; // TODO Ridefinizione (senza type iniziale) globale in teoria da non permettere
+p1 = &a; // TODO Ridefinizione (senza type iniziale) globale in teoria da non permettere
 
 int e = 1, f = 2, g;
 
@@ -26,11 +26,13 @@ int func_test(int j, char k) {
     a = 1;
 
     int vect3[5];
-    int vect4[] = {5,6};
+    int vect4[] = {5,6,7};
     //int vect5[] = {1.1,3,4};
-    int vect6[];
+    int vect6[]; // TODO Errore non dato nel caso manca il size o la definizione tra graffe
 
-    a = vect1[2];
+    a = vect1[3];
+
+    vect1[2] = 777777;
 
     //int vect7[] = {'a', 'b', 'c'};
     char vect8[] = {'a', 'b', 'c'};
@@ -40,21 +42,26 @@ int func_test(int j, char k) {
 
     return 1; // TODO Almeno un return (Controllo blando)
     return a;
-    return;
+    //return;
 }
 
-char funct_char(int a, int b) { // TODO Controllo call_params, possiamo chiamarla come si vuole per ora
+char funct_char(int a, int b) { // TODO Controllo call_params, possiamo chiamarla con qualsiasi tipo per ora
 }
 
 int main (int j, char k) {
     //z = 5; // Variabili globali come le funzioni devono essere all'inizio, ma non è un'errore (sequenziale)
 
     char a = 'a' + 'a';
-    char f = funct_char() + 'a';
+    //char f = funct_char(a,b) + 'a';
     //char a = 'a' - 'a';
 
-    int ret = func_test() + 1; // TODO Valori fittizzi per i return dopo aver eseguito tutti i calcoli delle funzioni, per ora solo controllo sui tipi ritornati
-    //int ret = func_char() + 1;
+    int ret = func_test(j,k) + 1 * 2;
+    //int ret = func_char(a,b) + 1;
+
+    int i = 1;
+    for(i = 1; i < 5; i = i + 1){ // TODO Definizone interna del for int i = 1 non funziona
+        d = d + 1;
+    }
 
     return 0; // TODO Obbligatorio nel main return 0
 }

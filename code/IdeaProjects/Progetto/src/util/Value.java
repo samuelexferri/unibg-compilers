@@ -9,7 +9,7 @@ public class Value {
     public int address;
     public boolean isVar;
     public boolean isVect;
-    public ArrayList<?> vect;
+    public ArrayList<Value> vect;
 
     public static int program_counter = 1000; // Program counter fittizio
 
@@ -53,7 +53,7 @@ public class Value {
     }
 
     // Costruttore per vettori
-    public Value(String n, String t, String v, boolean b, boolean bvect, ArrayList<?> list, Integer size) {
+    public Value(String n, String t, String v, boolean b, boolean bvect, ArrayList<Value> list, Integer size) {
         name = n;
         type = t;
         value = v;
@@ -62,9 +62,9 @@ public class Value {
         isVect = bvect;
 
         if (list != null)
-            vect = new ArrayList<>(list);
+            vect = new ArrayList<Value>(list);
         else
-            vect = new ArrayList<>();
+            vect = new ArrayList<Value>();
 
         program_counter += size + 1;
     }

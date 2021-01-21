@@ -59,7 +59,7 @@ public class ParserEnvironment {
         vect_pos = "0";
         is_amp_punct = false;
 
-        // Funzioni escluse
+        // Funzioni escluse (Aggiungere in caso di necessità)
         excluded_functions = new ArrayList<>();
         excluded_functions.add("printf");
     }
@@ -238,6 +238,33 @@ public class ParserEnvironment {
         }
     }
 
+    // Assegna un valore ad un vettore (dichiarata)
+    public void assignVectorValue(Token var_name, String vect_size, Value exp) {
+        if (!is_local) { // Globale
+            if (!isDeclaredGlobal(var_name))
+                return;
+
+            Value var = symbolTable.get(var_name.getText()); // Reference
+
+            if (var != null)
+                var.vect.get(Integer.parseInt(vect_size)).value = exp.value;
+        } else { // Locale
+            if (!isDeclaredLocal(var_name) && !isDeclaredGlobal(var_name))
+                return;
+            else if (isDeclaredLocal(var_name)) {
+                Value var = symbolTableLocal.get(var_name.getText()); // Reference
+
+                if (var != null)
+                    var.vect.get(Integer.parseInt(vect_size)).value = exp.value;
+            } else {
+                Value var = symbolTable.get(var_name.getText()); // Reference
+
+                if (var != null)
+                    var.vect.get(Integer.parseInt(vect_size)).value = exp.value;
+            }
+        }
+    }
+
     // Valore temporaneo
     public Value setValue(Token vl, String type, String expectedType) {
         String value = vl.getText();
@@ -257,38 +284,41 @@ public class ParserEnvironment {
     }
 
     // Valore temporaneo per le call function
-    public Value setValueCallFunction(Token vl, String type, String expectedType) {
-        String value = vl.getText();
+    public Value setValueCallFunction(Token called_func_name, String type, String expectedType) {
         if (!ValueTypes.isCoherent(type, expectedType)) {
             type = ValueTypes.UNDEFINED_STR;
-            addErrorMessage(vl, ERR_TYPE_MISMATCH);
+            addErrorMessage(called_func_name, ERR_TYPE_MISMATCH);
         }
 
-        // TODO Valori fittizzi per i return dopo aver eseguito tutti i calcoli delle funzioni, per ora solo controllo sui tipi ritornati
-        if (type.matches(ValueTypes.INT_STR))
-            return new Value(type, "777", false);
-        else if (type.matches(ValueTypes.FLOAT_STR))
-            return new Value(type, "777.77", false);
-        else if (type.matches(ValueTypes.CHAR_STR)) {
-            return new Value(type, "x", false);
-        }
+        Value func_temp_value = symbolTable.get(called_func_name.getText());
 
-        return null;
+        return new Value(type, func_temp_value.value, false);
     }
 
     // Verifica che il tipo ritornato dalla funzione e quello atteso siano coerenti
-    public void checkFunctionReturnType(String func_type, String expectedType) {
-        if (func_type.matches("void"))
+    public void checkFunctionReturnType(Token tk, Value value, String return_type, String funct_type) {
+        if (return_type.matches("void") && funct_type.matches("void"))
             return;
 
-        if (!func_type.matches(expectedType))
-            addErrorMessage(Token.SKIP_TOKEN, ERR_TYPE_FUNCT_RETURN); // Token inutile
+        if (!return_type.matches(funct_type))
+            addErrorMessage(tk, ERR_TYPE_FUNCT_RETURN);
+
+        if (value != null)
+            setFunctionReturnType(value);
+    }
+
+    // Assegna il valore alla funzione dato il return
+    public void setFunctionReturnType(Value value) {
+        Value func_temp_value = symbolTable.get(funct_name.getText());
+        func_temp_value.value = value.value;
+
+        symbolTable.put(funct_name.getText(), func_temp_value);
     }
 
     // Verifica che il tipo ritornato dalla chiamata funzione e quello atteso siano coerenti
-    public void checkCallFunctionReturnType(String func_type, String expectedType) {
+    public void checkCallFunctionReturnType(Token tk, String func_type, String expectedType) {
         if (!func_type.matches(expectedType))
-            addErrorMessage(Token.SKIP_TOKEN, ERR_TYPE_CALL_FUNCT_RETURN); // Token inutile
+            addErrorMessage(tk, ERR_TYPE_CALL_FUNCT_RETURN);
     }
 
     // Recupera il valore di una variabile dichiarata
@@ -364,7 +394,7 @@ public class ParserEnvironment {
             }
         }
 
-        return (Value) value.vect.get(Integer.parseInt(position));
+        return value.vect.get(Integer.parseInt(position));
     }
 
     // FUNZIONI
@@ -632,7 +662,7 @@ public class ParserEnvironment {
         else if (code == ERR_TYPE_CALL_FUNCT)
             msg += "La chiamta di funzione <" + tk.getText() + "> non deve avere il type";
         else if (code == ERR_TYPE_FUNCT_RETURN)
-            msg += "La chiamata di funzione non ha lo stesso type dell'expression attesa";
+            msg += "Il tipo ritornato non ha lo stesso type del tipo di funzione atteso";
         else if (code == ERR_TYPE_CALL_FUNCT_RETURN)
             msg += "La chiamata di funzione non ha lo stesso type dell'expression attesa";
         else if (code == ERR_CALL_FUNC_IN_GLOBAL)
@@ -659,7 +689,7 @@ public class ParserEnvironment {
 
     // Errore sintattico
     public void handleError(String[] tokenNames, RecognitionException e, String h, String m) {
-        String st = " *** SINTAX ERROR [" + ERR_ON_SYNTAX + "] in " +
+        String st = " Errore sintattico [" + ERR_ON_SYNTAX + "] in " +
                 "(" + e.token.getLine() + ", " + e.token.getCharPositionInLine() + ") - " +
                 "Found ";
 
@@ -668,5 +698,9 @@ public class ParserEnvironment {
         st += " ('" + e.token.getText() + "')" + m;
 
         errorList.add(st);
+    }
+
+    private void emit(String s) {
+        translation.append(s + "\n");
     }
 }

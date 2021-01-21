@@ -6,9 +6,9 @@ int main() {
 	printf("Value of a[2]: ");
 
 	char b = 'b';
-	float c = b * 2;
+	float c = 2 * 2;
 
-	a[2] = c;
+	a[2] = 5;
 
 	printf("%d\n", a[2]);
 
