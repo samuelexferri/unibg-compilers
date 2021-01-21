@@ -96,7 +96,7 @@ ass_vector		[String vect_type]
 					  | exp=expression[vect_type] {env.assignVectorValue(env.var_name, env.vect_size, exp);})
 				;
 				
-vector 			: LBRACK {env.vect_size = "0";} (size=INT {env.vect_size = $size.getText();})? RBRACK {env.addNewVector(env.var_type, env.var_name, env.vect_size);} ass_vector[env.var_type]?
+vector 			: LBRACK {env.vect_size = "0";} (size=INT {env.vect_size = $size.getText();})? RBRACK {env.addNewVector(env.var_type, env.var_name, env.vect_size);} {env.var_type = env.getVarType(env.var_name);} ass_vector[env.var_type]?
 				;
 				
 pointer			: MULT (name=WORD {env.var_name = $name; env.addNewVector(env.var_type, env.var_name, "100") /* Per i puntatori size=100 fittizia */;} | LPAREN expression[ValueTypes.INT_STR] RPAREN) assignment? // Puntatori: *p o *(p+1)

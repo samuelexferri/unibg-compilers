@@ -1,5 +1,7 @@
 
 -----------------------------
-*****	Errori: #	1	*****
+*****	Errori: #	3	*****
 -----------------------------
-1: Errore semantico [16] in (35,15) - Valore di tipo non compatibile (null)
+1: Errore sintattico [1] in (13, 17) - Found LBRACK ('[') - mismatched input '[' expecting RPAREN
+2: Errore sintattico [1] in (16, 32) - Found LBRACK ('[') - mismatched input '[' expecting RPAREN
+3: Errore sintattico [1] in (18, 43) - Found LBRACK ('[') - mismatched input '[' expecting RPAREN

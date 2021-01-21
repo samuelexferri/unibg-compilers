@@ -23,7 +23,6 @@ Puntatori: 	Indirizzo fittizio, Puntatori tra parentesi *(cb + 1)
 Call Function: 	Controllo call_params, possiamo chiamarla con qualsiasi tipo per ora
 Return: 	Almeno un return (controllo blando), Obbligatorio nel main return 0
 
-Call Args: 	Non funzionano (Fibonacci...)
 Program Counter: Fittizio
 If, For, While: Compare, and-or-not, Definizone interna del for int i = 1 non funziona
 

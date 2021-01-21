@@ -11,7 +11,7 @@ public class AntlrParserTester {
 
     //static String fileIn = ".\\resources\\arithmetic_ops_C";
 
-    //static String fileIn = ".\\resources\\array_ops_C";
+    static String fileIn = ".\\resources\\array_ops_C";
     //static String fileIn = ".\\resources\\conditional_ops_C";
     //static String fileIn = ".\\resources\\factorial_C";
     //static String fileIn = ".\\resources\\fibonacci_C";
@@ -21,7 +21,7 @@ public class AntlrParserTester {
     //static String fileIn = ".\\resources\\array_ops_C";
     //static String fileIn = ".\\resources\\towers_of_hanoi_C";
     //static String fileIn = ".\\resources\\test_C";
-    static String fileIn = ".\\resources\\test_semantic_C";
+    //static String fileIn = ".\\resources\\test_semantic_C";
 
     static String fileOut = ".\\resources\\fileOut.txt";
     static String fileMsg = ".\\resources\\fileMsg.txt";
