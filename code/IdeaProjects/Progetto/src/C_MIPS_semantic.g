@@ -33,7 +33,6 @@ options {
     void init(FileWriter fOut) {
     	System.out.println("Inizio l'analisi\n");
         env = new ParserEnvironment(fOut);
-        tra = new Translation(env);
     }
 
     public Hashtable<String, Value> getSymbolTable() {
@@ -49,7 +48,7 @@ options {
 	}
 	
 	public String getTranslation() {
-    	return tra.translation.toString();
+    	return env.tra.translation.toString();
     }
 
     public ArrayList<String> getErrors() {
@@ -78,7 +77,7 @@ global			: funct_void
 				| {env.var_type = ValueTypes.UNDEFINED_STR; env.funct_type = ValueTypes.UNDEFINED_STR; env.is_local = false;} (type=type_name {env.var_type = type.getText();})? (pointer SEMICOL 
 				     		 		| name=WORD (({env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} ass_multiple
 				     		 		 			| {env.var_name = $name;} vector) SEMICOL
-									 			| {env.var_name = $name; env.funct_name = $name; env.funct_type = type.getText(); env.addFunction(env.var_type, $name);} funct_params))
+									 			| {env.var_name = $name; env.funct_name = $name; env.funct_type = type.getText(); env.addFunction(env.var_type, $name); env.tra.traAddNewFunction();} funct_params))
 				;
 				
 funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params 
@@ -87,7 +86,7 @@ funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local
 funct_params 	: LPAREN {env.is_local = true; env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);})*)? RPAREN isBlock=codeblock {env.is_local = false; env.clearSymbolTableLocal(isBlock);}
 				; 
 				
-assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name;}((eq=ADD ASS | eq=SUB ASS | eq=MULT ASS | eq=DIV ASS | eq=ASS) exp=expression[env.var_type] {env.assignValue(var_temp, exp, eq); tra.transAssignment(exp);})
+assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name; env.tra.traAssignmentBefore();}((eq=ADD ASS | eq=SUB ASS | eq=MULT ASS | eq=DIV ASS | eq=ASS) exp=expression[env.var_type] {env.assignValue(var_temp, exp, eq); env.tra.traAssignmentAfter(exp);})
 				;
 
 ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} assignment?)* // Assegnamento multiplo: int a, b=2, c...
@@ -150,15 +149,15 @@ type_name		returns [Token token]
 				;
 
 expression 		[String type] returns [Value value]
-				: v1=multiply_exp[type] ( op=ADD v2=multiply_exp[type] {v1 = env.doAdd($op, v1, v2);} 
-										| op=SUB v2=multiply_exp[type] {v1 = env.doSub($op, v1, v2);})* 
-										{value = v1;}
+				: v1=multiply_exp[type] {env.baddorsub = false; env.bmulordiv1 = env.bmulordiv;} ( op=ADD v2=multiply_exp[type] {env.bmulordiv2 = env.bmulordiv;} {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub); env.tra.traSetValueConst(new Value(type, v2.value, false), env.bmulordiv2); v1 = env.doAdd($op, v1, v2); env.baddorsub = true;} 
+																 | op=SUB v2=multiply_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub); env.tra.traSetValueConst(new Value(type, v2.value, false), env.bmulordiv2); v1 = env.doSub($op, v1, v2); env.baddorsub = true;} )* 
+																 {value = v1; env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub);}
     			;
     
 multiply_exp 	[String type] returns [Value value]
-				: v1=atom_exp[type] ( op=MULT v2=atom_exp[type] {v1 = env.doMul($op, v1, v2);} 
-									| op=DIV v2=atom_exp[type] {v1 = env.doDiv($op, v1, v2);})* 
-									{value = v1;}
+				: v1=atom_exp[type] {env.bmulordiv = false;} ( op=MULT v2=atom_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv); env.tra.traSetValueConst(new Value(type, v2.value, false), false); v1 = env.doMul($op, v1, v2); env.bmulordiv = true;} 
+															 | op=DIV v2=atom_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv); env.tra.traSetValueConst(new Value(type, v2.value, false), false); v1 = env.doDiv($op, v1, v2); env.bmulordiv = true;} )*
+															 {value = v1;}
     			;
     			
 atom_exp 		[String type] returns [Value value]
@@ -167,7 +166,7 @@ atom_exp 		[String type] returns [Value value]
 				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
 				| name=WORD ((LBRACK {env.vect_pos = "0";} (pos=INT {env.vect_pos = $pos.getText();})? RBRACK) {value = env.getVectorValue($name, type, env.vect_pos);}
 					   		| call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(name, env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);}
-					   		| {value = env.getDeclaredValue($name, type);}) // Variabile o Vettore
+					   		| {value = env.getDeclaredValue($name, type); env.tra.traSetValueVar(name);}) // Variabile o Vettore
 				| MULT name=WORD {value = env.getDeclaredValue($name, type);} // Puntatore
 				| AMP {env.is_amp_punct = true;} name=WORD {value = env.getDeclaredValue($name, type);} // Indirizzo (da estrarre)
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN // Parentesi

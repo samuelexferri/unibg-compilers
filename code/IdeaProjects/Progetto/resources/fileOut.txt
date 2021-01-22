@@ -1,1 +1,10 @@
 A: .word 2
+B: .word 3
+MAIN: 
+   lw $s0, 0x4000 	 #[Var a=2]
+   lw $t1, 2
+   lw $t2, 4
+   mul $t1, $t1, $t2
+   lw $t1, 1
+   add $t1, $t1, $t2
+   sw $t1, 0x4000 	 #[Var a=9]

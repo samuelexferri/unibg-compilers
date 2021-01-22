@@ -3,7 +3,7 @@ package util;
 import java.util.ArrayList;
 
 public class Value {
-    public static int stack_pointer = 1000; // Program counter fittizio
+    public static int stack_pointer = 4000; // Program counter fittizio
     public String name;
     public String type;
     public String value;
@@ -24,7 +24,7 @@ public class Value {
         isVect = false;
         vect = null;
 
-        stack_pointer += 4;
+        stack_pointer -= 4;
     }
 
     // Costruttore per funzioni
@@ -38,7 +38,7 @@ public class Value {
         isVect = false;
         vect = null;
 
-        stack_pointer += 4;
+        stack_pointer -= 4;
     }
 
     // Costruttore per valori temporanei
@@ -70,7 +70,7 @@ public class Value {
         else
             vect = new ArrayList<Value>();
 
-        stack_pointer += size*4 + 4; // Incrementa lo stack pointer per avere spazio per i vettori
+        stack_pointer -= size*4 + 4; // Incrementa lo stack pointer per avere spazio per i vettori
     }
 
     @Override

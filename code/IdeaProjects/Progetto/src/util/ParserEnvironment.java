@@ -43,11 +43,15 @@ public class ParserEnvironment {
     public String vect_size; // Dimensione del vettore specificata tra parentesi quadre
     public String vect_pos; // Posizione del vettore specificata tra parentesi quadre
     public Boolean is_amp_punct;
+    public Boolean bmulordiv;
+    public Boolean baddorsub;
+    public Boolean bmulordiv1;
+    public Boolean bmulordiv2;
 
     ArrayList<String> excluded_functions;
     FileWriter fOut;
 
-    Translation tra;
+    public Translation tra;
 
     public ParserEnvironment(FileWriter fOutMain) {
         symbolTable = new Hashtable<String, Value>(101); // 101 numero primo
@@ -297,35 +301,10 @@ public class ParserEnvironment {
         if (type.equals(ValueTypes.STRING_STR))
             value = value.substring(1, value.lastIndexOf("\""));
 
-        // TODO Non posso chiamarlo qua
-        transSetValue(new Value(type, value, false));
+        // TODO Rimuovere
+        //tra.traSetValueConst(new Value(type, value, false)); // Non è una variabile ma una costante (false)
 
         return new Value(type, value, false);
-    }
-
-    boolean alternate_transSetValue = true;
-
-    public void transSetValue(Value value) {
-        /*
-        if (alternate_transSetValue) {
-            if (value.isVar) {
-                emit("-la $t1, 0x" + value.address + " #Value " + value.value);
-                emit("-lw $s1, 0($t1)");
-            } else { // Costante
-                emit("-lw $s1, " + value.value);
-            }
-            emit("-sw $s1, 0(0x8000)");
-        } else {
-            if (value.isVar) {
-                emit("-la $t2, 0x" + value.address + " #Value " + value.value);
-                emit("-lw $s2, 0($t2)");
-            } else { // Costante
-                emit("-lw $s2, " + value.value);
-            }
-            emit("-sw $s2, 0(0x8004)");
-        }
-
-        alternate_transSetValue = !alternate_transSetValue;*/
     }
 
     // Valore temporaneo per le call function
@@ -521,7 +500,6 @@ public class ParserEnvironment {
         if (!var_type.matches(ValueTypes.UNDEFINED_STR)) // In locale si ha "int funct()" che è sbagliato avere il type
             addErrorMessage(name, ERR_TYPE_CALL_FUNCT);
 
-
         if (!symbolTable.containsKey(name.getText())) {
             addErrorMessage(name, ERR_FUNC_UNDECLARED);
         }
@@ -542,7 +520,6 @@ public class ParserEnvironment {
     // Inserisci il vettore creato nella symbol table
     public void insertVectorST() {
         // Costruisco il Value
-
         Value vect_val = new Value(var_name.getText(), getVarType(var_name), null, true, true, vect, vect.size());
 
         if (is_local && symbolTableLocal.containsKey(var_name.getText())) {
@@ -578,24 +555,15 @@ public class ParserEnvironment {
         } else if (op.getText().compareTo("/") == 0) {
             return doDiv(op, v1, v2);
         }
-
         return null;
     }
-
-    public void transDoAdd(Token op, Value v1, Value v2) {
-       //emit("add $s0, $s1, $s2");
-        //emit("sw $s0, 0(0x8888)");
-    }
-
-
 
     // Esegue l'operazione +
     public Value doAdd(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
 
-        // TODO Spostare
-        transDoAdd(op, v1, v2);
+        tra.traDoAdd(op, v1, v2);
 
         String value = "";
         String type = ValueTypes.returnType("+", v1.type, v2.type);
@@ -629,6 +597,8 @@ public class ParserEnvironment {
         if (op == null || v1 == null || v2 == null)
             return null;
 
+        tra.traDoSub(op, v1, v2);
+
         String value;
         String type = ValueTypes.returnType("-", v1.type, v2.type);
 
@@ -656,6 +626,8 @@ public class ParserEnvironment {
 
         String value;
         String type = ValueTypes.returnType("*", v1.type, v2.type);
+
+        tra.traDoMul(op, v1, v2);
 
         if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.CHAR_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
