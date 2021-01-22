@@ -26,9 +26,11 @@ Return: 	Almeno un return (controllo blando), Obbligatorio nel main return 0
 If, For, While: Per ora non gestiamo le cose in esecuzione, eseguirà l'inizializzazione e l'incremento lo stesso una sola volta..., Parentesi nei compare non fatte
 
 Program Counter vs Stack Pointer
-Traduzione
+
+TRADUZIONE:
+Ipotesi tutte .word
+
+Operazioni:	Funziona ma non usa i registri ma le costanti quando si usano parentesi (si crea una nuova expression)
 
 MARS
 TODO
-
-Ipotesi tutti word

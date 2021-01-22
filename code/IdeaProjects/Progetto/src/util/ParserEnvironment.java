@@ -47,11 +47,9 @@ public class ParserEnvironment {
     public Boolean baddorsub;
     public Boolean bmulordiv1;
     public Boolean bmulordiv2;
-
+    public Translation tra;
     ArrayList<String> excluded_functions;
     FileWriter fOut;
-
-    public Translation tra;
 
     public ParserEnvironment(FileWriter fOutMain) {
         symbolTable = new Hashtable<String, Value>(101); // 101 numero primo

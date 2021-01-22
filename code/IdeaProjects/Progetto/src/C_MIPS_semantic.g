@@ -80,7 +80,7 @@ global			: funct_void
 									 			| {env.var_name = $name; env.funct_name = $name; env.funct_type = type.getText(); env.addFunction(env.var_type, $name); env.tra.traAddNewFunction();} funct_params))
 				;
 				
-funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name);} funct_params 
+funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local = true; env.var_name = $name; env.funct_name = $name; env.addFunction(env.var_type, $name); env.tra.traAddNewFunction(); } funct_params {env.tra.traReturnVoid();}
 				;
 				
 funct_params 	: LPAREN {env.is_local = true; env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);})*)? RPAREN isBlock=codeblock {env.is_local = false; env.clearSymbolTableLocal(isBlock);}
@@ -139,7 +139,7 @@ whileStat		: WHILE LPAREN bool=condition RPAREN statement
 forStat			: FOR LPAREN initialization SEMICOL bool=condition SEMICOL increment RPAREN statement 
 				;
 
-returnStat		: tk=RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(tk, value, env.var_type, env.funct_type);} SEMICOL 
+returnStat		: tk=RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(tk, value, env.var_type, env.funct_type); env.tra.traReturn(value);} SEMICOL 
 				;
 
 type_name		returns [Token token]

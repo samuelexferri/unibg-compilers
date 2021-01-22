@@ -21,7 +21,7 @@ public class Translation {
         translation = new StringBuffer();
     }
 
-    // Translation
+    // Emit
     public void emit(String s) {
         for (int i = 0; i < indentation; i++) {
             translation.append("   ");
@@ -30,6 +30,7 @@ public class Translation {
         //program_counter += 4; // TODO
     }
 
+    // Cambiare il numero di registro $t
     public void changeT() {
         if (t == 1)
             t = 2;
@@ -62,6 +63,7 @@ public class Translation {
         return value;
     }
 
+    // Prima dell'assegnamento
     public void traAssignmentBefore() {
         if (!env.is_local) { // Variabile globale
             // Nothing
@@ -72,6 +74,7 @@ public class Translation {
         var_name_assignment = env.var_name;
     }
 
+    // Dopo l'assegnamento
     public void traAssignmentAfter(Value exp) {
         // Nel caso di variabile globale assegnata (ricordo che si può fare una sola volta), fare .word
         if (!env.is_local) { // Variabile globale
@@ -83,9 +86,35 @@ public class Translation {
         }
     }
 
+    // Aggiunta di una nuova funzione
     public void traAddNewFunction() {
+        indentation = 0;
         emit(env.var_name.getText().toUpperCase(Locale.ROOT) + ": ");
         indentation++;
+        emit("addiu $sp, $sp, -8");
+        emit("sw $ra, 4($sp)");
+    }
+
+    // Return di funzione
+    public void traReturn(Value val) {
+        if (val != null)
+            emit("sw " + val.value + ", 0($sp)"); // TODO Non numerico costante
+        else
+            emit("sw 0, 0($sp)");
+
+        emit("lw $v0, 0($sp)");
+        emit("lw $ra, 4($sp)");
+        emit("addiu $sp, $sp, 8");
+        emit("jr $ra");
+    }
+
+    // Return di funzione void
+    public void traReturnVoid() {
+        emit("sw 0, 0($sp)");
+        emit("lw $v0, 0($sp)");
+        emit("lw $ra, 4($sp)");
+        emit("addiu $sp, $sp, 8");
+        emit("jr $ra");
     }
 
     public void traDoAdd(Token op, Value v1, Value v2) {

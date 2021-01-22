@@ -5,14 +5,18 @@ int a = 2;
 int b = 3;
 //a = 1;
 
-int main () {
+int main() {
     //a = 2 + 4 + 5 + 6 + 7;
-    a = (2+3)*4;
-    //a = 1 + 2 * 4 ;
+    //a = (2+3)*4; // TODO
+    a = 1 + 2 * 4 ;
     //a = 1 * 2 + 4 ;
 
-    //int b = 3;
+    int b = 3;
 
     //a = a + 3 + 2;
-    //return 0;
+    return 0;
+}
+
+void func() {
+    int b = 3;
 }
