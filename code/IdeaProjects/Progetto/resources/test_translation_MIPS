@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int a;
+int a = 2;
+//a = 1;
 
 int main () {
     a = 1 + 2 + 3;

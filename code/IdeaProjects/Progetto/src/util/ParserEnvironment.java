@@ -3,7 +3,8 @@ package util;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 
-import javax.swing.*;
+import util.Translation;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ public class ParserEnvironment {
     public Hashtable<String, Value> symbolTableLocal = null;
     public ArrayList<String> errorList = null;
     public StringBuffer debug = null;
-    public StringBuffer translation = null;
 
     public Token var_name; // Nome della variabile
     public String var_type; // Tipo della variabile
@@ -43,32 +43,28 @@ public class ParserEnvironment {
     public String vect_size; // Dimensione del vettore specificata tra parentesi quadre
     public String vect_pos; // Posizione del vettore specificata tra parentesi quadre
     public Boolean is_amp_punct;
-    public int program_counter = 5000; // Program counter TODO
+
     ArrayList<String> excluded_functions;
     FileWriter fOut;
+
+    Translation tra;
 
     public ParserEnvironment(FileWriter fOutMain) {
         symbolTable = new Hashtable<String, Value>(101); // 101 numero primo
         symbolTableLocal = new Hashtable<String, Value>(101); // 101 numero primo
         errorList = new ArrayList<String>();
         debug = new StringBuffer();
-        translation = new StringBuffer();
         fOut = fOutMain;
         vect = new ArrayList<Value>();
         vect_size = "0";
         vect_pos = "0";
         is_amp_punct = false;
 
+        tra = new Translation(this);
+
         // Funzioni escluse (Aggiungere in caso di necessità)
         excluded_functions = new ArrayList<>();
         excluded_functions.add("printf");
-    }
-
-    // TODO Traduzione
-    // Translation
-    private void emit(String s) {
-        translation.append(s + "\n");
-        program_counter += 4;
     }
 
     // VARIABILI
@@ -310,6 +306,7 @@ public class ParserEnvironment {
     boolean alternate_transSetValue = true;
 
     public void transSetValue(Value value) {
+        /*
         if (alternate_transSetValue) {
             if (value.isVar) {
                 emit("-la $t1, 0x" + value.address + " #Value " + value.value);
@@ -328,7 +325,7 @@ public class ParserEnvironment {
             emit("-sw $s2, 0(0x8004)");
         }
 
-        alternate_transSetValue = !alternate_transSetValue;
+        alternate_transSetValue = !alternate_transSetValue;*/
     }
 
     // Valore temporaneo per le call function
@@ -586,16 +583,11 @@ public class ParserEnvironment {
     }
 
     public void transDoAdd(Token op, Value v1, Value v2) {
-        emit("add $s0, $s1, $s2");
-        emit("sw $s0, 0(0x8888)");
+       //emit("add $s0, $s1, $s2");
+        //emit("sw $s0, 0(0x8888)");
     }
 
-    public void transAssignment() {
-        Value output = getDeclaredValue(var_name, var_type);
 
-        emit("lw $t1, 0(0x8888) + #Assignment");
-        emit("sw $t1, 0(0x" + output.address + ") + #Assignment");
-    }
 
     // Esegue l'operazione +
     public Value doAdd(Token op, Value v1, Value v2) {
