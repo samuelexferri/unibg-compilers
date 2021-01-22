@@ -3,8 +3,9 @@ B: .word 3
 MAIN: 
    lw $s0, 0x4000 	 #[Var a=2]
    lw $t1, 2
-   lw $t2, 4
-   mul $t1, $t1, $t2
-   lw $t1, 1
+   lw $t2, 3
    add $t1, $t1, $t2
-   sw $t1, 0x4000 	 #[Var a=9]
+   lw $t2, 5
+   lw $t1, 4
+   mul $t2, $t1, $t2
+   sw $t2, 0x4000 	 #[Var a=20]

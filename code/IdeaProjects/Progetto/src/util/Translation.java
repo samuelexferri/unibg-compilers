@@ -30,6 +30,13 @@ public class Translation {
         //program_counter += 4; // TODO
     }
 
+    public void changeT() {
+        if (t == 1)
+            t = 2;
+        else if (t == 2)
+            t = 1;
+    }
+
     // Recupera il valore di una variabile senza controlli se inizializzata
     public Value getValue(Token var) {
         Value value = null;
@@ -70,11 +77,9 @@ public class Translation {
         if (!env.is_local) { // Variabile globale
             emit(env.var_name.getText().toUpperCase(Locale.ROOT) + ": .word " + exp.value);
         } else { // Variabile locale
-            //getValue(env.var_name).address = stack_pointer;
-            if (alternate_traSetValue)
-                emit("sw $t2, 0x" + getValue(var_name_assignment).address + " \t #[Var " + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
-            else
-                emit("sw $t1, 0x" + getValue(var_name_assignment).address + " \t #[Var " + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
+            changeT();
+            emit("sw $t" + t + ", 0x" + getValue(var_name_assignment).address + " \t #[Var " + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
+            changeT();
         }
     }
 
@@ -84,43 +89,29 @@ public class Translation {
     }
 
     public void traDoAdd(Token op, Value v1, Value v2) {
-        if (alternate_traSetValue)
-            emit("add $t1, $t1, $t2");
-        else
-            emit("add $t2, $t1, $t2");
+        emit("add $t" + t + ", $t1, $t2");
+        changeT();
     }
 
     public void traDoSub(Token op, Value v1, Value v2) {
-        if (alternate_traSetValue)
-            emit("sub $t1, $t1, $t2");
-        else
-            emit("sub $t2, $t2, $t1");
+        emit("sub $t" + t + ", $t1, $t2");
+        changeT();
     }
 
     public void traDoMul(Token op, Value v1, Value v2) {
-        if (alternate_traSetValue)
-            emit("mul $t1, $t1, $t2");
-        else
-            emit("mul $t2, $t1, $t2");
+        emit("mul $t" + t + ", $t1, $t2");
+        changeT();
     }
 
     // Costante
     public void traSetValueConst(Value value, Boolean bool) {
         if (env.is_local) {
             if (bool) {
-                if (alternate_traSetValue) {
-                    //emit("---------lw $t1, ");
-                } else {
-                    //emit("---------------lw $t2, ");
-                }
+                // Display nothing
             } else {
-                if (alternate_traSetValue) {
-                    emit("lw $t1, " + value.value);
-                } else {
-                    emit("lw $t2, " + value.value);
-                }
+                emit("lw $t" + t + ", " + value.value);
+                changeT();
             }
-            alternate_traSetValue = !alternate_traSetValue;
         }
     }
 
@@ -129,13 +120,8 @@ public class Translation {
         Value value = getValue(name);
 
         if (env.is_local) {
-            if (alternate_traSetValue) {
-                emit("lw $t1, 0x" + value.address + " \t #[Var " + value.name + "=" + value.value + "]");
-            } else {
-                emit("lw $t2, 0x" + value.address + " \t #[Var " + value.name + "=" + value.value + "]");
-            }
+            emit("lw $t" + t + ", 0x" + value.address + " \t #[Var " + value.name + "=" + value.value + "]");
+            changeT();
         }
-
-        alternate_traSetValue = !alternate_traSetValue;
     }
 }

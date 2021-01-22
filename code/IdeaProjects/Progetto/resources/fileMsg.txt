@@ -7,5 +7,5 @@
 *****	Global Symbol Table	*****
 ---------------------------------
 1:	b=Value{name='b', type='int', value='3', address='3996', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-2:	a=Value{name='a', type='int', value='9', address='4000', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+2:	a=Value{name='a', type='int', value='20', address='4000', isVar=true, isVarPassed=false, isVect=false, vect=[]}
 3:	main=Value{name='main', type='int', value='null', address='3992', isVar=false, isVarPassed=false, isVect=false, vect=[]}
