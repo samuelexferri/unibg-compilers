@@ -43,10 +43,11 @@ public class ParserEnvironment {
     public String vect_size; // Dimensione del vettore specificata tra parentesi quadre
     public String vect_pos; // Posizione del vettore specificata tra parentesi quadre
     public Boolean is_amp_punct;
-    public Boolean bmulordiv;
-    public Boolean baddorsub;
-    public Boolean bmulordiv1;
-    public Boolean bmulordiv2;
+    public Boolean bmulordiv = false;
+    public Boolean baddorsub = false;
+    public Boolean bmulordiv1 = false;
+    public Boolean bmulordiv2 = false;
+    public int stat = 0;
     public Translation tra;
     ArrayList<String> excluded_functions;
     FileWriter fOut;
@@ -648,6 +649,8 @@ public class ParserEnvironment {
     public Value doDiv(Token op, Value v1, Value v2) {
         if (op == null || v1 == null || v2 == null)
             return null;
+
+        tra.traDoDiv(op, v1, v2);
 
         String value;
         String type = ValueTypes.returnType("/", v1.type, v2.type);

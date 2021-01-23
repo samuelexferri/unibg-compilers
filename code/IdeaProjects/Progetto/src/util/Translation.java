@@ -12,7 +12,6 @@ public class Translation {
     //public int stack_pointer = 4000;
     ParserEnvironment env;
     Token var_name_assignment = null;
-    boolean alternate_traSetValue = true;
 
     int t = 1;
 
@@ -123,7 +122,10 @@ public class Translation {
     }
 
     public void traDoSub(Token op, Value v1, Value v2) {
-        emit("sub $t" + t + ", $t1, $t2");
+        if (env.bmulordiv1 && env.bmulordiv2)
+            emit("sub $t" + t + ", $t2, $t1");
+        else
+            emit("sub $t" + t + ", $t1, $t2");
         changeT();
     }
 
@@ -132,8 +134,19 @@ public class Translation {
         changeT();
     }
 
+    public void traDoDiv(Token op, Value v1, Value v2) {
+        if (env.bmulordiv1 && env.bmulordiv2)
+            emit("div $t" + t + ", $t2, $t1");
+        else
+            emit("div $t" + t + ", $t1, $t2");
+        changeT();
+    }
+
     // Costante
     public void traSetValueConst(Value value, Boolean bool) {
+        if (value == null)
+            return;
+
         if (env.is_local) {
             if (bool) {
                 // Display nothing
@@ -152,5 +165,64 @@ public class Translation {
             emit("lw $t" + t + ", 0x" + value.address + " \t #[Var " + value.name + "=" + value.value + "]");
             changeT();
         }
+    }
+
+    // Compare
+    public void traCompare(Value exp1, Value exp2, Token comp, Integer stat) {
+        emit("lw $t6, " + exp1.value);
+        emit("lw $t7, " + exp2.value);
+
+        String label;
+        if (env.stat == 1) { // If
+            label = "ELSE" + (indentation-1);
+        } else if (env.stat == 2) { // While
+            label = "ENDWHILE" + (indentation-1);
+        } else { // For
+            label = "ENDFOR" + (indentation-1);
+        }
+
+        // TODO Operatori logici
+
+        switch(comp.getText()) {
+            case "==":
+                emit("bne $t6, $t7 " + label);
+                break;
+            case "!=":
+                emit("beq $t6, $t7 " + label);
+                break;
+            case "<":
+                emit("slt $t8, $t6, $t7");
+                emit("bne $t8, 1" + label);
+                break;
+            case ">":
+                emit("slt $t8, $t7, $t6"); // Registri invertiti
+                emit("bne $t8, 1" + label);
+                break;
+            case "<=":
+                emit("slt $t8, $t7, $t6");  // Registri invertiti
+                emit("beq $t8, 1" + label);
+                break;
+            case ">=":
+                emit("slt $t8, $t6, $t7 ");
+                emit("beq $t8, 1" + label);
+                break;
+        }
+    }
+
+    public void traIfStart() {
+        emit("IF" + indentation + ":");
+        indentation++;
+    }
+
+    public void traIfEnd() {
+        indentation--;
+        emit("ENDIF" + indentation + ":");
+    }
+
+    public void traElseStart() {
+        emit("j ENDIF" + (indentation-1));
+        indentation--;
+        emit("ELSE" + indentation + ":");
+        indentation++;
     }
 }

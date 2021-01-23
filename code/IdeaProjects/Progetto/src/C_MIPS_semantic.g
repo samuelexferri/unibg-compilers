@@ -129,15 +129,6 @@ local			: {env.var_type = ValueTypes.UNDEFINED_STR; env.is_local = true;} (type=
 																									     		 		 	  					 | {env.var_name = $name;} vector 
 																														      					 | {env.var_name = $name; env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
 				;
-			  	
-ifStat			: IF LPAREN bool=condition RPAREN codeblock (ELSE statement)?
-				;
-						
-whileStat		: WHILE LPAREN bool=condition RPAREN statement
-				;
-				
-forStat			: FOR LPAREN initialization SEMICOL bool=condition SEMICOL increment RPAREN statement 
-				;
 
 returnStat		: tk=RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(tk, value, env.var_type, env.funct_type); env.tra.traReturn(value);} SEMICOL 
 				;
@@ -149,15 +140,17 @@ type_name		returns [Token token]
 				;
 
 expression 		[String type] returns [Value value]
-				: v1=multiply_exp[type] {env.baddorsub = false; env.bmulordiv1 = env.bmulordiv;} ( op=ADD v2=multiply_exp[type] {env.bmulordiv2 = env.bmulordiv;} {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub); env.tra.traSetValueConst(new Value(type, v2.value, false), env.bmulordiv2); v1 = env.doAdd($op, v1, v2); env.baddorsub = true;} 
-																 | op=SUB v2=multiply_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub); env.tra.traSetValueConst(new Value(type, v2.value, false), env.bmulordiv2); v1 = env.doSub($op, v1, v2); env.baddorsub = true;} )* 
-																 {value = v1; env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub);}
+				: v1=multiply_exp[type] {if(v1==null) {v1 = new Value(type, null, false);} env.baddorsub = false; env.bmulordiv1 = env.bmulordiv;} 
+										( op=ADD v2=multiply_exp[type] {if(v2==null) {v2 = new Value(type, null, false);} env.bmulordiv2 = env.bmulordiv;} {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub); env.tra.traSetValueConst(new Value(type, v2.value, false), env.bmulordiv2); v1 = env.doAdd($op, v1, v2); env.baddorsub = true;} 
+										| op=SUB v2=multiply_exp[type] {if(v2==null) {v2 = new Value(type, null, false);} env.bmulordiv2 = env.bmulordiv;} {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub); env.tra.traSetValueConst(new Value(type, v2.value, false), env.bmulordiv2); v1 = env.doSub($op, v1, v2); env.baddorsub = true;} )* 
+										{value = v1; env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv1 || env.baddorsub);}
     			;
     
 multiply_exp 	[String type] returns [Value value]
-				: v1=atom_exp[type] {env.bmulordiv = false;} ( op=MULT v2=atom_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv); env.tra.traSetValueConst(new Value(type, v2.value, false), false); v1 = env.doMul($op, v1, v2); env.bmulordiv = true;} 
-															 | op=DIV v2=atom_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv); env.tra.traSetValueConst(new Value(type, v2.value, false), false); v1 = env.doDiv($op, v1, v2); env.bmulordiv = true;} )*
-															 {value = v1;}
+				: {env.bmulordiv = false;} v1=atom_exp[type] {if(v1==null) {v1 = new Value(type, null, false);}} 
+									( op=MULT v2=atom_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv); env.tra.traSetValueConst(new Value(type, v2.value, false), false); v1 = env.doMul($op, v1, v2); env.bmulordiv = true;} 
+									| op=DIV v2=atom_exp[type] {env.tra.traSetValueConst(new Value(type, v1.value, false), env.bmulordiv); env.tra.traSetValueConst(new Value(type, v2.value, false), false); v1 = env.doDiv($op, v1, v2); env.bmulordiv = true;} )*
+									{value = v1;}
     			;
     			
 atom_exp 		[String type] returns [Value value]
@@ -166,17 +159,26 @@ atom_exp 		[String type] returns [Value value]
 				| tk=CHAR_QUOTE {value = env.setValue($tk, ValueTypes.CHAR_STR, type);}
 				| name=WORD ((LBRACK {env.vect_pos = "0";} (pos=INT {env.vect_pos = $pos.getText();})? RBRACK) {value = env.getVectorValue($name, type, env.vect_pos);}
 					   		| call_function {env.var_name = $name; env.var_type = env.getVarType($name); env.checkCallFunctionReturnType(name, env.var_type, type); value = env.setValueCallFunction($name, env.var_type, type);}
-					   		| {value = env.getDeclaredValue($name, type); env.tra.traSetValueVar(name);}) // Variabile o Vettore
+					   		| {value = env.getDeclaredValue($name, type); env.tra.traSetValueVar(name); env.bmulordiv = true;}) // Variabile o Vettore
 				| MULT name=WORD {value = env.getDeclaredValue($name, type);} // Puntatore
 				| AMP {env.is_amp_punct = true;} name=WORD {value = env.getDeclaredValue($name, type);} // Indirizzo (da estrarre)
     			| LPAREN v=expression[type] {{ value = v;}} RPAREN // Parentesi
     			;
+    			
+ifStat			: IF LPAREN {env.tra.traIfStart(); env.stat = 1;} bool=condition[env.stat] RPAREN codeblock {env.tra.traElseStart();} (ELSE statement)? {env.tra.traIfEnd();}
+				;
+						
+whileStat		: WHILE LPAREN {env.stat = 2;} bool=condition[env.stat] RPAREN statement
+				;
+				
+forStat			: FOR LPAREN initialization SEMICOL {env.stat = 3;} bool=condition[env.stat] SEMICOL increment RPAREN statement 
+				;
 
 initialization	: {env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name {env.var_type = type.getText();})? name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} assignment?
 				;
 
-condition		returns [Boolean bool = false]
-				: exp1=expression[ValueTypes.ANYVALUE_STR] comp=compare exp2=expression[ValueTypes.ANYVALUE_STR] {bool = env.compareEvaluator(comp,exp1,exp2);} 
+condition		[Integer stat] returns [Boolean bool = false]
+				: exp1=expression[ValueTypes.ANYVALUE_STR] comp=compare exp2=expression[ValueTypes.ANYVALUE_STR] {env.tra.traCompare(exp1,exp2,comp,stat); bool = env.compareEvaluator(comp,exp1,exp2);} 
 				  (op=operator exp1=expression[ValueTypes.ANYVALUE_STR] comp=compare exp2=expression[ValueTypes.ANYVALUE_STR] { bool = env.compareEvaluatorSeries(bool, op, env.compareEvaluator(comp,exp1,exp2));})*
 				;
 				

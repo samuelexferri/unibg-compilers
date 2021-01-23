@@ -34,3 +34,6 @@ Operazioni:	Funziona ma non usa i registri ma le costanti quando si usano parent
 
 MARS
 TODO
+
+Commentare lw iniziali e finali
+Traduzione non funziona!

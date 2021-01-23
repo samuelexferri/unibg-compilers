@@ -2,17 +2,19 @@
 -----------------------------------------
 *****	Local Symbol Table: main	*****
 -----------------------------------------
-1:	b=Value{name='b', type='int', value='3', address='3988', isVar=true, isVarPassed=false, isVect=false, vect=[]}
 
 -----------------------------------------
 *****	Local Symbol Table: func	*****
 -----------------------------------------
-1:	b=Value{name='b', type='int', value='3', address='3980', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+1:	c=Value{name='c', type='int', value='7', address='3980', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+2:	b=Value{name='b', type='int', value='3', address='3984', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+3:	g=Value{name='g', type='int', value='10', address='3972', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+4:	f=Value{name='f', type='int', value='8', address='3976', isVar=true, isVarPassed=false, isVect=false, vect=[]}
 
 ---------------------------------
 *****	Global Symbol Table	*****
 ---------------------------------
 1:	b=Value{name='b', type='int', value='3', address='3996', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-2:	a=Value{name='a', type='int', value='9', address='4000', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-3:	func=Value{name='func', type='void', value='null', address='3984', isVar=false, isVarPassed=false, isVect=false, vect=[]}
+2:	a=Value{name='a', type='int', value='2', address='4000', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+3:	func=Value{name='func', type='void', value='null', address='3988', isVar=false, isVarPassed=false, isVect=false, vect=[]}
 4:	main=Value{name='main', type='int', value='0', address='3992', isVar=false, isVarPassed=false, isVect=false, vect=[]}
