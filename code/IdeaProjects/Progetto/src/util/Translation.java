@@ -61,11 +61,14 @@ public class Translation {
 
     // ASSEGNAMENTI
     // Assegnamento (Prima)
-    public void traAssignmentBefore() {
+    public void traAssignmentBefore(Token eq) {
         if (!env.is_local) { // Variabile globale
             // Nothing
-        } else { // Variabile locale
-            emit("lw $s0, 0x" + getValue(env.var_name).address + " \t\t #[" + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
+        } else if (eq.getText().matches("=")) { // Variabile locale
+            // Nothing
+        } else {
+            emit("lw $t" + t + ", 0x" + getValue(env.var_name).address + " \t\t #[" + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "] Opz se non +=,-=...");
+            changeT();
         }
 
         var_name_assignment = env.var_name;
@@ -233,6 +236,7 @@ public class Translation {
     }
 
     public void traWhileEnd() {
+        emit("j WHILE" +  (indentation - 1));
         indentation--;
         emit("ENDWHILE" + indentation + ":");
     }

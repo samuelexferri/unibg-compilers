@@ -86,7 +86,7 @@ funct_void		: type=VOID {env.var_type = type.getText();} name=WORD {env.is_local
 funct_params 	: LPAREN {env.is_local = true; env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);} (COMMA type=type_name name=WORD {env.var_type = type.getText(); env.var_name = $name; env.addNewVariable(env.var_type, $name, true);})*)? RPAREN isBlock=codeblock {env.is_local = false; env.clearSymbolTableLocal(isBlock);}
 				; 
 				
-assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name; env.tra.traAssignmentBefore();}((eq=ADD ASS | eq=SUB ASS | eq=MULT ASS | eq=DIV ASS | eq=ASS) exp=expression[env.var_type] {env.assignValue(var_temp, exp, eq); env.tra.traAssignmentAfter(exp);})
+assignment		: {env.var_type = env.getVarType(env.var_name); Token var_temp = env.var_name;}((eq=ADD ASS | eq=SUB ASS | eq=MULT ASS | eq=DIV ASS | eq=ASS) {env.tra.traAssignmentBefore(eq);} exp=expression[env.var_type] {env.assignValue(var_temp, exp, eq); env.tra.traAssignmentAfter(exp);})
 				;
 
 ass_multiple	: assignment? (COMMA name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} assignment?)* // Assegnamento multiplo: int a, b=2, c...

@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int a = 2;
+int b = 3;
+
+int main() {
+    while (b < 10) {
+        b += a;
+    }
+
+    return 0;
+}

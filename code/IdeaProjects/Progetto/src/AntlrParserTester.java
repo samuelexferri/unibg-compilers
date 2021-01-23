@@ -22,7 +22,12 @@ public class AntlrParserTester {
 
     //static String fileIn = ".\\resources\\test_C";
     //static String fileIn = ".\\resources\\test_semantic_C";
-    static String fileIn = ".\\resources\\test_translation_MIPS";
+    //static String fileIn = ".\\resources\\test_translation_MIPS";
+
+    static String fileIn = ".\\resources\\trad_if";
+    //static String fileIn = ".\\resources\\trad_while";
+    //static String fileIn = ".\\resources\\trad_for";
+
 
     static String fileOut = ".\\resources\\fileOut.txt";
     static String fileMsg = ".\\resources\\fileMsg.txt";
