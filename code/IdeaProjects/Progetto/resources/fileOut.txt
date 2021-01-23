@@ -1,48 +1,104 @@
 A: .word 2
 B: .word 3
 MAIN: 
-   addiu $sp, $sp, -8
-   sw $ra, 4($sp)
-   sw 0, 0($sp)
-   lw $v0, 0($sp)
-   lw $ra, 4($sp)
-   addiu $sp, $sp, 8
-   jr $ra
-FUNC: 
-   addiu $sp, $sp, -8
-   sw $ra, 4($sp)
-   lw $s0, 0x3984 	 #[Var b=null]
+   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
+   sw $ra, 4($sp) 		 #Salva return address
+   sw 0, 0($sp) 		 #Memorizza il valore del return
+   lw $v0, 0($sp) 		 #Salva valore d'uscita
+   lw $ra, 4($sp) 		 #Ripristina return address
+   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
+   jr $ra 				 #Salta al return address
+FUNC1: 
+   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
+   sw $ra, 4($sp) 		 #Salva return address
+   lw $s0, 0x3984 		 #[b=null]
    lw $t1, 3
-   sw $t1, 0x3984 	 #[Var b=3]
+   sw $t1, 0x3984 		 #[b=3]
    IF1:
-      lw $t2, 0x3984 	 #[Var b=3]
+      lw $t2, 0x3984 		 #[b=3]
       lw $t1, 2
       lw $t6, 3
       lw $t7, 2
-      bne $t6, $t7 ELSE1
-      lw $s0, 0x3980 	 #[Var c=null]
+      bne $t6, $t7, ELSE1
+      lw $s0, 0x3980 		 #[e=null]
       lw $t2, 7
-      sw $t2, 0x3980 	 #[Var c=7]
+      sw $t2, 0x3980 		 #[e=7]
       j ENDIF1
    ELSE1:
       IF2:
-         lw $t1, 0x3980 	 #[Var c=7]
+         lw $t1, 0x3984 		 #[b=3]
          lw $t2, 7
-         lw $t6, 7
+         lw $t6, 3
          lw $t7, 7
-         bne $t6, $t7 ELSE2
-         lw $s0, 0x3976 	 #[Var f=null]
+         bne $t6, $t7, ELSE2
+         lw $s0, 0x3976 		 #[f=null]
          lw $t1, 8
-         sw $t1, 0x3976 	 #[Var f=8]
+         sw $t1, 0x3976 		 #[f=8]
          j ENDIF2
       ELSE2:
-         lw $s0, 0x3972 	 #[Var g=null]
+         lw $s0, 0x3972 		 #[g=null]
          lw $t2, 10
-         sw $t2, 0x3972 	 #[Var g=10]
+         sw $t2, 0x3972 		 #[g=10]
       ENDIF2:
    ENDIF1:
-   sw 0, 0($sp)
-   lw $v0, 0($sp)
-   lw $ra, 4($sp)
-   addiu $sp, $sp, 8
-   jr $ra
+   sw 0, 0($sp) 		 #Memorizza il valore del return
+   lw $v0, 0($sp) 		 #Salva valore d'uscita
+   lw $ra, 4($sp) 		 #Ripristina return address
+   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
+   jr $ra 				 #Salta al return address
+FUNC2: 
+   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
+   sw $ra, 4($sp) 		 #Salva return address
+   lw $s0, 0x3964 		 #[b=null]
+   lw $t1, 3
+   sw $t1, 0x3964 		 #[b=3]
+   WHILE1:
+      lw $t2, 0x3964 		 #[b=3]
+      lw $t1, 5
+      lw $t6, 3
+      lw $t7, 5
+      slt $t8, $t6, $t7
+      bne $t8, 1, ENDWHILE1
+      lw $s0, 0x3960 		 #[c=null]
+      lw $t2, 3
+      sw $t2, 0x3960 		 #[c=3]
+   ENDWHILE1:
+   sw 0, 0($sp) 		 #Memorizza il valore del return
+   lw $v0, 0($sp) 		 #Salva valore d'uscita
+   lw $ra, 4($sp) 		 #Ripristina return address
+   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
+   jr $ra 				 #Salta al return address
+FUNC3: 
+   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
+   sw $ra, 4($sp) 		 #Salva return address
+   lw $s0, 0x3952 		 #[b=null]
+   lw $t1, 3
+   sw $t1, 0x3952 		 #[b=3]
+   FOR1:
+      lw $s0, 0x3952 		 #[b=3]
+      lw $t2, 2
+      sw $t2, 0x3952 		 #[b=2]
+      lw $t1, 0x3952 		 #[b=2]
+      lw $t2, 5
+      lw $t6, 2
+      lw $t7, 5
+      slt $t8, $t6, $t7
+      bne $t8, 1, ENDFOR1
+      j ENDINCRFOR1
+      INCRFOR1:
+         lw $s0, 0x3952 		 #[b=2]
+         lw $t1, 5
+         add $t2, $t1, $t2
+         sw $t2, 0x3952 		 #[b=7]
+         j FOR1
+      ENDINCRFOR1:
+      lw $s0, 0x3948 		 #[c=null]
+      lw $t1, 3
+      sw $t1, 0x3948 		 #[c=3]
+      j INCRFOR1
+   ENDFOR1:
+   sw 0, 0($sp) 		 #Memorizza il valore del return
+   lw $v0, 0($sp) 		 #Salva valore d'uscita
+   lw $ra, 4($sp) 		 #Ripristina return address
+   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
+   jr $ra 				 #Salta al return address

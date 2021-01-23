@@ -168,10 +168,10 @@ atom_exp 		[String type] returns [Value value]
 ifStat			: IF LPAREN {env.tra.traIfStart(); env.stat = 1;} bool=condition[env.stat] RPAREN codeblock {env.tra.traElseStart();} (ELSE statement)? {env.tra.traIfEnd();}
 				;
 						
-whileStat		: WHILE LPAREN {env.stat = 2;} bool=condition[env.stat] RPAREN statement
+whileStat		: WHILE LPAREN {env.tra.traWhileStart(); env.stat = 2;} bool=condition[env.stat] RPAREN statement {env.tra.traWhileEnd();}
 				;
 				
-forStat			: FOR LPAREN initialization SEMICOL {env.stat = 3;} bool=condition[env.stat] SEMICOL increment RPAREN statement 
+forStat			: FOR LPAREN {env.tra.traForStart();} initialization SEMICOL {env.stat = 3;} bool=condition[env.stat] SEMICOL {env.tra.traIncrStart();} increment {env.tra.traIncrEnd();} RPAREN statement {env.tra.traForEnd();}
 				;
 
 initialization	: {env.var_type = ValueTypes.UNDEFINED_STR;} (type=type_name {env.var_type = type.getText();})? name=WORD {env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} assignment?

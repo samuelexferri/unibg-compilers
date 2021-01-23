@@ -14,7 +14,6 @@ Una variabile globale può essere dichiarata alla fine: controllo posticipato do
 Symbol Table separata per ogni blocco locale (pensare in maniera ricorsiva) più quella globale.
 Errori è una lista di stringhe da riordinare in ordine crescente in base alle linee.
 
-TODO:
 Mancante: 	cast, do-while, const, bool, a++, !a
 
 Variabili:	Ridefinizione (senza type iniziale) globale in teoria da non permettere (anche vettori, puntatori)
@@ -23,17 +22,12 @@ Puntatori: 	Indirizzo fittizio, Puntatori tra parentesi *(cb + 1)
 Call Function: 	Controllo call_params, possiamo chiamarla con qualsiasi tipo per ora
 Return: 	Almeno un return (controllo blando), Obbligatorio nel main return 0
 
-If, For, While: Per ora non gestiamo le cose in esecuzione, eseguirà l'inizializzazione e l'incremento lo stesso una sola volta..., Parentesi nei compare non fatte
-
-Program Counter vs Stack Pointer
+Statements: 	Per ora non gestiamo le cose in esecuzione, eseguirà l'inizializzazione e l'incremento lo stesso una sola volta..., Parentesi nei compare non fatte
 
 TRADUZIONE:
 Ipotesi tutte .word
 
-Operazioni:	Funziona ma non usa i registri ma le costanti quando si usano parentesi (si crea una nuova expression)
+Operazioni:	Non funzionano le parentesi e alcune catene strane
+Statements:	Operatori logici mancanti, Return negli statements
 
-MARS
 TODO
-
-Commentare lw iniziali e finali
-Traduzione non funziona!

@@ -7,14 +7,12 @@ import java.util.Locale;
 
 public class Translation {
     public StringBuffer translation = null;
-    public int indentation = 0;
-    //public int program_counter = 1000; // Program counter TODO
-    //public int stack_pointer = 4000;
+    public int indentation = 0; // Indentazione
     ParserEnvironment env;
-    Token var_name_assignment = null;
+    Token var_name_assignment = null; // Nome della variabile a sinistra dell'assegnamento
+    int t = 1; // Numero del registro $t usato
 
-    int t = 1;
-
+    // Costruttore
     public Translation(ParserEnvironment env) {
         this.env = env;
         translation = new StringBuffer();
@@ -26,10 +24,9 @@ public class Translation {
             translation.append("   ");
         }
         translation.append(s + "\n");
-        //program_counter += 4; // TODO
     }
 
-    // Cambiare il numero di registro $t
+    // Cambia il numero di registro $t
     public void changeT() {
         if (t == 1)
             t = 2;
@@ -62,60 +59,62 @@ public class Translation {
         return value;
     }
 
-    // Prima dell'assegnamento
+    // ASSEGNAMENTI
+    // Assegnamento (Prima)
     public void traAssignmentBefore() {
         if (!env.is_local) { // Variabile globale
             // Nothing
         } else { // Variabile locale
-            emit("lw $s0, 0x" + getValue(env.var_name).address + " \t #[Var " + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
+            emit("lw $s0, 0x" + getValue(env.var_name).address + " \t\t #[" + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
         }
 
         var_name_assignment = env.var_name;
     }
 
-    // Dopo l'assegnamento
+    // Assegnamento (Dopo)
     public void traAssignmentAfter(Value exp) {
-        // Nel caso di variabile globale assegnata (ricordo che si può fare una sola volta), fare .word
-        if (!env.is_local) { // Variabile globale
+        if (!env.is_local) { // Variabile globale, nel caso di variabile globale assegnata (ricordo che si può fare una sola volta), fare .word
             emit(env.var_name.getText().toUpperCase(Locale.ROOT) + ": .word " + exp.value);
         } else { // Variabile locale
             changeT();
-            emit("sw $t" + t + ", 0x" + getValue(var_name_assignment).address + " \t #[Var " + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
+            emit("sw $t" + t + ", 0x" + getValue(var_name_assignment).address + " \t\t #[" + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
             changeT();
         }
     }
 
+    // FUNZIONI
     // Aggiunta di una nuova funzione
     public void traAddNewFunction() {
         indentation = 0;
         emit(env.var_name.getText().toUpperCase(Locale.ROOT) + ": ");
         indentation++;
-        emit("addiu $sp, $sp, -8");
-        emit("sw $ra, 4($sp)");
+        emit("addiu $sp, $sp, -8" + " \t #Crea area nello stack pointer");
+        emit("sw $ra, 4($sp)" + " \t\t #Salva return address");
     }
 
-    // Return di funzione
+    // Return di una funzione
     public void traReturn(Value val) {
         if (val != null)
-            emit("sw " + val.value + ", 0($sp)"); // TODO Non numerico costante
+            emit("sw " + val.value + ", 0($sp)" + " \t\t #Memorizza il valore del return");
         else
-            emit("sw 0, 0($sp)");
+            emit("sw 0, 0($sp)" + " \t\t #Memorizza il valore del return");
 
-        emit("lw $v0, 0($sp)");
-        emit("lw $ra, 4($sp)");
-        emit("addiu $sp, $sp, 8");
-        emit("jr $ra");
+        emit("lw $v0, 0($sp)" + " \t\t #Salva valore d'uscita");
+        emit("lw $ra, 4($sp)" + " \t\t #Ripristina return address");
+        emit("addiu $sp, $sp, 8" + " \t #Elimina area nello stack pointer");
+        emit("jr $ra" + " \t\t\t\t #Salta al return address");
     }
 
-    // Return di funzione void
+    // Return di una funzione void
     public void traReturnVoid() {
-        emit("sw 0, 0($sp)");
-        emit("lw $v0, 0($sp)");
-        emit("lw $ra, 4($sp)");
-        emit("addiu $sp, $sp, 8");
-        emit("jr $ra");
+        emit("sw 0, 0($sp)" + " \t\t #Memorizza il valore del return");
+        emit("lw $v0, 0($sp)" + " \t\t #Salva valore d'uscita");
+        emit("lw $ra, 4($sp)" + " \t\t #Ripristina return address");
+        emit("addiu $sp, $sp, 8" + " \t #Elimina area nello stack pointer");
+        emit("jr $ra" + " \t\t\t\t #Salta al return address");
     }
 
+    // OPERAZIONI
     public void traDoAdd(Token op, Value v1, Value v2) {
         emit("add $t" + t + ", $t1, $t2");
         changeT();
@@ -142,6 +141,7 @@ public class Translation {
         changeT();
     }
 
+    // VALUES
     // Costante
     public void traSetValueConst(Value value, Boolean bool) {
         if (value == null)
@@ -162,11 +162,12 @@ public class Translation {
         Value value = getValue(name);
 
         if (env.is_local) {
-            emit("lw $t" + t + ", 0x" + value.address + " \t #[Var " + value.name + "=" + value.value + "]");
+            emit("lw $t" + t + ", 0x" + value.address + " \t\t #[" + value.name + "=" + value.value + "]");
             changeT();
         }
     }
 
+    // STATEMENTS
     // Compare
     public void traCompare(Value exp1, Value exp2, Token comp, Integer stat) {
         emit("lw $t6, " + exp1.value);
@@ -174,37 +175,37 @@ public class Translation {
 
         String label;
         if (env.stat == 1) { // If
-            label = "ELSE" + (indentation-1);
+            label = "ELSE" + (indentation - 1);
         } else if (env.stat == 2) { // While
-            label = "ENDWHILE" + (indentation-1);
+            label = "ENDWHILE" + (indentation - 1);
         } else { // For
-            label = "ENDFOR" + (indentation-1);
+            label = "ENDFOR" + (indentation - 1);
         }
 
         // TODO Operatori logici
 
-        switch(comp.getText()) {
+        switch (comp.getText()) {
             case "==":
-                emit("bne $t6, $t7 " + label);
+                emit("bne $t6, $t7, " + label);
                 break;
             case "!=":
-                emit("beq $t6, $t7 " + label);
+                emit("beq $t6, $t7, " + label);
                 break;
             case "<":
                 emit("slt $t8, $t6, $t7");
-                emit("bne $t8, 1" + label);
+                emit("bne $t8, 1, " + label);
                 break;
             case ">":
                 emit("slt $t8, $t7, $t6"); // Registri invertiti
-                emit("bne $t8, 1" + label);
+                emit("bne $t8, 1, " + label);
                 break;
             case "<=":
                 emit("slt $t8, $t7, $t6");  // Registri invertiti
-                emit("beq $t8, 1" + label);
+                emit("beq $t8, 1, " + label);
                 break;
             case ">=":
                 emit("slt $t8, $t6, $t7 ");
-                emit("beq $t8, 1" + label);
+                emit("beq $t8, 1, " + label);
                 break;
         }
     }
@@ -220,9 +221,42 @@ public class Translation {
     }
 
     public void traElseStart() {
-        emit("j ENDIF" + (indentation-1));
+        emit("j ENDIF" + (indentation - 1));
         indentation--;
         emit("ELSE" + indentation + ":");
         indentation++;
+    }
+
+    public void traWhileStart() {
+        emit("WHILE" + indentation + ":");
+        indentation++;
+    }
+
+    public void traWhileEnd() {
+        indentation--;
+        emit("ENDWHILE" + indentation + ":");
+    }
+
+    public void traForStart() {
+        emit("FOR" + indentation + ":");
+        indentation++;
+    }
+
+    public void traForEnd() {
+        emit("j INCRFOR" + (indentation - 1));
+        indentation--;
+        emit("ENDFOR" + indentation + ":");
+    }
+
+    public void traIncrStart() {
+        emit("j ENDINCRFOR" + (indentation - 1));
+        emit("INCRFOR" + (indentation - 1) + ":");
+        indentation++;
+    }
+
+    public void traIncrEnd() {
+        emit("j FOR" + (indentation - 2));
+        indentation--;
+        emit("ENDINCRFOR" + (indentation - 1) + ":");
     }
 }

@@ -25,18 +25,30 @@ int main() {
     return 0;
 }
 
-void func() {
+void func1() {
     int b = 3;
 
     if (b == 2) {
-       int c = 7;
-      /*   if (c != 3) {
-            int d = 9;
-        }
-        int e = 5;*/
-    } else if (c == 7) {
+       int e = 7;
+    } else if (b == 7) {
         int f = 8;
     } else {
         int g = 10;
+    }
+}
+
+void func2() {
+    int b = 3;
+
+    while (b < 5) {
+        int c = 3;
+    }
+}
+
+void func3() {
+    int b = 3;
+
+    for (b = 2;b < 5; b += 5) {
+        int c = 3;
     }
 }

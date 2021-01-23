@@ -12,6 +12,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class ParserEnvironment {
+    // Errori
     public final int ERR_ON_SYNTAX = 1;
     public final int ERR_ALREADY_DECLARED = 10;
     public final int ERR_FUNC_ALREADY_DECLARED = 101;
@@ -29,29 +30,36 @@ public class ParserEnvironment {
     public final int ERR_UNDEFINED_OP = 15;
     public final int ERR_TYPE_MISMATCH = 16;
 
+    // Symbol Tables
     public Hashtable<String, Value> symbolTable = null;
     public Hashtable<String, Value> symbolTableLocal = null;
+
+    // Errori e Debug
     public ArrayList<String> errorList = null;
     public StringBuffer debug = null;
 
-    public Token var_name; // Nome della variabile
-    public String var_type; // Tipo della variabile
-    public Token funct_name; // Nome della funzione
-    public String funct_type; // Nome della funzione
+    // Utils
+    public Token var_name; // Nome dell'ultima variabile trovata in ANTLR
+    public String var_type; // Tipo dell'ultima variabile trovata in ANTLR
+    public Token funct_name; // Nome dell'ultima funzione trovata in ANTLR
+    public String funct_type; // Tipo dell'ultima funzione trovata in ANTLR
     public Boolean is_local; // Indica se siamo all'interno di una funzione
     public ArrayList<Value> vect; // Vettore temporaneo
     public String vect_size; // Dimensione del vettore specificata tra parentesi quadre
     public String vect_pos; // Posizione del vettore specificata tra parentesi quadre
-    public Boolean is_amp_punct;
+    public Boolean is_amp_punct; // Indica se è un puntatore (address)
+    // Traduzione
+    public Translation tra;
+    // Utils per la traduzione
     public Boolean bmulordiv = false;
     public Boolean baddorsub = false;
     public Boolean bmulordiv1 = false;
     public Boolean bmulordiv2 = false;
-    public int stat = 0;
-    public Translation tra;
-    ArrayList<String> excluded_functions;
+    public int stat = 0; // Indica il tipo di statement trovato: 1-If, 2-While, 3-For
+    ArrayList<String> excluded_functions; // Funzioni escluse dal parsing (es. printf())
     FileWriter fOut;
 
+    // Costruttore
     public ParserEnvironment(FileWriter fOutMain) {
         symbolTable = new Hashtable<String, Value>(101); // 101 numero primo
         symbolTableLocal = new Hashtable<String, Value>(101); // 101 numero primo
@@ -138,13 +146,13 @@ public class ParserEnvironment {
         }
     }
 
-    // Controlla se una var è in symbol table globale
+    // Controlla se una variabile è in symbol table globale
     public void checkDeclarationGlobal(Token var) {
         if (!isDeclaredGlobal(var))
             addErrorMessage(var, ERR_UNDECLARED);
     }
 
-    // Verifica se una var è in symbol table globale (true)
+    // Verifica se una variabile è in symbol table globale
     public boolean isDeclaredGlobal(Token var) {
         if (var == null)
             return false;
@@ -152,13 +160,13 @@ public class ParserEnvironment {
         return symbolTable.containsKey(var.getText());
     }
 
-    // Controlla se una var è in symbol table globale o locale
+    // Controlla se una variabile è in symbol table globale o locale
     public void checkDeclarationLocal(Token var) {
         if (!isDeclaredLocal(var) && !isDeclaredGlobal(var))
             addErrorMessage(var, ERR_UNDECLARED);
     }
 
-    // Verifica se una var è in symbol table (true)
+    // Verifica se una variabile è in symbol table
     public boolean isDeclaredLocal(Token var) {
         if (var == null)
             return false;
@@ -258,7 +266,7 @@ public class ParserEnvironment {
         }
     }
 
-    // Assegna un valore ad un vettore (dichiarata)
+    // Assegna un valore ad un vettore (dichiarato)
     public void assignVectorValue(Token var_name, String vect_size, Value exp) {
         if (!is_local) { // Globale
             if (!isDeclaredGlobal(var_name))
@@ -299,9 +307,6 @@ public class ParserEnvironment {
 
         if (type.equals(ValueTypes.STRING_STR))
             value = value.substring(1, value.lastIndexOf("\""));
-
-        // TODO Rimuovere
-        //tra.traSetValueConst(new Value(type, value, false)); // Non è una variabile ma una costante (false)
 
         return new Value(type, value, false);
     }
@@ -381,7 +386,7 @@ public class ParserEnvironment {
         return value;
     }
 
-    // Recupera il valore di una variabile dichiarata
+    // Recupera il valore di un vettore dichiarato
     public Value getVectorValue(Token var, String expectedType, String position) {
         Value value = null;
 
@@ -465,7 +470,7 @@ public class ParserEnvironment {
             addErrorMessage(var, ERR_FUNC_UNDECLARED);
     }
 
-    // Verifica se una funzione è in symbol table (true)
+    // Verifica se una funzione è in symbol table globale
     public boolean isDeclaredFunction(Token var) {
         if (var == null)
             return false;
@@ -505,7 +510,7 @@ public class ParserEnvironment {
     }
 
     // VETTORI
-    // Creare il vettore di sostegno, controllo di tipi già fatto con env.var_type
+    // Creare un vettore di sostegno, controllo di tipi già fatto con env.var_type
     public void createVector(Value val) {
         vect.clear();
         vect.add(val);
@@ -562,6 +567,7 @@ public class ParserEnvironment {
         if (op == null || v1 == null || v2 == null)
             return null;
 
+        // Traduzione
         tra.traDoAdd(op, v1, v2);
 
         String value = "";
@@ -596,6 +602,7 @@ public class ParserEnvironment {
         if (op == null || v1 == null || v2 == null)
             return null;
 
+        // Traduzione
         tra.traDoSub(op, v1, v2);
 
         String value;
@@ -623,10 +630,11 @@ public class ParserEnvironment {
         if (op == null || v1 == null || v2 == null)
             return null;
 
+        // Traduzione
+        tra.traDoMul(op, v1, v2);
+
         String value;
         String type = ValueTypes.returnType("*", v1.type, v2.type);
-
-        tra.traDoMul(op, v1, v2);
 
         if (type.equals(ValueTypes.UNDEFINED_STR) || type.equals(ValueTypes.CHAR_STR) || type.equals(ValueTypes.STRING_STR) || type.equals(ValueTypes.ANYVALUE_STR)) {
             addErrorMessage(op, ERR_UNDEFINED_OP);
@@ -650,6 +658,7 @@ public class ParserEnvironment {
         if (op == null || v1 == null || v2 == null)
             return null;
 
+        // Traduzione
         tra.traDoDiv(op, v1, v2);
 
         String value;
@@ -679,7 +688,7 @@ public class ParserEnvironment {
     // Valuta le condizioni date le due espressioni e il comparatore
     public Boolean compareEvaluator(Token comp, Value exp1, Value exp2) {
         if (comp == null || exp1 == null || exp2 == null) {
-            // TODO Compare errors
+            // TODO Compare (Errors)
         }
         // TODO Compare
         return false;
@@ -688,7 +697,7 @@ public class ParserEnvironment {
     // Valuta le condizioni in serie
     public Boolean compareEvaluatorSeries(Boolean b1, Token op, Boolean b2) {
         if (op == null) {
-            // TODO Compare errors
+            // TODO Compare (Errors)
         }
         // TODO Compare
         return false;
