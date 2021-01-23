@@ -22,7 +22,7 @@ Puntatori: 	Indirizzo fittizio, Puntatori tra parentesi *(cb + 1)
 Call Function: 	Controllo call_params, possiamo chiamarla con qualsiasi tipo per ora
 Return: 	Almeno un return (controllo blando), Obbligatorio nel main return 0
 
-Statements: 	Per ora non gestiamo le cose in esecuzione, eseguirà l'inizializzazione e l'incremento lo stesso una sola volta..., Parentesi nei compare non fatte
+Statements: 	Per ora non gestiamo le cose in esecuzione, eseguirà l'inizializzazione e l'incremento lo stesso una sola volta...
 
 TRADUZIONE:
 Ipotesi tutte .word
@@ -30,4 +30,8 @@ Ipotesi tutte .word
 Operazioni:	Non funzionano le parentesi e alcune catene strane
 Statements:	Operatori logici mancanti, Return negli statements
 
-TODO
+TODO:
+    //a = 1 - 2 * 4 -  3 * 4 - 2;
+    //a = 1 - 2 / 4 - 3/5;
+
+Aggiornare C MIPS e debug

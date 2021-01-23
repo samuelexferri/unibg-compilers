@@ -10,7 +10,7 @@
 int a;
 float b = 2.2;
 char c;
-//int a = 1;
+//int a = 1; // Errore catturato
 int d = 1, e, f = 2;
 a;
 a = 2;
@@ -19,43 +19,36 @@ g = (5+b)*4;
 //a = 1, b = 3;
 
 int vettore1[] = {2, 3};
-//int vettore2[5] = {5, 6}; // TODO Errore semantico non gestito: richiede 5 elementi e ne si assegnano 2
 char vettore3[];
-//char vettore4[] = {c, 5.4 , 3*b, 4};
-//vettore5[5] = {2};
 
 int *p1;
 int *p2 = &a;
 *p1 = &a;
 *p1 = 5;
 
-//vettore5[] = {5,6};
-//*vettore5 = 5;
+vettore5[] = {5,6};
+*vettore5 = 5;
 
 char ca = 'a';
 char *cb = &ca;
-//*(cb + 1) = 3; // TODO Puntatori tra parentesi
+*(cb + 1) = 3;
 
 char special1 = '\n';
 char special2 = '\0';
-
-//a++; // TODO Non fatto
 
 int sqrt(int a) {
     return 1;
 }
 
-int radice = sqrt(a)+2;
-
 void func_void();
 
-int funzione();
-
 int main (int j, char k) {
+    int radice = sqrt(a)+2;
+
     int a;
     float b = 2.2;
     char c;
-    //int a = 1;
+    //int a = 1; // Errore catturato
     int d = 1, e, f = 2;
     a;
     a = 2;
@@ -64,38 +57,33 @@ int main (int j, char k) {
     //a = 1, b = 3;
 
     int vettore1[] = {2, 3};
-    //int vettore2[5] = {5, 6}; // TODO Errore semantico non gestito: richiede 5 elementi e ne si assegnano 2
     char vettore3[];
-    //char vettore4[] = {c, 5.4 , 3*b, 4};
-    //vettore5[5] = {2};
 
     int *p1;
     int *p2 = &a;
     *p1 = &a;
-    *p2 = 5;
+    *p1 = 5;
 
-    //vettore5[] = {5,6};
-    //*vettore5 = 5;
+    vettore5[] = {5,6};
+    *vettore5 = 5;
 
     char ca = 'a';
     char *cb = &ca;
-    //*(cb + 1) = 3; // TODO Puntatori tra parentesi
+    *(cb + 1) = 3;
 
     char special1 = '\n';
     char special2 = '\0';
 
-    //a++; // TODO Non fatto
+    func_void(t);
+    func_void();
 
-    funzione(t);
-    funzione();
-
-    //void pippo();
-    //int pippo();
+    //void notexist(); // Errore catturato
+    //int notexist(); // Errore catturato
 
     return p1;
-    return *p1;
-    return &p1;
-    return funzione();
+    //return *p1;
+    //return &p1;
+    //return funzione();
 }
 
 int statements(int t) {
@@ -111,12 +99,12 @@ int statements(int t) {
 		}
 
         if (a == 5) {
-                     a;
-         } else if (a == 5) {
-             b;
-         } else while (a > 0) {
-             c;
-         }
+            a;
+        } else if (a == 5) {
+            b;
+        } else while (a > 0) {
+            c;
+        }
 
 		while(a > 0) {
         	a = a - 1;
@@ -128,5 +116,3 @@ int statements(int t) {
 
         printf("a", "b=2", a, "Text for + * #", *b);
 }
-
-int pippo; // Variabili globali come le funzioni devono essere all'inizio, ma non è un'errore (sequenziale)

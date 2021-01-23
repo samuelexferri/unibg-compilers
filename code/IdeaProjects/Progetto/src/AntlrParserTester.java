@@ -9,29 +9,22 @@ import java.util.Enumeration;
 public class AntlrParserTester {
     static C_MIPS_semanticParser parser;
 
-    // TODO
-    //static String fileIn = ".\\resources\\arithmetic_ops_C";
-    //static String fileIn = ".\\resources\\array_ops_C";
-    //static String fileIn = ".\\resources\\conditional_ops_C";
-    //static String fileIn = ".\\resources\\factorial_C"; // NO
-    //static String fileIn = ".\\resources\\fibonacci_C"; // NO
-    //static String fileIn = ".\\resources\\function_ops_C";
-    //static String fileIn = ".\\resources\\pointer_type_C"; // MAI (Puntatori strani
-    //static String fileIn = ".\\resources\\regular_type_C"; // NO (Cast)
-    // static String fileIn = ".\\resources\\towers_of_hanoi_C"; // NO (Call args)
+    // SELEZIONARE UN FILE DI TEST
 
-    //static String fileIn = ".\\resources\\test_C";
-    //static String fileIn = ".\\resources\\test_semantic_C";
-    //static String fileIn = ".\\resources\\test_translation_MIPS";
+    // File di test
+    //static String fileIn = ".\\resources\\test_C_1"; // Non usarle per la traduzione semplificata!
+    //static String fileIn = ".\\resources\\test_C_2"; // Non usarle per la traduzione semplificata!
 
-    static String fileIn = ".\\resources\\trad_if";
+    // File di test (Traduzione)
+    //static String fileIn = ".\\resources\\trad_operations";
+    //static String fileIn = ".\\resources\\trad_if";
     //static String fileIn = ".\\resources\\trad_while";
     //static String fileIn = ".\\resources\\trad_for";
+    static String fileIn = ".\\resources\\trad_funct";
 
-
-    static String fileOut = ".\\resources\\fileOut.txt";
-    static String fileMsg = ".\\resources\\fileMsg.txt";
-    static String fileErr = ".\\resources\\fileErr.txt";
+    static String fileTraduzione = ".\\resources\\FILE_TRADUZIONE.txt";
+    static String fileDebug = ".\\resources\\FILE_DEBUG.txt";
+    static String fileErrori = ".\\resources\\FILE_ERRORI.txt";
 
     public static void main(String[] args) throws IOException {
         CommonTokenStream tokens;
@@ -43,7 +36,7 @@ public class AntlrParserTester {
             tokens = new CommonTokenStream(lexer);
             parser = new C_MIPS_semanticParser(tokens);
 
-            fOut = new FileWriter(fileMsg); // Symbol Table
+            fOut = new FileWriter(fileDebug); // Symbol Table
 
             parser.init(fOut);
             parser.start();
@@ -58,18 +51,18 @@ public class AntlrParserTester {
 
                 System.out.println("-------------------------\n" + "*****\tTraduzione\t*****\n" + "-------------------------");
                 System.out.println(parser.getTranslation());
-                fOut = new FileWriter(fileOut);
+                fOut = new FileWriter(fileTraduzione);
                 fOut.append(parser.getTranslation());
                 fOut.close();
 
-                fOut = new FileWriter(fileErr);
+                fOut = new FileWriter(fileErrori);
                 fOut.append("Nessun errore!");
                 fOut.close();
             } else {
                 System.out.println("\n*********************************************\n" + "*****\tParsing completato con " + parser.getErrors().size() + " errori\t*****" + "\n*********************************************");
 
                 System.out.println("\n-----------------------------\n" + "*****\tErrori: #\t" + parser.getErrors().size() + "\t*****\n" + "-----------------------------\n");
-                fOut = new FileWriter(fileErr);
+                fOut = new FileWriter(fileErrori);
                 fOut.append("\n-----------------------------\n" + "*****\tErrori: #\t" + parser.getErrors().size() + "\t*****\n" + "-----------------------------\n");
                 for (int i = 0; i < parser.getErrors().size(); i++) {
                     fOut.append((i + 1) + ":" + parser.getErrors().get(i) + "\n");

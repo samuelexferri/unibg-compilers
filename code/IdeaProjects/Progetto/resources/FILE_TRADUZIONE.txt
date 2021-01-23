@@ -1,0 +1,61 @@
+A: .word 2
+B: .word 3
+FUNCT1: 
+   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
+   sw $ra, 4($sp) 		 #Salva return address
+   lw $t1, 3
+   sw $t1, 0x3988 		 #[d=3]
+   IF1:
+      lw $t2, 0x3988 		 #[d=3]
+      lw $t1, 2
+      bne $t1, $t2, ELSE1
+      lw $t2, 3
+      sw $t2, 0x4000 		 #[a=3]
+      j ENDIF1
+   ELSE1:
+      lw $t1, 4
+      sw $t1, 0x4000 		 #[a=4]
+   ENDIF1:
+   sw 0, 0($sp) 		 #Memorizza il valore del return
+   lw $v0, 0($sp) 		 #Salva valore d'uscita
+   lw $ra, 4($sp) 		 #Ripristina return address
+   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
+   jr $ra 				 #Salta al return address
+FUNCT2: 
+   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
+   sw $ra, 4($sp) 		 #Salva return address
+   lw $t2, 3
+   sw $t2, 0x3980 		 #[e=3]
+   WHILE1:
+      lw $t1, 0x3980 		 #[e=3]
+      lw $t2, 5
+      slt $t8, $t1, $t2
+      bne $t8, 1, ENDWHILE1
+      lw $t1, 0x3980 		 #[e=3]
+      lw $t2, 2
+      add $t1, $t1, $t2
+      sw $t1, 0x3980 		 #[e=5]
+      j WHILE1
+   ENDWHILE1:
+   sw 0, 0($sp) 		 #Memorizza il valore del return
+   lw $v0, 0($sp) 		 #Salva valore d'uscita
+   lw $ra, 4($sp) 		 #Ripristina return address
+   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
+   jr $ra 				 #Salta al return address
+MAIN: 
+   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
+   sw $ra, 4($sp) 		 #Salva return address
+   lw $t2, 4
+   sw $t2, 0x3972 		 #[c=4]
+   lw $t1, 5
+   sw $t1, 0x4000 		 #[a=5]
+   addiu $sp, $sp, -4 	 #Crea area nello stack pointer (per la chiamata di funzione)
+   sw $ra, 0($sp) 		 #Salva return address (per la chiamata di funzione)
+   j FUNCT1 			 #Chiamata di funzione
+   lw $ra, 0($sp) 		 #Ripristina return address (dopo la chiamata di funzione)
+   addiu $sp, $sp, 4 	 #Elimina area nello stack pointer (dopo la chiamata di funzione)
+   sw 0, 0($sp) 		 #Memorizza il valore del return
+   lw $v0, 0($sp) 		 #Salva valore d'uscita
+   lw $ra, 4($sp) 		 #Ripristina return address
+   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
+   jr $ra 				 #Salta al return address

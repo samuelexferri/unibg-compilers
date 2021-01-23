@@ -67,7 +67,7 @@ public class Translation {
         } else if (eq.getText().matches("=")) { // Variabile locale
             // Nothing
         } else {
-            emit("lw $t" + t + ", 0x" + getValue(env.var_name).address + " \t\t #[" + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "] Opz se non +=,-=...");
+            emit("lw $t" + t + ", 0x" + getValue(env.var_name).address + " \t\t #[" + getValue(env.var_name).name + "=" + getValue(env.var_name).value + "]");
             changeT();
         }
 
@@ -115,6 +115,20 @@ public class Translation {
         emit("lw $ra, 4($sp)" + " \t\t #Ripristina return address");
         emit("addiu $sp, $sp, 8" + " \t #Elimina area nello stack pointer");
         emit("jr $ra" + " \t\t\t\t #Salta al return address");
+    }
+
+    // Inizio della chiamata di funzione
+    public void traCallFunctStart() {
+        emit("addiu $sp, $sp, -4" + " \t #Crea area nello stack pointer (per la chiamata di funzione)");
+        emit("sw $ra, 0($sp)" + " \t\t #Salva return address (per la chiamata di funzione)");
+        emit("j " + env.var_name.getText().toUpperCase(Locale.ROOT) + " \t\t\t #Chiamata di funzione");
+    }
+
+    // Fine della chiamata di funzione
+    public void traCallFunctEnd() {
+        // Nothing
+        emit("lw $ra, 0($sp)" + " \t\t #Ripristina return address (dopo la chiamata di funzione)");
+        emit("addiu $sp, $sp, 4" + " \t #Elimina area nello stack pointer (dopo la chiamata di funzione)");
     }
 
     // OPERAZIONI
@@ -173,10 +187,8 @@ public class Translation {
     // STATEMENTS
     // Compare
     public void traCompare(Value exp1, Value exp2, Token comp, Integer stat) {
-        emit("lw $t6, " + exp1.value);
-        emit("lw $t7, " + exp2.value);
-
         String label;
+
         if (env.stat == 1) { // If
             label = "ELSE" + (indentation - 1);
         } else if (env.stat == 2) { // While
@@ -189,25 +201,25 @@ public class Translation {
 
         switch (comp.getText()) {
             case "==":
-                emit("bne $t6, $t7, " + label);
+                emit("bne $t1, $t2, " + label);
                 break;
             case "!=":
-                emit("beq $t6, $t7, " + label);
+                emit("beq $t1, $t2, " + label);
                 break;
             case "<":
-                emit("slt $t8, $t6, $t7");
+                emit("slt $t8, $t1, $t2");
                 emit("bne $t8, 1, " + label);
                 break;
             case ">":
-                emit("slt $t8, $t7, $t6"); // Registri invertiti
+                emit("slt $t8, $t2, $t1"); // Registri invertiti
                 emit("bne $t8, 1, " + label);
                 break;
             case "<=":
-                emit("slt $t8, $t7, $t6");  // Registri invertiti
+                emit("slt $t8, $t2, $t1");  // Registri invertiti
                 emit("beq $t8, 1, " + label);
                 break;
             case ">=":
-                emit("slt $t8, $t6, $t7 ");
+                emit("slt $t8, $t1, $t2");
                 emit("beq $t8, 1, " + label);
                 break;
         }
@@ -236,7 +248,7 @@ public class Translation {
     }
 
     public void traWhileEnd() {
-        emit("j WHILE" +  (indentation - 1));
+        emit("j WHILE" + (indentation - 1));
         indentation--;
         emit("ENDWHILE" + indentation + ":");
     }

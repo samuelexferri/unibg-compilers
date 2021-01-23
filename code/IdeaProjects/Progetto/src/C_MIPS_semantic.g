@@ -127,7 +127,7 @@ statement 		: local
 local			: {env.var_type = ValueTypes.UNDEFINED_STR; env.is_local = true;} (type=type_name {env.var_type = type.getText();})? (pointer
 													     		 												  					 | name=WORD ({env.var_name = $name; env.addNewVariable(env.var_type, $name, false);} ass_multiple
 																									     		 		 	  					 | {env.var_name = $name;} vector 
-																														      					 | {env.var_name = $name; env.checkCallFunction(env.var_type, $name);} call_function)) SEMICOL
+																														      					 | {env.var_name = $name; env.checkCallFunction(env.var_type, $name); env.tra.traCallFunctStart();} call_function {env.tra.traCallFunctEnd();})) SEMICOL
 				;
 
 returnStat		: tk=RETURN {env.var_type = "void";} (value=atom_exp[env.funct_type] {env.var_type = value.type;})? {env.checkFunctionReturnType(tk, value, env.var_type, env.funct_type); env.tra.traReturn(value);} SEMICOL 
@@ -162,7 +162,7 @@ atom_exp 		[String type] returns [Value value]
 					   		| {value = env.getDeclaredValue($name, type); env.tra.traSetValueVar(name); env.bmulordiv = true;}) // Variabile o Vettore
 				| MULT name=WORD {value = env.getDeclaredValue($name, type);} // Puntatore
 				| AMP {env.is_amp_punct = true;} name=WORD {value = env.getDeclaredValue($name, type);} // Indirizzo (da estrarre)
-    			| LPAREN v=expression[type] {{ value = v;}} RPAREN // Parentesi
+    			| LPAREN v=expression[type] {value = v; env.bmulordiv = true;} RPAREN // Parentesi
     			;
     			
 ifStat			: IF LPAREN {env.tra.traIfStart(); env.stat = 1;} bool=condition[env.stat] RPAREN codeblock {env.tra.traElseStart();} (ELSE statement)? {env.tra.traIfEnd();}
