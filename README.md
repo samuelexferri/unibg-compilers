@@ -6,7 +6,7 @@
 
 Formal Languages and Compilers project
 
-Creation of a compiler (lexicon, syntax, semantics) for C using ANTLR which also performs *simplified* translation in Assembler MIPS
+Creation of a *simplified* compiler for C (lexicon, syntax, semantics) using ANTLR which also performs *simplified* translation in Assembler MIPS
 
 ![ANTLR](https://www.antlr.org/)
 
