@@ -7,7 +7,7 @@ C_MIPS_debug (Sintassi ma deprecata)
 C_MIPS_semantic (Semantica)
 
 SINTASSI:
-Prospezione LL(1) k=1
+Prospezione LL(1) k=1!
 
 SEMANTICA:
 Una variabile globale può essere dichiarata alla fine: controllo posticipato dopo, salvare una struttura per i controlli successivi da fare a fine parsing; tuttavia il C non permette ciò.
