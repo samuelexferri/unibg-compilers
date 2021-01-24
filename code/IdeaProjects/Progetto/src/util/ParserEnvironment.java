@@ -717,7 +717,7 @@ public class ParserEnvironment {
         else if (code == ERR_FUNC_UNDECLARED)
             msg += "La funzione <" + tk.getText() + "> non è stata dichiarata";
         else if (code == ERR_TYPE_CALL_FUNCT)
-            msg += "La chiamta di funzione <" + tk.getText() + "> non deve avere il type";
+            msg += "La chiamata di funzione <" + tk.getText() + "> non deve avere il type";
         else if (code == ERR_TYPE_FUNCT_RETURN)
             msg += "Il tipo ritornato non ha lo stesso type del tipo di funzione atteso";
         else if (code == ERR_TYPE_CALL_FUNCT_RETURN)
