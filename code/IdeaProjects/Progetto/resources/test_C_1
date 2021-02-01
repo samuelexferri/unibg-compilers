@@ -10,7 +10,7 @@
 int a;
 float b = 2.2;
 char c;
-//int a = 1; // Errore catturato
+int a = 1 // Errore catturato
 int d = 1, e, f = 2;
 a;
 a = 2;
