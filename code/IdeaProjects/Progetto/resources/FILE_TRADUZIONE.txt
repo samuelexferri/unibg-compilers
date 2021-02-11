@@ -1,18 +1,31 @@
 A: .word 2
-B: .word 35
+B: .word 3
 MAIN: 
    addiu $sp, $sp, -8 	 #Crea area nello stack pointer
    sw $ra, 4($sp) 		 #Salva return address
    lw $t1, 4
    sw $t1, 0x3988 		 #[c=4]
-   lw $t2, 2
-   lw $t1, 3
-   add $t2, $t1, $t2
-   lw $t1, 4
-   mul $t2, $t1, $t2
-   lw $t1, 5
-   add $t2, $t1, $t2
-   sw $t2, 0x4000 		 #[a=25]
+   FOR1:
+      lw $t2, 2
+      sw $t2, 0x3996 		 #[b=2]
+      lw $t1, 0x3996 		 #[b=2]
+      lw $t2, 5
+      slt $t8, $t1, $t2
+      bne $t8, 1, ENDFOR1
+      j ENDINCRFOR1
+      INCRFOR1:
+         lw $t1, 0x3996 		 #[b=2]
+         lw $t2, 2
+         add $t1, $t1, $t2
+         sw $t1, 0x3996 		 #[b=4]
+         j FOR1
+      ENDINCRFOR1:
+      lw $t2, 0x3988 		 #[c=4]
+      lw $t1, 4
+      add $t2, $t1, $t2
+      sw $t2, 0x3988 		 #[c=8]
+      j INCRFOR1
+   ENDFOR1:
    sw 0, 0($sp) 		 #Memorizza il valore del return
    lw $v0, 0($sp) 		 #Salva valore d'uscita
    lw $ra, 4($sp) 		 #Ripristina return address

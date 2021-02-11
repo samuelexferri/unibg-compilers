@@ -727,7 +727,7 @@ public class ParserEnvironment {
         else if (code == ERR_MAIN_NOT_FOUND)
             msg += "La funzione int main() è richiesta ma non è stata trovata";
         else if (code == ERR_MAIN_TYPE_NOT_INT)
-            msg += "La funzione int main() è richiesta ma non è stata trovata";
+            msg += "Il tipo della funzione main() deve essere int";
         else if (code == ERR_TYPE_MISMATCH)
             msg += "Valore di tipo non compatibile (null)";
         else if (code == ERR_UNDEFINED_OP)

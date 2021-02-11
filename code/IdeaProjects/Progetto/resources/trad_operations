@@ -6,6 +6,7 @@ int b = 35;
 
 int main() {
     int c = 4;
+    int d = 4;
 
     //a = 2 + 3 + 4 + 5 + 6 + 7;
     //b = 2 - 3 - 4 - 5 - 6 - 7;
@@ -14,11 +15,12 @@ int main() {
 
     //a = 2 + 3 * 4 + 5;
     //a = 1 * 2 - 4 ;
-    //a = + 3 * 4 * 5; // Esempio di errore catturato
+    //a = + 3 * 4 * 5; // Esempio di errore catturato (Manca un operando)
 
     a = (2+3)*4+5;
 
     //a = a / 5 + 3 ;
+
     //b = (a + b) * c;
 
     return 0;
