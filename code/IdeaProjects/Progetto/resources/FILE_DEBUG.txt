@@ -1,54 +1,12 @@
 
 -----------------------------------------
-*****	Local Symbol Table: sqrt	*****
------------------------------------------
-1:	a=Value{name='a', type='int', value='null', address='3112', isVar=true, isVarPassed=true, isVect=false, vect=[]}
-
------------------------------------------
 *****	Local Symbol Table: main	*****
 -----------------------------------------
-1:	d=Value{name='d', type='int', value='1', address='3076', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-2:	c=Value{name='c', type='char', value='null', address='3080', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-3:	b=Value{name='b', type='float', value='2.2', address='3084', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-4:	a=Value{name='a', type='int', value='2', address='3088', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-5:	p2=Value{name='p2', type='int', value='3088', address='2636', isVar=true, isVarPassed=false, isVect=true, vect=[]}
-6:	p1=Value{name='p1', type='int', value='5', address='3040', isVar=true, isVarPassed=false, isVect=true, vect=[]}
-7:	vettore3=Value{name='vettore3', type='char', value='null', address='3044', isVar=true, isVarPassed=false, isVect=true, vect=[]}
-8:	vettore1=Value{name='vettore1', type='int', value='null', address='3056', isVar=true, isVarPassed=false, isVect=true, vect=[Value{name='', type='int', value='2', address='8888', isVar=false, isVarPassed=false, isVect=false, vect=[]}, Value{name='', type='int', value='3', address='8888', isVar=false, isVarPassed=false, isVect=false, vect=[]}]}
-9:	cb=Value{name='cb', type='char', value='2220', address='2216', isVar=true, isVarPassed=false, isVect=true, vect=[]}
-10:	ca=Value{name='ca', type='char', value='a', address='2220', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-11:	radice=Value{name='radice', type='int', value='3', address='3092', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-12:	k=Value{name='k', type='char', value='null', address='3096', isVar=true, isVarPassed=true, isVect=false, vect=[]}
-13:	j=Value{name='j', type='int', value='null', address='3100', isVar=true, isVarPassed=true, isVect=false, vect=[]}
-14:	g=Value{name='g', type='float', value='28.8', address='3064', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-15:	f=Value{name='f', type='int', value='2', address='3068', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-16:	e=Value{name='e', type='int', value='null', address='3072', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-
------------------------------------------
-*****	Local Symbol Table: statements	*****
------------------------------------------
-1:	b=Value{name='b', type='int', value='3', address='1804', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-2:	t=Value{name='t', type='int', value='null', address='1808', isVar=true, isVarPassed=true, isVect=false, vect=[]}
+1:	c=Value{name='c', type='int', value='4', address='3988', isVar=true, isVarPassed=false, isVect=false, vect=[]}
 
 ---------------------------------
 *****	Global Symbol Table	*****
 ---------------------------------
-1:	d=Value{name='d', type='int', value='1', address='3988', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-2:	c=Value{name='c', type='char', value='null', address='3992', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-3:	b=Value{name='b', type='float', value='2.2', address='3996', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-4:	a=Value{name='a', type='int', value='1', address='4000', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-5:	main=Value{name='main', type='int', value='5', address='3104', isVar=false, isVarPassed=false, isVect=false, vect=[]}
-6:	p2=Value{name='p2', type='int', value='4000', address='3548', isVar=true, isVarPassed=false, isVect=true, vect=[]}
-7:	p1=Value{name='p1', type='int', value='5', address='3952', isVar=true, isVarPassed=false, isVect=true, vect=[]}
-8:	sqrt=Value{name='sqrt', type='int', value='1', address='3116', isVar=false, isVarPassed=false, isVect=false, vect=[]}
-9:	vettore5=Value{name='vettore5', type='int', value='5', address='2232', isVar=true, isVarPassed=false, isVect=true, vect=[Value{name='', type='int', value='5', address='8888', isVar=false, isVarPassed=false, isVect=false, vect=[]}, Value{name='', type='int', value='6', address='8888', isVar=false, isVarPassed=false, isVect=false, vect=[]}]}
-10:	vettore3=Value{name='vettore3', type='char', value='null', address='3956', isVar=true, isVarPassed=false, isVect=true, vect=[]}
-11:	vettore1=Value{name='vettore1', type='int', value='null', address='3968', isVar=true, isVarPassed=false, isVect=true, vect=[Value{name='', type='int', value='2', address='8888', isVar=false, isVarPassed=false, isVect=false, vect=[]}, Value{name='', type='int', value='3', address='8888', isVar=false, isVarPassed=false, isVect=false, vect=[]}]}
-12:	special2=Value{name='special2', type='char', value='\0', address='3120', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-13:	special1=Value{name='special1', type='char', value='\n', address='3124', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-14:	ca=Value{name='ca', type='char', value='a', address='3128', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-15:	func_void=Value{name='func_void', type='void', value='null', address='3108', isVar=false, isVarPassed=false, isVect=false, vect=[]}
-16:	statements=Value{name='statements', type='int', value='null', address='1812', isVar=false, isVarPassed=false, isVect=false, vect=[]}
-17:	g=Value{name='g', type='float', value='28.8', address='3976', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-18:	f=Value{name='f', type='int', value='2', address='3980', isVar=true, isVarPassed=false, isVect=false, vect=[]}
-19:	e=Value{name='e', type='int', value='null', address='3984', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+1:	b=Value{name='b', type='int', value='35', address='3996', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+2:	a=Value{name='a', type='int', value='25', address='4000', isVar=true, isVarPassed=false, isVect=false, vect=[]}
+3:	main=Value{name='main', type='int', value='0', address='3992', isVar=false, isVarPassed=false, isVect=false, vect=[]}

@@ -16,10 +16,10 @@ int main() {
     //a = 1 * 2 - 4 ;
     //a = + 3 * 4 * 5; // Esempio di errore catturato
 
-    //a = (2+3)*4+5;
+    a = (2+3)*4+5;
 
     //a = a / 5 + 3 ;
-    b = (a + b) * c;
+    //b = (a + b) * c;
 
     return 0;
 }

@@ -1,98 +1,18 @@
-D: .word 1
-A: .word 5
-P1: .word 4
-add $t1, $t1, $t2
-E: .word 9
-P1: .word 5
-F: .word 2
-FUNC_TEST: 
-   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
-   sw $ra, 4($sp) 		 #Salva return address
-   lw $t2, 1
-   sw $t2, 0x3508 		 #[a=1]
-   lw $t1, 5
-   lw $t2, 6
-   lw $t1, 7
-   lw $t2, 4
-   sw $t2, 0x3508 		 #[a=4]
-   lw $t1, 0x3508 		 #[a=4]
-   lw $t2, 5
-   lw $t1, 7
-   add $t2, $t1, $t2
-   sub $t1, $t1, $t2
-   sw $t1, 0x3508 		 #[a=-8]
-   lw $t2, 777777
-   lw $t1, a
-   lw $t2, b
-   lw $t1, c
-   sw 1, 0($sp) 		 #Memorizza il valore del return
-   lw $v0, 0($sp) 		 #Salva valore d'uscita
-   lw $ra, 4($sp) 		 #Ripristina return address
-   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
-   jr $ra 				 #Salta al return address
-FUNCT_CHAR: 
-   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
-   sw $ra, 4($sp) 		 #Salva return address
-   sw a, 0($sp) 		 #Memorizza il valore del return
-   lw $v0, 0($sp) 		 #Salva valore d'uscita
-   lw $ra, 4($sp) 		 #Ripristina return address
-   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
-   jr $ra 				 #Salta al return address
-FUNCT_VOID: 
-   addiu $sp, $sp, -8 	 #Crea area nello stack pointer
-   sw $ra, 4($sp) 		 #Salva return address
-   lw $t2, 8
-   sw $t2, 0x3416 		 #[v=8]
-   sw 0, 0($sp) 		 #Memorizza il valore del return
-   lw $v0, 0($sp) 		 #Salva valore d'uscita
-   lw $ra, 4($sp) 		 #Ripristina return address
-   addiu $sp, $sp, 8 	 #Elimina area nello stack pointer
-   jr $ra 				 #Salta al return address
+A: .word 2
+B: .word 35
 MAIN: 
    addiu $sp, $sp, -8 	 #Crea area nello stack pointer
    sw $ra, 4($sp) 		 #Salva return address
-   lw $t1, a
-   lw $t2, a
-   add $t1, $t1, $t2
-   sw $t1, 0x3400 		 #[a=aa]
-   lw $t2, a
-   lw $t1, a
-   add $t2, $t1, $t2
-   sw $t2, 0x3396 		 #[funct_char=a]
-   lw $t1, 1
+   lw $t1, 4
+   sw $t1, 0x3988 		 #[c=4]
    lw $t2, 2
-   mul $t1, $t1, $t2
-   lw $t2, 1
-   add $t1, $t1, $t2
-   sw $t1, 0x3392 		 #[func_test=1]
-   FOR1:
-      lw $t2, 1
-      sw $t2, 0x3388 		 #[i=1]
-      lw $t1, 0x3388 		 #[i=1]
-      lw $t2, 5
-      slt $t8, $t1, $t2
-      bne $t8, 1, ENDFOR1
-      lw $t1, 0x3388 		 #[i=1]
-      lw $t2, 2
-      j ENDINCRFOR1
-      INCRFOR1:
-         lw $t1, 0x3388 		 #[i=1]
-         lw $t2, 1
-         add $t1, $t1, $t2
-         sw $t1, 0x3388 		 #[i=2]
-         j FOR1
-      ENDINCRFOR1:
-      lw $t2, 0x3988 		 #[d=1]
-      lw $t1, 1
-      add $t2, $t1, $t2
-      sw $t2, 0x3988 		 #[d=2]
-      j INCRFOR1
-   ENDFOR1:
-   addiu $sp, $sp, -4 	 #Crea area nello stack pointer (per la chiamata di funzione)
-   sw $ra, 0($sp) 		 #Salva return address (per la chiamata di funzione)
-   j PRINTF 			 #Chiamata di funzione
-   lw $ra, 0($sp) 		 #Ripristina return address (dopo la chiamata di funzione)
-   addiu $sp, $sp, 4 	 #Elimina area nello stack pointer (dopo la chiamata di funzione)
+   lw $t1, 3
+   add $t2, $t1, $t2
+   lw $t1, 4
+   mul $t2, $t1, $t2
+   lw $t1, 5
+   add $t2, $t1, $t2
+   sw $t2, 0x4000 		 #[a=25]
    sw 0, 0($sp) 		 #Memorizza il valore del return
    lw $v0, 0($sp) 		 #Salva valore d'uscita
    lw $ra, 4($sp) 		 #Ripristina return address

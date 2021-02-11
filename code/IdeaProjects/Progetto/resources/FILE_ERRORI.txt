@@ -1,6 +1,1 @@
-
------------------------------
-*****	Errori: #	2	*****
------------------------------
-1: Errore semantico [10] in (13,4) - La variabile <a> è già stata dichiarata
-2: Errore sintattico [1] in (14, 0) - Found K_INT ('int') - missing SEMICOL at 'int'
+Nessun errore!

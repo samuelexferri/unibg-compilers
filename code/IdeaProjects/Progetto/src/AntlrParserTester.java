@@ -12,11 +12,11 @@ public class AntlrParserTester {
     // SELEZIONARE UN FILE DI TEST
 
     // File di test
-    static String fileIn = ".\\resources\\test_C_1"; // Non usarle per la traduzione semplificata!
+    //static String fileIn = ".\\resources\\test_C_1"; // Non usarle per la traduzione semplificata!
     //static String fileIn = ".\\resources\\test_C_2"; // Non usarle per la traduzione semplificata!
 
     // File di test (Traduzione)
-    //static String fileIn = ".\\resources\\trad_operations";
+    static String fileIn = ".\\resources\\trad_operations";
     //static String fileIn = ".\\resources\\trad_if";
     //static String fileIn = ".\\resources\\trad_while";
     //static String fileIn = ".\\resources\\trad_for";
